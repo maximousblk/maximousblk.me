@@ -16,7 +16,7 @@ export default {
     links: [
       { name: "uses", href: "/uses" },
       { name: "snippets", href: "/snippets" },
-      { name: "pgp", href: "https://keybase.io/maximousblk/pgp_keys.asc" }
+      { name: "pgp", href: "/pgp" }
     ],
     social: [
       {

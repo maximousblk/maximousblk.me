@@ -17,5 +17,13 @@ module.exports = {
     }
 
     return config;
+  },
+  async redirects() {
+    return [
+      {
+        source: "/pgp",
+        destination: "https://keybase.io/maximousblk/pgp_keys.asc"
+      }
+    ];
   }
 };
