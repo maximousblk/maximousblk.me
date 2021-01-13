@@ -1,18 +1,16 @@
-<p align="center">
-  <img height="80" src="https://cdn.maximousblk.now.sh/images/max/logotype.svg">
-</p>
+# maximousblk.now.sh
 
-### Maximous Black
+My personal slice of the internet.
 
-> /'mak.si.mus blak/
+## Built Using
 
-I'm a Web Developer and occasional UI/UX Designer who loves making high-quality websites and applications. I'm still a student and preparing for college. I also love Physics, and I want to learn more about how the Universe works.
+- [Next.js](https://nextjs.org/)
+- [Vercel](https://vercel.com)
+- [MDX](https://github.com/mdx-js/mdx)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-### 📫 How to reach me:
+## License
 
-- Website: [maximousblk.now.sh](https://maximousblk.now.sh/)
-- Email: [maximousblk@gmail.com](mailto:maximousblk@gmail.com)
+Contents of directory [`./data`](./data) are Licensed under the [`CC BY-NC-ND 4.0`](./data/LICENSE)
 
-You can also ask questions on my [Public AMA](https://github.com/maximousblk/maximousblk/issues)
-
-PGP Public Key: [`EC7B EE3B 0561 BF2F`](https://keybase.io/maximousblk/pgp_keys.asc)
+For web site source code, see [LICENSE](./LICENSE).
