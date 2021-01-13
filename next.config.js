@@ -22,7 +22,8 @@ module.exports = {
     return [
       {
         source: "/pgp",
-        destination: "https://keybase.io/maximousblk/pgp_keys.asc"
+        destination: "https://keybase.io/maximousblk/pgp_keys.asc",
+        permanent: true
       }
     ];
   }
