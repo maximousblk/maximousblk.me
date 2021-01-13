@@ -1,9 +1,11 @@
-module.exports = {
+const withPWA = require("next-pwa");
+
+module.exports = withPWA({
   images: {
     domains: [
       "i.scdn.co", // Spotify Album Art
       "pbs.twimg.com", // Twitter Profile Picture
-      "cdn.maximousblk.now.sh" // Twitter Profile Picture
+      "cdn.maximousblk.now.sh" // Personal CDN
     ]
   },
   webpack: (config, { dev, isServer }) => {
@@ -18,6 +20,10 @@ module.exports = {
 
     return config;
   },
+  pwa: {
+    // disable: process.env.NODE_ENV === "development",
+    dest: "public"
+  },
   async redirects() {
     return [
       {
@@ -27,4 +33,4 @@ module.exports = {
       }
     ];
   }
-};
+});
