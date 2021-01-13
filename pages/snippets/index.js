@@ -15,7 +15,10 @@ export default function Snippets({ snippets }) {
   const [searchValue, setSearchValue] = useState("");
   const filteredSnippets = snippets.sort().filter((frontMatter) => {
     return (
-      frontMatter.title.toLowerCase().includes(searchValue.toLowerCase()) &&
+      (frontMatter.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        frontMatter.description
+          ?.toLowerCase()
+          .includes(searchValue.toLowerCase())) &&
       !frontMatter.unlisted
     );
   });
