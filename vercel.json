@@ -1,4 +1,10 @@
 {
   "github": { "silent": true },
-  "redirects": []
+  "redirects": [
+    {
+      "source": "/post/(.*)",
+      "destination": "/posts/$1",
+      "permanent": true
+    }
+  ]
 }
