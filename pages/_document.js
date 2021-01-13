@@ -49,7 +49,10 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://rsms.me" />
           <link rel="preconnect" href="https://cdn.jsdelivr.net" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-          <meta content="xxx" name="google-site-verification" />
+          <meta
+            content="M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI"
+            name="google-site-verification"
+          />
         </Head>
         <body className="bg-white dark:bg-black text-white dark:text-black">
           <Main />
