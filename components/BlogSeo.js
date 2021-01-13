@@ -1,11 +1,11 @@
-import { NextSeo, ArticleJsonLd } from 'next-seo';
+import { NextSeo, ArticleJsonLd } from "next-seo";
 
 import config from "@/data/config";
 
 const BlogSeo = ({ title, summary, publishedAt, url, image }) => {
   const date = new Date(publishedAt).toISOString();
   const featuredImage = {
-    url: config.baseUrl + image,
+    url: config.baseUrl + (image ?? "/og.png"),
     alt: title
   };
 
@@ -16,7 +16,7 @@ const BlogSeo = ({ title, summary, publishedAt, url, image }) => {
         description={summary}
         canonical={url}
         openGraph={{
-          type: 'article',
+          type: "article",
           article: {
             publishedTime: date
           },
@@ -31,7 +31,7 @@ const BlogSeo = ({ title, summary, publishedAt, url, image }) => {
         dateModified={date}
         datePublished={date}
         description={summary}
-        images={[featuredImage]}
+        images={[featuredImage.url]}
         publisherLogo="/static/favicons/android-chrome-192x192.png"
         publisherName={config.name}
         title={title}
