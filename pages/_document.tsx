@@ -45,14 +45,42 @@ class MyDocument extends Document {
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="theme-color" content="#111827" />
 
+          {/* fonts */}
+          <link
+            rel="preload"
+            href="/fonts/sans/Inter-roman.var.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/sans/Inter-italic.var.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/mono/JetBrainsMono-Regular.ttf"
+            as="font"
+            type="font/truetype"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/mono/JetBrainsMono-Italic.ttf"
+            as="font"
+            type="font/truetype"
+            crossOrigin="anonymous"
+          />
+
           {/* misc */}
-          <link rel="preconnect" href="https://rsms.me" />
-          <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-          <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta
             content="M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI"
             name="google-site-verification"
           />
+          <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         </Head>
         <body className="bg-white dark:bg-black text-white dark:text-black">
           <Main />
