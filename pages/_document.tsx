@@ -64,14 +64,14 @@ class MyDocument extends Document {
             rel="preload"
             href="/fonts/mono/JetBrainsMono-Regular.ttf"
             as="font"
-            type="font/truetype"
+            type="font/ttf"
             crossOrigin="anonymous"
           />
           <link
             rel="preload"
             href="/fonts/mono/JetBrainsMono-Italic.ttf"
             as="font"
-            type="font/truetype"
+            type="font/ttf"
             crossOrigin="anonymous"
           />
 

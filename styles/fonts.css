@@ -2,7 +2,7 @@
   @font-face {
     font-family: "Inter";
     font-weight: 100 900;
-    font-display: swap;
+    font-display: optional;
     font-style: normal;
     font-named-instance: "Regular";
     src: url("/fonts/sans/Inter-roman.var.woff2")
@@ -13,7 +13,7 @@
   @font-face {
     font-family: "Inter";
     font-weight: 100 900;
-    font-display: swap;
+    font-display: optional;
     font-style: italic;
     font-named-instance: "Italic";
     src: url("/fonts/sans/Inter-italic.var.woff2")
@@ -28,7 +28,7 @@
       url("/fonts/mono/JetBrainsMono-Regular.ttf") format("truetype-variations");
     font-weight: 100 800;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
   }
 
   @font-face {
@@ -38,6 +38,6 @@
       url("/fonts/mono/JetBrainsMono-Italic.ttf") format("truetype-variations");
     font-weight: 100 800;
     font-style: italic;
-    font-display: swap;
+    font-display: optional;
   }
 }
