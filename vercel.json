@@ -9,7 +9,7 @@
   ],
   "headers": [
     {
-      "source": "/fonts/.*",
+      "source": "/fonts/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "source": "/images/.*",
+      "source": "/images/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
