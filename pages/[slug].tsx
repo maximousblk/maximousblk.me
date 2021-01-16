@@ -13,10 +13,10 @@ export default function Page({ mdxSource, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const snippets = await getFiles("pages");
+  const pages = await getFiles("pages");
 
   return {
-    paths: snippets.map((s) => ({
+    paths: pages.map((s) => ({
       params: {
         slug: s.replace(/\.mdx/, "")
       }
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const snippet = await getFileBySlug("pages", params.slug);
+  const pages = await getFileBySlug("pages", params.slug);
 
-  return { props: snippet };
+  return { props: pages };
 }

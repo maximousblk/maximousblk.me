@@ -1,13 +1,11 @@
 import { NextSeo } from "next-seo";
 
 import Container from "@/components/Container";
-
 import config from "@/data/config";
 
 export default function IndexLayout({ children, frontMatter }) {
-  const title = frontMatter.title;
-  const url = config.baseUrl;
-  const description = frontMatter.summary;
+  const { title, description, hide_description } = frontMatter;
+  const { baseUrl: url } = config;
 
   return (
     <Container>
@@ -19,9 +17,9 @@ export default function IndexLayout({ children, frontMatter }) {
       />
       <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          {frontMatter.title}
+          {title}
         </h1>
-        {!frontMatter.hide_summary && (
+        {!hide_description && (
           <p className="text-gray-700 dark:text-gray-300 mt-2 mb-8">
             {description}
           </p>

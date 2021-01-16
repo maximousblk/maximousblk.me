@@ -1,6 +1,12 @@
 import Link from "next/link";
 
-export default function FunctionCard({ title, description, slug, ...rest }) {
+interface Attributes {
+  title: string;
+  description: string;
+  slug: string;
+}
+
+const FunctionCard = ({ title, description, slug, ...rest }: Attributes) => {
   return (
     <Link href={`/snippets/${slug}`}>
       <a
@@ -14,4 +20,6 @@ export default function FunctionCard({ title, description, slug, ...rest }) {
       </a>
     </Link>
   );
-}
+};
+
+export default FunctionCard;

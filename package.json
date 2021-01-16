@@ -1,11 +1,6 @@
 {
   "name": "maximouslk.now.sh",
   "description": "My personal website",
-  "author": {
-    "name": "Maximous Black",
-    "email": "maximousblk@gmail.com",
-    "url": "https://maximouslk.now.sh"
-  },
   "license": "MIT",
   "scripts": {
     "dev": "next",

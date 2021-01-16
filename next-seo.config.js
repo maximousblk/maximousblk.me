@@ -5,7 +5,8 @@ const description = config.description;
 const SEO = {
   title,
   description,
-  canonical: config.baseUrl,
+  // disabled due to `double canocial address` error
+  // canonical: config.baseUrl,
   openGraph: {
     type: "website",
     locale: "en_IE",

@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { parseISO, format } from "date-fns";
 
-const BlogPost = ({ title, summary, slug, publishedAt }) => {
+interface Attributes {
+  title: string;
+  description: string;
+  slug: string;
+  publishedAt: string;
+}
+
+const BlogPost = ({ title, description, slug, publishedAt }: Attributes) => {
   return (
     <div>
       <Link href={`/posts/${slug}`}>
@@ -15,7 +22,7 @@ const BlogPost = ({ title, summary, slug, publishedAt }) => {
                 {publishedAt && format(parseISO(publishedAt), "MMM, yyy")}
               </p>
             </div>
-            <p className="text-gray-600 dark:text-gray-400">{summary}</p>
+            <p className="text-gray-600 dark:text-gray-400">{description}</p>
           </div>
         </a>
       </Link>

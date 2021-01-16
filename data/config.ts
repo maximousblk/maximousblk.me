@@ -1,4 +1,4 @@
-export default {
+export const config = {
   name: "Maximous Black",
   description:
     "I'm a Web Developer who likes building beautiful web interfaces & experiences.",
@@ -42,3 +42,5 @@ export default {
     ]
   }
 };
+
+export default config;

@@ -1,16 +1,55 @@
 import { parseISO, format } from "date-fns";
+import { ExternalLink } from "react-feather";
+import { NextSeo, ArticleJsonLd } from "next-seo";
 
 import Container from "@/components/Container";
-import BlogSeo from "@/components/BlogSeo";
-import { ExternalLink } from "react-feather";
 import config from "@/data/config";
 
-const editUrl = (slug) => {
+const editUrl = (slug: string) => {
   return `https://github.com/${config.repo.name}/edit/${config.repo.branch}/data/posts/${slug}.mdx`;
 };
-const discussUrl = (slug) => {
+const discussUrl = (slug: string) => {
   let query = encodeURIComponent(`${config.baseUrl}/posts/${slug}`);
   return `https://mobile.twitter.com/search?q=${query}`;
+};
+
+const BlogSeo = ({ title, description, publishedAt, url, image }) => {
+  const date = new Date(publishedAt).toISOString();
+  const featuredImage = {
+    url: config.baseUrl + (image ?? "/og.png"),
+    alt: title
+  };
+
+  return (
+    <>
+      <NextSeo
+        title={`${title} – ${config.name}`}
+        description={description}
+        canonical={url}
+        openGraph={{
+          type: "article",
+          article: {
+            publishedTime: date
+          },
+          url,
+          title,
+          description: description,
+          images: [featuredImage]
+        }}
+      />
+      <ArticleJsonLd
+        authorName={config.name}
+        dateModified={date}
+        datePublished={date}
+        description={description}
+        images={[featuredImage.url]}
+        publisherLogo="/static/favicons/android-chrome-192x192.png"
+        publisherName={config.name}
+        title={title}
+        url={url}
+      />
+    </>
+  );
 };
 
 export default function PostLayout({ children, frontMatter }) {

@@ -4,6 +4,8 @@ public/sw*
 public/workbox*
 node_modules
 *.log
+*.lock
+LICENSE
 .DS_Store
 .env.local
 .next

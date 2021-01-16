@@ -21,7 +21,7 @@ export default function Blog({ posts }) {
     .filter((frontMatter) => {
       return (
         (frontMatter.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-          frontMatter.summary
+          frontMatter.description
             ?.toLowerCase()
             .includes(searchValue.toLowerCase())) &&
         !frontMatter.unlisted

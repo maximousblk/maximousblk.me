@@ -1,8 +1,8 @@
-import hydrate from 'next-mdx-remote/hydrate';
+import hydrate from "next-mdx-remote/hydrate";
 
-import { getFiles, getFileBySlug } from '@/lib/mdx';
-import SnippetLayout from '@/layouts/snippet';
-import MDXComponents from '@/components/MDXComponents';
+import { getFiles, getFileBySlug } from "@/lib/mdx";
+import SnippetLayout from "@/layouts/snippet";
+import MDXComponents from "@/components/MDXComponents";
 
 export default function Snippet({ mdxSource, frontMatter }) {
   const content = hydrate(mdxSource, {
@@ -13,12 +13,12 @@ export default function Snippet({ mdxSource, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const snippets = await getFiles('snippets');
+  const snippets = await getFiles("snippets");
 
   return {
     paths: snippets.map((s) => ({
       params: {
-        slug: s.replace(/\.mdx/, '')
+        slug: s.replace(/\.mdx/, "")
       }
     })),
     fallback: false
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const snippet = await getFileBySlug('snippets', params.slug);
+  const snippet = await getFileBySlug("snippets", params.slug);
 
   return { props: snippet };
 }

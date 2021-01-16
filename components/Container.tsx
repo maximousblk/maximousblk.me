@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import Footer from "@/components/Footer";
 import Icon from "@/components/FeatherIcons";
-
 import config from "@/data/config";
 
 export default function Container({ children }) {

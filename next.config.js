@@ -29,7 +29,7 @@ module.exports = withPWA({
       {
         source: "/pgp",
         destination: "https://keybase.io/maximousblk/pgp_keys.asc",
-        permanent: true
+        permanent: false
       }
     ];
   }

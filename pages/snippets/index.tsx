@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo";
 import { Search as SearchIcon } from "react-feather";
 
 import Container from "@/components/Container";
-import FunctionCard from "@/components/SnippetCard";
+import SnippetCard from "@/components/SnippetCard";
 import { getAllFilesFrontMatter } from "@/lib/mdx";
 
 import config from "@/data/config";
@@ -58,7 +58,7 @@ export default function Snippets({ snippets }) {
         )}
         <div className="grid gap-4 grid-cols-1 my-2 w-full mt-4">
           {filteredSnippets.map((snippet) => (
-            <FunctionCard
+            <SnippetCard
               key={snippet.slug}
               title={snippet.title}
               slug={snippet.slug}

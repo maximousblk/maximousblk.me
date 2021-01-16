@@ -7,7 +7,7 @@ import config from "@/data/config";
 export default function PageLayout({ children, frontMatter }) {
   const title = `${frontMatter.title} - ${config.name}`;
   const url = `${config.baseUrl}/${frontMatter.slug}`;
-  const description = frontMatter.summary;
+  const { description, hide_description } = frontMatter;
 
   return (
     <Container>
@@ -21,7 +21,7 @@ export default function PageLayout({ children, frontMatter }) {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           {frontMatter.title}
         </h1>
-        {!frontMatter.hide_summary && (
+        {!hide_description && (
           <p className="text-gray-700 dark:text-gray-300 mt-2 mb-8">
             {description}
           </p>
