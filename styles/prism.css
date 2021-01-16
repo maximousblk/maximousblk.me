@@ -72,7 +72,7 @@ pre[class*="language-"] {
 .token.pseudo-class,
 .token.pseudo-element,
 .token.string {
-  @apply text-amber-700 dark:text-amber-300;
+  @apply text-yellow-700 dark:text-yellow-300;
 }
 
 .token.hexcode,
