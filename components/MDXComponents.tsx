@@ -3,7 +3,6 @@ import Link from "next/link";
 // import Tweet from "react-tweet-embed";
 import { ExternalLink } from "react-feather";
 
-// import Step from "@/components/Step";
 // import ProsCard from "@/components/ProsCard";
 // import ConsCard from "@/components/ConsCard";
 
@@ -36,7 +35,6 @@ const CustomLink = (props) => {
 };
 
 const MDXComponents = {
-  // Step,
   // Image,
   // Tweet,
   // ConsCard,
