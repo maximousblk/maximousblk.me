@@ -43,7 +43,7 @@ html {
 }
 
 .prose a {
-  @apply no-underline hover:underline hover:text-indigo-600 dark:hover:text-indigo-400;
+  @apply no-underline hover:underline;
 }
 
 pre::-webkit-scrollbar {

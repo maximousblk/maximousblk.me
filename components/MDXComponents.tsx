@@ -1,5 +1,5 @@
 import Link from "next/link";
-// import Image from "next/image";
+import Image from "next/image";
 // import Tweet from "react-tweet-embed";
 import { ExternalLink } from "react-feather";
 
@@ -35,7 +35,7 @@ const CustomLink = (props) => {
 };
 
 const MDXComponents = {
-  // Image,
+  Image,
   // Tweet,
   // ConsCard,
   // ProsCard,

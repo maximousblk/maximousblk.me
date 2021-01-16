@@ -9,7 +9,7 @@ So, you're trying to learn JavaScript. You have just gotten a bit fluent with Ja
 
 Before diving in, you need some background information.
 
-# What is a JavaScript Engine?
+## What is a JavaScript Engine?
 
 As you may know, JavaScript is an interpreted programming language. It means that source code isn’t compiled into binary code prior to execution.
 
@@ -19,7 +19,7 @@ That’s the job for a JavaScript engine. A JavaScript engine compiles JavaScrip
 
 For example, when you run JavaScript on google chrome, your JavaScript engine is V8. If on Mozilla, it is SpiderMonkey.
 
-# What is a JavaScript Runtime Environment?
+## What is a JavaScript Runtime Environment?
 
 You don’t usually use the JavaScript engine directly. The JavaScript engine works inside an environment, which provides additional features to your JavaScript application that you can use at runtime.
 
@@ -31,13 +31,13 @@ For example, a web browser like Google Chrome is a desktop JavaScript runtime en
 
 Similarly, Server-side runtime environments like Node and Deno use the V8 engine and provide File System Access, Network Access, Console, etc.
 
-# Why do we need a runtime outside of a browser?
+## Why do we need a runtime outside of a browser?
 
 Although the main environment for JavaScript is a web browser, in recent years, JavaScript has taken over the server platforms.
 
 Server-side JavaScript runtime environments give you access to the file system, network, and other things that aren’t allowed in web browsers. You can actually build a whole web application (from the UI to the data layer) with a technology stack based only on JavaScript like [MEAN](http://meanjs.org/) or [MERN](https://www.geeksforgeeks.org/mern-stack/).
 
-# What's wrong with NodeJS?
+## What's wrong with NodeJS?
 
 According to Ryan Dahl (the creator of NodeJS), there were some things NodeJS did wrong. He delivered a [presentation](https://youtu.be/M3BM9TB-8yA) about this at JSConf EU 2018.
 
@@ -69,7 +69,7 @@ The package.json file has some unnecessary information that is only required by 
 
 npm is centralized and privately controlled. If you have done some projects in the browser, you would know how you link to dependencies. similar to JQuery, Bootstrap, etc. You add any link to the HTML and you can use it directly. In Node, you cannot install dependencies form anywhere but npm.
 
-### require("module") without the extension ".js"
+### `require("module")` without the ".js" extension
 
 This is how you import external libraries, which is not specific enough. For example, if you want to install JQuery in your project, you would first use npm to install it in the project folder using the install command
 
@@ -89,7 +89,7 @@ require("JQuery");
 
 Yeah, but the algorithms, required for this _neat_ syntax to work, are very complex and inefficient. The module loader has to query the file system at multiple locations trying to guess what the user intended.
 
-### node_modules
+### `node_modules`
 
 This is the aftermath of using that neat syntax for importing modules.
 
@@ -103,9 +103,14 @@ Let's say you want to create two different projects but they both use JQuery, yo
 
 And if there's a meme about it, then you know it's serious. This is one of the slides from the presentation.
 
-![node_modules](/images/deno-for-javascript-beginners/node_modules.jpg)
+<Image
+  alt="node_modules"
+  src="/images/deno-for-javascript-beginners/node_modules.jpg"
+  width={1600}
+  height={900}
+/>
 
-### index.js
+### `index.js`
 
 Similar to "index.html", NodeJS would look for an "index.js" file if not specified. This was an unnecessary thing to do. It needlessly complicated the module loading system. It became especially unnecessary after "require()" supported package.json
 
@@ -123,7 +128,7 @@ NodeJS, when it came out in 2009, was the best thing that could have happened to
 
 And yes, they did create a whole new thing... Deno.
 
-# What is Deno?
+## What is Deno?
 
 Deno is a _new_ cross-platform runtime environment, based on Google's V8 engine, just like NodeJS. It's made by the creator of NodeJS, Ryan Dahl. And it is made for the same purpose as NodeJS.
 
