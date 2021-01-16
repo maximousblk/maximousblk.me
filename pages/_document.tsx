@@ -48,30 +48,16 @@ class MyDocument extends Document {
           {/* fonts */}
           <link
             rel="preload"
-            href="/fonts/sans/Inter-roman.var.woff2"
+            href="/fonts/sans/Inter-roman.latin.var.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="preload"
-            href="/fonts/sans/Inter-italic.var.woff2"
+            href="/fonts/sans/Inter-italic.latin.var.woff2"
             as="font"
             type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/mono/JetBrainsMono-Regular.ttf"
-            as="font"
-            type="font/ttf"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/mono/JetBrainsMono-Italic.ttf"
-            as="font"
-            type="font/ttf"
             crossOrigin="anonymous"
           />
 
