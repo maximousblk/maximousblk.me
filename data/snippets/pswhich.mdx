@@ -1,0 +1,68 @@
+---
+title: PowerShell Which
+description: A compact which command for PowerShell
+---
+
+```powershell:which.ps1
+function which {
+  Param(
+    [Parameter(Position = 0, Mandatory)][string[]]$Names,
+    [Parameter()][Switch][Alias('r')]$Raw
+  )
+
+  foreach ($Name in $Names) {
+    if (!$Raw) { Write-Host "" }
+
+    $Commands = Get-Command $Name -all -ErrorAction:Ignore
+
+    if (!$Commands) {
+      $Commands = [psobject]@{
+        Name = $Name;
+      }
+    }
+
+    foreach ($Command in $Commands) {
+
+      if ($Raw) {
+        if ($Command.Path -or $Command.Source) {
+          Write-Output ($Command.Path ?? $Command.Source)
+        } elseif ($Command.ResolvedCommand) {
+          Write-Output $Command.ResolvedCommand
+        } else {
+          Write-Output "(???)"
+        }
+      } else {
+        if ($Command.CommandType) {
+          Write-Host "[$($Command.CommandType)] " -NoNewline -ForegroundColor Green
+        } else {
+          Write-Host "[Missing] " -NoNewline -ForegroundColor Red
+        }
+
+        Write-Host "$($Command.Name ?? $Name) " -NoNewline
+
+        if ($Command.Path -or $Command.Source) {
+          Write-Host "($($Command.Path ? $Command.Path : $Command.Source))" -ForegroundColor DarkGray
+        } elseif ($Command.ResolvedCommand) {
+          Write-Host "($($Command.ResolvedCommand))" -ForegroundColor DarkGray
+        } else {
+          Write-Host "(???)" -ForegroundColor DarkGray
+        }
+      }
+
+    }
+  }
+}
+```
+
+#### Exapmle
+
+```powershell
+$ which which, history, notepad
+
+[Function] which (???)
+
+[Alias] history (Get-History)
+
+[Application] notepad.exe (C:\Windows\notepad.exe)
+[Application] notepad.exe (C:\Windows\system32\notepad.exe)
+```
