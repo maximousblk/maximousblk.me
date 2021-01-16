@@ -43,7 +43,7 @@ module.exports = {
             a: {
               color: theme("colors.indigo.400"),
               "&:hover": {
-                color: theme("colors.indigo.600")
+                color: theme("colors.indigo.300")
               }
             },
             blockquote: {
