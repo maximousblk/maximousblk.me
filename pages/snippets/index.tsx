@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo";
 import { Search as SearchIcon } from "react-feather";
 
 import Container from "@/components/Container";
-import FunctionCard from "@/components/FunctionCard";
+import FunctionCard from "@/components/SnippetCard";
 import { getAllFilesFrontMatter } from "@/lib/mdx";
 
 import config from "@/data/config";

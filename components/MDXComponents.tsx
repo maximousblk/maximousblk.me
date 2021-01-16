@@ -36,7 +36,7 @@ const CustomLink = (props) => {
 };
 
 const MDXComponents = {
-  a: CustomLink,
+  a: CustomLink
   // Image,
   // ConsCard,
   // ProsCard,

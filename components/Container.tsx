@@ -32,7 +32,7 @@ export default function Container({ children }) {
         </button>
         <div className="space-x-2">
           {config.nav.map(({ name, href }) => (
-            <Link href={href} key={name} >
+            <Link href={href} key={name}>
               <a className="py-2 px-3 rounded text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-900">
                 {name}
               </a>

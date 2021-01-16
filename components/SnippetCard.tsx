@@ -1,11 +1,6 @@
 import Link from "next/link";
 
-export default function FunctionCard({
-  title,
-  description,
-  slug,
-  ...rest
-}) {
+export default function FunctionCard({ title, description, slug, ...rest }) {
   return (
     <Link href={`/snippets/${slug}`}>
       <a

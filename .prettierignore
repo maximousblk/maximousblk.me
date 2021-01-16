@@ -1,2 +1,10 @@
+public/sitemap.xml
+public/robots.txt
+public/sw*
+public/workbox*
+node_modules
+*.log
+.DS_Store
+.env.local
 .next
 .vercel
