@@ -8,17 +8,14 @@ module.exports = {
     colors: colors,
     extend: {
       fontFamily: {
-        sans: ["Inter", ...fontFamily.sans],
+        sans: ["Inter", ...fontFamily.sans]
       },
       typography: (theme) => ({
         DEFAULT: {
           css: {
             color: theme("colors.gray.800"),
             a: {
-              color: theme("colors.indigo.600"),
-              "&:hover": {
-                color: theme("colors.indigo.800")
-              }
+              color: theme("colors.indigo.600")
             },
             "h1,h2,h3,h4": {
               "scroll-margin-top": spacing[32]
@@ -41,10 +38,7 @@ module.exports = {
           css: {
             color: theme("colors.gray.300"),
             a: {
-              color: theme("colors.indigo.400"),
-              "&:hover": {
-                color: theme("colors.indigo.300")
-              }
+              color: theme("colors.indigo.400")
             },
             blockquote: {
               borderLeftColor: theme("colors.gray.700"),

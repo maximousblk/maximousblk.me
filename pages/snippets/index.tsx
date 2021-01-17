@@ -19,7 +19,7 @@ export default function Snippets({ snippets }) {
         frontMatter.description
           ?.toLowerCase()
           .includes(searchValue.toLowerCase())) &&
-      !frontMatter.unlisted
+      frontMatter.published
     );
   });
 

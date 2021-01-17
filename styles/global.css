@@ -39,7 +39,7 @@ html {
 
 .prose img {
   /* Don't apply styles to next/image */
-  @apply m-0 rounded;
+  @apply m-0 rounded-md;
 }
 
 .prose a {

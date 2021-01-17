@@ -24,7 +24,7 @@ export default function Blog({ posts }) {
           frontMatter.description
             ?.toLowerCase()
             .includes(searchValue.toLowerCase())) &&
-        !frontMatter.unlisted
+        frontMatter.published
       );
     });
 
