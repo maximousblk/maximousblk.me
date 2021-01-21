@@ -3,6 +3,8 @@
   "description": "My personal website",
   "license": "MIT",
   "scripts": {
+    "fmt": "prettier --check .",
+    "fmt:write": "prettier --write .",
     "dev": "next",
     "start": "next start",
     "build": "next build",

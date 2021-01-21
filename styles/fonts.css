@@ -27,3 +27,11 @@
       U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF;
   }
 }
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/mono/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: optional;
+}
