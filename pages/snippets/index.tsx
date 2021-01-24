@@ -16,9 +16,7 @@ export default function Snippets({ snippets }) {
   const filteredSnippets = snippets.sort().filter((frontMatter) => {
     return (
       (frontMatter.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-        frontMatter.description
-          ?.toLowerCase()
-          .includes(searchValue.toLowerCase())) &&
+        frontMatter.description?.toLowerCase().includes(searchValue.toLowerCase())) &&
       frontMatter.published
     );
   });
@@ -34,12 +32,9 @@ export default function Snippets({ snippets }) {
         }}
       />
       <div className="flex flex-col justify-center items-start w-full max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          Code Snippets
-        </h1>
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">Code Snippets</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          These are a collection of code snippets I've used in the past and
-          saved.
+          These are a collection of code snippets I've used in the past and saved.
         </p>
         <div className="relative w-full mb-4">
           <input
@@ -52,9 +47,7 @@ export default function Snippets({ snippets }) {
           <SearchIcon className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300" />
         </div>
         {!filteredSnippets.length && (
-          <p className="my-8 self-center text-gray-600 dark:text-gray-400 mb-4">
-            No snippets found ;-;
-          </p>
+          <p className="my-8 self-center text-gray-600 dark:text-gray-400 mb-4">No snippets found ;-;</p>
         )}
         <div className="grid gap-4 grid-cols-1 my-2 w-full mt-4">
           {filteredSnippets.map((snippet) => (

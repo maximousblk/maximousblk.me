@@ -21,9 +21,7 @@ export default function Blog({ posts }) {
     .filter((frontMatter) => {
       return (
         (frontMatter.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-          frontMatter.description
-            ?.toLowerCase()
-            .includes(searchValue.toLowerCase())) &&
+          frontMatter.description?.toLowerCase().includes(searchValue.toLowerCase())) &&
         frontMatter.published
       );
     });
@@ -41,9 +39,7 @@ export default function Blog({ posts }) {
         }}
       />
       <div className="flex flex-col justify-center items-start w-full max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-8 text-black dark:text-white">
-          Blog
-        </h1>
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-8 text-black dark:text-white">Blog</h1>
         <div className="relative w-full mb-4">
           <input
             aria-label={`Search through ${filteredBlogPosts.length} articles`}
@@ -55,9 +51,7 @@ export default function Blog({ posts }) {
           <SearchIcon className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300" />
         </div>
         {!filteredBlogPosts.length && (
-          <p className="my-8 self-center text-gray-600 dark:text-gray-400 mb-4">
-            No posts found ;-;
-          </p>
+          <p className="my-8 self-center text-gray-600 dark:text-gray-400 mb-4">No posts found ;-;</p>
         )}
         <div className="divide-y divide-gray-200 dark:divide-gray-900">
           {filteredBlogPosts.map((frontMatter) => (

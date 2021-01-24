@@ -23,10 +23,7 @@ export default function Container({ children }) {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && (
-            <Icon
-              name={theme === "dark" ? "Sun" : "Moon"}
-              className="h-4 w-4 text-gray-800 dark:text-gray-200"
-            />
+            <Icon name={theme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />
           )}
         </button>
         <div className="space-x-2">
@@ -39,9 +36,7 @@ export default function Container({ children }) {
           ))}
         </div>
       </nav>
-      <main className="flex flex-col justify-center bg-white dark:bg-black px-8">
-        {children}
-      </main>
+      <main className="flex flex-col justify-center bg-white dark:bg-black px-8">{children}</main>
       <Footer />
     </div>
   );
