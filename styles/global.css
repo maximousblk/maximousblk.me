@@ -24,15 +24,15 @@ html {
   position: sticky;
   z-index: 10;
   top: 0;
-  backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: blur(20px);
   transition: background-color 0.1 ease-in-out;
-  --tw-bg-opacity: 0.5 !important;
+  --tw-bg-opacity: 0.6 !important;
 }
 
 @supports not (backdrop-filter: none) {
   .sticky-nav {
     backdrop-filter: none;
-    @apply bg-opacity-100;
+    --tw-bg-opacity: 1 !important;
   }
 }
 
