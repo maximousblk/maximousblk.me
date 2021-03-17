@@ -5,7 +5,10 @@ module.exports = {
   purge: ["./pages/**/*.tsx", "./components/**/*.tsx", "./layouts/**/*.tsx"],
   darkMode: "class",
   theme: {
-    colors: colors,
+    colors: {
+      gray: colors.coolGray
+      ...colors
+    }
     extend: {
       fontFamily: {
         sans: ["Inter", ...fontFamily.sans],
