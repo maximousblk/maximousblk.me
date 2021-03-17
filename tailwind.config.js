@@ -8,7 +8,7 @@ module.exports = {
     colors: {
       gray: colors.coolGray,
       ...colors
-    }
+    },
     extend: {
       fontFamily: {
         sans: ["Inter", ...fontFamily.sans],
