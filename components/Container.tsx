@@ -15,11 +15,11 @@ export default function Container({ children }) {
 
   return (
     <div className="bg-white dark:bg-coolGray-900">
-      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-coolGray-900 bg-opacity-60">
+      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-coolGray-900">
         <button
           aria-label="Toggle Dark Mode"
           type="button"
-          className="bg-white dark:bg-coolGray-900 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10"
+          className="hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && (
@@ -29,7 +29,7 @@ export default function Container({ children }) {
         <div className="space-x-2">
           {config.nav.map(({ name, href }) => (
             <Link href={href} key={name}>
-              <a className="py-2 px-3 rounded text-gray-900 dark:text-coolGray-100 hover:bg-gray-100 dark:hover:bg-coolGray-900 bg-opacity-30 hover:bg-opacity-80">
+              <a className="py-2 px-3 rounded text-gray-900 dark:text-coolGray-100 hover:bg-gray-100 dark:hover:bg-coolGray-800">
                 {name}
               </a>
             </Link>
