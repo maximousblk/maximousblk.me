@@ -15,11 +15,11 @@ export default function Container({ children }) {
 
   return (
     <div className="bg-white dark:bg-black">
-      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-black bg-opacity-60">
+      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-coolGray-900 bg-opacity-60">
         <button
           aria-label="Toggle Dark Mode"
           type="button"
-          className="bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 rounded p-3 h-10 w-10"
+          className="bg-gray-100 dark:bg-coolGray-800 hover:bg-coolGray-200 dark:hover:bg-coolGray-700 rounded p-3 h-10 w-10 bg-opacity-80"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && (
@@ -36,7 +36,7 @@ export default function Container({ children }) {
           ))}
         </div>
       </nav>
-      <main className="flex flex-col justify-center bg-white dark:bg-black px-8">{children}</main>
+      <main className="flex flex-col justify-center bg-white dark:bg-coolGray-900 px-8">{children}</main>
       <Footer />
     </div>
   );
