@@ -6,7 +6,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     colors: {
-      gray: colors.coolGray
+      gray: colors.coolGray,
       ...colors
     }
     extend: {
