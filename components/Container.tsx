@@ -14,7 +14,7 @@ export default function Container({ children }) {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="bg-white dark:bg-black">
+    <div className="bg-white dark:bg-coolGray-800">
       <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-coolGray-900 bg-opacity-60">
         <button
           aria-label="Toggle Dark Mode"
