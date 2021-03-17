@@ -68,6 +68,11 @@ pre {
   scrollbar-width: none; /* Firefox */
 }
 
+table {
+  display: block;
+  overflow-y: scroll;
+}
+
 .remark-code-title {
   @apply text-gray-800 dark:text-gray-200 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-700 rounded-t bg-gray-200 dark:bg-gray-800 text-sm font-mono font-bold;
 }
