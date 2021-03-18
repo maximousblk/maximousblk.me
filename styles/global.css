@@ -37,11 +37,15 @@ html {
 }
 
 .prose pre {
-  @apply border border-coolGray-700 bg-coolGray-800 text-coolGray-200;
+  background-color: #1C1E26;
+  color: #D5D8DA;
+  @apply border border-coolGray-800;
 }
 
 .prose code {
-  @apply text-coolGray-200 px-1.5 py-0.5 border border-coolGray-700 rounded bg-coolGray-800;
+  background-color: #1C1E26;
+  color: #D5D8DA;
+  @apply px-1.5 py-0.5 border border-coolGray-800 rounded;
 }
 
 .prose img {
