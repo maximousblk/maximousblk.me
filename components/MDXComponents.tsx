@@ -26,7 +26,7 @@ const CustomLink = (props) => {
   return (
     <a target="_blank" rel="noopener noreferrer" {...props}>
       {props.children}
-      {typeof props.children == "string" && <ExternalLink size={16} className="inline-block ml-1 text-gray-500" />}
+      {typeof props.children == "string" && <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />}
     </a>
   );
 };
