@@ -15,7 +15,7 @@ pre[class*="language-"] {
 .language-css > code,
 .language-sass > code,
 .language-scss > code {
-  @apply text-orange-300;
+  @apply text-orange-400;
 }
 
 [class*="language-"] .namespace {
@@ -36,7 +36,7 @@ pre[class*="language-"] {
 .token.keyword,
 .token.regex,
 .token.symbol {
-  @apply text-violet-300;
+  @apply text-rose-400;
 }
 
 .token.attr-name,
@@ -47,14 +47,14 @@ pre[class*="language-"] {
 .token.inserted,
 .token.operator,
 .token.property {
-  @apply text-cyan-300;
+  @apply text-cyan-400;
 }
 
 .token.comment,
 .token.doctype,
 .token.prolog,
 .token.punctuation {
-  @apply text-coolGray-300;
+  @apply text-coolGray-400;
 }
 
 .token.deleted,
@@ -64,7 +64,7 @@ pre[class*="language-"] {
 .token.tag,
 .token.url,
 .token.variable {
-  @apply text-rose-300;
+  @apply text-indigo-400;
 }
 
 .token.attr-value,
@@ -72,10 +72,10 @@ pre[class*="language-"] {
 .token.pseudo-class,
 .token.pseudo-element,
 .token.string {
-  @apply text-yellow-300;
+  @apply text-amber-400;
 }
 
 .token.hexcode,
 .token.unit {
-  @apply text-orange-300;
+  @apply text-pink-400;
 }
