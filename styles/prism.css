@@ -1,141 +1,59 @@
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #E95678B3;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-
-  -moz-tab-size: 2;
-  -o-tab-size: 2;
-  tab-size: 2;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-pre[class*="language-"]::-moz-selection,
-pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection,
-code[class*="language-"] ::-moz-selection {
-  text-shadow: none;
-  background: #1c1e26;
-}
-
-pre[class*="language-"]::selection,
-pre[class*="language-"] ::selection,
-code[class*="language-"]::selection,
-code[class*="language-"] ::selection {
-  text-shadow: none;
-  background: #1c1e26;
-}
-
-@media print {
-  code[class*="language-"],
-  pre[class*="language-"] {
-    text-shadow: none;
-  }
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
-  overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  color: white;
-  background: #1c1e26;
-}
-
-:not(pre) > code[class*="language-"] {
-  padding: 0.1em;
-  border-radius: 0.3em;
-  white-space: normal;
-}
-
-
-.token.comment {
-  color: #BBBBBB4D;
-  font-style: italic
-}
-
-.token.constant {
-  color: #F09483E6;
-  
-}
-
-.token.attr-name {
-  color: #F09483E6;
-  
-}
-
-.token.keyword {
-  color: #F09483E6;
-  
-}
-
-.token.regex {
-  color: #F09483E6;
-  
-}
-
-.token.char {
-  color: #25B0BCE6;
-  
-}
-
-.token.function {
-  color: #25B0BCE6;
-  
-}
-
-.token.builtin {
-  color: #25B0BCE6;
-  
-}
-
-.token.tag {
-  color: #E95678E6;
-  
-}
-
-.token.variable {
-  color: #E95678E6;
-  
-}
-
-.token.property {
-  color: #E95678E6;
-  
-}
-
-.token.operator {
-  color: #BBBBBB;
-  
-}
-
-.token.string {
-  color: #FAB795E6;
-  
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-coolGray-300;
 }
 
 .token.punctuation {
-  color: #E95678B3;
-  
+  @apply text-coolGray-300;
 }
 
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-green-500;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-purple-500;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-500;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-blue-500;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-pink-500;
+}
+
+.token.regex,
 .token.important,
-.token.bold {
-  font-weight: bold;
+.token.variable {
+  @apply text-yellow-500;
 }
 
-.token.italic {
-  font-style: italic;
+code[class*='language-'],
+pre[class*='language-'] {
+  @apply text-coolGray-50;
 }
