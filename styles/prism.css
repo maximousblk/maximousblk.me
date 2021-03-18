@@ -46,7 +46,8 @@ pre[class*="language-"] {
 .token.class,
 .token.inserted,
 .token.operator,
-.token.property {
+.token.property,
+.token.parameter {
   @apply text-cyan-400;
 }
 
