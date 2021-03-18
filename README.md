@@ -1,6 +1,6 @@
 # maximousblk.now.sh
 
-My personal slice of the internet.
+My personal blog.
 
 ### Built Using
 
