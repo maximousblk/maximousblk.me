@@ -66,18 +66,18 @@ export default function PostLayout({ children, frontMatter }) {
               {format(parseISO(frontMatter.publishedAt), "MMMM dd, yyyy")}
             </p>
           </div>
-          <p className="text-sm text-gray-500 min-w-32 mt-2 md:mt-0">{frontMatter.readingTime.text}</p>
+          <p className="text-sm text-gray-500 dark:text-coolGray-500 min-w-32 mt-2 md:mt-0">{frontMatter.readingTime.text}</p>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
         <div className="flex space-x-3 text-sm text-gray-700 dark:text-coolGray-300 hover:text-gray-800 hover:dark:text-coolGray-200 mt-8">
           <a href={discussUrl(frontMatter.slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {"Discuss on Twitter"}
-            <ExternalLink size={16} className="inline-block ml-1 text-gray-500" />
+            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
           </a>
           <p> • </p>
           <a href={editUrl(frontMatter.slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {"Edit on GitHub"}
-            <ExternalLink size={16} className="inline-block ml-1 text-gray-500" />
+            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
           </a>
         </div>
       </article>
