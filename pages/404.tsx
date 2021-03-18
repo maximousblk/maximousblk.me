@@ -25,7 +25,7 @@ export default function NotFound() {
           URL?
         </p>
         <Link href="/">
-          <a className="p-1 sm:p-4 w-64 font-bold mx-auto text-center rounded-md bg-gray-100 dark:bg-gray-900 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-800">
+          <a className="p-1 sm:p-4 w-64 font-bold mx-auto text-center rounded-md bg-gray-100 dark:bg-gray-800 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
             Return Home
           </a>
         </Link>
