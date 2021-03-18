@@ -5,7 +5,7 @@ import config from "@/data/config";
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en-US">
+      <Html lang="en-US" className="dark">
         <Head>
           {/* icons */}
           <link href="/favicon.ico" rel="shortcut icon" />
