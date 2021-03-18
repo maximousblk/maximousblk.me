@@ -6,7 +6,7 @@
 @import "prism.css";
 
 ::selection {
-  @apply text-gray-100 bg-indigo-500 dark:bg-indigo-300;
+  @apply text-gray-100 bg-indigo-500 dark:text-coolGray-900 dark:bg-indigo-400;
 }
 
 html {
