@@ -9,7 +9,7 @@ pre[class*="language-"] {
   -ms-hyphens: none;
   hyphens: none;
 
-  @apply text-gray-800 dark:text-gray-100;
+  @apply text-coolGray-100;
 }
 
 .language-css > code,
@@ -54,7 +54,7 @@ pre[class*="language-"] {
 .token.doctype,
 .token.prolog,
 .token.punctuation {
-  @apply text-gray-300;
+  @apply text-coolGray-300;
 }
 
 .token.deleted,
