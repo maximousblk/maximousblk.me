@@ -16,7 +16,7 @@
 .token.constant,
 .token.symbol,
 .token.deleted {
-  @apply text-emerald-400;
+  @apply text-orange-400;
 }
 
 .token.selector,
@@ -33,7 +33,7 @@
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  @apply text-yellow-400;
+  @apply text-orange-400;
 }
 
 .token.atrule,
@@ -50,7 +50,7 @@
 .token.regex,
 .token.important,
 .token.variable {
-  @apply text-amber-400;
+  @apply text-pink-400;
 }
 
 code[class*='language-'],
