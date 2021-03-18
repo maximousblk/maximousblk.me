@@ -26,7 +26,7 @@ html {
   top: 0;
   backdrop-filter: blur(20px);
   transition: background-color 0.1 ease-in-out;
-  --tw-bg-opacity: 0.55 !important;
+  --tw-bg-opacity: 0.6 !important;
 }
 
 @supports not (backdrop-filter: none) {
