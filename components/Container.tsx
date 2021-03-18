@@ -23,7 +23,7 @@ export default function Container({ children }) {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && (
-            <Icon name={theme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />
+            <Icon name={theme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />
           )}
         </button>
         <div className="space-x-2">
