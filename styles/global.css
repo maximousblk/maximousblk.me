@@ -6,7 +6,7 @@
 @import "prism.css";
 
 ::selection {
-  @apply text-gray-100 bg-indigo-500 dark:bg-indigo-300;
+  @apply text-gray-100 bg-indigo-500 dark:text-coolGray-900 dark:bg-indigo-400;
 }
 
 html {
@@ -24,24 +24,24 @@ html {
   position: sticky;
   z-index: 10;
   top: 0;
-  backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: blur(20px);
   transition: background-color 0.1 ease-in-out;
-  --tw-bg-opacity: 0.5 !important;
+  --tw-bg-opacity: 0.6 !important;
 }
 
 @supports not (backdrop-filter: none) {
   .sticky-nav {
     backdrop-filter: none;
-    @apply bg-opacity-100;
+    --tw-bg-opacity: 1 !important;
   }
 }
 
 .prose pre {
-  @apply bg-gray-50 border border-gray-200 dark:border-gray-700 dark:bg-gray-900 text-gray-800 dark:text-gray-200;
+  @apply border border-coolGray-700 bg-coolGray-800 text-coolGray-200;
 }
 
 .prose code {
-  @apply text-gray-800 dark:text-gray-200 px-1.5 py-0.5 border border-gray-100 dark:border-gray-800 rounded bg-gray-100 dark:bg-gray-900;
+  @apply px-1.5 py-0.5 rounded border border-coolGray-700 text-coolGray-200 bg-coolGray-800;
 }
 
 .prose img {
@@ -74,7 +74,7 @@ table {
 }
 
 .remark-code-title {
-  @apply text-gray-800 dark:text-gray-200 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-700 rounded-t bg-gray-200 dark:bg-gray-800 text-sm font-mono font-bold;
+  @apply text-coolGray-200 px-5 py-3 border border-b-0 border-coolGray-700 rounded-t bg-coolGray-700 text-sm font-mono;
 }
 
 .remark-code-title + pre {
@@ -82,7 +82,7 @@ table {
 }
 
 .mdx-marker {
-  @apply block -mx-4 px-4 bg-gray-100 dark:bg-gray-800 border-l-4 border-blue-500;
+  @apply block -mx-4 px-4 bg-gray-100 dark:bg-coolGray-800 border-l-4 border-blue-500;
 }
 
 /* Remove Safari input shadow on mobile */

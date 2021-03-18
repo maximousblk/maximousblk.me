@@ -14,29 +14,29 @@ export default function Container({ children }) {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="bg-white dark:bg-black">
-      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-black bg-opacity-60">
+    <div className="bg-white dark:bg-coolGray-900">
+      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-coolGray-900">
         <button
           aria-label="Toggle Dark Mode"
           type="button"
-          className="bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 rounded p-3 h-10 w-10"
+          className="hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && (
-            <Icon name={theme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />
+            <Icon name={theme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />
           )}
         </button>
         <div className="space-x-2">
           {config.nav.map(({ name, href }) => (
             <Link href={href} key={name}>
-              <a className="py-2 px-3 rounded text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-900">
+              <a className="py-2 px-3 rounded text-gray-900 dark:text-coolGray-100 hover:bg-gray-100 dark:hover:bg-coolGray-800">
                 {name}
               </a>
             </Link>
           ))}
         </div>
       </nav>
-      <main className="flex flex-col justify-center bg-white dark:bg-black px-8">{children}</main>
+      <main className="flex flex-col justify-center bg-white dark:bg-coolGray-900 px-8">{children}</main>
       <Footer />
     </div>
   );

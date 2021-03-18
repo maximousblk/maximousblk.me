@@ -51,7 +51,7 @@ class MyDocument extends Document {
           <meta content="M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI" name="google-site-verification" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         </Head>
-        <body className="bg-white dark:bg-black text-white dark:text-black">
+        <body className="bg-white dark:bg-coolGray-900 text-black dark:text-white">
           <Main />
           <NextScript />
         </body>

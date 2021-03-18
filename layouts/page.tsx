@@ -16,7 +16,7 @@ export default function PageLayout({ children, frontMatter }) {
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           {frontMatter.title}
         </h1>
-        {!hide_description && <p className="text-gray-700 dark:text-gray-300 mt-2 mb-8">{description}</p>}
+        {!hide_description && <p className="text-gray-700 dark:text-coolGray-300 mt-2 mb-8">{description}</p>}
         <div className="prose dark:prose-dark w-full">{children}</div>
       </article>
     </Container>
