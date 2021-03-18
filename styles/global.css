@@ -37,11 +37,11 @@ html {
 }
 
 .prose pre {
-  @apply bg-gray-50 border border-gray-200 dark:border-gray-700 dark:bg-gray-900 text-gray-800 dark:text-gray-200;
+  @apply border border-gray-200 dark:border-coolGray-700 bg-gray-50 dark:bg-coolGray-800 text-gray-800 dark:text-coolGray-200;
 }
 
 .prose code {
-  @apply text-gray-800 dark:text-gray-200 px-1.5 py-0.5 border border-gray-100 dark:border-gray-800 rounded bg-gray-100 dark:bg-gray-900;
+  @apply text-gray-800 dark:text-coolGray-200 px-1.5 py-0.5 border border-gray-100 dark:border-coolGray-700 rounded bg-gray-100 dark:bg-coolGray-800;
 }
 
 .prose img {
@@ -74,7 +74,7 @@ table {
 }
 
 .remark-code-title {
-  @apply text-gray-800 dark:text-gray-200 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-700 rounded-t bg-gray-200 dark:bg-gray-800 text-sm font-mono font-bold;
+  @apply text-gray-800 dark:text-coolGray-200 px-5 py-3 border border-b-0 border-gray-200 dark:border-coolGray-700 rounded-t bg-gray-200 dark:bg-coolGray-800 text-sm font-mono;
 }
 
 .remark-code-title + pre {
@@ -82,7 +82,7 @@ table {
 }
 
 .mdx-marker {
-  @apply block -mx-4 px-4 bg-gray-100 dark:bg-gray-800 border-l-4 border-blue-500;
+  @apply block -mx-4 px-4 bg-gray-100 dark:bg-coolGray-800 border-l-4 border-blue-500;
 }
 
 /* Remove Safari input shadow on mobile */
