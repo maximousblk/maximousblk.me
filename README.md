@@ -11,6 +11,6 @@ My personal slice of the internet.
 
 ### License
 
-Contents of directory [`./data`](./data) are Licensed under the [`CC BY-NC-ND 4.0`](./data/LICENSE)
+Contents of directory [`./data`](./data) are Licensed under [`CC BY-NC-ND 4.0`](./data/LICENSE)
 
 Source code and design for the website is derivative of [Lee Robinson's blog](https://leerob.io), see [LICENSE](./LICENSE) for more info.
