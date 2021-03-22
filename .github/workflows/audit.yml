@@ -13,6 +13,8 @@ jobs:
         with:
           github-token: ${{ github.token }}
           environment: ${{ github.ref == 'main' && 'Production' || 'Preview' }}
+          timeout: 120
+          interval: 10
 
       - name: Audit
         uses: treosh/lighthouse-ci-action@v7
