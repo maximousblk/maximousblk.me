@@ -4,11 +4,13 @@ on: deployment_status
 
 jobs:
   audit:
-    if: github.deployment_status.state == 'Success'
+    # if: github.deployment_status.state == 'Success'
 
     runs-on: ubuntu-latest
 
     steps:
+      - run: echo github.deployment_status.state
+
       - name: Audit
         uses: treosh/lighthouse-ci-action@v7
         with:
