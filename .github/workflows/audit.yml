@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo github.deployment_status.state
+      - run: echo ${{ github.deployment_status.state }}
 
       - name: Audit
         uses: treosh/lighthouse-ci-action@v7
