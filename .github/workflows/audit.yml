@@ -11,7 +11,7 @@ jobs:
         uses: SFDigitalServices/wait-for-deployment-action@v1
         id: deployment
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ github.token }}
           environment: ${{ github.ref == 'main' && 'Production' || 'Preview' }}
 
       - name: Audit
