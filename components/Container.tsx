@@ -13,8 +13,6 @@ export default function Container({ children }) {
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
 
-  document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === "dark" ? "#111827" : "#FFFFFF");
-
   return (
     <div className="bg-white dark:bg-coolGray-900">
       <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-coolGray-900">
