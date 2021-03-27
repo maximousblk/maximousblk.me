@@ -21,8 +21,8 @@ export default function Container({ children }) {
           type="button"
           className="hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10"
           onClick={() => {
-            setTheme(theme === "dark" ? "light" : "dark");
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === "dark" ? "#FFFFFF" : "#111827");
+            setTheme(theme === "light" ? "dark" : "light");
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === "light" ? "#111827" : "#FFFFFF");
           }}
         >
           {mounted && (
