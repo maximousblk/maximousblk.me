@@ -22,6 +22,7 @@ class MyDocument extends Document {
           <meta name="description" content={config.description} />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="theme-color" content="#111827" />
 
           {/* fonts */}
           <link
