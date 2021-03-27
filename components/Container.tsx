@@ -20,7 +20,10 @@ export default function Container({ children }) {
           aria-label="Toggle Dark Mode"
           type="button"
           className="hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={() => {
+            setTheme(theme === "dark" ? "light" : "dark");
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === "dark" ? "#111827" : "#FFFFFF");
+          }}
         >
           {mounted && (
             <Icon name={theme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />
