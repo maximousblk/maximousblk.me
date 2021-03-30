@@ -66,7 +66,9 @@ export default function PostLayout({ children, frontMatter }) {
               {format(parseISO(frontMatter.publishedAt), "MMMM dd, yyyy")}
             </p>
           </div>
-          <p className="text-sm text-gray-500 dark:text-coolGray-500 min-w-32 mt-2 md:mt-0">{frontMatter.readingTime.text}</p>
+          <p className="text-sm text-gray-500 dark:text-coolGray-500 min-w-32 mt-2 md:mt-0">
+            {frontMatter.readingTime.text}
+          </p>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
         <div className="flex space-x-3 text-sm text-gray-700 dark:text-coolGray-300 hover:text-gray-800 hover:dark:text-coolGray-200 mt-8">
