@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@next/mdx": "^10.1.2",
-    "@tailwindcss/jit": "^0.1.17",
+    "@tailwindcss/jit": "^0.1.18",
     "@tailwindcss/typography": "^0.4.0",
     "autoprefixer": "^10.2.5",
     "date-fns": "^2.19.0",
