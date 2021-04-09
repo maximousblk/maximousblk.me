@@ -3408,14 +3408,15 @@ next-mdx-remote@^2.1.3:
     "@mdx-js/mdx" "^1.6.22"
     "@mdx-js/react" "^1.6.22"
 
-next-pwa@^5.2.3:
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.2.3.tgz#ec3b61eb4689859252357e33a1495abaeee09fe9"
-  integrity sha512-CVht4cT3KxOe9Yc/kyJleJY5653646D4j3rxpsqVHoH71cDEDu0pOfHr9FPp9IBpTHFSS3ZTXO7+uyxtbABycg==
+next-pwa@^5.2.5:
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.2.5.tgz#475e364ef06546c3370f68f74f65f2601cbb6ee6"
+  integrity sha512-N7pX8zonoRe3UX3Yb3FPeA6YjTSvgDMONP5D2+ta0VcMOqvuw8Eqxz/Zksnj56B7fc64JWIHf8s45yFW8/OWDw==
   dependencies:
     babel-loader "^8.2.2"
     clean-webpack-plugin "^3.0.0"
     globby "^11.0.3"
+    terser-webpack-plugin "^5.1.1"
     workbox-webpack-plugin "^6.1.2"
     workbox-window "^6.1.2"
 
