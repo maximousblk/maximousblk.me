@@ -8,7 +8,7 @@ import config from "@/data/config";
 
 export default function Container({ children }) {
   const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
