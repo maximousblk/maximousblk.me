@@ -54,11 +54,5 @@
     "tabWidth": 2,
     "trailingComma": "none",
     "printWidth": 120
-  },
-  "peerDependencies": {
-    "@babel/core": "^7.13.15",
-    "@mdx-js/loader": "^1.6.22",
-    "@mdx-js/react": "^1.6.22",
-    "webpack": "^5.31.2"
   }
 }
