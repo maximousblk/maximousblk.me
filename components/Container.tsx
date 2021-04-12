@@ -8,7 +8,7 @@ import config from "@/data/config";
 
 export default function Container({ children }) {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
@@ -23,7 +23,7 @@ export default function Container({ children }) {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && (
-            <Icon name={theme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />
+            <Icon name={resolvedTheme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />
           )}
         </button>
         <div className="space-x-2">
