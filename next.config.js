@@ -39,6 +39,11 @@ module.exports = withPWA({
   async redirects() {
     return [
       {
+        source: "/post/:path*",
+        destination: "/posts/:path*",
+        permanent: true
+      },
+      {
         source: "/pgp",
         destination: "https://keybase.io/maximousblk/pgp_keys.asc",
         permanent: false

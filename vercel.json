@@ -1,12 +1,5 @@
 {
   "github": { "silent": true },
-  "redirects": [
-    {
-      "source": "/post/(.*)",
-      "destination": "/posts/$1",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/fonts/(.*)",
