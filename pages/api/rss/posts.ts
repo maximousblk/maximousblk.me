@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     title: config.name,
     description: config.description,
     site_url: config.baseUrl,
-    feed_url: config.baseUrl + "/rss",
+    feed_url: config.baseUrl + "/rss/posts",
     image_url: config.baseUrl + "/og.png",
     copyright: config.name,
     language: "en",
