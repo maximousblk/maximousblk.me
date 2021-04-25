@@ -9,7 +9,6 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "postbuild": "next-sitemap",
     "prod": "yarn build && yarn start"
   },
   "dependencies": {
