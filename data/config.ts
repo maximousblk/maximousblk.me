@@ -2,7 +2,7 @@ export const config = {
   name: "Maximous Black",
   description: "I'm a Web Developer who likes building beautiful web interfaces & experiences.",
   username: "maximousblk",
-  baseUrl: "https://maximousblk.now.sh",
+  baseUrl: "https://maximousblk.me",
   repo: {
     name: "maximousblk/maximousblk.now.sh",
     branch: "main"
