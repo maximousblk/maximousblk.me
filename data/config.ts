@@ -15,6 +15,7 @@ export const config = {
     links: [
       { name: "uses", href: "/uses" },
       { name: "snippets", href: "/snippets" },
+      { name: "rss", href: "/rss/posts" },
       { name: "pgp", href: "https://keybase.io/maximousblk/pgp_keys.asc" }
     ],
     social: [
@@ -22,6 +23,11 @@ export const config = {
         name: "GitHub",
         icon: "GitHub",
         href: "https://github.com/maximousblk"
+      },
+      {
+        name: "Figma",
+        icon: "Figma",
+        href: "https://figma.com/@maximousblk"
       },
       {
         name: "Twitter",
