@@ -28,6 +28,14 @@ module.exports = withPWA({
     disable: process.env.NODE_ENV === "development",
     dest: "public"
   },
+  async rewrites() {
+    return [
+      {
+        source: "/rss/posts",
+        destination: "/api/rss"
+      }
+    ];
+  },
   async redirects() {
     return [
       {
