@@ -56,7 +56,8 @@ html {
 }
 
 .prose a[aria-hidden="true"] {
-  margin-right: 0.5em;
+  margin-right: 0.5ch;
+  margin-left: -1.5ch;
 
   @apply hover:no-underline;
 }
@@ -71,7 +72,7 @@ html {
   text-decoration: none;
   font-size: 1em;
 
-  @apply opacity-50;
+  @apply opacity-30;
   @apply hover:opacity-100;
 }
 
