@@ -65,14 +65,15 @@ html {
 .prose span.icon.icon-link::before {
   content: "#";
 
-  @apply text-coolGray-500;
+  @apply text-gray-600;
+  @apply dark:text-coolGray-400;
 }
 
 .prose span.icon.icon-link {
   text-decoration: none;
   font-size: 1em;
 
-  @apply opacity-30;
+  @apply opacity-50;
   @apply hover:opacity-100;
 }
 
