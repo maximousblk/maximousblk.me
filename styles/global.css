@@ -65,7 +65,7 @@ html {
 .prose span.icon.icon-link::before {
   content: "#";
 
-  @apply text-gray-600;
+  @apply text-gray-500;
   @apply dark:text-coolGray-400;
 }
 
