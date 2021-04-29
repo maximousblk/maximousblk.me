@@ -5,7 +5,6 @@
   "scripts": {
     "fmt": "prettier --check .",
     "fmt:write": "prettier --write .",
-    "codemod": "npx @next/codemod",
     "dev": "next",
     "start": "next start",
     "build": "next build",
@@ -36,7 +35,6 @@
     "tailwindcss": "^2.1.2"
   },
   "devDependencies": {
-    "@next/codemod": "^10.2.0",
     "@types/react": "^17.0.4",
     "@types/rss": "^0.0.28",
     "next-sitemap": "^1.6.25",
