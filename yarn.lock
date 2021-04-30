@@ -4613,10 +4613,10 @@ next-mdx-remote@^2.1.4:
     "@mdx-js/mdx" "^1.6.22"
     "@mdx-js/react" "^1.6.22"
 
-next-pwa@^5.2.15:
-  version "5.2.15"
-  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.2.15.tgz#5e2dc6054267fa5a6445fc4336533177ae7ce9ae"
-  integrity sha512-lJ1BIwV3fel8BZbG06Cjr/EdKJRti3XzWuH3eF4Mxnm4KJ9P+EPbJzWyQAzaf7JVrRH0zZWUCcN7NrUBw220nw==
+next-pwa@^5.2.16:
+  version "5.2.16"
+  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.2.16.tgz#2779089639905b70b71b178c0e8f7215ee8e526c"
+  integrity sha512-gOfcKSBxZTHflf5vxUFs+nU9qC95MdvW9XpXtfK+gq7fedVGexZ/rk8rj12JUBTU+BufTZsN7RAls1jzXV/FaA==
   dependencies:
     babel-loader "^8.2.2"
     clean-webpack-plugin "^3.0.0"
