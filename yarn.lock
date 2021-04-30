@@ -4613,10 +4613,10 @@ next-mdx-remote@^2.1.4:
     "@mdx-js/mdx" "^1.6.22"
     "@mdx-js/react" "^1.6.22"
 
-next-pwa@^5.2.16:
-  version "5.2.16"
-  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.2.16.tgz#2779089639905b70b71b178c0e8f7215ee8e526c"
-  integrity sha512-gOfcKSBxZTHflf5vxUFs+nU9qC95MdvW9XpXtfK+gq7fedVGexZ/rk8rj12JUBTU+BufTZsN7RAls1jzXV/FaA==
+next-pwa@^5.2.18:
+  version "5.2.18"
+  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.2.18.tgz#948e9c1035fac68bee8d81692dab450469797a9d"
+  integrity sha512-T++ATlKrUD42ETf5sLcqK/L6ZV+gm7jRaZMbwJTfrxeqrbkmcYn5WZY3uLx9HI8lC/QcNJQSFd287KCZSLcQ6A==
   dependencies:
     babel-loader "^8.2.2"
     clean-webpack-plugin "^3.0.0"
@@ -5259,7 +5259,7 @@ postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-preact@^10.5.12:
+preact@^10.5.13:
   version "10.5.13"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.13.tgz#85f6c9197ecd736ce8e3bec044d08fd1330fa019"
   integrity sha512-q/vlKIGNwzTLu+jCcvywgGrt+H/1P/oIRSD6mV4ln3hmlC+Aa34C7yfPI4+5bzW8pONyVXYS7SvXosy2dKKtWQ==

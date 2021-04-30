@@ -2,7 +2,7 @@ const withPWA = require("next-pwa");
 
 module.exports = withPWA({
   future: {
-    webpack5: false,
+    webpack5: true,
     strictPostcssConfiguration: true
   },
   images: {
@@ -26,7 +26,11 @@ module.exports = withPWA({
   },
   pwa: {
     disable: process.env.NODE_ENV === "development",
-    dest: "public"
+    dest: "public",
+    fallbacks: {
+      document: '/_offline',
+      data: '/_offline.json'
+    }
   },
   async rewrites() {
     return [
