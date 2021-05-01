@@ -17,7 +17,7 @@ function NotFound() {
           No Internet Connection
         </h1>
         <p className="text-gray-600 dark:text-coolGray-400 mb-8">
-          Oops! Looks like you're offline. this page is not ready for offline viewing yet.
+          Oops! Looks like you're offline. This page is not ready for offline viewing yet.
         </p>
         <p className="text-gray-600 dark:text-coolGray-400 mb-8">
           <blockquote className="px-4 p-2 border-l-4 border-gray-300 dark:border-coolGray-700">
