@@ -24,19 +24,6 @@ function NotFound() {
             <code>ERR_INTERNET_DISCONNECTED</code>
           </blockquote>
         </p>
-<<<<<<< HEAD
-=======
-        <p className="text-gray-600 dark:text-coolGray-400 mb-8">
-          <blockquote className="px-4 p-2 border-l-4 border-gray-300 dark:border-coolGray-700">
-            <code>ERR_INTERNET_DISCONNECTED</code>
-          </blockquote>
-        </p>
-        <Link href="/">
-          <a className="p-3 w-48 mx-auto text-center rounded-md bg-gray-100 dark:bg-coolGray-800 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-coolGray-700">
-            Go to Home
-          </a>
-        </Link>
->>>>>>> b093cc1 (chore: update error pages)
       </div>
     </Container>
   );
