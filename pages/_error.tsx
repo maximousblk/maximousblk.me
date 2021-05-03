@@ -24,7 +24,7 @@ function UnknownError({ statusCode }) {
         <p className="text-gray-600 dark:text-coolGray-400 mb-8">{err.message}</p>
         <p className="text-gray-600 dark:text-coolGray-400 mb-8">
           <blockquote className="px-4 p-2 border-l-4 border-gray-300 dark:border-coolGray-700">
-            <code>HTTP ERROR {statusCode || 666}</code>
+            <code>STATUS {statusCode || 666}</code>
           </blockquote>
         </p>
         <a
