@@ -1,15 +1,15 @@
-import hydrate from "next-mdx-remote/hydrate";
+import { MDXRemote } from "next-mdx-remote";
 
 import { getFileBySlug } from "@/lib/mdx";
 import IndexLayout from "@/layouts/index";
 import MDXComponents from "@/components/MDXComponents";
 
 export default function Uses({ mdxSource, frontMatter }) {
-  const content = hydrate(mdxSource, {
-    components: MDXComponents
-  });
-
-  return <IndexLayout frontMatter={frontMatter}>{content}</IndexLayout>;
+  return (
+    <IndexLayout frontMatter={frontMatter}>
+      <MDXRemote {...mdxSource} components={MDXComponents} />
+    </IndexLayout>
+  );
 }
 
 export async function getStaticProps() {

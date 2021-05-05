@@ -55,11 +55,12 @@ html {
   @apply no-underline hover:underline;
 }
 
-.prose a[aria-hidden="true"] {
+.prose a[aria-hidden="true"][href^="#"] {
   margin-right: 0.5ch;
   margin-left: -1.5ch;
 
   @apply hover:no-underline;
+  @apply font-normal;
 }
 
 .prose span.icon.icon-link::before {
