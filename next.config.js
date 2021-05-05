@@ -4,7 +4,7 @@ module.exports = withPWA({
   reactStrictMode: true,
   future: {
     turboMode: true,
-    webpack5: true,
+    webpack5: false,
     strictPostcssConfiguration: true
   },
   images: {
