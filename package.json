@@ -40,7 +40,7 @@
     "@types/react": "^17.0.5",
     "@types/rss": "^0.0.28",
     "next-sitemap": "^1.6.49",
-    "prettier": "2.2.1",
+    "prettier": "2.3.0",
     "rehype": "11.0.0",
     "remark-frontmatter": "3.0.0",
     "remark-parse": "9.0.0",
