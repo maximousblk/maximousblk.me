@@ -1098,10 +1098,10 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.22.tgz#219dfd89ae5b97a8801f015323ffa4b62f45718b"
   integrity sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==
 
-"@next/codemod@^10.2.2":
-  version "10.2.2"
-  resolved "https://registry.yarnpkg.com/@next/codemod/-/codemod-10.2.2.tgz#05dd3c6873b56704c4e2cbacf5968d39879c6aeb"
-  integrity sha512-gM8/AU5k76X2CnQoch2InciJz263dMtQS3aPpH9TaroTNlXfliuMA/ughfsVh5z2g255zV4b7oXSgyBJHcagCQ==
+"@next/codemod@^10.2.3":
+  version "10.2.3"
+  resolved "https://registry.yarnpkg.com/@next/codemod/-/codemod-10.2.3.tgz#4ce13cb51cf800fcc286d91bc65586de8255c29b"
+  integrity sha512-6mSlwskREU35g/tIUZlUkkVGeWSUKaXGaVjz/m4tnYd4O6nAIkTwBcnH5BSBh+owxdOG1nElkErUROSfu2OGyA==
   dependencies:
     chalk "4.1.0"
     execa "4.0.3"
