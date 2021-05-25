@@ -12,7 +12,7 @@
     "prod": "yarn build && yarn start"
   },
   "dependencies": {
-    "@next/mdx": "^10.2.2",
+    "@next/mdx": "^10.2.3",
     "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.2.5",
     "date-fns": "^2.21.3",
