@@ -14,7 +14,7 @@
   "dependencies": {
     "@next/mdx": "^10.2.3",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.2.5",
+    "autoprefixer": "^10.2.6",
     "date-fns": "^2.21.3",
     "gray-matter": "^4.0.3",
     "mdx-prism": "^0.3.3",
