@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@next/codemod": "^10.2.3",
-    "@types/react": "^17.0.8",
+    "@types/react": "^17.0.9",
     "@types/rss": "^0.0.28",
     "next-sitemap": "^1.6.99",
     "prettier": "2.3.0",
