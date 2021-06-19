@@ -31,13 +31,7 @@ const CustomLink = ({ href, children, ...props }) => {
     );
   };
 
-  if (isAnchorHref) {
-    return (
-      <BaseIconLink href={href} icon="Hash" {...props}>
-        {children}
-      </BaseIconLink>
-    );
-  } else if (isMailHref) {
+  if (isMailHref) {
     return (
       <BaseIconLink href={href} icon="Mail" {...props}>
         {children}
@@ -54,9 +48,15 @@ const CustomLink = ({ href, children, ...props }) => {
     );
   } else if (isFootNoteHref) {
     return (
-      <a href={href} {...props} {...props}>
+      <a href={href} {...props}>
         {children}
       </a>
+    );
+  } else if (isAnchorHref) {
+    return (
+      <BaseIconLink href={href} icon="Hash" {...props}>
+        {children}
+      </BaseIconLink>
     );
   } else {
     return (
