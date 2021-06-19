@@ -6,7 +6,7 @@
 @import "prism.css";
 
 ::selection {
-  @apply text-gray-100 bg-indigo-500 dark:text-coolGray-900 dark:bg-indigo-400;
+  @apply text-gray-100 bg-gray-800 dark:text-coolGray-900 dark:bg-coolGray-100;
 }
 
 html {
@@ -52,15 +52,20 @@ html {
 }
 
 .prose a {
-  @apply no-underline hover:underline;
+  @apply no-underline;
 }
 
 .prose a[aria-hidden="true"][href^="#"] {
   margin-right: 0.5ch;
   margin-left: -1.5ch;
 
-  @apply hover:no-underline;
+  @apply hover:bg-opacity-0;
   @apply font-normal;
+  @apply p-0;
+}
+
+.prose sup {
+  scroll-margin: 32px;
 }
 
 .prose span.icon.icon-link::before {
@@ -91,11 +96,6 @@ pre::-webkit-scrollbar {
 pre {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-}
-
-table {
-  display: block;
-  overflow-y: scroll;
 }
 
 .remark-code-title {

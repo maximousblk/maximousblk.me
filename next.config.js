@@ -2,17 +2,8 @@ const withPWA = require("next-pwa");
 
 module.exports = withPWA({
   reactStrictMode: true,
-  future: {
-    turboMode: true,
-    webpack5: false,
-    strictPostcssConfiguration: true
-  },
   images: {
-    domains: [
-//      "i.scdn.co", // Spotify Album Art
-//      "pbs.twimg.com", // Twitter Profile Picture
-      "cdn.maximousblk.now.sh" // Personal CDN
-    ]
+    domains: ["cdn.maximousblk.now.sh", "octodex.github.com"]
   },
   webpack: (config, { dev, isServer }) => {
     // Replace React with Preact only in client production build
