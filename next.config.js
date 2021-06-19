@@ -2,16 +2,11 @@ const withPWA = require("next-pwa");
 
 module.exports = withPWA({
   reactStrictMode: true,
-  future: {
-    turboMode: true,
-    webpack5: false,
-    strictPostcssConfiguration: true
-  },
+  // webpack5: false,
   images: {
     domains: [
-//      "i.scdn.co", // Spotify Album Art
-//      "pbs.twimg.com", // Twitter Profile Picture
-      "cdn.maximousblk.now.sh" // Personal CDN
+      "cdn.maximousblk.now.sh", // Personal CDN
+      "octodex.github.com"
     ]
   },
   webpack: (config, { dev, isServer }) => {

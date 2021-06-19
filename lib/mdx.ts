@@ -1,9 +1,8 @@
 import fs from "fs";
 import matter from "gray-matter";
-import mdxPrism from "mdx-prism";
 import path from "path";
 import readingTime from "reading-time";
-import { serialize } from 'next-mdx-remote/serialize';
+import { serialize } from "next-mdx-remote/serialize";
 
 const root = process.cwd();
 
@@ -19,13 +18,8 @@ export async function getFileBySlug(type: string, slug?: string) {
   const { data, content } = matter(source);
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [
-        require("remark-slug"),
-        require("remark-autolink-headings"),
-        require("remark-footnotes"),
-        require("remark-code-titles")
-      ],
-      rehypePlugins: [mdxPrism]
+      remarkPlugins: [require("remark-slug"), require("remark-autolink-headings"), require("remark-code-titles")],
+      rehypePlugins: [require("mdx-prism")]
     }
   });
 

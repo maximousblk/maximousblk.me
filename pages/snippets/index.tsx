@@ -34,7 +34,7 @@ export default function Snippets({ snippets }) {
       <div className="flex flex-col justify-center items-start w-full max-w-2xl mx-auto mb-16">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">Code Snippets</h1>
         <p className="text-gray-600 dark:text-coolGray-400 mb-4">
-          These are a collection of code snippets I've used in the past and saved.
+          These are a collection of code snippets I&apos;ve used in the past and saved.
         </p>
         <div className="relative w-full mb-4">
           <input

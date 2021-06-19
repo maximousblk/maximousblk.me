@@ -5,7 +5,6 @@ import PageLayout from "@/layouts/page";
 import MDXComponents from "@/components/MDXComponents";
 
 export default function Page({ mdxSource, frontMatter }) {
-
   return (
     <PageLayout frontMatter={frontMatter}>
       <MDXRemote {...mdxSource} components={MDXComponents} />

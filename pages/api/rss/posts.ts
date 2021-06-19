@@ -6,7 +6,7 @@ import RSS from "rss";
 import matter from "gray-matter";
 import config from "@/data/config";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const postsRss = async (req: NextApiRequest, res: NextApiResponse) => {
   const feed = new RSS({
     title: config.name,
     description: config.description,
@@ -41,3 +41,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader("Cache-Control", "s-maxage=86400, maxage=86400, stale-while-revalidate");
   res.end(feed.xml({ indent: true }));
 };
+
+export default postsRss;
