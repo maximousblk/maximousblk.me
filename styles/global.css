@@ -52,7 +52,7 @@ html {
 }
 
 .prose a {
-  @apply px-1 py-0.5 no-underline;
+  @apply no-underline;
 }
 
 .prose a[aria-hidden="true"][href^="#"] {

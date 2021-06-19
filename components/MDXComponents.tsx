@@ -20,7 +20,7 @@ const CustomLink = ({ href, children, ...props }) => {
   const isFootNoteHref = href && href.startsWith("#fn");
   const isRelativeHref = href && (href.startsWith("/") || href.startsWith("."));
 
-  const baseStyle = "hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded";
+  const baseStyle = "px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded";
 
   const BaseIconLink = ({ href, icon, children, ...props }) => {
     return (
@@ -33,13 +33,13 @@ const CustomLink = ({ href, children, ...props }) => {
 
   if (isAnchorHref) {
     return (
-      <BaseIconLink href={href} icon="Hash">
+      <BaseIconLink href={href} icon="Hash" {...props}>
         {children}
       </BaseIconLink>
     );
   } else if (isMailHref) {
     return (
-      <BaseIconLink href={href} icon="Mail">
+      <BaseIconLink href={href} icon="Mail" {...props}>
         {children}
       </BaseIconLink>
     );
@@ -54,13 +54,13 @@ const CustomLink = ({ href, children, ...props }) => {
     );
   } else if (isFootNoteHref) {
     return (
-      <a href={href} {...props}>
+      <a href={href} {...props} {...props}>
         {children}
       </a>
     );
   } else {
     return (
-      <BaseIconLink href={href} icon="ExternalLink" target="_blank" rel="noopener noreferrer">
+      <BaseIconLink href={href} icon="ExternalLink" target="_blank" rel="noopener noreferrer" {...props}>
         {children}
       </BaseIconLink>
     );
