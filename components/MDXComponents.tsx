@@ -60,7 +60,7 @@ const CustomLink = ({ href, children, ...props }) => {
     );
   } else {
     return (
-      <BaseIconLink href={href} icon="Hash" target="_blank" rel="noopener noreferrer">
+      <BaseIconLink href={href} icon="ExternalLink" target="_blank" rel="noopener noreferrer">
         {children}
       </BaseIconLink>
     );
