@@ -1,4 +1,4 @@
-# maximousblk.now.sh
+# maximousblk.me
 
 My personal blog.
 
