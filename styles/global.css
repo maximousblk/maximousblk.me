@@ -12,6 +12,7 @@
 html {
   min-width: 360px;
   scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
 }
 
 #__next {
@@ -62,10 +63,6 @@ html {
   @apply hover:bg-opacity-0;
   @apply font-normal;
   @apply p-0;
-}
-
-.prose sup {
-  scroll-margin: 32px;
 }
 
 .prose span.icon.icon-link::before {
