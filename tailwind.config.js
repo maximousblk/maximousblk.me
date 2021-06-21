@@ -19,9 +19,6 @@ module.exports = {
             a: {
               color: theme("colors.indigo.600")
             },
-            "h1,h2,h3,h4": {
-              "scroll-margin-top": spacing[32]
-            },
             code: {
               color: theme("colors.pink.500"),
               fontWeight: "normal"
@@ -47,8 +44,7 @@ module.exports = {
               color: theme("colors.coolGray.300")
             },
             "h1,h2,h3,h4": {
-              color: theme("colors.coolGray.100"),
-              "scroll-margin-top": spacing[32]
+              color: theme("colors.coolGray.100")
             },
             hr: { borderColor: theme("colors.coolGray.700") },
             ol: {
