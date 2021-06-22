@@ -4,7 +4,7 @@ https://keybase.io/maximousblk
 
 I hereby claim:
 
-  * I am an admin of https://maximousblk.now.sh
+  * I am an admin of https://maximousblk.me
   * I am maximousblk (https://keybase.io/maximousblk) on keybase.
   * I have a public key with fingerprint C24B F071 EBAB ECAA 7A66  CB9C EC7B EE3B 0561 BF2F
 
@@ -22,26 +22,26 @@ To do so, I am signing this object:
       "username": "maximousblk"
     },
     "merkle_root": {
-      "ctime": 1610534143,
-      "hash_meta": "2951637aecbe45310e46b807cff31c21de13a3f65177307ccfb74744a0ca3831",
-      "seqno": 18725996
+      "ctime": 1624367716,
+      "hash_meta": "1f1887d993384950ab7253d236328e61cf06a46d5b9b24aff895382cb0e9281c",
+      "seqno": 20234252
     },
     "revoke": {
       "sig_ids": [
-        "7583ee4125a425123cb16f3f42ce0392835878abb356d17517d5f13138b3a4aa0f"
+        "5fbaf579aba5a061c2beb722fc4c1d725b1145525c76d71e6f11c511dccc63170f"
       ]
     },
     "service": {
-      "hostname": "maximousblk.now.sh",
+      "hostname": "maximousblk.me",
       "protocol": "https:"
     },
     "type": "web_service_binding",
     "version": 1
   },
-  "ctime": 1610534155,
+  "ctime": 1624367735,
   "expire_in": 157680000,
-  "prev": "86584123388535bafbab048c3838ee8cb01762b6745ffb15175dcd9f04df4677",
-  "seqno": 74,
+  "prev": "ed7da30bfbb67aa6a7d3dec7751778d26f564b6f1b5fa07f15da2f92622dae6b",
+  "seqno": 77,
   "tag": "signature"
 }
 
@@ -51,26 +51,26 @@ which yields the signature:
 Version: Keybase OpenPGP v2.1.13
 Comment: https://keybase.io/crypto
 
-yMK3AnicrVNdaBxFHL+zsaVJLbHQChalrFQrhmRm53OjBR/OWhpo1DaC2nLMzM5c
-lvvYc3cvaRoCMUqUKChYKCQgCD6UBlpz+FKpUlOppRKh2tPClUKIYAipUlSItaTO
-BkVQH92XZWd//9/XzHx+z7pMa3Zxz7XlD2/f35f9cna0lsmvzrUNOzL0h5zuYaeo
-11665Os4yRcD3+l2AARQ+UYyLlyshWIeQFBAYpjvGwokEdJ3BdVMQV8LKV0pqPCw
-hC6G2nM1QMYA4XQ4JqgUdFSNgkpiaZWLpQEMaimkVkIwQamSntKKSa2RBIRCaVxj
-B/vDOJ2w5qSIdWcQ2jX7kV+z9x/4/9l3bY2O+JwyyRCQjEEIfEutBIfELlLfQC8F
-xjqqiLK26LI4EpTDWixLRWekwynrqFjS+SgMk7RflQQpClIICMIQI5tRxP35sk6E
-HXY9AiliQiupMUEQaEwlB0wZg6ByrV2IBDKUQGb9MKVsSMwwFkAJxBG0VmL9ciW0
-Cpy5xPOotRDpgbCoU/U4KNjqYqf7JYcRjrTG0CUCuwS6SElIDTLYVTa/53JEuO1P
-SkSoD5kV9ImBCCIukcBCAOMcHknVooFArZGne/XvDjor4WBn3G+NVaMwCVVYsv/7
-k6Qad6f1JEPVdGBQy/yfVHkZVHx7XuzEgI7iIKzYMBb5j+YI6XD0kWoQ6XyQIgij
-HNgn1dEDlpJTwm08hDgniEhh7GkDmCtbE9eaKwkgo66kDBNjJLQBid1ZzwDsG0wZ
-+7tKhq1PUbCctr+KSGqRdkZmzx1qyWRbM+vvviu9SJnWje1/Xa8nFjbcqfn5nxdP
-Ngq59acm20vLX99q3bbzxvWlalv8SMv7zTOduWN945f33XzhoDpab6u88iPfdWqx
-Z6Z4/NtLSW7nSvvuxtGh75ffnJ2cGD195425zQtbG6TrMT725OrkBQoePVHYf2/P
-Euh6vvlDV/n3LZ+czZEdF8ZfzErCXz/w667NJ52N0z/NP1u/uH1qx1R1dOGtX6av
-PnPp2DfnH5Qb6g/1Hrz12onq4d1j81PNLRPPtS3NDN539qlXH9776X66/NVHpq/3
-gdsfbP9upXFjxlnXvNJzuT6x7fxv9bf59TPFQ48PfnH646ebuHc4O//ZudWVsYvT
-e8Ob8PjS3KaW9xq5fXs2jb/zbsb9A8s+jos=
-=Cdi3
+yMK4AnicrVNdaB1FGL3RNtbQ1kIwjdEomfbBh2uYmd2Z2b1o1QdjC4ohGJpWm+v8
+Jtv7sze7e296aQNaX/oQilZMaJUIVqSgllK1wg2KVJsWq9Q8lPgXLJJAG4p9EA1I
+RGeDIqiP7suy357vnDPn++bTDTdnWpqu9nx3/dRKR3/TxbMHqplnZn8Y3Q9EqOog
+tx8U9OpLF5WOk3whUCAHIIJIKiOYx7GruWQ+dBBHxDClDIWCcKEwp5pJpDQXAgtO
+ue8KhF2kfayhYwzkIAtMUB7SUSUKyomlldgVBjKkBRdacs44pVL4UksmtHYEJBQJ
+g41tHA7jtMOaEzzW3UFoa/Yjv2rvP/D/s+/qKh1RHmWCOVAwhhBUllpyDxFbpMog
+PwXGOirzkrboEt8XlMJqLIoFMJYFJR0VijofhWGS5iuTIEUhil2HWjpqz8jj4XxJ
+J9w2I4M8jynfdxzP9QnkgmHiKOxQB3uaImkg5S5VRPgCu9wYzyeOh6WA1reHpLUS
+65FyCHIYYsfFBFsLka6FBZ2qx8GQjS4GuacAMYIbwnwuOOHQMmOhrRg20rWpWFWB
+kEsIJpJRZWdFDUKSIKSklNRBDBqwZyxVi2qBXCVPZ/XvDLptIQsqUZiEMizaf8NJ
+UolzaTRJvZKCR7XI/0mTF0FZ2V2xHTUdxUFYtlFZ5D9Sc0gW6H2VINL5IEUQRj1o
+n1RH19LNUExxOy8jBGXcDpcpR9l1YQQx5ilMDaGusEcSxHDIDCKKY+NjirHimoq/
+Y2TM+uRDltNmV+ZJNdJg7OzHT6/JNLVkmtfelF6iTMutm/66WtH6W37fvfOR6Tt6
+Rg5tPsxuh6c/mvYfWwHj4eTgiZnFjm86p/qy8q3eO7fMtNUXausHLt/YuletZMxU
+bxE+2L7cfPHrePCdX+9vnX775Z2Fk4F7fHzH3CcPvBZWz3Xf/ePi0MrjywOvH738
+RlfHxkbjrpc+z26be7jx/ERxsPbbunu/GlxiU2uP1fomf35o3bG2XS/OfbFw30+z
+k5v3Lvb27S42lrx+1PtK8dS3rA7aj3Rudy4V+u7pqW99/8j81Q2XNm27cOXN2+a7
+dnz42YFf9szSzu2tzy61XRn/Mjy85sboxMaRR9979+j3A4ealxvtB6fPLHww88KT
+1863L2fF/EBX/nj/q+cbB7dMtD73xB8sU4oA
+=SrlW
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or
