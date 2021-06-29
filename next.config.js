@@ -26,6 +26,14 @@ module.exports = withPWA({
       {
         source: "/rss/:path*",
         destination: "/api/rss/:path*"
+      },
+      {
+        source: "/robots.txt",
+        destination: "/.well-known/robots.txt"
+      },
+      {
+        source: "/keybase.txt",
+        destination: "/.well-known/keybase.txt"
       }
     ];
   },
