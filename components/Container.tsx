@@ -22,19 +22,12 @@ export default function Container({ children }) {
           className="hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-          {mounted && (
-            <Icon
-              name={resolvedTheme === "dark" ? "Sun" : "Moon"}
-              className="h-4 w-4 text-gray-800 dark:text-coolGray-200"
-            />
-          )}
+          {mounted && <Icon name={resolvedTheme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />}
         </button>
         <div className="space-x-2">
           {config.nav.map(({ name, href }) => (
             <Link href={href} key={name}>
-              <a className="py-2 px-3 rounded text-gray-900 dark:text-coolGray-100 hover:bg-gray-100 dark:hover:bg-coolGray-800">
-                {name}
-              </a>
+              <a className="py-2 px-3 rounded text-gray-900 dark:text-coolGray-100 hover:bg-gray-100 dark:hover:bg-coolGray-800">{name}</a>
             </Link>
           ))}
         </div>

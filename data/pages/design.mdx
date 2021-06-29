@@ -1,6 +1,6 @@
 ---
-title: Test Page
-description: Exhaustive list of supported components for testing.
+title: Design System
+description: List of supported components.
 ---
 
 ## Table of contents
@@ -16,25 +16,25 @@ description: Exhaustive list of supported components for testing.
 - [Lists](#lists)
   - [Unordered](#unordered)
   - [Ordered](#ordered)
+  - [Todo List](#todo-list)
 - [Code](#code)
   - [Inline code](#inline-code)
   - [Code block](#code-block)
-  - [Indented code](#indented-code)
   - [Syntax highlighting](#syntax-highlighting)
+  - [Line highlighting](#line-highlighting)
+  - [Code Title](#code-title)
 - [Links](#links)
   - [Autolinks](#autolinks)
   - [Inline links](#inline-links)
   - [Link titles](#link-titles)
   - [Named Anchors](#named-anchors)
   - [Link Types](#all-link-types)
+  - [Footnotes](#footnotes)
 - [Images](#images)
 - [Raw HTML](#raw-html)
 - [Escaping with backslashes](#escaping-with-backslashes)
 - [Strikethrough](#strikethrough)
-- [Footnotes](#footnotes)
-- [Todo List](#todo-list)
 - [Tables](#tables)
-  - [Aligning cells](#aligning-cells)
 
 ## Headings
 
@@ -172,6 +172,14 @@ Renders to:
 > > > Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
 > > > Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
 
+you can also add author to blockquotes
+
+```tsx
+<Quote author="Greef Karga">Come on, baby! Do the magic hand thing.</Quote>
+```
+
+<Quote author="Greef Karga">Come on, baby! Do the magic hand thing.</Quote>
+
 ## Lists
 
 ### Unordered
@@ -234,6 +242,20 @@ Renders to:
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
 
+### Todo List
+
+```md
+- [ ] Lorem ipsum dolor sit amet
+- [x] Consectetur adipiscing elit
+- [ ] Integer molestie lorem at massa
+```
+
+Renders to:
+
+- [ ] Lorem ipsum dolor sit amet
+- [x] Consectetur adipiscing elit
+- [ ] Integer molestie lorem at massa
+
 ## Code
 
 ### Inline code
@@ -253,65 +275,135 @@ Three consecutive backticks, referred to as "code fences", are used to denote mu
 For example, this:
 
 ````
-```html
-Example text here...
+```
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
 ```
 ````
 
 Appears like this when viewed in a browser:
 
 ```
-Example text here...
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
 ```
 
 ### Syntax highlighting
 
-To apply the correct styling for the language inside the code block, simply add the file extension of the language you want to use directly after the first code "fence": <code>```js</code>, and syntax highlighting will automatically be applied in the rendered HTML (if supported by the parser). For example, to apply syntax highlighting to JavaScript code:
+To apply syntax highlighting to the code block, add the file extension of the language after the first code "fence": <code>```tsx</code>.
 
 ````md
-```js
-grunt.initConfig({
-  assemble: {
-    options: {
-      assets: "docs/assets",
-      data: "src/data/*.{json,yml}",
-      helpers: "src/custom-helpers.js",
-      partials: ["src/partials/**/*.{hbs,md}"]
-    },
-    pages: {
-      options: {
-        layout: "default.hbs"
-      },
-      files: {
-        "./": ["src/templates/pages/index.hbs"]
-      }
-    }
-  }
-});
+```tsx
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
 ```
 ````
 
 Which renders to:
 
-```js
-grunt.initConfig({
-  assemble: {
-    options: {
-      assets: "docs/assets",
-      data: "src/data/*.{json,yml}",
-      helpers: "src/custom-helpers.js",
-      partials: ["src/partials/**/*.{hbs,md}"]
-    },
-    pages: {
-      options: {
-        layout: "default.hbs"
-      },
-      files: {
-        "./": ["src/templates/pages/index.hbs"]
-      }
-    }
-  }
-});
+```tsx
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
+```
+
+### Line Highlighting
+
+You can highlight lines in the code block by adding braces after the language.
+
+````md
+```tsx{3-8}
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
+```
+````
+
+Which renders to:
+
+```tsx{3-8}
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
+```
+
+### Code Title
+
+You can add a title to the code block by adding a colon and the title after it.
+
+````md
+```tsx{3-8}:components/MDXComponents.tsx
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
+```
+````
+
+Which renders to:
+
+```tsx{3-8}:components/MDXComponents.tsx
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
 ```
 
 ## Links
@@ -364,6 +456,26 @@ For example, [Table of Contents](#table-of-contents) will jump back to the table
 
 Note that placement of achors is arbitrary, you can put them anywhere you want, not just in headings. This makes adding cross-references easy when writing markdown.
 
+### Footnotes
+
+Markdown footnotes are denoted by an opening square bracket, followed by a caret, followed by a number and a closing square bracket: `[^1]`.
+
+```md
+This is some text[^1] with a footnote reference link.
+```
+
+This is some text[^1] with a footnote reference link.
+
+The accompanying text for the footnote can be added elsewhere in the document using the following syntax:
+
+```
+[^1]: This is a footnote
+```
+
+[^1]: This is a footnote
+
+Footnotes are "stacked" by the markdown parser at the bottom of the file, in the order in which the footnotes were defined.
+
 ### All Link Types
 
 Different type of links will render with a corresponding icon.
@@ -372,6 +484,7 @@ Different type of links will render with a corresponding icon.
 - [External link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 - [Anchor](#links)
 - [Email](mailto:maximousblk@gmail.com)
+- Footnote[^1]
 
 ## Images
 
@@ -394,22 +507,10 @@ or with tooltips:
 Using NextJS `<Image/>` Component
 
 ```tsx
-<Image
-  src="https://octodex.github.com/images/Robotocat.png"
-  width={896}
-  height={896}
-  alt="The Robotocat"
-  title="The Robotocat"
-/>
+<Image src="https://octodex.github.com/images/Robotocat.png" width={896} height={896} alt="The Robotocat" title="The Robotocat" />
 ```
 
-<Image
-  src="https://octodex.github.com/images/Robotocat.png"
-  width={896}
-  height={896}
-  alt="The Robotocat"
-  title="The Robotocat"
-/>
+<Image src="https://octodex.github.com/images/Robotocat.png" width={896} height={896} alt="The Robotocat" title="The Robotocat" />
 
 ## Raw HTML
 
@@ -451,40 +552,6 @@ Which renders to:
 
 ~~Strike through this text.~~
 
-## Footnotes
-
-Markdown footnotes are denoted by an opening square bracket, followed by a caret, followed by a number and a closing square bracket: `[^1]`.
-
-```md
-This is some text[^footnote] with a footnote reference link.
-```
-
-This is some text[^footnote] with a footnote reference link.
-
-The accompanying text for the footnote can be added elsewhere in the document using the following syntax:
-
-```
-[^footnote]: "This is a footnote"
-```
-
-[^footnote]: "This is a footnote"
-
-Footnotes are "stacked" by the markdown parser at the bottom of the file, in the order in which the footnotes were defined.
-
-### Todo List
-
-```md
-- [ ] Lorem ipsum dolor sit amet
-- [x] Consectetur adipiscing elit
-- [ ] Integer molestie lorem at massa
-```
-
-Renders to:
-
-- [ ] Lorem ipsum dolor sit amet
-- [x] Consectetur adipiscing elit
-- [ ] Integer molestie lorem at massa
-
 ## Tables
 
 Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header _(this line of dashes is required)_.
@@ -496,39 +563,47 @@ Tables are created by adding pipes as dividers between each cell, and by adding 
 Example:
 
 ```md
-| Option | Description                                                               |
-| ------ | ------------------------------------------------------------------------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default.    |
-| ext    | extension to be used for dest files.                                      |
+| Company                      | Contact          | Country |
+| ---------------------------- | ---------------- | ------- |
+| Alfreds Futterkiste          | Maria Anders     | Germany |
+| Centro comercial Moctezuma   | Francisco Chang  | Mexico  |
+| Ernst Handel                 | Roland Mendel    | Austria |
+| Island Trading               | Helen Bennett    | UK      |
+| Laughing Bacchus Winecellars | Yoshi Tannamuri  | Canada  |
+| Magazzini Alimentari Riuniti | Giovanni Rovelli | Italy   |
 ```
 
 Renders to:
 
-| Option | Description                                                               |
-| ------ | ------------------------------------------------------------------------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default.    |
-| ext    | extension to be used for dest files.                                      |
+| Company                      | Contact          | Country |
+| ---------------------------- | ---------------- | ------- |
+| Alfreds Futterkiste          | Maria Anders     | Germany |
+| Centro comercial Moctezuma   | Francisco Chang  | Mexico  |
+| Ernst Handel                 | Roland Mendel    | Austria |
+| Island Trading               | Helen Bennett    | UK      |
+| Laughing Bacchus Winecellars | Yoshi Tannamuri  | Canada  |
+| Magazzini Alimentari Riuniti | Giovanni Rovelli | Italy   |
 
-### Aligning cells
-
-**Right-align the text in a column**
-
-To right-align the text in a column, add a colon to the middle of the dashes in the row beneath the header.
+To align the text in a column, add a colon to the desired side of the dashes in the row beneath the header.
 
 ```md
-| Option |                                                               Description |
-| -----: | ------------------------------------------------------------------------: |
-|   data | path to data files to supply the data that will be passed into templates. |
-| engine |    engine to be used for processing templates. Handlebars is the default. |
-|    ext |                                      extension to be used for dest files. |
+| Company                      |     Contact      | Country |
+| :--------------------------- | :--------------: | ------: |
+| Alfreds Futterkiste          |   Maria Anders   | Germany |
+| Centro comercial Moctezuma   | Francisco Chang  |  Mexico |
+| Ernst Handel                 |  Roland Mendel   | Austria |
+| Island Trading               |  Helen Bennett   |      UK |
+| Laughing Bacchus Winecellars | Yoshi Tannamuri  |  Canada |
+| Magazzini Alimentari Riuniti | Giovanni Rovelli |   Italy |
 ```
 
 Renders to:
 
-| Option |                                                               Description |
-| -----: | ------------------------------------------------------------------------: |
-|   data | path to data files to supply the data that will be passed into templates. |
-| engine |    engine to be used for processing templates. Handlebars is the default. |
-|    ext |                                      extension to be used for dest files. |
+| Company                      |     Contact      | Country |
+| :--------------------------- | :--------------: | ------: |
+| Alfreds Futterkiste          |   Maria Anders   | Germany |
+| Centro comercial Moctezuma   | Francisco Chang  |  Mexico |
+| Ernst Handel                 |  Roland Mendel   | Austria |
+| Island Trading               |  Helen Bennett   |      UK |
+| Laughing Bacchus Winecellars | Yoshi Tannamuri  |  Canada |
+| Magazzini Alimentari Riuniti | Giovanni Rovelli |   Italy |

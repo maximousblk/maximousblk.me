@@ -14,6 +14,7 @@ class MyDocument extends Document {
           <link href="/favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
           <link href="/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
           <link color="#111827" href="/favicons/safari-pinned-tab.svg" rel="mask-icon" />
+
           {/* manifest */}
           <meta name="application-name" content={config.name} />
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -25,27 +26,11 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#111827" />
 
           {/* fonts */}
-          <link
-            rel="preload"
-            href="/fonts/sans/Inter-roman.latin.var.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/sans/Inter-italic.latin.var.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/mono/JetBrainsMono-Regular.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
+          <link rel="preload" href="/fonts/sans/Inter-roman.latin.var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/sans/Inter-italic.latin.var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/serif/Lora-VF.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/serif/Lora-Italic-VF.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/mono/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
           {/* misc */}
           <meta content="M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI" name="google-site-verification" />

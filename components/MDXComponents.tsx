@@ -67,8 +67,20 @@ const CustomLink = ({ href, children, ...props }) => {
   }
 };
 
+const Quote = ({ author, children, ...props }) => {
+  return (
+    <blockquote {...props}>
+      <div className="quote relative">
+        <p className="font-serif font-normal text-2xl italic pr-8">{children}</p>
+        <p className="font-mono font-normal text-sm text-right">— {author}</p>
+      </div>
+    </blockquote>
+  );
+};
+
 const MDXComponents = {
   Image,
+  Quote,
   // Tweet,
   // ConsCard,
   // ProsCard,

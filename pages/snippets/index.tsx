@@ -46,17 +46,10 @@ export default function Snippets({ snippets }) {
           />
           <SearchIcon className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-coolGray-300" />
         </div>
-        {!filteredSnippets.length && (
-          <p className="my-8 self-center text-gray-600 dark:text-coolGray-400 mb-4">No snippets found ;-;</p>
-        )}
+        {!filteredSnippets.length && <p className="my-8 self-center text-gray-600 dark:text-coolGray-400 mb-4">No snippets found ;-;</p>}
         <div className="grid gap-4 grid-cols-1 my-2 w-full mt-4">
           {filteredSnippets.map((snippet) => (
-            <SnippetCard
-              key={snippet.slug}
-              title={snippet.title}
-              slug={snippet.slug}
-              description={snippet.description}
-            />
+            <SnippetCard key={snippet.slug} title={snippet.title} slug={snippet.slug} description={snippet.description} />
           ))}
         </div>
       </div>

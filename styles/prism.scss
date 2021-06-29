@@ -1,0 +1,222 @@
+@mixin base {
+  code {
+    white-space: pre;
+  }
+
+  code,
+  pre {
+    &[class*="language-"] {
+      hyphens: none;
+      tab-size: 2;
+      text-align: left;
+      width: 100%;
+      word-break: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+    }
+  }
+
+  /* Code blocks */
+  pre {
+    font-size: 0.9rem;
+    margin: theme("spacing.6") 0;
+    min-width: 100%;
+    overflow: auto;
+    padding-bottom: theme("spacing.4");
+    padding-left: theme("spacing.4");
+    padding-right: theme("spacing.4");
+    padding-top: theme("spacing.4");
+    white-space: nowrap;
+  }
+
+  .mdx-marker {
+    @apply block -mx-4 px-4 border-l-2 border-sky-500;
+  }
+
+  .token.important,
+  .token.bold {
+    font-weight: bold;
+  }
+
+  .token.italic {
+    font-style: italic;
+  }
+
+  .token.entity {
+    cursor: help;
+  }
+
+  .remark-code-title {
+    border-width: 1px;
+    border-bottom-width: 0;
+    font-family: theme("fontFamily.mono");
+    font-size: theme("fontSize.sm");
+    margin-bottom: 0;
+    padding: theme("spacing.2") theme("spacing.4");
+    width: 100%;
+
+    @apply rounded-t;
+
+    + pre {
+      @apply mt-0 rounded-t-none;
+    }
+  }
+}
+
+.light {
+  @include base;
+
+  :root {
+    --prism-text-color: theme("colors.gray.700");
+  }
+
+  pre {
+    background-color: theme("colors.gray.50");
+    border: 1px solid theme("colors.gray.200");
+    color: var(--prism-text-color);
+  }
+
+  .mdx-marker {
+    background-color: theme("colors.gray.200");
+  }
+
+  .remark-code-title {
+    background: theme("colors.gray.100");
+    border-color: theme("colors.gray.200");
+    color: theme("colors.gray.700");
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: theme("colors.gray.600");
+    font-style: italic;
+  }
+
+  .token.namespace {
+    opacity: 0.7;
+  }
+
+  .token.string,
+  .token.attr-value {
+    color: theme("colors.indigo.700");
+  }
+
+  .token.punctuation,
+  .token.operator {
+    color: var(--prism-text-color);
+  }
+
+  .token.entity,
+  .token.url,
+  .token.symbol,
+  .token.number,
+  .token.boolean,
+  .token.variable,
+  .token.constant,
+  .token.property,
+  .token.regex,
+  .token.inserted {
+    color: theme("colors.cyan.700");
+  }
+
+  .token.atrule,
+  .token.keyword,
+  .token.attr-name,
+  .language-autohotkey .token.selector {
+    color: theme("colors.rose.700");
+  }
+
+  .token.function,
+  .token.deleted,
+  .language-autohotkey .token.tag {
+    color: theme("colors.purple.700");
+  }
+
+  .token.tag,
+  .token.selector,
+  .language-autohotkey .token.keyword {
+    color: theme("colors.blue.700");
+  }
+}
+
+.dark {
+  @include base;
+
+  :root {
+    --prism-text-color: theme("colors.coolGray.400");
+  }
+
+  pre {
+    color: var(--prism-text-color);
+
+    @apply border border-coolGray-800 bg-coolGray-900;
+  }
+
+  .mdx-marker {
+    background-color: theme("colors.coolGray.800");
+  }
+
+  .remark-code-title {
+    background: theme("colors.coolGray.900");
+    border-color: theme("colors.coolGray.800");
+    color: theme("colors.coolGray.500");
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: theme("colors.coolGray.600");
+    font-style: italic;
+  }
+
+  .token.string,
+  .token.attr-value {
+    color: theme("colors.amber.300");
+  }
+
+  .token.punctuation,
+  .token.operator {
+    color: var(--prism-text-color);
+  }
+
+  .token.entity,
+  .token.url,
+  .token.symbol,
+  .token.number,
+  .token.boolean,
+  .token.variable,
+  .token.constant,
+  .token.property,
+  .token.regex,
+  .token.inserted {
+    color: theme("colors.cyan.500");
+  }
+
+  .token.atrule,
+  .token.keyword,
+  .token.operator,
+  .token.attr-name,
+  .language-autohotkey .token.selector {
+    color: theme("colors.rose.500");
+  }
+
+  .token.function,
+  .token.deleted,
+  .language-autohotkey .token.tag {
+    color: theme("colors.emerald.400");
+  }
+
+  .token.tag,
+  .token.selector,
+  .language-autohotkey .token.keyword {
+    color: theme("colors.blue.400");
+  }
+
+  .token.builtin,
+  .token.arrow.operator {
+    color: theme("colors.coolGray.400");
+  }
+}

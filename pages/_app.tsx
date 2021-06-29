@@ -1,4 +1,4 @@
-import "@/styles/global.css";
+import "@/styles/global.scss";
 
 import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";

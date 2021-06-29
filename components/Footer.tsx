@@ -28,9 +28,7 @@ export default function Footer() {
       <div className="space-x-3">
         {config.footer.links.map(({ name, href }) => (
           <Link href={href} key={name}>
-            <a className="text-sm text-gray-600 hover:text-gray-900 dark:text-coolGray-400 dark:hover:text-coolGray-200">
-              /{name}
-            </a>
+            <a className="text-sm text-gray-600 hover:text-gray-900 dark:text-coolGray-400 dark:hover:text-coolGray-200">/{name}</a>
           </Link>
         ))}
       </div>

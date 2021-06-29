@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./fonts.scss";
+@import "./prism.scss";
+
+::selection {
+  @apply text-gray-100 bg-gray-800 dark:text-coolGray-900 dark:bg-coolGray-100;
+}
+
+html {
+  min-width: 360px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sticky-nav {
+  --tw-bg-opacity: 0.6 !important;
+
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  transition: background-color 0.1 ease-in-out;
+  z-index: 10;
+
+  @supports not (backdrop-filter: none) {
+    --tw-bg-opacity: 1 !important;
+
+    backdrop-filter: none;
+  }
+}
+
+.prose {
+  code {
+    @apply px-1.5 py-0.5 rounded border text-sm text-coolGray-200 border-coolGray-700 bg-coolGray-900;
+  }
+
+  img {
+    /* Don't apply styles to next/image */
+    @apply m-0 rounded-md;
+  }
+
+  a {
+    @apply no-underline;
+
+    &[aria-hidden="true"][href^="#"] {
+      margin-left: -1.5ch;
+      margin-right: 0.5ch;
+
+      @apply hover:bg-opacity-0;
+      @apply font-normal;
+      @apply p-0;
+    }
+  }
+
+  span.icon.icon-link {
+    font-size: 1em;
+    text-decoration: none;
+
+    @apply opacity-50;
+    @apply hover:opacity-100;
+
+    &::before {
+      content: "#";
+
+      @apply text-gray-500;
+      @apply dark:text-coolGray-400;
+    }
+  }
+
+  .task-list-item {
+    @apply pl-0;
+
+    &::before {
+      display: none;
+    }
+
+    &:first-child,
+    :last-child {
+      @apply my-0;
+    }
+
+    input {
+      @apply mr-2;
+    }
+  }
+
+  .footnote-backref {
+    @apply ml-2;
+  }
+
+  .footnote-ref {
+    @apply ml-0.5;
+
+    &::before {
+      content: "[";
+    }
+
+    &::after {
+      content: "]";
+    }
+  }
+}
+
+.prose > :first-child {
+  /* Override removing margin, to prevent layout shift */
+  margin-top: 1.25em !important;
+  margin-bottom: 1.25em !important;
+}
+
+.quote::after {
+  content: "”";
+
+  @apply top-0 right-0 text-7xl font-serif text-gray-400 dark:text-coolGray-600 absolute;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Remove Safari input shadow on mobile */
+input[type="text"],
+input[type="email"] {
+  appearance: none;
+}

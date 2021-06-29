@@ -12,9 +12,7 @@ function UnknownError({ statusCode }) {
         }}
       />
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 space-y-8">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          418 – I&apos;m a teapot
-        </h1>
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">418 – I&apos;m a teapot</h1>
         <p className="text-gray-600 dark:text-coolGray-400 mb-8">
           The server was too lazy to handle this error. Please report this issue so a human can look into this.
         </p>

@@ -3,8 +3,8 @@
   "description": "My personal website",
   "license": "MIT",
   "scripts": {
-    "fmt": "prettier --check .",
-    "fmt:fix": "prettier --write .",
+    "fmt": "prettier --check . && stylelint ./**.scss --config stylelint.config.js",
+    "fmt:fix": "prettier --write . && stylelint ./**.scss --config stylelint.config.js --fix",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "dev": "next",
@@ -48,6 +48,7 @@
     "remark-parse": "9.0.0",
     "remark-stringify": "9.0.1",
     "rss": "^1.2.2",
+    "sass": "^1.35.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "terser-webpack-plugin": "^5.1.4",
@@ -58,6 +59,6 @@
     "arrowParens": "always",
     "tabWidth": 2,
     "trailingComma": "none",
-    "printWidth": 120
+    "printWidth": 140
   }
 }
