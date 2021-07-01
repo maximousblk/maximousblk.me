@@ -37,7 +37,7 @@
     "tailwindcss": "^2.2.4"
   },
   "devDependencies": {
-    "@types/react": "^17.0.11",
+    "@types/react": "^17.0.13",
     "@types/rss": "^0.0.28",
     "eslint": "^7.29.0",
     "eslint-config-next": "^11.0.1",
