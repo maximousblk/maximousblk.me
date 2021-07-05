@@ -39,7 +39,7 @@
   "devDependencies": {
     "@types/react": "^17.0.13",
     "@types/rss": "^0.0.28",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-config-next": "^11.0.1",
     "next-sitemap": "^1.6.124",
     "prettier": "2.3.2",
