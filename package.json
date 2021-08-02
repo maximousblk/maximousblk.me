@@ -48,7 +48,7 @@
     "remark-parse": "9.0.0",
     "remark-stringify": "9.0.1",
     "rss": "^1.2.2",
-    "sass": "^1.36.0",
+    "sass": "^1.37.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "terser-webpack-plugin": "^5.1.4",
