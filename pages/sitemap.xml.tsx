@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       loc: config.baseUrl + page.path,
       lastmod: new Date().toISOString(),
       changefreq: "daily",
-      priority: "0.7"
+      priority: 0.7
     };
   });
 
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         loc: config.baseUrl + route,
         lastmod: new Date().toISOString(),
         changefreq: "daily",
-        priority: "0.7"
+        priority: 0.7
       };
     })
   );
