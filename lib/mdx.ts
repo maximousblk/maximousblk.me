@@ -4,7 +4,8 @@ import path from "path";
 import readingTime from "reading-time";
 import { serialize } from "next-mdx-remote/serialize";
 
-import remarkSlug from 'remark-slug';
+import remarkSlug from "remark-slug";
+import remarkAutolinkHeadings from "remark-autolink-headings";
 
 const root = process.cwd();
 
@@ -20,7 +21,7 @@ export async function getFileBySlug(type: string, slug?: string) {
   const { data, content } = matter(source);
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [remarkSlug, require("remark-autolink-headings"), require("remark-code-titles")],
+      remarkPlugins: [remarkSlug, remarkAutolinkHeadings, require("remark-code-titles")],
       rehypePlugins: [require("mdx-prism")]
     }
   });
