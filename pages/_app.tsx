@@ -21,7 +21,6 @@ export default function App({ Component, pageProps }) {
         strategy="afterInteractive"
         src="https://analytics.maximousblk.me/umami.js"
         data-website-id="d565f770-836d-42fb-9fe3-0946633cdb49"
-        data-do-not-track="true"
       />
     </ThemeProvider>
   );
