@@ -41,7 +41,7 @@
     "@types/react": "^17.0.19",
     "@types/rss": "^0.0.29",
     "eslint": "^7.32.0",
-    "eslint-config-next": "^11.1.0",
+    "eslint-config-next": "^11.1.2",
     "next-sitemap": "^1.6.164",
     "prettier": "^2.3.2",
     "rehype": "^12.0.0",
