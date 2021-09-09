@@ -35,7 +35,7 @@
     "remark-code-titles": "^0.1.2",
     "remark-slug": "^7.0.0",
     "sharp": "^0.29.1",
-    "tailwindcss": "^2.2.11"
+    "tailwindcss": "^2.2.14"
   },
   "devDependencies": {
     "@types/react": "^17.0.20",
