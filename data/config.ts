@@ -8,8 +8,9 @@ export const config = {
     branch: "main"
   },
   nav: [
-    { name: "Home", href: "/" },
-    { name: "Blog", href: "/posts" }
+    { name: "🏠 Home", href: "/" },
+    { name: "✒ Blog", href: "/posts" },
+    { name: "🛠 Uses", href: "/uses" }
   ],
   footer: {
     links: [

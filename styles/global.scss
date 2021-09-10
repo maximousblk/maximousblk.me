@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./fonts.scss";
 @import "./prism.scss";
 
 ::selection {
@@ -12,13 +11,25 @@
 html {
   min-width: 360px;
   scroll-behavior: smooth;
-  scroll-padding-top: 8rem;
+  scroll-padding-top: 4rem;
+
+  @media screen and (min-width: 960px) {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+  }
 }
 
 #__next {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
 }
 
 .sticky-nav {

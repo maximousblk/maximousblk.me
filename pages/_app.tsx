@@ -1,4 +1,7 @@
 import "@/styles/global.scss";
+import "@fontsource/inter";
+import "@fontsource/lora";
+import "@fontsource/jetbrains-mono";
 
 import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";
