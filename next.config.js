@@ -3,7 +3,7 @@ const withPWA = require("next-pwa");
 module.exports = withPWA({
   reactStrictMode: true,
   images: {
-    domains: ["cdn.maximousblk.now.sh", "octodex.github.com"]
+    domains: ["cdn.maximousblk.me", "octodex.github.com"]
   },
   webpack: (config, { dev, isServer }) => {
     // Replace React with Preact only in client production build

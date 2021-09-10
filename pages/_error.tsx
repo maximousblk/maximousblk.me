@@ -22,7 +22,7 @@ function UnknownError({ statusCode }) {
           </blockquote>
         </p>
         <a
-          href="https://github.com/maximousblk/maximousblk.now.sh/issues/new"
+          href="https://github.com/maximousblk/maximousblk.me/issues/new"
           className="p-3 w-48 mx-auto text-center rounded-md bg-gray-100 dark:bg-coolGray-800 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-coolGray-700"
         >
           Report issue

@@ -5,12 +5,13 @@ import "@fontsource/jetbrains-mono";
 
 import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
 
 import SEO from "../next-seo.config";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
       <Head>

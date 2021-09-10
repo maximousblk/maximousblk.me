@@ -4,7 +4,7 @@ export const config = {
   username: "maximousblk",
   baseUrl: "https://maximousblk.me",
   repo: {
-    name: "maximousblk/maximousblk.now.sh",
+    name: "maximousblk/maximousblk.me",
     branch: "main"
   },
   nav: [

@@ -38,7 +38,7 @@ export default function Blog({ posts }) {
           description
         }}
       />
-      <div className="flex flex-col justify-center items-start w-full max-w-2xl mx-auto mb-16">
+      <div className="flex flex-col justify-center items-start w-full max-w-4xl mx-auto mb-16">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-8 text-black dark:text-white">Blog</h1>
         <div className="relative w-full mb-4">
           <input
