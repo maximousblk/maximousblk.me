@@ -8,15 +8,15 @@ export const config = {
     branch: "main"
   },
   nav: [
-    { name: "🏠 Home", href: "/" },
-    { name: "✒ Blog", href: "/posts" },
-    { name: "🛠 Uses", href: "/uses" }
+    { name: "Home", emoji: "house", href: "/" },
+    { name: "Blog", emoji: "black_nib", href: "/posts" },
+    { name: "Snippets", emoji: "memo", href: "/snippets" },
+    { name: "Tools", emoji: "hammer_and_wrench", href: "/uses" }
   ],
   footer: {
     links: [
-      { name: "uses", href: "/uses" },
-      { name: "snippets", href: "/snippets" },
-      { name: "rss", href: "/rss/posts" },
+      { name: "rss", href: "/rss" },
+      { name: "sitemap.xml", href: "/sitemap.xml" },
       { name: "pgp", href: "https://keybase.io/maximousblk/pgp_keys.asc" }
     ],
     social: [
