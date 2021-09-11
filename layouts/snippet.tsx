@@ -25,7 +25,7 @@ export default function SnippetLayout({ children, frontMatter }) {
             {!frontMatter.hide_description && <p className="text-gray-700 dark:text-coolGray-300">{frontMatter.description}</p>}
           </div>
         </div>
-        <div className="prose dark:prose-dark w-full">{children}</div>
+        <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
       </article>
     </Container>
   );

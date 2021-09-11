@@ -12,7 +12,7 @@ function InternalServerError() {
           title: "500 – Internal Server Error"
         }}
       />
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 space-y-8">
+      <div className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 space-y-8">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">500 – Internal Server Error</h1>
         <p className="text-gray-600 dark:text-coolGray-400 mb-8">
           It seems that the server wasn&apos;t able to process your request properly.

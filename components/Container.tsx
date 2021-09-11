@@ -3,9 +3,9 @@ import Footer from "@/components/Footer";
 
 export default function Container({ children }) {
   return (
-    <div className="bg-white dark:bg-coolGray-900">
+    <div className="flex flex-col bg-white dark:bg-coolGray-900 min-h-screen">
       <Navbar />
-      <main className="flex flex-col justify-center bg-white dark:bg-coolGray-900 px-6">{children}</main>
+      <main className="flex flex-col flex-1 justify-center bg-white dark:bg-coolGray-900 px-6">{children}</main>
       <Footer />
     </div>
   );
