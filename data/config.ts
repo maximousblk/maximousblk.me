@@ -16,7 +16,8 @@ export const config = {
   footer: {
     links: [
       { name: "rss", href: "/rss" },
-      { name: "sitemap.xml", href: "/sitemap.xml" },
+      { name: "sitemap", href: "/sitemap.xml" },
+      { name: "design", href: "/design" }
       { name: "pgp", href: "https://keybase.io/maximousblk/pgp_keys.asc" }
     ],
     social: [
