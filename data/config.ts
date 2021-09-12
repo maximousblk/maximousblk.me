@@ -17,7 +17,7 @@ export const config = {
     links: [
       { name: "rss", href: "/rss" },
       { name: "sitemap", href: "/sitemap.xml" },
-      { name: "design", href: "/design" }
+      { name: "design", href: "/design" },
       { name: "pgp", href: "https://keybase.io/maximousblk/pgp_keys.asc" }
     ],
     social: [
