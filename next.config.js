@@ -1,6 +1,9 @@
 const withPWA = require("next-pwa");
 
 module.exports = withPWA({
+  experimental: {
+    nftTracing: true // Fix for `ENOENT: no such file or directory, scandir '/var/task/<path>'`
+  },
   reactStrictMode: true,
   images: {
     domains: ["cdn.maximousblk.me", "octodex.github.com"]
