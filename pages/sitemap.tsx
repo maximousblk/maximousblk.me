@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   });
 
   fields.unshift(
-    ...["", "/posts", "/snippets"].map((route) => {
+    ...["", "/posts", "/gists"].map((route) => {
       return {
         loc: config.baseUrl + route,
         lastmod: new Date().toISOString(),
@@ -60,5 +60,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return getServerSideSitemap(ctx, fields.sort());
 };
 
-const SiteMap = () => {};
+function SiteMap() {}
 export default SiteMap;

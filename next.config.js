@@ -31,6 +31,10 @@ module.exports = withPWA({
         destination: "/api/feed?f=:format*"
       },
       {
+        source: "/sitemap.xml",
+        destination: "/sitemap"
+      },
+      {
         source: "/robots.txt",
         destination: "/.well-known/robots.txt"
       },
