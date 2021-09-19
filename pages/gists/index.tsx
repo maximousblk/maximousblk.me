@@ -60,5 +60,5 @@ export default function Gists({ gists }) {
 export async function getStaticProps() {
   const gists = await getAllFilesFrontMatter("gists");
 
-  return { props: { gists } };
+  return { props: { gists }, revalidate: 1440 };
 }

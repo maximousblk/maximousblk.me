@@ -15,5 +15,5 @@ export default function Uses({ mdxSource, frontMatter }) {
 export async function getStaticProps() {
   const index = await getFileBySlug("pages", "home");
 
-  return { props: index };
+  return { props: index, revalidate: 1440 };
 }
