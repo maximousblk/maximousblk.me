@@ -27,8 +27,8 @@ module.exports = withPWA({
   async rewrites() {
     return [
       {
-        source: "/rss/:path*",
-        destination: "/api/rss/:path*"
+        source: "/feed/:format*",
+        destination: "/api/feed?f=:format*"
       },
       {
         source: "/robots.txt",

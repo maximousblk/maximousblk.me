@@ -1,6 +1,3 @@
-public/rss.xml
-public/sitemap.xml
-public/robots.txt
 public/sw*
 public/workbox*
 node_modules

@@ -38,7 +38,7 @@ export default function Navbar() {
           {mounted && <Icon name={resolvedTheme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />}
         </button>
         <button aria-label="RSS Feed" type="button" className="hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10">
-          <Link href="/rss">
+          <Link href="/feed">
             <a>
               <Icon name="Rss" className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />
             </a>

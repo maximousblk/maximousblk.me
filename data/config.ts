@@ -1,6 +1,7 @@
 export const config = {
   name: "Maximous Black",
   description: "I'm a Web Developer who likes building beautiful web interfaces & experiences.",
+  email: "maximousblk@gmail.com",
   username: "maximousblk",
   baseUrl: "https://maximousblk.me",
   repo: {
@@ -15,7 +16,7 @@ export const config = {
   ],
   footer: {
     links: [
-      { name: "rss", href: "/rss" },
+      { name: "feed", href: "/feed" },
       { name: "sitemap", href: "/sitemap.xml" },
       { name: "design", href: "/design" },
       { name: "pgp", href: "https://keybase.io/maximousblk/pgp_keys.asc" }
