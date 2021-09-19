@@ -4,6 +4,7 @@ const title = config.name;
 const description = config.description;
 const SEO = {
   title,
+  titleTemplate: `%s - ${title}`,
   description,
   // disabled due to `double canocial address` error
   // canonical: config.baseUrl,

@@ -11,13 +11,13 @@ export const config = {
   nav: [
     { name: "Home", emoji: "house", href: "/" },
     { name: "Blog", emoji: "black_nib", href: "/posts" },
-    { name: "Snippets", emoji: "memo", href: "/snippets" },
+    { name: "Gists", emoji: "memo", href: "/gists" },
     { name: "Tools", emoji: "hammer_and_wrench", href: "/uses" }
   ],
   footer: {
     links: [
       { name: "feed", href: "/feed" },
-      { name: "sitemap", href: "/sitemap.xml" },
+      { name: "sitemap", href: "/sitemap" },
       { name: "design", href: "/design" },
       { name: "pgp", href: "https://keybase.io/maximousblk/pgp_keys.asc" }
     ],

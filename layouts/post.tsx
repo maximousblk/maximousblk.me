@@ -23,7 +23,7 @@ const BlogSeo = ({ title, description, publishedAt, url, image }) => {
   return (
     <>
       <NextSeo
-        title={`${title} – ${config.name}`}
+        title={title}
         description={description}
         canonical={url}
         openGraph={{

@@ -5,7 +5,7 @@ import Container from "@/components/Container";
 import config from "@/data/config";
 
 export default function PageLayout({ children, frontMatter }) {
-  const title = `${frontMatter.title} - ${config.name}`;
+  const title = frontMatter.title;
   const url = `${config.baseUrl}/${frontMatter.slug}`;
   const { description, hide_description } = frontMatter;
 

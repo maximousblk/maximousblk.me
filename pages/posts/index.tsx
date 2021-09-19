@@ -9,7 +9,7 @@ import { getAllFilesFrontMatter } from "@/lib/mdx";
 import config from "@/data/config";
 
 const url = config.baseUrl + "/blog";
-const title = "Blog – " + config.name;
+const title = "Blog";
 const description = config.description;
 
 export default function Blog({ posts }) {

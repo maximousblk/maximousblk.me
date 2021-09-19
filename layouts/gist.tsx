@@ -4,9 +4,9 @@ import Container from "@/components/Container";
 
 import config from "@/data/config";
 
-export default function SnippetLayout({ children, frontMatter }) {
-  const title = `${frontMatter.title} - ${config.name}`;
-  const url = `${config.baseUrl}/snippets/${frontMatter.slug}`;
+export default function GistLayout({ children, frontMatter }) {
+  const title = `${frontMatter.title}`;
+  const url = `${config.baseUrl}/gists/${frontMatter.slug}`;
 
   return (
     <Container>
