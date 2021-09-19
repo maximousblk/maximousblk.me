@@ -50,8 +50,8 @@ Look for the following lines.
 
 you need to uncomment these lines and update accordingly
 
-```ts
-HiddenServiceDir "/var/lib/tor/hidden_service/"
+```rust
+HiddenServiceDir /var/lib/tor/hidden_service/
 HiddenServicePort 80 127.0.0.1:[PORT]
 ```
 
@@ -73,7 +73,7 @@ python3 -m http.server --bind 127.0.0.1 5000
 
 So our `torrc` file now looks like following
 
-```bash
+```rust
 HiddenServiceDir /var/lib/tor/hidden_service/
 HiddenServicePort 80 127.0.0.1:5000
 ```
