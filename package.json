@@ -52,7 +52,7 @@
     "remark-frontmatter": "^4.0.0",
     "remark-parse": "^10.0.0",
     "remark-stringify": "^10.0.0",
-    "sass": "^1.42.0",
+    "sass": "^1.42.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "terser-webpack-plugin": "^5.2.4",
