@@ -20,7 +20,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
     image: config.baseUrl + "/og.png",
     favicon: config.baseUrl + "/favicon.ico",
     copyright: "All rights reserved 2020, " + config.name,
-    ttl: 1440,
+    ttl: 3600,
     feed: config.baseUrl + "/feed/" + format,
     hub: "https://pubsubhubbub.appspot.com/",
     updated: new Date(),
