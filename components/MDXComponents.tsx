@@ -1,10 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-// import Tweet from "react-tweet-embed";
 
 import Icon from "@/components/FeatherIcons";
-// import ProsCard from "@/components/ProsCard";
-// import ConsCard from "@/components/ConsCard";
 
 const LinkIcon = ({ name, children }) => {
   if (typeof children == "string") {
@@ -81,9 +78,6 @@ const Quote = ({ author, children, ...props }) => {
 const MDXComponents = {
   Image,
   Quote,
-  // Tweet,
-  // ConsCard,
-  // ProsCard,
   a: CustomLink
 };
 

@@ -21,10 +21,9 @@ export default function Navbar() {
             <Link href={href}>
               <a className="p-2 rounded align-middle text-gray-900 dark:text-coolGray-100 hover:bg-gray-100 dark:hover:bg-coolGray-800">
                 {nameToEmoji[emoji]}
-                <span className="hidden md:inline-block pl-2">{name}</span>
+                <span className="hidden md:inline-block pl-2 pr-0.5">{name}</span>
               </a>
             </Link>
-            {i + 1 < a.length && <span className="text-gray-500 dark:text-coolGray-300 select-none px-1.5">·</span>}
           </div>
         ))}
       </div>
@@ -36,13 +35,6 @@ export default function Navbar() {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {mounted && <Icon name={resolvedTheme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />}
-        </button>
-        <button aria-label="RSS Feed" type="button" className="hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded p-3 h-10 w-10">
-          <Link href="/feed">
-            <a>
-              <Icon name="Rss" className="h-4 w-4 text-gray-800 dark:text-coolGray-200" />
-            </a>
-          </Link>
         </button>
       </div>
     </nav>
