@@ -8,6 +8,7 @@ export function Twemoji({ emoji, size = 16, ...props }: { emoji: string; size?: 
       height={size}
       width={size}
       alt={emoji}
+      priority
       {...props}
     />
   );

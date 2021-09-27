@@ -10,7 +10,7 @@ export const config = {
   },
   nav: [
     { name: "Home", emoji: "house", href: "/" },
-    { name: "Posts", emoji: "black_nib", href: "/posts" },
+    { name: "Posts", emoji: "feather", href: "/posts" },
     { name: "Gists", emoji: "memo", href: "/gists" },
     { name: "Tools", emoji: "hammer_and_wrench", href: "/uses" }
   ],

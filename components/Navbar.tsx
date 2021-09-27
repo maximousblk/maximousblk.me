@@ -21,7 +21,7 @@ export default function Navbar() {
           <div key={name} className="inline-block my-3">
             <Link href={href}>
               <a className="flex justify-between items-center px-2.5 py-1.5 rounded text-gray-900 dark:text-coolGray-100 hover:bg-gray-100 dark:hover:bg-coolGray-800">
-                <span className="hidden md:flex justify-between items-center text-sm pr-1.5">
+                <span className="hidden md:flex justify-between items-center text-sm pr-2">
                   <Twemoji emoji={nameToEmoji[emoji]} />
                 </span>
                 {name}
