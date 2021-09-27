@@ -8,7 +8,7 @@ module.exports = withPWA(
     },
     reactStrictMode: true,
     images: {
-      domains: ["cdn.maximousblk.me", "octodex.github.com"]
+      domains: ["cdn.maximousblk.me", "octodex.github.com", "twemoji.maxcdn.com"]
     },
     pwa: {
       disable: process.env.NODE_ENV === "development",
