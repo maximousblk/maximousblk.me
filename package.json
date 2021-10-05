@@ -31,7 +31,7 @@
     "next-seo": "^4.28.1",
     "next-sitemap": "^1.6.173",
     "next-themes": "^0.0.15",
-    "postcss": "^8.3.7",
+    "postcss": "^8.3.9",
     "preact": "^10.5.14",
     "preact-render-to-string": "^5.1.19",
     "react": "npm:@preact/compat",
