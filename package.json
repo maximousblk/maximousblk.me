@@ -18,7 +18,7 @@
     "@fontsource/lora": "^4.5.0",
     "@next/mdx": "^11.1.2",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.3.5",
+    "autoprefixer": "^10.3.7",
     "date-fns": "^2.25.0",
     "feed": "^4.2.2",
     "gemoji": "^7.0.0",
