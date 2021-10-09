@@ -1,32 +1,47 @@
-import { MDXRemote } from "next-mdx-remote";
-
-import { getFiles, getFileBySlug } from "@/lib/mdx";
 import PageLayout from "@/layouts/page";
-import MDXComponents from "@/components/MDXComponents";
 
-export default function Page({ mdxSource, frontMatter }) {
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { getIndex, getBlockChildren, getDatabase } from "@/lib/notion";
+import { NotionContent } from "@/lib/render";
+
+export default function Page({ blocks, title, description, hide_descr, slug }) {
+  if (!blocks) {
+    return null;
+  }
   return (
-    <PageLayout frontMatter={frontMatter}>
-      <MDXRemote {...mdxSource} components={MDXComponents} />
+    <PageLayout title={title} slug={slug} description={description} hide_description={hide_descr}>
+      <NotionContent blocks={blocks} />
     </PageLayout>
   );
 }
 
+export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
+  const index = await getIndex();
+  const pages = await getDatabase(index.pages.id);
+  // @ts-ignore
+  const page = pages.results.find((page) => page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__") === slug);
+  const blocks = await getBlockChildren(page.id);
+  // @ts-ignore
+  const title = page.properties.name.title.map((part) => part.plain_text).join(" ");
+  // @ts-ignore
+  const description = page.properties.description.rich_text.map((part) => part.plain_text).join(" ");
+  // @ts-ignore
+  const hide_descr = page.properties.hide_description.checkbox;
+
+  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 14400 };
+}
+
 export async function getStaticPaths() {
-  const pages = await getFiles("pages");
+  const index = await getIndex();
+  const pages = await getDatabase(index.pages.id);
 
   return {
-    paths: pages.map((s) => ({
+    paths: pages.results.map((page) => ({
       params: {
-        slug: s.replace(/\.mdx/, "")
+        // @ts-ignore
+        slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
       }
     })),
     fallback: false
   };
-}
-
-export async function getStaticProps({ params }) {
-  const pages = await getFileBySlug("pages", params.slug);
-
-  return { props: pages, revalidate: 3600 };
 }

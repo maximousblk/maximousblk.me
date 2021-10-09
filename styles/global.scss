@@ -88,17 +88,11 @@ html {
     }
   }
 
-  .task-list-item {
-    @apply pl-0;
+  label {
+    @apply my-2 pl-5;
 
-    &::before {
-      display: none;
-    }
-
-    &:first-child,
-    :last-child {
-      @apply my-0;
-    }
+    display: block;
+    text-indent: -1.25rem;
 
     input {
       @apply mr-2;

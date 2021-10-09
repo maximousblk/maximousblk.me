@@ -3,15 +3,11 @@ import Image from "next/image";
 
 import Icon from "@/components/FeatherIcons";
 
-const LinkIcon = ({ name, children }) => {
-  if (typeof children == "string") {
-    return <Icon name={name} size={16} className="inline-block ml-1 mb-1 text-gray-500 dark:text-coolGray-500" />;
-  } else {
-    return null;
-  }
-};
+function LinkIcon({ name }) {
+  return <Icon name={name} size={16} className="inline-block ml-1 mb-1 text-gray-500 dark:text-coolGray-500" />;
+}
 
-const CustomLink = ({ href, children, ...props }) => {
+export function CustomLink({ href, children, ...props }) {
   const isAnchorHref = href && href.startsWith("#");
   const isMailHref = href && href.startsWith("mailto:");
   const isFootNoteHref = href && href.startsWith("#fn");
@@ -19,14 +15,14 @@ const CustomLink = ({ href, children, ...props }) => {
 
   const baseStyle = "px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded";
 
-  const BaseIconLink = ({ href, icon, children, ...props }) => {
+  function BaseIconLink({ href, icon, children, ...props }) {
     return (
       <a href={href} className={baseStyle} {...props}>
         {children}
-        <LinkIcon name={icon}>{children}</LinkIcon>
+        {icon && <LinkIcon name={icon} />}
       </a>
     );
-  };
+  }
 
   if (isMailHref) {
     return (
@@ -39,7 +35,7 @@ const CustomLink = ({ href, children, ...props }) => {
       <Link href={href}>
         <a className={baseStyle} {...props}>
           {children}
-          <LinkIcon name="Link">{children}</LinkIcon>
+          <LinkIcon name="Link" />
         </a>
       </Link>
     );
@@ -57,14 +53,14 @@ const CustomLink = ({ href, children, ...props }) => {
     );
   } else {
     return (
-      <BaseIconLink href={href} icon="ExternalLink" target="_blank" rel="noopener noreferrer" {...props}>
+      <BaseIconLink href={href} icon={false} target="_blank" rel="noopener noreferrer" {...props}>
         {children}
       </BaseIconLink>
     );
   }
-};
+}
 
-const Quote = ({ author, children, ...props }) => {
+export function Quote({ author, children, ...props }) {
   return (
     <blockquote {...props}>
       <div className="quote relative">
@@ -73,7 +69,7 @@ const Quote = ({ author, children, ...props }) => {
       </div>
     </blockquote>
   );
-};
+}
 
 const MDXComponents = {
   Image,

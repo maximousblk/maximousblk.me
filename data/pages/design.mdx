@@ -12,6 +12,7 @@ description: List of supported components.
 - [Emphasis](#emphasis)
   - [Bold](#bold)
   - [Italics](#italics)
+  - [Strikethrough](#strikethrough)
 - [Blockquotes](#blockquotes)
 - [Lists](#lists)
   - [Unordered](#unordered)
@@ -33,7 +34,6 @@ description: List of supported components.
 - [Images](#images)
 - [Raw HTML](#raw-html)
 - [Escaping with backslashes](#escaping-with-backslashes)
-- [Strikethrough](#strikethrough)
 - [Tables](#tables)
 
 ## Headings
@@ -133,6 +133,18 @@ _rendered as italicized text_
 renders to:
 
 _rendered as italicized text_
+
+## Strikethrough
+
+You can do strickthroughs like so:
+
+```md
+~~Strike through this text.~~
+```
+
+Which renders to:
+
+~~Strike through this text.~~
 
 ## Blockquotes
 
@@ -248,6 +260,7 @@ Renders to:
 - [ ] Lorem ipsum dolor sit amet
 - [x] Consectetur adipiscing elit
 - [ ] Integer molestie lorem at massa
+  - [x] nested todo item
 ```
 
 Renders to:
@@ -255,6 +268,7 @@ Renders to:
 - [ ] Lorem ipsum dolor sit amet
 - [x] Consectetur adipiscing elit
 - [ ] Integer molestie lorem at massa
+  - [x] nested todo item
 
 ## Code
 
@@ -539,18 +553,6 @@ Example:
 Renders to:
 
 \_this is not italic\_
-
-## Strikethrough
-
-You can do strickthroughs like so:
-
-```md
-~~Strike through this text.~~
-```
-
-Which renders to:
-
-~~Strike through this text.~~
 
 ## Tables
 

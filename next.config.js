@@ -1,6 +1,7 @@
 const withPWA = require("next-pwa");
 const withPreact = require("next-plugin-preact");
 
+/** @type {import('next').NextConfig} */
 module.exports = withPWA(
   withPreact({
     experimental: {
