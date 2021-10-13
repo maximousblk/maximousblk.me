@@ -44,7 +44,7 @@
     "twemoji": "^13.1.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.28",
+    "@types/react": "^17.0.29",
     "@types/twemoji": "^12.1.2",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
