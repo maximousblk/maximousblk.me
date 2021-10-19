@@ -1,4 +1,4 @@
-import { getServerSideSitemap } from "next-sitemap";
+import { getServerSideSitemap, ISitemapField } from "next-sitemap";
 import { GetServerSideProps } from "next";
 
 import { promises as fs } from "fs";
@@ -6,7 +6,7 @@ import path from "path";
 import matter from "gray-matter";
 import config from "@/data/config";
 
-async function getFiles(dir) {
+async function getFiles(dir: string) {
   const dirents = await fs.readdir(dir, { withFileTypes: true });
   const files = await Promise.all(
     dirents.map((dirent) => {
@@ -37,11 +37,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return file.isPage && file.isPublished;
   });
 
-  const fields = filteredPages.map((page) => {
+  const fields: ISitemapField[] = filteredPages.map((page) => {
     return {
       loc: config.baseUrl + page.path,
       lastmod: new Date().toISOString(),
-      changefreq: "daily",
       priority: 0.7
     };
   });
@@ -51,7 +50,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       return {
         loc: config.baseUrl + route,
         lastmod: new Date().toISOString(),
-        changefreq: "daily",
         priority: 0.7
       };
     })
