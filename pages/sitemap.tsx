@@ -41,7 +41,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       loc: config.baseUrl + page.path,
       lastmod: new Date().toISOString(),
-      changefreq: "daily",
       priority: 0.7
     };
   });
