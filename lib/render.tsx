@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { CustomLink } from "@/components/MDXComponents";
+import { CodeBlock } from "@/components/CodeBlock";
 import type { NotionBlock } from "@/lib/notion";
 
 export function NotionText({ blocks }) {
@@ -38,11 +39,11 @@ export function NotionText({ blocks }) {
 
     let part: JSX.Element = text?.link ? <CustomLink href={text.link?.url}>{text?.content}</CustomLink> : <>{text?.content}</>;
 
+    if (code) part = <code>{part}</code>;
     if (bold) part = <strong>{part}</strong>;
     if (italic) part = <em>{part}</em>;
     if (strikethrough) part = <del>{part}</del>;
     if (underline) part = <u>{part}</u>;
-    if (code) part = <code>{part}</code>;
 
     return (
       <span key={text} style={{ whiteSpace: "pre-wrap" }}>
@@ -111,8 +112,23 @@ export function renderBlock(block: NotionBlock) {
           ))}
         </details>
       );
+    case "code":
+      // TODO: add captions/titles when they get added to the api
+      return (
+        <CodeBlock>
+          <NotionText blocks={blockContents.text} />
+        </CodeBlock>
+      );
     case "child_page":
       return <p>{blockContents.title}</p>;
+    case "divider":
+      return <hr />;
+    case "quote":
+      return (
+        <blockquote>
+          <NotionText blocks={blockContents.text} />
+        </blockquote>
+      );
     case "image":
       const src = blockContents.type === "external" ? blockContents.external.url : blockContents.file.url;
       const caption = blockContents?.caption[0]?.plain_text ?? "";
