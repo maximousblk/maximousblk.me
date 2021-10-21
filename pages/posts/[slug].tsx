@@ -1,32 +1,50 @@
-import { MDXRemote } from "next-mdx-remote";
-
-import { getFiles, getFileBySlug } from "@/lib/mdx";
 import PostLayout from "@/layouts/post";
-import MDXComponents from "@/components/MDXComponents";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { getBlockChildren, getDatabase, getIndex } from "@/lib/notion";
+import { NotionContent } from "@/lib/render";
+import { parseISO } from "date-fns";
 
-export default function Blog({ mdxSource, frontMatter }) {
+export default function Blog({ blocks, title, description, image, slug, publishedAt }) {
   return (
-    <PostLayout frontMatter={frontMatter}>
-      <MDXRemote {...mdxSource} components={MDXComponents} />
+    <PostLayout title={title} slug={slug} description={description} image={image} publishedAt={publishedAt}>
+      <NotionContent blocks={blocks} />
     </PostLayout>
   );
 }
 
-export async function getStaticPaths() {
-  const posts = await getFiles("posts");
+export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
+  const index = await getIndex();
+  const posts = await getDatabase(index.posts.id);
 
-  return {
-    paths: posts.map((p) => ({
-      params: {
-        slug: p.replace(/\.mdx/, "")
-      }
-    })),
-    fallback: false
-  };
+  // @ts-ignore
+  const post = posts.results.find((post) => post.properties.slug.rich_text.map((slug) => slug.plain_text).join("__") === slug);
+  const blocks = await getBlockChildren(post.id);
+  // @ts-ignore
+  const title = post.properties.title.title.map((part) => part.plain_text).join(" ");
+  // @ts-ignore
+  const description = post.properties.description.rich_text.map((part) => part.plain_text).join(" ");
+  // @ts-ignore
+  const publishedAt = parseISO(post.properties.date.date.start).getTime();
+
+  return { props: { blocks, title, description, slug, publishedAt }, revalidate: 14400 };
 }
 
-export async function getStaticProps({ params }) {
-  const post = await getFileBySlug("posts", params.slug);
+export async function getStaticPaths() {
+  const index = await getIndex();
+  const pages = await getDatabase(index.posts.id);
 
-  return { props: post, revalidate: 3600 };
+  return {
+    paths: pages.results
+      .filter((post) => {
+        // @ts-ignore
+        return post.properties.published.checkbox;
+      })
+      .map((page) => ({
+        params: {
+          // @ts-ignore
+          slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
+        }
+      })),
+    fallback: false
+  };
 }

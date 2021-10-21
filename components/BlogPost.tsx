@@ -5,7 +5,7 @@ interface Attributes {
   title: string;
   description: string;
   slug: string;
-  publishedAt: string;
+  publishedAt: Date;
 }
 
 const BlogPost = ({ title, description, slug, publishedAt }: Attributes) => {
@@ -17,7 +17,7 @@ const BlogPost = ({ title, description, slug, publishedAt }: Attributes) => {
             <div className="flex flex-col md:flex-row justify-between">
               <h4 className="text-lg md:text-xl font-medium mb-2 w-full text-gray-900 dark:text-coolGray-100">{title}</h4>
               <p className="text-gray-500 dark:text-coolGray-500 text-left md:text-right w-32 mb-4 md:mb-0">
-                {publishedAt && format(parseISO(publishedAt), "MMM, yyy")}
+                {publishedAt && format(publishedAt, "MMM, yyy")}
               </p>
             </div>
             <p className="text-gray-600 dark:text-coolGray-400">{description}</p>

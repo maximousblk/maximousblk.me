@@ -1,4 +1,4 @@
-import { parseISO, format } from "date-fns";
+import { format } from "date-fns";
 import { ExternalLink } from "react-feather";
 import { NextSeo, ArticleJsonLd } from "next-seo";
 
@@ -52,26 +52,26 @@ const BlogSeo = ({ title, description, publishedAt, url, image }) => {
   );
 };
 
-export default function PostLayout({ children, frontMatter }) {
+export default function PostLayout({ children, title, slug, image, publishedAt, description }) {
   return (
     <Container>
-      <BlogSeo url={`${config.baseUrl}/posts/${frontMatter.slug}`} {...frontMatter} />
+      <BlogSeo url={`${config.baseUrl}/posts/${slug}`} title={title} description={description} image={image} publishedAt={publishedAt} />
       <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">{frontMatter.title}</h1>
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">{title}</h1>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
           <div className="flex items-center">
-            <p className="text-sm text-gray-700 dark:text-coolGray-300">{format(parseISO(frontMatter.publishedAt), "MMMM dd, yyyy")}</p>
+            <p className="text-sm text-gray-700 dark:text-coolGray-300">{format(publishedAt, "MMMM dd, yyyy")}</p>
           </div>
-          <p className="text-sm text-gray-500 dark:text-coolGray-500 min-w-32 mt-2 md:mt-0">{frontMatter.readingTime.text}</p>
+          <p className="text-sm text-gray-500 dark:text-coolGray-500 min-w-32 mt-2 md:mt-0">--</p>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
         <div className="flex space-x-3 text-sm text-gray-700 dark:text-coolGray-300 hover:text-gray-800 dark:hover:text-coolGray-200 mt-8">
-          <a href={discussUrl(frontMatter.slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href={discussUrl(slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {"Discuss on Twitter"}
             <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
           </a>
           <p> • </p>
-          <a href={editUrl(frontMatter.slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href={editUrl(slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {"Edit on GitHub"}
             <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
           </a>
