@@ -1,14 +1,16 @@
 import { Fragment } from "react";
+import TeX from "@matejmazur/react-katex";
 import { CustomLink } from "@/components/MDXComponents";
 import { CodeBlock } from "@/components/CodeBlock";
 import type { NotionBlock } from "@/lib/notion";
 
 export function NotionText({ blocks }) {
   return blocks.map((block) => {
-    // if (block.type != "text") console.log(block);
-    // console.log(block.type);
+    if (!["text", "mention", "equation"].includes(block.type)) console.log("unsupported text:", block.type);
 
-    if (block.type == "mention") {
+    if (block.type == "equation") {
+      return <TeX math={block.equation.expression} />;
+    } else if (block.type == "mention") {
       const type = block.mention.type;
       switch (type) {
         case "date":
@@ -32,6 +34,7 @@ export function NotionText({ blocks }) {
       }
     }
 
+    // else if (block.type == "text")
     const {
       annotations: { bold, code, italic, strikethrough, underline },
       text
@@ -119,6 +122,8 @@ export function renderBlock(block: NotionBlock) {
           <NotionText blocks={blockContents.text} />
         </CodeBlock>
       );
+    case "equation":
+      return <TeX math={blockContents.expression} block />;
     case "child_page":
       return <p>{blockContents.title}</p>;
     case "divider":
