@@ -88,6 +88,10 @@ html {
     }
   }
 
+  details > div {
+    margin-left: 1.25em;
+  }
+
   label {
     @apply my-2 pl-5;
 
