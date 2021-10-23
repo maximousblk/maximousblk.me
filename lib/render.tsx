@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
 import { CustomLink } from "@/components/MDXComponents";
 import { CodeBlock } from "@/components/CodeBlock";
@@ -127,6 +128,33 @@ export function renderBlock(block: NotionBlock) {
           <NotionText blocks={contentBlock.text} />
         </CodeBlock>
       );
+    case "video":
+      return (
+        <figure>
+          <div className="flex justify-center">
+            <ReactPlayer light controls url={contentBlock[contentBlock.type].url} width={800} height={450} />
+          </div>
+          {contentBlock.caption && (
+            <figcaption className="flex justify-center">
+              <NotionText blocks={contentBlock.caption} />
+            </figcaption>
+          )}
+        </figure>
+      );
+    case "audio":
+      console.log("audio", contentBlock);
+      return (
+        <figure>
+          <div className="flex justify-center">
+            <ReactPlayer controls url={contentBlock[contentBlock.type].url} width="100%" height="5em" />
+          </div>
+          {contentBlock.caption && (
+            <figcaption className="flex justify-center">
+              <NotionText blocks={contentBlock.caption} />
+            </figcaption>
+          )}
+        </figure>
+      );
     case "equation":
       return <TeX math={contentBlock.expression} block />;
     case "child_page":
@@ -140,13 +168,15 @@ export function renderBlock(block: NotionBlock) {
         </blockquote>
       );
     case "image":
-      const src = contentBlock.type === "external" ? contentBlock.external.url : contentBlock.file.url;
-      const caption = contentBlock?.caption[0]?.plain_text ?? "";
       return (
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={caption} />
-          {caption && <figcaption>{caption}</figcaption>}
+          <img src={contentBlock[contentBlock.type].url} alt={contentBlock?.caption.map(({ plain_text }) => plain_text).join("") ?? ""} />
+          {contentBlock.caption && (
+            <figcaption>
+              <NotionText blocks={contentBlock.caption} />
+            </figcaption>
+          )}
         </figure>
       );
     default:

@@ -40,6 +40,7 @@
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
     "react-feather": "^2.0.9",
+    "react-player": "^2.9.0",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "reading-time": "^1.5.0",
     "sharp": "^0.29.2",
