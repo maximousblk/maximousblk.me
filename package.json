@@ -52,7 +52,7 @@
     "rehype": "^12.0.0",
     "remark-autolink-headings": "^7.0.1",
     "remark-code-titles": "^0.1.2",
-    "remark-frontmatter": "^4.0.0",
+    "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.0",
     "remark-slug": "^7.0.1",
     "remark-stringify": "^10.0.1",
