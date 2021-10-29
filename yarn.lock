@@ -6853,7 +6853,7 @@ string-width@^1.0.1:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
-string-width@^4.2.2, string-width@^4.2.3:
+string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -7030,10 +7030,10 @@ stylelint-config-standard@^23.0.0:
   dependencies:
     stylelint-config-recommended "^6.0.0"
 
-stylelint@^14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.0.0.tgz#0dc9655bc81378ac9937e6ea2f32704e9c2f92f9"
-  integrity sha512-//4Po+WlWImVaro2BiNJZMamBo0Enekb+3fp5cYYN5r08kaPTHlxM8bCi/yvnPl7G+zqyLqjZU+O22vr/SDW0w==
+stylelint@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.0.1.tgz#88e6c8bd3be61e666225ddb871826321f16661f6"
+  integrity sha512-ZcAkmFLVCultmwkQUjxKzxW/o5+CzNmDk6TPJj/d4Y7ipTGGrewIWmNm+InjdSr04PR5/yynsAJeYJY/wisdMg==
   dependencies:
     balanced-match "^2.0.0"
     cosmiconfig "^7.0.1"
@@ -7044,7 +7044,7 @@ stylelint@^14.0.0:
     file-entry-cache "^6.0.1"
     get-stdin "^8.0.0"
     global-modules "^2.0.0"
-    globby "^11.0.3"
+    globby "^11.0.4"
     globjoin "^0.1.4"
     html-tags "^3.1.0"
     ignore "^5.1.8"
@@ -7066,8 +7066,8 @@ stylelint@^14.0.0:
     postcss-value-parser "^4.1.0"
     resolve-from "^5.0.0"
     specificity "^0.4.1"
-    string-width "^4.2.2"
-    strip-ansi "^6.0.0"
+    string-width "^4.2.3"
+    strip-ansi "^6.0.1"
     style-search "^0.1.0"
     svg-tags "^1.0.0"
     table "^6.7.2"
@@ -7783,10 +7783,10 @@ webpack-sources@^3.2.0:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.1.tgz#251a7d9720d75ada1469ca07dbb62f3641a05b6d"
   integrity sha512-t6BMVLQ0AkjBOoRTZgqrWm7xbXMBzD+XDq2EZ96+vMfn3qKgsvdXZhbPZ4ElUOpdv4u+iiGe+w3+J75iy/bYGA==
 
-webpack@^5.60.0:
-  version "5.60.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.60.0.tgz#9c26f38a57c9688b0a8c5c885e05197344eae67d"
-  integrity sha512-OL5GDYi2dKxnwJPSOg2tODgzDxAffN0osgWkZaBo/l3ikCxDFP+tuJT3uF7GyBE3SDBpKML/+a8EobyWAQO3DQ==
+webpack@^5.61.0:
+  version "5.61.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.61.0.tgz#fa827f0ee9bdfd141dd73c3e891e955ebd52fe7f"
+  integrity sha512-fPdTuaYZ/GMGFm4WrPi2KRCqS1vDp773kj9S0iI5Uc//5cszsFEDgHNaX4Rj1vobUiU1dFIV3mA9k1eHeluFpw==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.50"
