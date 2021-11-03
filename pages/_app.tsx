@@ -2,7 +2,7 @@ import "@/styles/global.scss";
 import "@fontsource/inter";
 import "@fontsource/lora";
 import "@fontsource/jetbrains-mono";
-import 'katex/dist/katex.min.css';
+import "katex/dist/katex.min.css";
 
 import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";
