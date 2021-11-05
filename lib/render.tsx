@@ -75,7 +75,7 @@ export function renderBlock(block: NotionBlock) {
     case "table_of_contents":
       return (
         <>
-          <h1 id="_toc">Table of Contents</h1>
+          <h6 id="_toc">Table of Contents</h6>
           <TableOfContents items={children} />
         </>
       );
