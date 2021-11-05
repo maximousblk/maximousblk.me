@@ -1,5 +1,7 @@
 import { Client } from "@notionhq/client";
 import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { TableOfContentsItem } from "@/components/TableOfContents";
+
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN
 });
@@ -83,26 +85,65 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
     return block;
   });
 
-  return blocks.reduce((acc: NotionBlock[], curr: NotionBlock) => {
-    if (curr.type === "bulleted_list_item") {
-      if (acc[acc.length - 1]?.type === "bulleted_list") {
+  return blocks
+    .map((block) => {
+      if (block.type === "table_of_contents") {
         // @ts-ignore
-        acc[acc.length - 1].bulleted_list.children?.push(curr);
-      } else {
-        acc.push({ id: getRandomInt(10 ** 99, 10 ** 100).toString(), type: "bulleted_list", bulleted_list: { children: [curr] } });
+        block.table_of_contents["children"] = blocks
+          .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
+          .map((block) => {
+            return {
+              title: block[block.type].text[0].plain_text,
+              type: block.type,
+              children: []
+            };
+          })
+          .reduce((acc: TableOfContentsItem[], curr: TableOfContentsItem) => {
+            if (curr.type === "heading_1") {
+              acc.push({ ...curr, children: [] });
+            } else if (curr.type === "heading_2") {
+              const prev = acc[acc.length - 1];
+              if (prev?.type === "heading_1") {
+                prev.children.push(curr);
+              } else {
+                acc.push(curr);
+              }
+            } else if (curr.type === "heading_3") {
+              const prev = acc[acc.length - 1];
+              const prevprev = prev?.children[prev.children.length - 1];
+              if (prevprev?.type === "heading_2") {
+                prevprev.children.push(curr);
+              } else if (prev?.type === "heading_1") {
+                prev.children?.push(curr);
+              } else {
+                acc.push(curr);
+              }
+            }
+            return acc;
+          }, []);
       }
-    } else if (curr.type === "numbered_list_item") {
-      if (acc[acc.length - 1]?.type === "numbered_list") {
-        // @ts-ignore
-        acc[acc.length - 1].numbered_list.children?.push(curr);
+      return block;
+    })
+    .reduce((acc: NotionBlock[], curr: NotionBlock) => {
+      if (curr.type === "bulleted_list_item") {
+        if (acc[acc.length - 1]?.type === "bulleted_list") {
+          // @ts-ignore
+          acc[acc.length - 1].bulleted_list.children?.push(curr);
+        } else {
+          acc.push({ id: getRandomInt(10 ** 99, 10 ** 100).toString(), type: "bulleted_list", bulleted_list: { children: [curr] } });
+        }
+      } else if (curr.type === "numbered_list_item") {
+        if (acc[acc.length - 1]?.type === "numbered_list") {
+          // @ts-ignore
+          acc[acc.length - 1].numbered_list.children?.push(curr);
+        } else {
+          acc.push({ id: getRandomInt(10 ** 99, 10 ** 100).toString(), type: "numbered_list", numbered_list: { children: [curr] } });
+        }
       } else {
-        acc.push({ id: getRandomInt(10 ** 99, 10 ** 100).toString(), type: "numbered_list", numbered_list: { children: [curr] } });
+        acc.push(curr);
       }
-    } else {
-      acc.push(curr);
-    }
-    return acc;
-  }, []);
+      return acc;
+    }, []);
 }
 
 function getRandomInt(min: number, max: number) {

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Clipboard, Check } from "react-feather";
 
-export function CodeBlock(props): JSX.Element {
+export default function CodeBlock(props): JSX.Element {
   const textInput = useRef(null);
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -42,3 +42,5 @@ export function CodeBlock(props): JSX.Element {
     </div>
   );
 }
+
+export { CodeBlock };

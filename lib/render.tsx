@@ -1,8 +1,10 @@
 import { Fragment } from "react";
+import { parseISO } from "date-fns";
 import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
 import { CustomLink } from "@/components/MDXComponents";
-import { CodeBlock } from "@/components/CodeBlock";
+import CodeBlock from "@/components/CodeBlock";
+import { TableOfContents, slugify } from "@/components/TableOfContents";
 import type { NotionBlock } from "@/lib/notion";
 
 export function NotionText({ blocks }) {
@@ -14,18 +16,23 @@ export function NotionText({ blocks }) {
         switch (textBlock.type) {
           case "date":
             const date = textBlock.date;
+            const start = parseISO(date.start);
+            const end = parseISO(date.end);
+            const hasTime = (d: Date) => d.getHours() !== 0;
+            const withTime = (d: Date) => `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+            const withoutTime = (d: Date) => d.toLocaleDateString();
+
             return (
               <span>
-                {date.start}
-                {date.end ? " - " : ""}
-                {date.end}
+                {hasTime(start) ? withTime(start) : withoutTime(start)}
+                {date.end ? ` - ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
               </span>
             );
           case "user":
-            return <span className="px-1 py-0.5 bg-gray-100 dark:bg-coolGray-800 rounded">{block.plain_text}</span>;
+            return <a>{block.plain_text}</a>;
           case "page":
             const page = textBlock.page;
-            return <CustomLink href={`/${page.id}`}>{block.plain_text}</CustomLink>;
+            return <CustomLink href={"/" + page.id}>{block.plain_text}</CustomLink>;
           default:
             console.log("unsupported mention:", textBlock);
             return <p>{`❌ Unsupported mention (${textBlock})`}</p>;
@@ -61,61 +68,93 @@ export function NotionText({ blocks }) {
 }
 
 export function renderBlock(block: NotionBlock) {
-  const contentBlock = block[block.type];
+  const contents = block[block.type];
+  const children = contents.children;
 
   switch (block.type) {
+    case "table_of_contents":
+      return (
+        <>
+          <h1 id="_toc">Table of Contents</h1>
+          <TableOfContents items={children} />
+        </>
+      );
     case "paragraph":
       return (
         <p>
-          <NotionText blocks={contentBlock.text} />
+          <NotionText blocks={contents.text} />
         </p>
       );
     case "heading_1":
       return (
-        <h1>
-          <NotionText blocks={contentBlock.text} />
-        </h1>
+        <h2 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
+          <a
+            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded"
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <span className="icon icon-link"></span>
+          </a>
+          <NotionText blocks={contents.text} />
+        </h2>
       );
     case "heading_2":
       return (
-        <h2>
-          <NotionText blocks={contentBlock.text} />
-        </h2>
+        <h3 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
+          <a
+            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded"
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <span className="icon icon-link"></span>
+          </a>
+          <NotionText blocks={contents.text} />
+        </h3>
       );
     case "heading_3":
       return (
-        <h3>
-          <NotionText blocks={contentBlock.text} />
-        </h3>
+        <h4 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
+          <a
+            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded"
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <span className="icon icon-link"></span>
+          </a>
+          <NotionText blocks={contents.text} />
+        </h4>
       );
     case "bulleted_list":
-      return <ul>{contentBlock?.children && contentBlock.children.map((child) => renderBlock(child))}</ul>;
+      return <ul>{children && children.map((child) => renderBlock(child))}</ul>;
     case "numbered_list":
-      return <ol>{contentBlock?.children && contentBlock.children.map((child) => renderBlock(child))}</ol>;
+      return <ol>{children && children.map((child) => renderBlock(child))}</ol>;
     case "bulleted_list_item":
     case "numbered_list_item":
       return (
         <li>
-          <NotionText blocks={contentBlock.text} />
-          {contentBlock?.children && contentBlock.children.map((child) => renderBlock(child))}
+          <NotionText blocks={contents.text} />
+          {children && children.map((child) => renderBlock(child))}
         </li>
       );
     case "to_do":
       return (
         <label htmlFor={block.id}>
-          <input type="checkbox" id={block.id} checked={contentBlock.checked} disabled />
-          <NotionText blocks={contentBlock.text} />
-          {contentBlock?.children && contentBlock.children.map((child) => renderBlock(child))}
+          <input type="checkbox" id={block.id} checked={contents.checked} disabled />
+          <NotionText blocks={contents.text} />
+          {children && children.map((child) => renderBlock(child))}
         </label>
       );
     case "toggle":
       return (
         <details>
           <summary className="p-2">
-            <NotionText blocks={contentBlock.text} />
+            <NotionText blocks={contents.text} />
           </summary>
           <div>
-            {contentBlock.children?.map((block) => (
+            {children?.map((block) => (
               <Fragment key={block.id}>{renderBlock(block)}</Fragment>
             ))}
           </div>
@@ -125,56 +164,55 @@ export function renderBlock(block: NotionBlock) {
       // TODO: add captions/titles when they get added to the api
       return (
         <CodeBlock>
-          <NotionText blocks={contentBlock.text} />
+          <NotionText blocks={contents.text} />
         </CodeBlock>
       );
     case "video":
       return (
         <figure>
           <div className="flex justify-center">
-            <ReactPlayer light controls url={contentBlock[contentBlock.type].url} width={800} height={450} />
+            <ReactPlayer light controls url={contents[contents.type].url} width={800} height={450} />
           </div>
-          {contentBlock.caption && (
+          {contents.caption && (
             <figcaption className="flex justify-center">
-              <NotionText blocks={contentBlock.caption} />
+              <NotionText blocks={contents.caption} />
             </figcaption>
           )}
         </figure>
       );
     case "audio":
-      console.log("audio", contentBlock);
       return (
         <figure>
           <div className="flex justify-center">
-            <ReactPlayer controls url={contentBlock[contentBlock.type].url} width="100%" height="5em" />
+            <ReactPlayer controls url={contents[contents.type].url} width="100%" height="5em" />
           </div>
-          {contentBlock.caption && (
+          {contents.caption && (
             <figcaption className="flex justify-center">
-              <NotionText blocks={contentBlock.caption} />
+              <NotionText blocks={contents.caption} />
             </figcaption>
           )}
         </figure>
       );
     case "equation":
-      return <TeX math={contentBlock.expression} block />;
+      return <TeX math={contents.expression} block />;
     case "child_page":
-      return <p>{contentBlock.title}</p>;
+      return <p>{contents.title}</p>;
     case "divider":
       return <hr />;
     case "quote":
       return (
         <blockquote>
-          <NotionText blocks={contentBlock.text} />
+          <NotionText blocks={contents.text} />
         </blockquote>
       );
     case "image":
       return (
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={contentBlock[contentBlock.type].url} alt={contentBlock?.caption.map(({ plain_text }) => plain_text).join("") ?? ""} />
-          {contentBlock.caption && (
+          <img src={contents[contents.type].url} alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""} />
+          {contents.caption && (
             <figcaption>
-              <NotionText blocks={contentBlock.caption} />
+              <NotionText blocks={contents.caption} />
             </figcaption>
           )}
         </figure>
