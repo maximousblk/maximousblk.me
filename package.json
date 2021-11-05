@@ -21,7 +21,7 @@
     "autoprefixer": "^10.4.0",
     "date-fns": "^2.25.0",
     "feed": "^4.2.2",
-    "gemoji": "^7.0.0",
+    "gemoji": "^7.1.0",
     "gray-matter": "^4.0.3",
     "mdx-prism": "^0.3.4",
     "next": "^11.1.2",

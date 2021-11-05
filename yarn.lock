@@ -3343,10 +3343,10 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-gemoji@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/gemoji/-/gemoji-7.0.0.tgz#e77c435a208ab6d74a32d5e9d05746ee86ae0390"
-  integrity sha512-QN1P252570sLIRdEUQCB0hA1EaEuQZCcgLIDxSEPr353q9eBRLxV7cRN/MxhVRCXqybUX0GwUgi0qPMV0zSA7w==
+gemoji@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/gemoji/-/gemoji-7.1.0.tgz#165403777681a9690d649aabd104da037bdd7739"
+  integrity sha512-wI0YWDIfQraQMDs0yXAVQiVBZeMm/rIYssf8LZlMDdssKF19YqJKOHkv4zvwtVQTBJ0LNmErv1S+DqlVUudz8g==
 
 gensync@^1.0.0-beta.1, gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
