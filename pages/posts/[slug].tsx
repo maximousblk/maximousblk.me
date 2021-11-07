@@ -1,10 +1,10 @@
 import PostLayout from "@/layouts/post";
-import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { getBlockChildren, getDatabase, getIndex } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { parseISO } from "date-fns";
+import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
-export default function Blog({ blocks, title, description, image, slug, publishedAt }) {
+export default function Blog({ blocks, slug, title, description, image, publishedAt }) {
   return (
     <PostLayout title={title} slug={slug} description={description} image={image} publishedAt={publishedAt}>
       <NotionContent blocks={blocks} />

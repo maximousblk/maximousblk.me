@@ -4,20 +4,18 @@ import { Search as SearchIcon } from "react-feather";
 
 import Container from "@/components/Container";
 import GistCard from "@/components/GistCard";
-import { getAllFilesFrontMatter } from "@/lib/mdx";
 
 import config from "@/data/config";
+import { getDatabase, getIndex } from "@/lib/notion";
 
 const url = config.baseUrl + "/gists";
 const title = "Gists";
 
 export default function Gists({ gists }) {
   const [searchValue, setSearchValue] = useState("");
-  const filteredGists = gists.sort().filter((frontMatter) => {
+  const filteredGists = gists.sort().filter((gist) => {
     return (
-      (frontMatter.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-        frontMatter.description?.toLowerCase().includes(searchValue.toLowerCase())) &&
-      frontMatter.published
+      gist.title.toLowerCase().includes(searchValue.toLowerCase()) || gist.description?.toLowerCase().includes(searchValue.toLowerCase())
     );
   });
 
@@ -58,7 +56,24 @@ export default function Gists({ gists }) {
 }
 
 export async function getStaticProps() {
-  const gists = await getAllFilesFrontMatter("gists");
+  const index = await getIndex();
+  const gists = await getDatabase(index.gists.id).then((gists) => {
+    return gists.results
+      .filter((gist) => {
+        // @ts-ignore
+        return gist.properties.published.checkbox;
+      })
+      .map((gist) => {
+        return {
+          // @ts-ignore
+          title: gist.properties.title.title.map((part) => part.plain_text).join(" "),
+          // @ts-ignore
+          description: gist.properties.description.rich_text.map((part) => part.plain_text).join(" "),
+          // @ts-ignore
+          slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
+        };
+      });
+  });
 
   return { props: { gists }, revalidate: 3600 };
 }

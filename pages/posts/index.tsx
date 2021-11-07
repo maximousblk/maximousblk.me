@@ -9,8 +9,8 @@ import { parseISO } from "date-fns";
 import config from "@/data/config";
 import { getDatabase, getIndex } from "@/lib/notion";
 
-const url = config.baseUrl + "/blog";
-const title = "Blog";
+const url = config.baseUrl + "/posts";
+const title = "Posts";
 const description = config.description;
 
 export default function Posts({ posts }) {
@@ -38,7 +38,7 @@ export default function Posts({ posts }) {
         }}
       />
       <div className="flex flex-col justify-center items-start w-full max-w-4xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-8 text-black dark:text-white">Blog</h1>
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-8 text-black dark:text-white">Posts</h1>
         <div className="relative w-full mb-4">
           <input
             aria-label={`Search through ${filteredPosts.length} articles`}

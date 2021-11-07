@@ -1,32 +1,49 @@
-import { MDXRemote } from "next-mdx-remote";
-
-import { getFiles, getFileBySlug } from "@/lib/mdx";
 import GistLayout from "@/layouts/gist";
-import MDXComponents from "@/components/MDXComponents";
+import { getBlockChildren, getDatabase, getIndex } from "@/lib/notion";
+import { NotionContent } from "@/lib/render";
+import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
-export default function Gist({ mdxSource, frontMatter }) {
+export default function Gist({ blocks, slug, title, description, hide_description }) {
   return (
-    <GistLayout frontMatter={frontMatter}>
-      <MDXRemote {...mdxSource} components={MDXComponents} />
+    <GistLayout slug={slug} title={title} description={description} hide_description={hide_description}>
+      <NotionContent blocks={blocks} />
     </GistLayout>
   );
 }
 
-export async function getStaticPaths() {
-  const gists = await getFiles("gists");
+export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
+  const index = await getIndex();
+  const gists = await getDatabase(index.gists.id);
 
-  return {
-    paths: gists.map((s) => ({
-      params: {
-        slug: s.replace(/\.mdx/, "")
-      }
-    })),
-    fallback: false
-  };
+  // @ts-ignore
+  const gist = gists.results.find((gist) => gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__") === slug);
+  const blocks = await getBlockChildren(gist.id);
+  // @ts-ignore
+  const title = gist.properties.title.title.map((part) => part.plain_text).join(" ");
+  // @ts-ignore
+  const description = gist.properties.description.rich_text.map((part) => part.plain_text).join(" ");
+  // @ts-ignore
+  const hide_description = gist.properties.hide_description.checkbox;
+
+  return { props: { blocks, title, description, slug, hide_description }, revalidate: 14400 };
 }
 
-export async function getStaticProps({ params }) {
-  const gist = await getFileBySlug("gists", params.slug);
+export async function getStaticPaths() {
+  const index = await getIndex();
+  const gists = await getDatabase(index.gists.id);
 
-  return { props: gist, revalidate: 3600 };
+  return {
+    paths: gists.results
+      .filter((gist) => {
+        // @ts-ignore
+        return gist.properties.published.checkbox;
+      })
+      .map((gist) => ({
+        params: {
+          // @ts-ignore
+          slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
+        }
+      })),
+    fallback: false
+  };
 }
