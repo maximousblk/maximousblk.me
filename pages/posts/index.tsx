@@ -6,7 +6,7 @@ import BlogPost from "@/components/BlogPost";
 import { Search as SearchIcon } from "react-feather";
 import { parseISO } from "date-fns";
 
-import config from "@/data/config";
+import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
 
 const url = config.baseUrl + "/posts";

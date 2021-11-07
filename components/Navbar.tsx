@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import Icon from "@/components/FeatherIcons";
 import Twemoji from "@/components/Twemoji";
-import config from "@/data/config";
+import config from "@/config";
 
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);

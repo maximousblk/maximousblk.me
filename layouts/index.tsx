@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo";
 
 import Container from "@/components/Container";
-import config from "@/data/config";
+import config from "@/config";
 
 export default function IndexLayout({ children, title, description }) {
   const { baseUrl: url } = config;

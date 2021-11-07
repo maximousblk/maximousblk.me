@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 
 import Container from "@/components/Container";
 
-import config from "@/data/config";
+import config from "@/config";
 
 export default function GistLayout({ children, slug, title, description, hide_description }) {
   const url = `${config.baseUrl}/gists/${slug}`;

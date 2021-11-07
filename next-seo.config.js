@@ -1,4 +1,4 @@
-import config from "@/data/config";
+import config from "@/config";
 
 const title = config.name;
 const description = config.description;

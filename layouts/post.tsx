@@ -3,14 +3,15 @@ import { ExternalLink } from "react-feather";
 import { NextSeo, ArticleJsonLd } from "next-seo";
 
 import Container from "@/components/Container";
-import config from "@/data/config";
+import config from "@/config";
 
-const editUrl = (slug: string) => {
-  return `https://github.com/${config.repo.name}/edit/${config.repo.branch}/data/posts/${slug}.mdx`;
+const discussURL = (title: string, slug: string) => {
+  return `https://github.com/${config.repo.name}/discussions/new?category=post&title=${title}`;
 };
-const discussUrl = (slug: string) => {
-  let query = encodeURIComponent(`${config.baseUrl}/posts/${slug}`);
-  return `https://mobile.twitter.com/search?q=${query}`;
+const twitterURL = (title: string, slug: string) => {
+  const text = encodeURIComponent(title);
+  const url = encodeURIComponent(`${config.baseUrl}/posts/${slug}`);
+  return `http://twitter.com/share?text=${text}&url=${url}`;
 };
 
 const BlogSeo = ({ title, description, publishedAt, url, image }) => {
@@ -66,13 +67,13 @@ export default function PostLayout({ children, title, slug, image, publishedAt, 
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
         <div className="flex space-x-3 text-sm text-gray-700 dark:text-coolGray-300 hover:text-gray-800 dark:hover:text-coolGray-200 mt-8">
-          <a href={discussUrl(slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
-            {"Discuss on Twitter"}
+          <a href={twitterURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            {"Share on Twitter"}
             <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
           </a>
           <p> • </p>
-          <a href={editUrl(slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
-            {"Edit on GitHub"}
+          <a href={discussURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            {"Discuss on GitHub"}
             <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
           </a>
         </div>

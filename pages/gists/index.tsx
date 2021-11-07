@@ -5,7 +5,7 @@ import { Search as SearchIcon } from "react-feather";
 import Container from "@/components/Container";
 import GistCard from "@/components/GistCard";
 
-import config from "@/data/config";
+import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
 
 const url = config.baseUrl + "/gists";

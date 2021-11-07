@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Icon from "@/components/FeatherIcons";
-import config from "@/data/config";
+import config from "@/config";
 
 const Social = ({ name, icon, href }) => {
   return (

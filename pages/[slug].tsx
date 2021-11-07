@@ -36,12 +36,17 @@ export async function getStaticPaths() {
   const pages = await getDatabase(index.pages.id);
 
   return {
-    paths: pages.results.map((page) => ({
-      params: {
+    paths: pages.results
+      .filter((post) => {
         // @ts-ignore
-        slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
-      }
-    })),
+        return post.properties.published.checkbox;
+      })
+      .map((page) => ({
+        params: {
+          // @ts-ignore
+          slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
+        }
+      })),
     fallback: false
   };
 }
