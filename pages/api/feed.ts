@@ -4,7 +4,9 @@ import { promises as fs } from "fs";
 import path from "path";
 import { Feed } from "feed";
 import matter from "gray-matter";
-import config from "@/data/config";
+import config from "@/config";
+import { getDatabase, getIndex } from "@/lib/notion";
+import { parseISO } from "date-fns";
 
 const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const { f } = req.query;
@@ -38,26 +40,39 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   });
 
-  const posts = await fs.readdir(path.join(process.cwd(), "data", "posts"));
+  const index = await getIndex();
+  const posts = await getDatabase(index.posts.id).then((posts) => {
+    return posts.results
+      .filter((post) => {
+        // @ts-ignore
+        return post.properties.published.checkbox;
+      })
+      .map((post) => {
+        return {
+          // @ts-ignore
+          title: post.properties.title.title.map((part) => part.plain_text).join(" "),
+          // @ts-ignore
+          description: post.properties.description.rich_text.map((part) => part.plain_text).join(" "),
+          // @ts-ignore
+          slug: post.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
+          // @ts-ignore
+          publishedAt: parseISO(post.properties.date.date.start).getTime()
+        };
+      })
+      .sort((a, b) => {
+        return Number(b.publishedAt) - Number(a.publishedAt);
+      });
+  });
 
-  await Promise.all(
-    posts.map(async (name) => {
-      const content = await fs.readFile(path.join(process.cwd(), "data", "posts", name));
-      const frontmatter = matter(content);
-
-      if (frontmatter.data.published) {
-        rss.addItem({
-          title: frontmatter.data.title,
-          id: name.replace(/\.mdx?/, ""),
-          link: config.baseUrl + "/posts/" + name.replace(/\.mdx?/, ""),
-          description: frontmatter.data.description,
-          date: new Date(frontmatter.data.publishedAt),
-          image: config.baseUrl + frontmatter.data.image,
-          content: frontmatter.content
-        });
-      }
-    })
-  );
+  posts.map((post) => {
+    rss.addItem({
+      title: post.title,
+      id: post.slug,
+      link: config.baseUrl + "/posts/" + post.slug,
+      description: post.description,
+      date: new Date(post.publishedAt)
+    });
+  });
 
   rss.items.sort((a, b) => {
     return a.date > b.date ? -1 : 1;
