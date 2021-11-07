@@ -29,10 +29,6 @@
     white-space: nowrap;
   }
 
-  .mdx-marker {
-    @apply block -mx-4 px-4 border-l-2 border-sky-500;
-  }
-
   .token.important,
   .token.bold {
     font-weight: bold;
@@ -74,10 +70,6 @@
     background-color: theme("colors.gray.50");
     border: 1px solid theme("colors.gray.200");
     color: var(--prism-text-color);
-  }
-
-  .mdx-marker {
-    background-color: theme("colors.gray.200");
   }
 
   .remark-code-title {
@@ -152,10 +144,6 @@
     color: var(--prism-text-color);
 
     @apply border border-coolGray-800 bg-coolGray-900;
-  }
-
-  .mdx-marker {
-    background-color: theme("colors.coolGray.800");
   }
 
   .remark-code-title {
