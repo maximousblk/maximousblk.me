@@ -8,7 +8,7 @@ function UnknownError({ statusCode }) {
       <NextSeo
         title="418 – I'm a teapot"
         openGraph={{
-          title: "418 – I'm a teapot"
+          title: "418 – I'm a teapot",
         }}
       />
       <div className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 space-y-8">

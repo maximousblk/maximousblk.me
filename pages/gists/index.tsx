@@ -26,7 +26,7 @@ export default function Gists({ gists }) {
         canonical={url}
         openGraph={{
           url,
-          title
+          title,
         }}
       />
       <div className="flex flex-col justify-center items-start w-full max-w-4xl mx-auto mb-16">
@@ -70,7 +70,7 @@ export async function getStaticProps() {
           // @ts-ignore
           description: gist.properties.description.rich_text.map((part) => part.plain_text).join(" "),
           // @ts-ignore
-          slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
+          slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
         };
       });
   });

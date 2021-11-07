@@ -14,7 +14,7 @@ export default function GistLayout({ children, slug, title, description, hide_de
         canonical={url}
         openGraph={{
           url,
-          title
+          title,
         }}
       />
       <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full">

@@ -66,9 +66,6 @@
     "webpack": "^5.62.1"
   },
   "prettier": {
-    "arrowParens": "always",
-    "tabWidth": 2,
-    "trailingComma": "none",
     "printWidth": 140
   }
 }

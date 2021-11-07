@@ -34,7 +34,7 @@ export default function Posts({ posts }) {
         openGraph={{
           url,
           title,
-          description
+          description,
         }}
       />
       <div className="flex flex-col justify-center items-start w-full max-w-4xl mx-auto mb-16">
@@ -77,7 +77,7 @@ export async function getStaticProps() {
           // @ts-ignore
           slug: post.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
           // @ts-ignore
-          publishedAt: parseISO(post.properties.date.date.start).getTime()
+          publishedAt: parseISO(post.properties.date.date.start).getTime(),
         };
       })
       .sort((a, b) => {

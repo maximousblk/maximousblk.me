@@ -41,9 +41,9 @@ export async function getStaticPaths() {
       .map((gist) => ({
         params: {
           // @ts-ignore
-          slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
-        }
+          slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
+        },
       })),
-    fallback: false
+    fallback: false,
   };
 }

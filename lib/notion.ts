@@ -3,7 +3,7 @@ import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { TableOfContentsItem } from "@/components/TableOfContents";
 
 export const notion = new Client({
-  auth: process.env.NOTION_TOKEN
+  auth: process.env.NOTION_TOKEN,
 });
 
 export async function getIndex(): Promise<{ [key: string]: { id: string } }> {
@@ -28,7 +28,10 @@ export async function getDatabase(database_id: string) {
   const db = await notion.databases.query({ database_id });
 
   while (db.has_more) {
-    const { results, has_more, next_cursor } = await notion.databases.query({ database_id, start_cursor: db.next_cursor });
+    const { results, has_more, next_cursor } = await notion.databases.query({
+      database_id,
+      start_cursor: db.next_cursor,
+    });
     db.results = [...db.results, ...results];
     db.has_more = has_more;
     db.next_cursor = next_cursor;
@@ -57,13 +60,13 @@ export type NotionBlock =
 
 export async function getBlockChildren(block_id: string): Promise<NotionBlock[]> {
   const list = await notion.blocks.children.list({
-    block_id
+    block_id,
   });
 
   while (list.has_more) {
     const { results, has_more, next_cursor } = await notion.blocks.children.list({
       block_id,
-      start_cursor: list.next_cursor
+      start_cursor: list.next_cursor,
     });
     list.results = list.results.concat(results);
     list.has_more = has_more;
@@ -95,7 +98,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             return {
               title: block[block.type].text[0].plain_text,
               type: block.type,
-              children: []
+              children: [],
             };
           })
           .reduce((acc: TableOfContentsItem[], curr: TableOfContentsItem) => {
@@ -130,14 +133,22 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           // @ts-ignore
           acc[acc.length - 1].bulleted_list.children?.push(curr);
         } else {
-          acc.push({ id: getRandomInt(10 ** 99, 10 ** 100).toString(), type: "bulleted_list", bulleted_list: { children: [curr] } });
+          acc.push({
+            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            type: "bulleted_list",
+            bulleted_list: { children: [curr] },
+          });
         }
       } else if (curr.type === "numbered_list_item") {
         if (acc[acc.length - 1]?.type === "numbered_list") {
           // @ts-ignore
           acc[acc.length - 1].numbered_list.children?.push(curr);
         } else {
-          acc.push({ id: getRandomInt(10 ** 99, 10 ** 100).toString(), type: "numbered_list", numbered_list: { children: [curr] } });
+          acc.push({
+            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            type: "numbered_list",
+            numbered_list: { children: [curr] },
+          });
         }
       } else {
         acc.push(curr);

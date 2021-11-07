@@ -9,7 +9,7 @@ function NotFound() {
       <NextSeo
         title="404 – Not Found"
         openGraph={{
-          title: "404 – Not Found"
+          title: "404 – Not Found",
         }}
       />
       <div className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 space-y-8">

@@ -44,9 +44,9 @@ export async function getStaticPaths() {
       .map((page) => ({
         params: {
           // @ts-ignore
-          slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__")
-        }
+          slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
+        },
       })),
-    fallback: false
+    fallback: false,
   };
 }

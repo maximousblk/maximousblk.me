@@ -9,7 +9,7 @@ function InternalServerError() {
       <NextSeo
         title="500 – Internal Server Error"
         openGraph={{
-          title: "500 – Internal Server Error"
+          title: "500 – Internal Server Error",
         }}
       />
       <div className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 space-y-8">

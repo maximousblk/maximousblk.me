@@ -33,7 +33,7 @@ export function Quote({ author, children, ...props }) {
 const MDXComponents = {
   Image,
   Quote,
-  a: CustomLink
+  a: CustomLink,
 };
 
 export default MDXComponents;

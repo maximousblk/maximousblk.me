@@ -43,7 +43,7 @@ export function NotionText({ blocks }) {
 
       case "text":
         const {
-          annotations: { bold, code, italic, strikethrough, underline }
+          annotations: { bold, code, italic, strikethrough, underline },
         } = block;
 
         let part: JSX.Element = textBlock.link ? (

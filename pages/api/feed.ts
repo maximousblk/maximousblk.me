@@ -31,13 +31,13 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
     feedLinks: {
       json: config.baseUrl + "/feed/json",
       rss: config.baseUrl + "/feed/rss",
-      atom: config.baseUrl + "/feed/atom"
+      atom: config.baseUrl + "/feed/atom",
     },
     author: {
       name: config.name,
       email: config.email,
-      link: config.baseUrl
-    }
+      link: config.baseUrl,
+    },
   });
 
   const index = await getIndex();
@@ -56,7 +56,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
           // @ts-ignore
           slug: post.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
           // @ts-ignore
-          publishedAt: parseISO(post.properties.date.date.start).getTime()
+          publishedAt: parseISO(post.properties.date.date.start).getTime(),
         };
       })
       .sort((a, b) => {
@@ -70,7 +70,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
       id: post.slug,
       link: config.baseUrl + "/posts/" + post.slug,
       description: post.description,
-      date: new Date(post.publishedAt)
+      date: new Date(post.publishedAt),
     });
   });
 
@@ -81,7 +81,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const feeds = {
     atom: { body: rss.atom1(), type: "application/xml" },
     json: { body: rss.json1(), type: "application/json" },
-    rss: { body: rss.rss2(), type: "application/xml" }
+    rss: { body: rss.rss2(), type: "application/xml" },
   };
 
   const feed = feeds[format] || feeds.atom;

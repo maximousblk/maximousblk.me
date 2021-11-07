@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       loc: config.baseUrl + route,
       lastmod: new Date().toISOString(),
-      priority: 0.7
+      priority: 0.7,
     };
   });
 
