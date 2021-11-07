@@ -52,7 +52,7 @@ html {
 
 .prose {
   code {
-    @apply px-1.5 py-0.5 rounded border text-sm text-coolGray-200 border-coolGray-700 bg-coolGray-900;
+    @apply px-1.5 py-0.5 rounded border text-sm text-gray-900 border-gray-300 bg-gray-100 dark:text-coolGray-200 dark:border-coolGray-700 dark:bg-coolGray-900;
   }
 
   img {
