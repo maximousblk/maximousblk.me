@@ -32,7 +32,7 @@ export function NotionText({ blocks }) {
             return <a>{block.plain_text}</a>;
           case "page":
             const page = textBlock.page;
-            return <CustomLink href={"/" + page.id}>{block.plain_text}</CustomLink>;
+            return <a href={"/" + page.id}>{block.plain_text}</a>;
           default:
             console.log("unsupported mention:", textBlock);
             return <p>{`❌ Unsupported mention (${textBlock})`}</p>;

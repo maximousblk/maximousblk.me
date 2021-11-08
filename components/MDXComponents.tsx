@@ -16,7 +16,7 @@ export function CustomLink({ href, ...props }) {
     );
   }
 
-  return <a className={baseStyle} target="_blank" rel="noopener noreferrer" {...props} />;
+  return <a href={href} className={baseStyle} target="_blank" rel="noopener noreferrer" {...props} />;
 }
 
 export function Quote({ author, children, ...props }) {
