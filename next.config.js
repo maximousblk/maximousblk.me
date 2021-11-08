@@ -26,10 +26,6 @@ const config = {
         source: "/robots.txt",
         destination: "/.well-known/robots.txt",
       },
-      {
-        source: "/keybase.txt",
-        destination: "/.well-known/keybase.txt",
-      },
     ];
   },
   async redirects() {
