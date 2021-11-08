@@ -1,6 +1,7 @@
 import { Client } from "@notionhq/client";
 import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { TableOfContentsItem } from "@/components/TableOfContents";
+import readingTime, { ReadTimeResults } from "reading-time";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -161,4 +162,15 @@ function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function getReadingTime(blocks: NotionBlock[]): ReadTimeResults {
+  const words: string = blocks.reduce((acc, block) => {
+    if (block[block.type].text?.length) {
+      return acc + block[block.type].text.map(({ plain_text }) => plain_text).join(" ");
+    }
+    return acc;
+  }, "");
+
+  return readingTime(words);
 }

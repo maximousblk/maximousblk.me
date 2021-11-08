@@ -1,12 +1,19 @@
 import PostLayout from "@/layouts/post";
-import { getBlockChildren, getDatabase, getIndex } from "@/lib/notion";
+import { getBlockChildren, getDatabase, getIndex, getReadingTime } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { parseISO } from "date-fns";
 import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
 export default function Blog({ blocks, slug, title, description, image, publishedAt }) {
   return (
-    <PostLayout title={title} slug={slug} description={description} image={image} publishedAt={publishedAt}>
+    <PostLayout
+      title={title}
+      slug={slug}
+      description={description}
+      image={image}
+      publishedAt={publishedAt}
+      readingTime={getReadingTime(blocks).text}
+    >
       <NotionContent blocks={blocks} />
     </PostLayout>
   );

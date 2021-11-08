@@ -53,7 +53,7 @@ const BlogSeo = ({ title, description, publishedAt, url, image }) => {
   );
 };
 
-export default function PostLayout({ children, title, slug, image, publishedAt, description }) {
+export default function PostLayout({ children, title, slug, image, publishedAt, description, readingTime }) {
   return (
     <Container>
       <BlogSeo url={`${config.baseUrl}/posts/${slug}`} title={title} description={description} image={image} publishedAt={publishedAt} />
@@ -63,7 +63,7 @@ export default function PostLayout({ children, title, slug, image, publishedAt, 
           <div className="flex items-center">
             <p className="text-sm text-gray-700 dark:text-coolGray-300">{format(publishedAt, "MMMM dd, yyyy")}</p>
           </div>
-          <p className="text-sm text-gray-500 dark:text-coolGray-500 min-w-32 mt-2 md:mt-0">--</p>
+          <p className="text-sm text-gray-500 dark:text-coolGray-500 min-w-32 mt-2 md:mt-0">{readingTime}</p>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
         <div className="flex space-x-3 text-sm text-gray-700 dark:text-coolGray-300 hover:text-gray-800 dark:hover:text-coolGray-200 mt-8">
