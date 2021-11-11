@@ -19,8 +19,8 @@ export function NotionText({ blocks }) {
             const start = parseISO(date.start);
             const end = parseISO(date.end);
             const hasTime = (d: Date) => d.getHours() !== 0;
-            const withTime = (d: Date) => `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
-            const withoutTime = (d: Date) => d.toLocaleDateString();
+            const withTime = (d: Date) => format(d, "PPpp");
+            const withoutTime = (d: Date) => format(d, "PP");
 
             return (
               <span>

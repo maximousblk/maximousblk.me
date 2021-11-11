@@ -15,9 +15,7 @@ function InternalServerError() {
       />
       <div className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 space-y-8">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">500 – Internal Server Error</h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          It seems that the server wasn&apos;t able to process your request properly.
-        </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-8">It seems that the server wasn&apos;t able to process your request properly.</p>
         <p className="text-gray-600 dark:text-gray-400 mb-8">
           <blockquote className="px-4 p-2 border-l-4 border-gray-300 dark:border-gray-700">
             <code>HTTP ERROR 500</code>
