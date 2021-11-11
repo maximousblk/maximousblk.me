@@ -1,5 +1,8 @@
 import { Fragment } from "react";
-import { parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
+import path from "path";
+
+import { File, FileText, Download, ExternalLink } from "react-feather";
 import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
 import { CustomLink } from "@/components/MDXComponents";
@@ -90,7 +93,7 @@ export function renderBlock(block: NotionBlock) {
         <h2 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
           <a
             href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded"
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
             aria-hidden="true"
             tabIndex={-1}
           >
@@ -104,7 +107,7 @@ export function renderBlock(block: NotionBlock) {
         <h3 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
           <a
             href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded"
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
             aria-hidden="true"
             tabIndex={-1}
           >
@@ -118,7 +121,7 @@ export function renderBlock(block: NotionBlock) {
         <h4 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
           <a
             href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-coolGray-800 rounded"
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
             aria-hidden="true"
             tabIndex={-1}
           >
@@ -227,6 +230,17 @@ export function renderBlock(block: NotionBlock) {
             </figcaption>
           )}
         </figure>
+      );
+    case "file":
+      const fileURL = new URL(contents[contents.type].url);
+      const fileName = path.basename(fileURL.pathname);
+      return (
+        <CustomLink className="hover:no-underline" href={fileURL.href}>
+          <p className="flex py-2 px-3 rounded border border-gray-800 bg-gray-900 hover:bg-gray-800 text-gray-400">
+            {contents.type == "file" ? <Download /> : <ExternalLink />}
+            <span className="pl-2 font-mono">{fileName}</span>
+          </p>
+        </CustomLink>
       );
     default:
       if (block.type !== "unsupported") console.log("unsupported block:", block.type);
