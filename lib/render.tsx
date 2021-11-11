@@ -216,7 +216,11 @@ export function renderBlock(block: NotionBlock) {
       return (
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={contents[contents.type].url} alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""} />
+          <img
+            className="border border-gray-700"
+            src={contents[contents.type].url}
+            alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
+          />
           {contents.caption && (
             <figcaption>
               <NotionText blocks={contents.caption} />
