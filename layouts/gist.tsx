@@ -21,7 +21,7 @@ export default function GistLayout({ children, slug, title, description, hide_de
         <div className="flex justify-between w-full mb-8">
           <div>
             <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">{title}</h1>
-            {!hide_description && <p className="text-gray-700 dark:text-coolGray-300">{description}</p>}
+            {!hide_description && <p className="text-gray-700 dark:text-gray-300">{description}</p>}
           </div>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>

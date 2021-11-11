@@ -2,7 +2,6 @@ const withPWA = require("next-pwa");
 
 /** @type {import('next').NextConfig} */
 const config = {
-  nftTracing: true, // Fix for `ENOENT: no such file or directory, scandir '/var/task/<path>'`
   swcMinify: true,
   reactStrictMode: true,
   images: {

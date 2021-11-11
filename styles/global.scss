@@ -5,7 +5,7 @@
 @import "./prism.scss";
 
 ::selection {
-  @apply text-gray-100 bg-gray-800 dark:text-coolGray-900 dark:bg-coolGray-100;
+  @apply text-gray-100 bg-gray-800 dark:text-gray-900 dark:bg-gray-100;
 }
 
 html {
@@ -52,7 +52,7 @@ html {
 
 .prose {
   code {
-    @apply px-1.5 py-0.5 rounded border text-sm text-gray-900 border-gray-300 bg-gray-100 dark:text-coolGray-200 dark:border-coolGray-700 dark:bg-coolGray-900;
+    @apply px-1.5 py-0.5 rounded border text-sm text-gray-900 border-gray-300 bg-gray-100 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-900;
   }
 
   img {
@@ -84,7 +84,7 @@ html {
       content: "#";
 
       @apply text-gray-500;
-      @apply dark:text-coolGray-400;
+      @apply dark:text-gray-400;
     }
   }
 
@@ -129,7 +129,7 @@ html {
 .quote::after {
   content: "”";
 
-  @apply top-0 right-0 text-7xl font-serif text-gray-400 dark:text-coolGray-600 absolute;
+  @apply top-0 right-0 text-7xl font-serif text-gray-400 dark:text-gray-600 absolute;
 }
 
 pre {

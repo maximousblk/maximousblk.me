@@ -2,8 +2,7 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  mode: "jit",
-  purge: ["./pages/**/*.tsx", "./components/**/*.tsx", "./layouts/**/*.tsx"],
+  content: ["./pages/**/*.tsx", "./layouts/**/*.tsx", "./components/**/*.tsx", "./lib/**/*.tsx"],
   darkMode: "class",
   theme: {
     colors,
@@ -36,35 +35,35 @@ module.exports = {
         },
         dark: {
           css: {
-            color: theme("colors.coolGray.300"),
+            color: theme("colors.gray.300"),
             a: {
               color: theme("colors.indigo.400"),
             },
             blockquote: {
-              borderLeftColor: theme("colors.coolGray.700"),
-              color: theme("colors.coolGray.300"),
+              borderLeftColor: theme("colors.gray.700"),
+              color: theme("colors.gray.300"),
             },
             "h1,h2,h3,h4": {
-              color: theme("colors.coolGray.100"),
+              color: theme("colors.gray.100"),
             },
-            hr: { borderColor: theme("colors.coolGray.700") },
+            hr: { borderColor: theme("colors.gray.700") },
             ol: {
               li: {
-                "&:before": { color: theme("colors.coolGray.500") },
+                "&:before": { color: theme("colors.gray.500") },
               },
             },
             ul: {
               li: {
-                "&:before": { backgroundColor: theme("colors.coolGray.500") },
+                "&:before": { backgroundColor: theme("colors.gray.500") },
               },
             },
-            strong: { color: theme("colors.coolGray.300") },
+            strong: { color: theme("colors.gray.300") },
             thead: {
-              color: theme("colors.coolGray.100"),
+              color: theme("colors.gray.100"),
             },
             tbody: {
               tr: {
-                borderBottomColor: theme("colors.coolGray.700"),
+                borderBottomColor: theme("colors.gray.700"),
               },
             },
           },
