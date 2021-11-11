@@ -209,6 +209,16 @@ export function renderBlock(block: NotionBlock) {
       );
     case "divider":
       return <hr />;
+    case "column_list":
+      return (
+        <div className="grid grid-flow-col gap-8">
+          {contents.children.map(({ column: { children }, id }) => (
+            <div className="w-full" key={id}>
+              <NotionContent blocks={children} />
+            </div>
+          ))}
+        </div>
+      );
     case "quote":
       return (
         <blockquote className="font-serif">
