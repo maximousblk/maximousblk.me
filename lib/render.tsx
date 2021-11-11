@@ -197,9 +197,12 @@ export function renderBlock(block: NotionBlock) {
       return <TeX math={contents.expression} block />;
     case "child_page":
       return (
-        <p>
-          <CustomLink href={"/p/" + block.id}>{contents.title}</CustomLink>
-        </p>
+        <CustomLink className="hover:no-underline" href={"/p/" + block.id}>
+          <p className="flex py-2 px-3 rounded border border-gray-800 bg-gray-900 hover:bg-gray-800 text-gray-400">
+            {block.has_children ? <FileText /> : <File />}
+            <span className="pl-2">{contents.title}</span>
+          </p>
+        </CustomLink>
       );
     case "divider":
       return <hr />;
