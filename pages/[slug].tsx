@@ -20,6 +20,8 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
   const pages = await getDatabase(index.pages.id);
   // @ts-ignore
   const page = pages.results.find((page) => page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__") === slug);
+  if (!page) return { notFound: true };
+
   const blocks = await getBlockChildren(page.id);
   // @ts-ignore
   const title = page.properties.name.title.map((part) => part.plain_text).join(" ");
@@ -28,7 +30,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
   // @ts-ignore
   const hide_descr = page.properties.hide_description.checkbox;
 
-  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 14400 };
+  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 10800 };
 }
 
 export async function getStaticPaths() {
@@ -47,6 +49,6 @@ export async function getStaticPaths() {
           slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
         },
       })),
-    fallback: false,
+    fallback: "blocking",
   };
 }

@@ -17,6 +17,8 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
 
   // @ts-ignore
   const gist = gists.results.find((gist) => gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__") === slug);
+  if (!gist) return { notFound: true };
+
   const blocks = await getBlockChildren(gist.id);
   // @ts-ignore
   const title = gist.properties.title.title.map((part) => part.plain_text).join(" ");
@@ -25,7 +27,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
   // @ts-ignore
   const hide_description = gist.properties.hide_description.checkbox;
 
-  return { props: { blocks, title, description, slug, hide_description }, revalidate: 14400 };
+  return { props: { blocks, title, description, slug, hide_description }, revalidate: 10800 };
 }
 
 export async function getStaticPaths() {
@@ -44,6 +46,6 @@ export async function getStaticPaths() {
           slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
         },
       })),
-    fallback: false,
+    fallback: "blocking",
   };
 }

@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 export function CustomLink({ href, ...props }) {
-  const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
+  const isInternalLink = href && href.startsWith("/");
+  const isAnchorLink = href && href.startsWith("#");
 
   const baseStyle = "hover:underline cursor-pointer";
 
@@ -14,9 +15,11 @@ export function CustomLink({ href, ...props }) {
         </a>
       </Link>
     );
+  } else if (isAnchorLink) {
+    return <a href={href} className={baseStyle} {...props} />;
+  } else {
+    return <a href={href} className={baseStyle} target="_blank" rel="noopener noreferrer" {...props} />;
   }
-
-  return <a href={href} className={baseStyle} target="_blank" rel="noopener noreferrer" {...props} />;
 }
 
 export function Quote({ author, children, ...props }) {

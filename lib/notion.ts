@@ -76,14 +76,14 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
   const children = await Promise.all(
     list.results
-      .filter(({ has_children, type }) => type !== "unsupported" && has_children)
+      .filter(({ has_children, type }) => !["unsupported", "child_page"].includes(type) && has_children)
       .map(async ({ id }) => {
         return { id, children: await getBlockChildren(id) };
       })
   );
 
   const blocks = list.results.map((block) => {
-    if (block.type != "unsupported" && block.has_children && !block[block.type].children) {
+    if (!["unsupported", "child_page"].includes(block.type) && block.has_children && !block[block.type].children) {
       block[block.type].children = children.find(({ id }) => id === block.id)?.children;
     }
     return block;

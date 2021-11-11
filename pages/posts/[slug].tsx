@@ -25,6 +25,8 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
 
   // @ts-ignore
   const post = posts.results.find((post) => post.properties.slug.rich_text.map((slug) => slug.plain_text).join("__") === slug);
+  if (!post) return { notFound: true };
+
   const blocks = await getBlockChildren(post.id);
   // @ts-ignore
   const title = post.properties.title.title.map((part) => part.plain_text).join(" ");
@@ -33,7 +35,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
   // @ts-ignore
   const publishedAt = parseISO(post.properties.date.date.start).getTime();
 
-  return { props: { blocks, title, description, slug, publishedAt }, revalidate: 14400 };
+  return { props: { blocks, title, description, slug, publishedAt }, revalidate: 10800 };
 }
 
 export async function getStaticPaths() {
@@ -52,6 +54,6 @@ export async function getStaticPaths() {
           slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
         },
       })),
-    fallback: false,
+    fallback: "blocking",
   };
 }

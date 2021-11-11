@@ -8,6 +8,7 @@ function InternalServerError() {
     <Container>
       <NextSeo
         title="500 – Internal Server Error"
+        titleTemplate={`%s`}
         openGraph={{
           title: "500 – Internal Server Error",
         }}

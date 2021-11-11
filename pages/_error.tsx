@@ -7,6 +7,7 @@ function UnknownError({ statusCode }) {
     <Container>
       <NextSeo
         title="418 – I'm a teapot"
+        titleTemplate={`%s`}
         openGraph={{
           title: "418 – I'm a teapot",
         }}

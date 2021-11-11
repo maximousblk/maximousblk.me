@@ -19,7 +19,9 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<any>> {
   const index = await getIndex();
 
   const page = await getPage(index.home.id);
+  if (!page) return { notFound: true };
+
   const blocks = await getBlockChildren(page.id);
 
-  return { props: { page, blocks }, revalidate: 14400 };
+  return { props: { page, blocks }, revalidate: 10800 };
 }

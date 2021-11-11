@@ -32,7 +32,7 @@ export function NotionText({ blocks }) {
             return <a>{block.plain_text}</a>;
           case "page":
             const page = textBlock.page;
-            return <a href={"/" + page.id}>{block.plain_text}</a>;
+            return <CustomLink href={"/p/" + page.id}>{block.plain_text}</CustomLink>;
           default:
             console.log("unsupported mention:", textBlock);
             return <p>{`❌ Unsupported mention (${textBlock})`}</p>;
@@ -196,7 +196,11 @@ export function renderBlock(block: NotionBlock) {
     case "equation":
       return <TeX math={contents.expression} block />;
     case "child_page":
-      return <p>{contents.title}</p>;
+      return (
+        <p>
+          <CustomLink href={"/p/" + block.id}>{contents.title}</CustomLink>
+        </p>
+      );
     case "divider":
       return <hr />;
     case "quote":
