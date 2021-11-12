@@ -172,11 +172,11 @@ export function renderBlock(block: NotionBlock) {
     case "video":
       return (
         <figure>
-          <div className="flex justify-center">
-            <ReactPlayer light controls url={contents[contents.type].url} width={800} height={450} />
+          <div className="!rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
+            <ReactPlayer light controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-auto aspect-video" />
           </div>
           {contents.caption && (
-            <figcaption className="flex justify-center">
+            <figcaption>
               <NotionText blocks={contents.caption} />
             </figcaption>
           )}
@@ -185,11 +185,9 @@ export function renderBlock(block: NotionBlock) {
     case "audio":
       return (
         <figure>
-          <div className="flex justify-center">
-            <ReactPlayer controls url={contents[contents.type].url} width="100%" height="5em" />
-          </div>
+          <ReactPlayer controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-10" />
           {contents.caption && (
-            <figcaption className="flex justify-center">
+            <figcaption>
               <NotionText blocks={contents.caption} />
             </figcaption>
           )}
