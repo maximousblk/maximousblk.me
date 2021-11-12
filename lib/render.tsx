@@ -93,6 +93,20 @@ export function renderBlock(block: NotionBlock) {
       );
     case "heading_1":
       return (
+        <h1 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
+          <a
+            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <span className="icon icon-link"></span>
+          </a>
+          <NotionText blocks={contents.text} />
+        </h1>
+      );
+    case "heading_2":
+      return (
         <h2 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
           <a
             href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
@@ -105,7 +119,7 @@ export function renderBlock(block: NotionBlock) {
           <NotionText blocks={contents.text} />
         </h2>
       );
-    case "heading_2":
+    case "heading_3":
       return (
         <h3 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
           <a
@@ -118,20 +132,6 @@ export function renderBlock(block: NotionBlock) {
           </a>
           <NotionText blocks={contents.text} />
         </h3>
-      );
-    case "heading_3":
-      return (
-        <h4 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
-          <a
-            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <span className="icon icon-link"></span>
-          </a>
-          <NotionText blocks={contents.text} />
-        </h4>
       );
     case "bulleted_list":
       return <ul>{children && <NotionContent blocks={children} />}</ul>;
