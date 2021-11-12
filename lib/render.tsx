@@ -134,15 +134,15 @@ export function renderBlock(block: NotionBlock) {
         </h4>
       );
     case "bulleted_list":
-      return <ul>{children && children.map((child) => renderBlock(child))}</ul>;
+      return <ul>{children && <NotionContent blocks={children} />}</ul>;
     case "numbered_list":
-      return <ol>{children && children.map((child) => renderBlock(child))}</ol>;
+      return <ol>{children && <NotionContent blocks={children} />}</ol>;
     case "bulleted_list_item":
     case "numbered_list_item":
       return (
         <li>
           <NotionText blocks={contents.text} />
-          {children && children.map((child) => renderBlock(child))}
+          {children && <NotionContent blocks={children} />}
         </li>
       );
     case "to_do":
@@ -150,7 +150,7 @@ export function renderBlock(block: NotionBlock) {
         <label htmlFor={block.id}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled />
           <NotionText blocks={contents.text} />
-          {children && children.map((child) => renderBlock(child))}
+          {children && <NotionContent blocks={children} />}
         </label>
       );
     case "toggle":
@@ -159,11 +159,7 @@ export function renderBlock(block: NotionBlock) {
           <summary className="p-2">
             <NotionText blocks={contents.text} />
           </summary>
-          <div>
-            {children?.map((block) => (
-              <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-            ))}
-          </div>
+          <div>{children && <NotionContent blocks={children} />}</div>
         </details>
       );
     case "code":
@@ -215,9 +211,9 @@ export function renderBlock(block: NotionBlock) {
     case "column_list":
       return (
         <div className="grid grid-flow-col gap-8">
-          {contents.children.map(({ column: { children }, id }) => (
+          {contents.children.map(({ column: { children: columnChildren }, id }) => (
             <div className="w-full" key={id}>
-              <NotionContent blocks={children} />
+              <NotionContent blocks={columnChildren} />
             </div>
           ))}
         </div>
