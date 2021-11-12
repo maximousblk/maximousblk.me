@@ -30,7 +30,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
   // @ts-ignore
   const hide_descr = page.properties.hide_description.checkbox;
 
-  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 10800 };
+  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 3600 };
 }
 
 export async function getStaticPaths() {

@@ -27,7 +27,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
   // @ts-ignore
   const hide_description = gist.properties.hide_description.checkbox;
 
-  return { props: { blocks, title, description, slug, hide_description }, revalidate: 10800 };
+  return { props: { blocks, title, description, slug, hide_description }, revalidate: 3600 };
 }
 
 export async function getStaticPaths() {
