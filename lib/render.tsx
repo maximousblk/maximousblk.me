@@ -220,7 +220,7 @@ export function renderBlock(block: NotionBlock) {
       );
     case "quote":
       return (
-        <blockquote className="font-serif">
+        <blockquote>
           <NotionText blocks={contents.text} />
         </blockquote>
       );
