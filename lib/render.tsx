@@ -229,7 +229,7 @@ export function renderBlock(block: NotionBlock) {
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            className="border border-gray-700"
+            className="border border-gray-200 dark:border-gray-700"
             src={contents[contents.type].url}
             alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
           />
