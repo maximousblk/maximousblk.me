@@ -84,9 +84,12 @@ export function renderBlock(block: NotionBlock) {
       );
     case "paragraph":
       return (
-        <p>
-          <NotionText blocks={contents.text} />
-        </p>
+        <>
+          <p>
+            <NotionText blocks={contents.text} />
+          </p>
+          <div className="ml-5">{children && <NotionContent blocks={children} />}</div>
+        </>
       );
     case "heading_1":
       return (
