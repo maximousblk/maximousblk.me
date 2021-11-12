@@ -208,7 +208,7 @@ export function renderBlock(block: NotionBlock) {
       return <hr />;
     case "column_list":
       return (
-        <div className="grid grid-flow-col gap-8">
+        <div className="grid grid-flow-row md:grid-flow-col md:gap-8">
           {contents.children.map(({ column: { children: columnChildren }, id }) => (
             <div className="w-full" key={id}>
               <NotionContent blocks={columnChildren} />
