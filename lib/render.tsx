@@ -149,7 +149,13 @@ export function renderBlock(block: NotionBlock) {
       return (
         <label htmlFor={block.id}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled />
-          <NotionText blocks={contents.text} />
+          {contents.checked ? (
+            <del className="text-gray-400 dark:text-gray-600">
+              <NotionText blocks={contents.text} />
+            </del>
+          ) : (
+            <NotionText blocks={contents.text} />
+          )}
           {children && <NotionContent blocks={children} />}
         </label>
       );
