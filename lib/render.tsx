@@ -2,10 +2,13 @@ import { Fragment } from "react";
 import { format, parseISO } from "date-fns";
 import path from "path";
 
+import { emojiToName } from "gemoji";
 import { File, FileText, Download, ExternalLink } from "react-feather";
+import Image from "next/image";
 import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
 import { CustomLink } from "@/components/MDXComponents";
+import { Twemoji } from "@/components/Twemoji";
 import CodeBlock from "@/components/CodeBlock";
 import { TableOfContents, slugify } from "@/components/TableOfContents";
 import type { NotionBlock } from "@/lib/notion";
@@ -167,6 +170,22 @@ export function renderBlock(block: NotionBlock) {
           </summary>
           <div>{children && <NotionContent blocks={children} />}</div>
         </details>
+      );
+    case "callout":
+      return (
+        <div className="flex p-4 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+          <div className="h-6 w-6 flex-shrink-0 mr-2 rounded-md">
+            {contents.icon.type == "emoji" ? (
+              <Twemoji alt={emojiToName[contents.icon.emoji] + "emoji"} emoji={contents.icon.emoji} size={24} />
+            ) : (
+              <Image alt="callout icon" src={contents.icon[contents.icon.type].url} height={24} width={24} />
+            )}
+          </div>
+
+          <div>
+            <NotionText blocks={contents.text} />
+          </div>
+        </div>
       );
     case "code":
       // TODO: add captions/titles when they get added to the api
