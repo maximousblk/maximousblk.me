@@ -152,14 +152,10 @@ export function renderBlock(block: NotionBlock) {
       return (
         <label htmlFor={block.id}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled />
-          {contents.checked ? (
-            <del className="text-gray-400 dark:text-gray-600">
-              <NotionText blocks={contents.text} />
-            </del>
-          ) : (
+          <span className={contents.checked ? "text-gray-400 dark:text-gray-600" : ""}>
             <NotionText blocks={contents.text} />
-          )}
-          {children && <NotionContent blocks={children} />}
+            {children && <NotionContent blocks={children} />}
+          </span>
         </label>
       );
     case "toggle":
