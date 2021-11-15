@@ -980,10 +980,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/jetbrains-mono/-/jetbrains-mono-4.5.0.tgz#4cf4014ad1538b1441afb2794097109d8515b7e9"
   integrity sha512-gxUlpdCLoIrEQ6+1hkPbFHuQz8E5bPZ/iERU+13zEKb8rD/h21v3uHuAT7dTD+Co9nbSlgk6fyVkFwF5edUMog==
 
-"@fontsource/lora@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/lora/-/lora-4.5.0.tgz#1b230175236c35d13b3a69a346ca5b0e2df0dbcf"
-  integrity sha512-4ThGnMFbktlQqsTW7kCdzT888esMFfnbHE9PJMQCtcP2JUIJXDQpxvmtlsio1AJBnvUxPxegAAp76Q8lm7t1VQ==
+"@fontsource/lora@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/lora/-/lora-4.5.1.tgz#4605b3ec94d2c296d4fe6992df51619cb9338a60"
+  integrity sha512-LyF+0PORmbt0kHFn235L3G8gv7k/ihE5hd2AxNdnVCpIzuNkwPtE5i+iJPm6Z8NNNsQL9etb3qEDuQPIQhb8mQ==
 
 "@hapi/accept@5.0.2":
   version "5.0.2"
