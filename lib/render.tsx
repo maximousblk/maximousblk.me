@@ -219,7 +219,7 @@ export function renderBlock(block: NotionBlock) {
     case "child_page":
       return (
         <CustomLink className="hover:no-underline" href={"/p/" + block.id}>
-          <p className="flex py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
+          <p className="flex items-center py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
             {block.has_children ? <FileText /> : <File />}
             <span className="pl-2">{contents.title}</span>
           </p>
@@ -264,7 +264,7 @@ export function renderBlock(block: NotionBlock) {
       const fileName = path.basename(fileURL.pathname);
       return (
         <CustomLink className="hover:no-underline" href={fileURL.href}>
-          <p className="flex py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
+          <p className="flex items-center py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
             {contents.type == "file" ? <Download /> : <ExternalLink />}
             <span className="pl-2 font-mono">{fileName}</span>
           </p>
