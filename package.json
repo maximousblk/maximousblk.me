@@ -55,7 +55,7 @@
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.0",
     "remark-slug": "^7.0.1",
-    "remark-stringify": "^10.0.1",
+    "remark-stringify": "^10.0.2",
     "sass": "^1.43.4",
     "stylelint": "^14.1.0",
     "stylelint-config-standard": "^24.0.0",
