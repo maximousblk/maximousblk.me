@@ -34,7 +34,9 @@ export async function getStaticPaths() {
   const index = await getIndex();
 
   return {
-    paths: index.gists.children.map(({ slug }) => slug),
+    paths: index.gists.children.map(({ slug }) => {
+      return { params: { slug } };
+    }),
     fallback: "blocking",
   };
 }

@@ -37,7 +37,9 @@ export async function getStaticPaths() {
   const index = await getIndex();
 
   return {
-    paths: index.pages.children.map(({ slug }) => slug),
+    paths: index.pages.children.map(({ slug }) => {
+      return { params: { slug } };
+    }),
     fallback: "blocking",
   };
 }
