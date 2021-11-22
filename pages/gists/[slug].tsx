@@ -32,20 +32,9 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
 
 export async function getStaticPaths() {
   const index = await getIndex();
-  const gists = await getDatabase(index.gists.id);
 
   return {
-    paths: gists.results
-      .filter((gist) => {
-        // @ts-ignore
-        return gist.properties.published.checkbox;
-      })
-      .map((gist) => ({
-        params: {
-          // @ts-ignore
-          slug: gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
-        },
-      })),
+    paths: index.gists.children.map(({ slug }) => slug),
     fallback: "blocking",
   };
 }

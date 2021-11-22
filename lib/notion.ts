@@ -7,22 +7,33 @@ export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-export async function getIndex(): Promise<{ [key: string]: { id: string } }> {
-  const { results } = await getDatabase(process.env.NOTION_INDEX);
+export async function getIndex(): Promise<{
+  [key: string]: { id: string; type: string; children?: { id: string; type: string; slug: string }[] };
+}> {
+  const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
-  return results
-    .map(({ properties }) => {
-      // @ts-ignore
-      const name = properties.name.title.map(({ plain_text }) => plain_text).join("");
-      // @ts-ignore
-      const page = properties.page.rich_text.filter(({ type }) => type === "mention")[0].mention;
+  return (
+    await Promise.all(
+      root.map(async ({ properties }) => {
+        // @ts-ignore
+        const name = properties.name.title.map(({ plain_text }) => plain_text).join("");
+        // @ts-ignore
+        const page = properties.page.rich_text.filter(({ type }) => type === "mention")[0].mention;
 
-      return { id: page[page.type].id, name };
-    })
-    .reduce((acc, { id, name }) => {
-      acc[name] = { id };
-      return acc;
-    }, {});
+        const children =
+          page.type == "database"
+            ? (await getDatabase(page[page.type].id)).results.map(({ properties, id, object }) => {
+                return { id, type: object, slug: properties.slug[properties.slug.type].map(({ plain_text }) => plain_text).join("") };
+              })
+            : undefined;
+
+        return { name, id: page[page.type].id, type: page.type, children };
+      })
+    )
+  ).reduce((acc, { name, ...props }) => {
+    acc[name] = { ...props };
+    return acc;
+  }, {});
 }
 
 export async function getDatabase(database_id: string) {

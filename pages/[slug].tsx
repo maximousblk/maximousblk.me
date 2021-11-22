@@ -35,20 +35,9 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
 
 export async function getStaticPaths() {
   const index = await getIndex();
-  const pages = await getDatabase(index.pages.id);
 
   return {
-    paths: pages.results
-      .filter((post) => {
-        // @ts-ignore
-        return post.properties.published.checkbox;
-      })
-      .map((page) => ({
-        params: {
-          // @ts-ignore
-          slug: page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
-        },
-      })),
+    paths: index.pages.children.map(({ slug }) => slug),
     fallback: "blocking",
   };
 }
