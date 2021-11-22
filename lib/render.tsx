@@ -216,6 +216,15 @@ export function renderBlock(block: NotionBlock) {
       );
     case "equation":
       return <TeX math={contents.expression} block />;
+    case "link_to_page":
+      return (
+        <CustomLink className="hover:no-underline" href={"/p/" + contents[contents.type]}>
+          <p className="flex items-center py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
+            {block.has_children ? <FileText /> : <File />}
+            <span className="pl-2">{contents.title}</span>
+          </p>
+        </CustomLink>
+      );
     case "child_page":
       return (
         <CustomLink className="hover:no-underline" href={"/p/" + block.id}>

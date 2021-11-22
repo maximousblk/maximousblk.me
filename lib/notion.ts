@@ -141,8 +141,6 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
         case "link_to_page":
           const page = await getPage(block.link_to_page[block.link_to_page.type]);
-          console.log(page);
-
           // @ts-ignore
           block.link_to_page["title"] = page.properties.title.title.map(({ plain_text }) => plain_text).join("");
           break;
