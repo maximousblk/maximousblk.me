@@ -100,46 +100,61 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
     return block;
   });
 
-  return blocks
-    .map((block) => {
-      if (block.type === "table_of_contents") {
-        // @ts-ignore
-        block.table_of_contents["children"] = blocks
-          .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
-          .map((block) => {
-            return {
-              title: block[block.type].text[0].plain_text,
-              type: block.type,
-              children: [],
-            };
-          })
-          .reduce((acc: TableOfContentsItem[], curr: TableOfContentsItem) => {
-            if (curr.type === "heading_1") {
-              acc.push({ ...curr, children: [] });
-            } else if (curr.type === "heading_2") {
-              const prev = acc[acc.length - 1];
-              if (prev?.type === "heading_1") {
-                prev.children.push(curr);
-              } else {
-                acc.push(curr);
+  return await Promise.all(
+    blocks.map(async (block) => {
+      switch (block.type) {
+        case "table_of_contents":
+          // @ts-ignore
+          block.table_of_contents["children"] = blocks
+            .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
+            .map((block) => {
+              return {
+                title: block[block.type].text[0].plain_text,
+                type: block.type,
+                children: [],
+              };
+            })
+            .reduce((acc: TableOfContentsItem[], curr: TableOfContentsItem) => {
+              if (curr.type === "heading_1") {
+                acc.push({ ...curr, children: [] });
+              } else if (curr.type === "heading_2") {
+                const prev = acc[acc.length - 1];
+                if (prev?.type === "heading_1") {
+                  prev.children.push(curr);
+                } else {
+                  acc.push(curr);
+                }
+              } else if (curr.type === "heading_3") {
+                const prev = acc[acc.length - 1];
+                const prevprev = prev?.children[prev.children.length - 1];
+                if (prevprev?.type === "heading_2") {
+                  prevprev.children.push(curr);
+                } else if (prev?.type === "heading_1") {
+                  prev.children?.push(curr);
+                } else {
+                  acc.push(curr);
+                }
               }
-            } else if (curr.type === "heading_3") {
-              const prev = acc[acc.length - 1];
-              const prevprev = prev?.children[prev.children.length - 1];
-              if (prevprev?.type === "heading_2") {
-                prevprev.children.push(curr);
-              } else if (prev?.type === "heading_1") {
-                prev.children?.push(curr);
-              } else {
-                acc.push(curr);
-              }
-            }
-            return acc;
-          }, []);
+              return acc;
+            }, []);
+          break;
+
+        case "link_to_page":
+          const page = await getPage(block.link_to_page[block.link_to_page.type]);
+          console.log(page);
+
+          // @ts-ignore
+          block.link_to_page["title"] = page.properties.title.title.map(({ plain_text }) => plain_text).join("");
+          break;
+
+        default:
+          break;
       }
+
       return block;
     })
-    .reduce((acc: NotionBlock[], curr: NotionBlock) => {
+  ).then((blocks) => {
+    return blocks.reduce((acc: NotionBlock[], curr: NotionBlock) => {
       if (curr.type === "bulleted_list_item") {
         if (acc[acc.length - 1]?.type === "bulleted_list") {
           // @ts-ignore
@@ -167,6 +182,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
       }
       return acc;
     }, []);
+  });
 }
 
 function getRandomInt(min: number, max: number) {
