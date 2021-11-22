@@ -26,7 +26,7 @@
     "gray-matter": "^4.0.3",
     "katex": "^0.15.1",
     "next": "^12.0.5-canary.8",
-    "next-pwa": "5.4.0",
+    "next-pwa": "5.4.1",
     "next-seo": "^4.28.1",
     "next-sitemap": "^1.6.199",
     "next-themes": "^0.0.15",
@@ -41,7 +41,7 @@
     "twemoji": "^13.1.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.35",
+    "@types/react": "^17.0.36",
     "@types/twemoji": "^12.1.2",
     "eslint": "7.x.x",
     "eslint-config-next": "^12.0.5-canary.8",
