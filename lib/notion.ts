@@ -2,6 +2,7 @@ import { Client } from "@notionhq/client";
 import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { TableOfContentsItem } from "@/components/TableOfContents";
 import readingTime, { ReadTimeResults } from "reading-time";
+import { getImageSize } from "@/lib/imgsize";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -102,6 +103,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
   return await Promise.all(
     blocks.map(async (block) => {
+      const contents = block[block.type];
       switch (block.type) {
         case "table_of_contents":
           // @ts-ignore
@@ -138,9 +140,15 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
               return acc;
             }, []);
           break;
+        case "image":
+          const size = await getImageSize(contents[contents.type].url);
+          block.image["size"] = size;
+          console.log(block.image["size"]);
+
+          break;
 
         case "link_to_page":
-          const page = await getPage(block.link_to_page[block.link_to_page.type]);
+          const page = await getPage(contents[contents.type]);
           // @ts-ignore
           block.link_to_page["title"] = page.properties.title.title.map(({ plain_text }) => plain_text).join("");
           break;

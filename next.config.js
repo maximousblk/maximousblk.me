@@ -5,7 +5,7 @@ const config = {
   swcMinify: true,
   reactStrictMode: true,
   images: {
-    domains: ["cdn.maximousblk.me", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com"],
+    domains: ["cdn.maximousblk.me", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com", "images.unsplash.com", "github.githubassets.com"],
   },
   pwa: {
     disable: process.env.NODE_ENV === "development",

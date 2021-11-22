@@ -255,9 +255,9 @@ export function renderBlock(block: NotionBlock) {
     case "image":
       return (
         <figure>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="border border-gray-200 dark:border-gray-700"
+          <Image
+            height={contents.size.height}
+            width={contents.size.width}
             src={contents[contents.type].url}
             alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
           />
