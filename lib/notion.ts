@@ -2,7 +2,7 @@ import { Client } from "@notionhq/client";
 import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { TableOfContentsItem } from "@/components/TableOfContents";
 import readingTime, { ReadTimeResults } from "reading-time";
-import { getImageSize } from "@/lib/imgsize";
+import getImageSize from "probe-image-size";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -143,7 +143,6 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
         case "image":
           const size = await getImageSize(contents[contents.type].url);
           block.image["size"] = size;
-          console.log(block.image["size"]);
 
           break;
 

@@ -2,7 +2,6 @@ const withPWA = require("next-pwa");
 
 /** @type {import('next').NextConfig} */
 const config = {
-  swcMinify: true,
   reactStrictMode: true,
   images: {
     domains: ["cdn.maximousblk.me", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com", "images.unsplash.com", "github.githubassets.com"],
