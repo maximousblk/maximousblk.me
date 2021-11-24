@@ -140,6 +140,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
               return acc;
             }, []);
           break;
+
         case "image":
           const size = await getImageSize(contents[contents.type].url);
           block.image["size"] = size;
@@ -150,6 +151,13 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           const page = await getPage(contents[contents.type]);
           // @ts-ignore
           block.link_to_page["title"] = page.properties.title.title.map(({ plain_text }) => plain_text).join("");
+          break;
+
+        case "synced_block":
+          if (contents.synced_from != null) {
+            const source_block = await getBlockChildren(contents.synced_from.block_id);
+            block[block.type]["children"] = source_block;
+          }
           break;
 
         default:

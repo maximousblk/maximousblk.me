@@ -249,6 +249,8 @@ export function renderBlock(block: NotionBlock) {
           ))}
         </div>
       );
+    case "synced_block":
+      return <>{children && <NotionContent blocks={children} />}</>;
     case "quote":
       return (
         <blockquote>
