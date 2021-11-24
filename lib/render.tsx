@@ -3,7 +3,7 @@ import { format, parseISO } from "date-fns";
 import path from "path";
 
 import { emojiToName } from "gemoji";
-import { File, FileText, Download, ExternalLink } from "react-feather";
+import { File, FileText, Download, ExternalLink, Link2 } from "react-feather";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
@@ -81,7 +81,9 @@ export function renderBlock(block: NotionBlock) {
     case "table_of_contents":
       return (
         <>
-          <h6 id="_toc">Table of Contents</h6>
+          <p id="_toc" className="font-mono text-sm">
+            Table of Contents
+          </p>
           <TableOfContents items={children} />
         </>
       );
@@ -96,20 +98,6 @@ export function renderBlock(block: NotionBlock) {
       );
     case "heading_1":
       return (
-        <h1 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
-          <a
-            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <span className="icon icon-link"></span>
-          </a>
-          <NotionText blocks={contents.text} />
-        </h1>
-      );
-    case "heading_2":
-      return (
         <h2 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
           <a
             href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
@@ -122,7 +110,7 @@ export function renderBlock(block: NotionBlock) {
           <NotionText blocks={contents.text} />
         </h2>
       );
-    case "heading_3":
+    case "heading_2":
       return (
         <h3 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
           <a
@@ -135,6 +123,20 @@ export function renderBlock(block: NotionBlock) {
           </a>
           <NotionText blocks={contents.text} />
         </h3>
+      );
+    case "heading_3":
+      return (
+        <h4 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
+          <a
+            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
+            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <span className="icon icon-link"></span>
+          </a>
+          <NotionText blocks={contents.text} />
+        </h4>
       );
     case "bulleted_list":
       return <ul>{children && <NotionContent blocks={children} />}</ul>;
@@ -170,16 +172,17 @@ export function renderBlock(block: NotionBlock) {
     case "callout":
       return (
         <div className="flex p-4 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-          <div className="h-6 w-6 flex-shrink-0 mr-2 rounded-md">
+          <div className="h-6 w-6 flex-shrink-0 mr-2 !rounded-sm" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
-              <Twemoji alt={emojiToName[contents.icon.emoji] + "emoji"} emoji={contents.icon.emoji} size={24} />
+              <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
               <Image alt="callout icon" src={contents.icon[contents.icon.type].url} height={24} width={24} />
             )}
           </div>
 
-          <div>
+          <div className="w-full space-y-2">
             <NotionText blocks={contents.text} />
+            {children && <NotionContent blocks={children} />}
           </div>
         </div>
       );
@@ -220,7 +223,7 @@ export function renderBlock(block: NotionBlock) {
       return (
         <CustomLink className="hover:no-underline" href={"/p/" + contents[contents.type]}>
           <p className="flex items-center py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
-            {block.has_children ? <FileText /> : <File />}
+            <Link2 />
             <span className="pl-2">{contents.title}</span>
           </p>
         </CustomLink>
