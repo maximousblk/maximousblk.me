@@ -61,20 +61,20 @@ export default function PostLayout({ children, title, slug, image, publishedAt, 
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">{title}</h1>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
           <div className="flex items-center">
-            <p className="text-sm font-mono text-gray-600 dark:text-coolGray-400">{format(publishedAt, "PPPP")}</p>
+            <p className="text-sm font-mono text-gray-600 dark:text-gray-400">{format(publishedAt, "PPPP")}</p>
           </div>
-          <p className="text-sm font-mono text-gray-600 dark:text-coolGray-400 min-w-32 mt-2 md:mt-0">{readingTime}</p>
+          <p className="text-sm font-mono text-gray-600 dark:text-gray-400 min-w-32 mt-2 md:mt-0">{readingTime}</p>
         </div>
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
-        <div className="flex space-x-3 text-sm text-gray-700 dark:text-coolGray-300 hover:text-gray-800 dark:hover:text-coolGray-200 mt-8">
+        <div className="flex space-x-3 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 mt-8">
           <a href={twitterURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {"Share on Twitter"}
-            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
+            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-gray-500" />
           </a>
           <p> • </p>
           <a href={discussURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {"Discuss on GitHub"}
-            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-coolGray-500" />
+            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-gray-500" />
           </a>
         </div>
       </article>
