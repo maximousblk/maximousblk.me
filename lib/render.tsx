@@ -172,7 +172,7 @@ export function renderBlock(block: NotionBlock) {
     case "callout":
       return (
         <aside className="flex p-4 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-          <div className="h-6 w-6 flex-shrink-0 mr-2 !rounded-sm" aria-hidden="true">
+          <div className="h-6 w-6 flex-shrink-0 mr-2 !rounded-sm select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
