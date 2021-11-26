@@ -160,11 +160,11 @@ export function renderContent(block: NotionBlock) {
     case "callout":
       return (
         <aside className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-          <div className="mt-1 h-5 w-5 flex-shrink-0 !rounded-sm select-none" aria-hidden="true">
+          <div className="h-6 w-6 flex-shrink-0 !rounded-sm select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
-              <Twemoji emoji={contents.icon.emoji} size={20} />
+              <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
-              <Image alt="callout icon" src={contents.icon[contents.icon.type].url} height={20} width={20} />
+              <Image alt="callout icon" src={contents.icon[contents.icon.type].url} height={24} width={24} />
             )}
           </div>
 
