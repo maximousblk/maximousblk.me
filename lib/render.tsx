@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { format, parseISO } from "date-fns";
+import { basename as pathBasename } from "path";
 import type { Icon } from "react-feather";
 
 import { File, FileText, Download, ExternalLink, Link2, AtSign } from "react-feather";
@@ -130,8 +131,8 @@ export function renderContent(block: NotionBlock) {
       );
     case "callout":
       return (
-        <aside className="flex p-4 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-          <div className="h-6 w-6 flex-shrink-0 mr-3 !rounded-sm select-none" aria-hidden="true">
+        <aside className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+          <div className="h-6 w-6 flex-shrink-0 !rounded-sm select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
@@ -151,6 +152,22 @@ export function renderContent(block: NotionBlock) {
         <CodeBlock>
           <NotionText blocks={contents.text} />
         </CodeBlock>
+      );
+    case "image":
+      return (
+        <figure>
+          <Image
+            height={contents.size.height}
+            width={contents.size.width}
+            src={contents[contents.type].url}
+            alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
+          />
+          {contents.caption && (
+            <figcaption>
+              <NotionText blocks={contents.caption} />
+            </figcaption>
+          )}
+        </figure>
       );
     case "video":
       return (
@@ -177,7 +194,7 @@ export function renderContent(block: NotionBlock) {
         </figure>
       );
     case "equation":
-      return <TeX math={contents.expression} block />;
+      return <TeX math={contents.expression} block className="my-8" />;
     case "link_to_page":
       return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={Link2} />;
     case "child_page":
@@ -202,24 +219,9 @@ export function renderContent(block: NotionBlock) {
           <NotionText blocks={contents.text} />
         </blockquote>
       );
-    case "image":
-      return (
-        <figure>
-          <Image
-            height={contents.size.height}
-            width={contents.size.width}
-            src={contents[contents.type].url}
-            alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
-          />
-          {contents.caption && (
-            <figcaption>
-              <NotionText blocks={contents.caption} />
-            </figcaption>
-          )}
-        </figure>
-      );
     case "file":
       const fileURL = new URL(contents[contents.type].url);
+      const fileName = pathBasename(fileURL.pathname);
       return <LinkCard mono url={fileURL.href} text={fileName} icon={contents.type == "file" ? Download : ExternalLink} />;
     default:
       if (block.type !== "unsupported") console.log("unsupported block:", block.type);
@@ -241,7 +243,7 @@ export function NotionText({ blocks }) {
   return (
     <>
       {blocks.map((block) => (
-        <Fragment key={block.id}>{renderText(block)}</Fragment>
+        <Fragment key={block.plain_text}>{renderText(block)}</Fragment>
       ))}
     </>
   );
@@ -263,7 +265,7 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
 
 function Unsupported({ block }) {
   return (
-    <p className="p-3 flex flex-nowrap space-x-2 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
+    <p className="p-2 flex flex-nowrap space-x-2 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
       <span>Unsupported content</span>
       <span className="font-mono">[{block.type}]</span>
