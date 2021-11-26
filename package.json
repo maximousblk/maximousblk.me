@@ -25,7 +25,7 @@
     "gemoji": "^7.1.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.15.1",
-    "next": "^12.0.5-canary.9",
+    "next": "^12.0.5-canary.10",
     "next-pwa": "5.4.1",
     "next-seo": "^4.28.1",
     "next-sitemap": "^1.6.199",
@@ -42,11 +42,11 @@
     "twemoji": "^13.1.0"
   },
   "devDependencies": {
+    "@types/probe-image-size": "^7.0.1",
     "@types/react": "^17.0.37",
     "@types/twemoji": "^12.1.2",
-    "@types/probe-image-size": "^7.0.1",
     "eslint": "7.x.x",
-    "eslint-config-next": "^12.0.5-canary.9",
+    "eslint-config-next": "^12.0.5-canary.10",
     "prettier": "^2.5.0",
     "sass": "^1.43.5",
     "typescript": "^4.5.2"
