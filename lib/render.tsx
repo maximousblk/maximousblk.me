@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { format, parseISO } from "date-fns";
-import path from "path";
+import type { Icon } from "react-feather";
 
 import { File, FileText, Download, ExternalLink, Link2, AtSign } from "react-feather";
 import Image from "next/image";
@@ -179,23 +179,9 @@ export function renderContent(block: NotionBlock) {
     case "equation":
       return <TeX math={contents.expression} block />;
     case "link_to_page":
-      return (
-        <CustomLink className="hover:no-underline" href={"/p/" + contents[contents.type]}>
-          <p className="flex items-center py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
-            <Link2 />
-            <span className="pl-2">{contents.title}</span>
-          </p>
-        </CustomLink>
-      );
+      return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={Link2} />;
     case "child_page":
-      return (
-        <CustomLink className="hover:no-underline" href={"/p/" + block.id}>
-          <p className="flex items-center py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
-            {block.has_children ? <FileText /> : <File />}
-            <span className="pl-2">{contents.title}</span>
-          </p>
-        </CustomLink>
-      );
+      return <LinkCard url={"/p/" + block.id} text={contents.title} icon={block.has_children ? FileText : File} />;
     case "divider":
       return <hr />;
     case "column_list":
@@ -234,15 +220,7 @@ export function renderContent(block: NotionBlock) {
       );
     case "file":
       const fileURL = new URL(contents[contents.type].url);
-      const fileName = path.basename(fileURL.pathname);
-      return (
-        <CustomLink className="hover:no-underline" href={fileURL.href}>
-          <p className="flex items-center py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
-            {contents.type == "file" ? <Download /> : <ExternalLink />}
-            <span className="pl-2 font-mono">{fileName}</span>
-          </p>
-        </CustomLink>
-      );
+      return <LinkCard mono url={fileURL.href} text={fileName} icon={contents.type == "file" ? Download : ExternalLink} />;
     default:
       if (block.type !== "unsupported") console.log("unsupported block:", block.type);
       return <Unsupported block={block} />;
@@ -314,5 +292,16 @@ function Heading({ type, id, contents }: { type: "heading_1" | "heading_2" | "he
       </a>
       <NotionText blocks={contents} />
     </HeadingX>
+  );
+}
+
+function LinkCard({ url, icon: CardIcon, text, mono }: { url: string; icon: Icon; text: string; mono?: boolean }) {
+  return (
+    <CustomLink className="hover:no-underline" href={url}>
+      <p className="flex items-center space-x-2 py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
+        <CardIcon />
+        <span className={mono ? "font-mono" : null}>{text}</span>
+      </p>
+    </CustomLink>
   );
 }
