@@ -64,6 +64,10 @@ html {
     @apply m-0 rounded;
   }
 
+  figure img {
+    @apply m-0 rounded-lg;
+  }
+
   a {
     @apply no-underline;
 
