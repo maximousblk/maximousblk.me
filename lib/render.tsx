@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { format, parseISO } from "date-fns";
 import path from "path";
 
-import { emojiToName } from "gemoji";
 import { File, FileText, Download, ExternalLink, Link2 } from "react-feather";
 import Image from "next/image";
 import ReactPlayer from "react-player";
@@ -38,7 +37,12 @@ export function NotionText({ blocks }) {
             return <span className="underline">{block.plain_text}</span>;
           case "page":
             const page = textBlock.page;
-            return <CustomLink href={"/p/" + page.id}>{block.plain_text}</CustomLink>;
+            return (
+              <CustomLink href={"/p/" + page.id} className="px-1.5 py-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+                <Link2 size={18} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
+                <span>{block.plain_text}</span>
+              </CustomLink>
+            );
           default:
             console.log("unsupported mention:", textBlock);
             return <p>{`❌ Unsupported mention (${textBlock})`}</p>;
