@@ -211,7 +211,7 @@ export function renderContent(block: NotionBlock) {
     case "audio":
       return (
         <figure>
-          <ReactPlayer controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-10" />
+          <audio controls src={contents[contents.type].url} preload="auto" className="max-w-full !w-full max-h-max !h-10" />
           {contents.caption && (
             <figcaption>
               <NotionText blocks={contents.caption} />
