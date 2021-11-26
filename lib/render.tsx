@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { format, parseISO } from "date-fns";
 import path from "path";
 
-import { File, FileText, Download, ExternalLink, Link2 } from "react-feather";
+import { File, FileText, Download, ExternalLink, Link2, AtSign } from "react-feather";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
@@ -33,15 +33,10 @@ export function renderText(block) {
             </span>
           );
         case "user":
-          return <span className="underline">{block.plain_text}</span>;
+          return <Mention type="user" link={`mailto:${contents.user.person.email}`} text={contents.user.name} />;
         case "page":
-          const page = contents.page;
-          return (
-            <CustomLink href={"/p/" + page.id} className="px-1.5 py-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
-              <Link2 size={18} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
-              <span>{block.plain_text}</span>
-            </CustomLink>
-          );
+          return <Mention type="page" link={"/p/" + contents.page.id} text={block.plain_text} />;
+
         default:
           console.log("unsupported mention:", contents.type);
           return <Unsupported block={contents} />;
@@ -309,6 +304,20 @@ export function NotionText({ blocks }: { blocks: NotionBlock[] }) {
         <Fragment key={block.id}>{renderText(block)}</Fragment>
       ))}
     </>
+  );
+}
+
+function Mention({ type, link, text }: { type: "user" | "page"; link: string; text: string }) {
+  const icons = {
+    user: AtSign,
+    page: Link2,
+  };
+  const Icon = icons[type];
+  return (
+    <CustomLink href={link} className="px-1.5 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+      <Icon size={16} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
+      <span>{text}</span>
+    </CustomLink>
   );
 }
 
