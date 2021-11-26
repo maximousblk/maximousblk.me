@@ -48,8 +48,32 @@ export function renderText(block) {
 
     case "text":
       const {
-        annotations: { bold, code, italic, strikethrough, underline },
+        annotations: { bold, code, italic, strikethrough, underline, color },
       } = block;
+
+      const classes = {
+        gray: "text-gray-400",
+        brown: "text-brown-400",
+        orange: "text-orange-400",
+        yellow: "text-yellow-400",
+        green: "text-emerald-400",
+        blue: "text-sky-400",
+        purple: "text-indigo-400",
+        pink: "text-pink-400",
+        red: "text-rose-400",
+
+        gray_background: "bg-gray-400",
+        brown_background: "bg-brown-400",
+        orange_background: "bg-orange-400",
+        yellow_background: "bg-yellow-400",
+        green_background: "bg-emerald-400",
+        blue_background: "bg-sky-400",
+        purple_background: "bg-indigo-400",
+        pink_background: "bg-pink-400",
+        red_background: "bg-rose-400",
+      };
+
+      const highlight = (classes[color] || "") + (color.includes("background") ? " p-0.5 rounded-sm !bg-opacity-30" : "");
 
       let part: JSX.Element = contents.link ? (
         <CustomLink href={contents.link.url}>{contents.content}</CustomLink>
@@ -63,7 +87,11 @@ export function renderText(block) {
       if (strikethrough) part = <del>{part}</del>;
       if (underline) part = <u>{part}</u>;
 
-      return <span style={{ whiteSpace: "pre-wrap" }}>{part}</span>;
+      return (
+        <span className={highlight} style={{ whiteSpace: "pre-wrap" }}>
+          {part}
+        </span>
+      );
 
     default:
       console.log("unsupported text:", block.type);
@@ -243,7 +271,7 @@ export function NotionText({ blocks }) {
   return (
     <>
       {blocks.map((block) => (
-        <Fragment key={block.plain_text}>{renderText(block)}</Fragment>
+        <Fragment key={Math.random()}>{renderText(block)}</Fragment>
       ))}
     </>
   );
