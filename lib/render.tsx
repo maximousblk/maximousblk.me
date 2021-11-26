@@ -94,47 +94,9 @@ export function renderContent(block: NotionBlock) {
         </>
       );
     case "heading_1":
-      return (
-        <h2 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
-          <a
-            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <span className="icon icon-link"></span>
-          </a>
-          <NotionText blocks={contents.text} />
-        </h2>
-      );
     case "heading_2":
-      return (
-        <h3 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
-          <a
-            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <span className="icon icon-link"></span>
-          </a>
-          <NotionText blocks={contents.text} />
-        </h3>
-      );
     case "heading_3":
-      return (
-        <h4 id={slugify(contents.text.map(({ plain_text }) => plain_text))}>
-          <a
-            href={"#" + slugify(contents.text.map(({ plain_text }) => plain_text))}
-            className="px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <span className="icon icon-link"></span>
-          </a>
-          <NotionText blocks={contents.text} />
-        </h4>
-      );
+      return <Heading type={block.type} id={slugify(contents.text.map(({ plain_text }) => plain_text))} contents={contents.text} />;
     case "bulleted_list":
       return <ul>{children && <NotionContent blocks={children} />}</ul>;
     case "numbered_list":
@@ -297,7 +259,7 @@ export function NotionContent({ blocks }: { blocks: NotionBlock[] }) {
   );
 }
 
-export function NotionText({ blocks }: { blocks: NotionBlock[] }) {
+export function NotionText({ blocks }) {
   return (
     <>
       {blocks.map((block) => (
@@ -321,12 +283,36 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
   );
 }
 
-function Unsupported({ block }: { block: NotionBlock }) {
+function Unsupported({ block }) {
   return (
     <p className="p-3 flex flex-nowrap space-x-2 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
       <span>Unsupported content</span>
       <span className="font-mono">[{block.type}]</span>
     </p>
+  );
+}
+
+function Heading({ type, id, contents }: { type: "heading_1" | "heading_2" | "heading_3"; id: string; contents: any }) {
+  const tags: { [key: string]: keyof JSX.IntrinsicElements } = {
+    heading_1: "h2",
+    heading_2: "h3",
+    heading_3: "h4",
+  };
+
+  const HeadingX = tags[type];
+
+  return (
+    <HeadingX id={id}>
+      <a
+        href={"#" + id}
+        className="px-1 py-0.5 rounded hidden sm:inline hover:bg-gray-100 dark:hover:bg-gray-800"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        <span className="icon icon-link"></span>
+      </a>
+      <NotionText blocks={contents} />
+    </HeadingX>
   );
 }
