@@ -32,20 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       });
   });
 
-  const gists = await getDatabase(index.gists.id).then((gists) => {
-    return gists.results
-      .filter((gist) => {
-        // @ts-ignore
-        return gist.properties.published.checkbox;
-      })
-      .map((gist) => {
-        // @ts-ignore
-        const slug = gist.properties.slug.rich_text.map((slug) => slug.plain_text).join("__");
-        return `/gists/${slug}`;
-      });
-  });
-
-  const entries: ISitemapField[] = ["", ...pages, "/posts", ...posts, "/gists", ...gists].map((route) => {
+  const entries: ISitemapField[] = ["", ...pages, "/posts", ...posts].map((route) => {
     return {
       loc: config.baseUrl + route,
       lastmod: new Date().toISOString(),
