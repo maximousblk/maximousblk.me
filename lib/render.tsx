@@ -12,72 +12,70 @@ import CodeBlock from "@/components/CodeBlock";
 import { TableOfContents, slugify } from "@/components/TableOfContents";
 import type { NotionBlock } from "@/lib/notion";
 
-export function NotionText({ blocks }) {
-  return blocks.map((block) => {
-    const textBlock = block[block.type];
+export function renderText(block) {
+  const contents = block[block.type];
 
-    switch (block.type) {
-      case "mention":
-        switch (textBlock.type) {
-          case "date":
-            const date = textBlock.date;
-            const start = parseISO(date.start);
-            const end = parseISO(date.end);
-            const hasTime = (d: Date) => d.getHours() !== 0;
-            const withTime = (d: Date) => format(d, "PPpp");
-            const withoutTime = (d: Date) => format(d, "PP");
+  switch (block.type) {
+    case "mention":
+      switch (contents.type) {
+        case "date":
+          const date = contents.date;
+          const start = parseISO(date.start);
+          const end = parseISO(date.end);
+          const hasTime = (d: Date) => d.getHours() !== 0;
+          const withTime = (d: Date) => format(d, "PPpp");
+          const withoutTime = (d: Date) => format(d, "PP");
 
-            return (
-              <span>
-                {hasTime(start) ? withTime(start) : withoutTime(start)}
-                {date.end ? ` - ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
-              </span>
-            );
-          case "user":
-            return <span className="underline">{block.plain_text}</span>;
-          case "page":
-            const page = textBlock.page;
-            return (
-              <CustomLink href={"/p/" + page.id} className="px-1.5 py-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
-                <Link2 size={18} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
-                <span>{block.plain_text}</span>
-              </CustomLink>
-            );
-          default:
-            console.log("unsupported mention:", textBlock);
-            return <p>{`❌ Unsupported mention (${textBlock})`}</p>;
-        }
+          return (
+            <span>
+              {hasTime(start) ? withTime(start) : withoutTime(start)}
+              {date.end ? ` - ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
+            </span>
+          );
+        case "user":
+          return <span className="underline">{block.plain_text}</span>;
+        case "page":
+          const page = contents.page;
+          return (
+            <CustomLink href={"/p/" + page.id} className="px-1.5 py-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+              <Link2 size={18} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
+              <span>{block.plain_text}</span>
+            </CustomLink>
+          );
+        default:
+          console.log("unsupported mention:", contents.type);
+          return <Unsupported block={contents} />;
+      }
 
-      case "equation":
-        return <TeX math={textBlock.expression} />;
+    case "equation":
+      return <TeX math={contents.expression} />;
 
-      case "text":
-        const {
-          annotations: { bold, code, italic, strikethrough, underline },
-        } = block;
+    case "text":
+      const {
+        annotations: { bold, code, italic, strikethrough, underline },
+      } = block;
 
-        let part: JSX.Element = textBlock.link ? (
-          <CustomLink href={textBlock.link.url}>{textBlock.content}</CustomLink>
-        ) : (
-          <>{textBlock.content}</>
-        );
+      let part: JSX.Element = contents.link ? (
+        <CustomLink href={contents.link.url}>{contents.content}</CustomLink>
+      ) : (
+        <>{contents.content}</>
+      );
 
-        if (code) part = <code>{part}</code>;
-        if (bold) part = <strong>{part}</strong>;
-        if (italic) part = <em>{part}</em>;
-        if (strikethrough) part = <del>{part}</del>;
-        if (underline) part = <u>{part}</u>;
+      if (code) part = <code>{part}</code>;
+      if (bold) part = <strong>{part}</strong>;
+      if (italic) part = <em>{part}</em>;
+      if (strikethrough) part = <del>{part}</del>;
+      if (underline) part = <u>{part}</u>;
 
-        return <span style={{ whiteSpace: "pre-wrap" }}>{part}</span>;
+      return <span style={{ whiteSpace: "pre-wrap" }}>{part}</span>;
 
-      default:
-        console.log("unsupported text:", block.type);
-        return <p>{`❌ Unsupported text (${block.type})`}</p>;
-    }
-  });
+    default:
+      console.log("unsupported text:", block.type);
+      return <Unsupported block={block} />;
+  }
 }
 
-export function renderBlock(block: NotionBlock) {
+export function renderContent(block: NotionBlock) {
   const contents = block[block.type];
   const children = contents.children;
 
@@ -176,7 +174,7 @@ export function renderBlock(block: NotionBlock) {
     case "callout":
       return (
         <aside className="flex p-4 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-          <div className="h-6 w-6 flex-shrink-0 mr-2 !rounded-sm select-none" aria-hidden="true">
+          <div className="h-6 w-6 flex-shrink-0 mr-3 !rounded-sm select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
@@ -290,7 +288,7 @@ export function renderBlock(block: NotionBlock) {
       );
     default:
       if (block.type !== "unsupported") console.log("unsupported block:", block.type);
-      return <p>{`❌ Unsupported block (${block.type === "unsupported" ? "unknown" : block.type})`}</p>;
+      return <Unsupported block={block} />;
   }
 }
 
@@ -298,8 +296,28 @@ export function NotionContent({ blocks }: { blocks: NotionBlock[] }) {
   return (
     <>
       {blocks.map((block) => (
-        <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+        <Fragment key={block.id}>{renderContent(block)}</Fragment>
       ))}
     </>
+  );
+}
+
+export function NotionText({ blocks }: { blocks: NotionBlock[] }) {
+  return (
+    <>
+      {blocks.map((block) => (
+        <Fragment key={block.id}>{renderText(block)}</Fragment>
+      ))}
+    </>
+  );
+}
+
+function Unsupported({ block }: { block: NotionBlock }) {
+  return (
+    <p className="p-3 flex flex-nowrap space-x-2 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
+      <span>❌</span>
+      <span>Unsupported content</span>
+      <span className="font-mono">[{block.type}]</span>
+    </p>
   );
 }

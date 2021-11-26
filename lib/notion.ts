@@ -144,7 +144,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
         case "image":
           block.image["size"] = await fetch(contents[contents.type].url)
             .then((res) => res.arrayBuffer())
-            .then((data) => getImageSize(new Buffer(data)));
+            .then((data) => getImageSize(Buffer.from(data)));
           break;
 
         case "link_to_page":
