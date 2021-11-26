@@ -25,10 +25,13 @@ export default function Footer() {
           <Social name={name} icon={icon} href={href} key={name} />
         ))}
       </div>
-      <div className="space-x-3">
+      <div className="space-x-1">
         {config.footer.links.map(({ name, href }) => (
           <Link href={href} key={name}>
-            <a className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200" aria-label={name}>
+            <a
+              className="px-1.5 py-1 rounded-sm text-sm font-mono text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+              aria-label={name}
+            >
               /{name}
             </a>
           </Link>
