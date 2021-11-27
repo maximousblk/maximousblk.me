@@ -35,7 +35,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
   // @ts-ignore
   const publishedAt = parseISO(post.properties.date.date.start).getTime();
 
-  return { props: { blocks, title, description, slug, publishedAt }, revalidate: 3600 };
+  return { props: { blocks, title, description, slug, publishedAt }, revalidate: 2700 };
 }
 
 export async function getStaticPaths() {

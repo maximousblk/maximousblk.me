@@ -22,7 +22,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
     // @ts-ignore
     const title = page.properties.title.title.map((part) => part.plain_text).join(" ");
 
-    return { props: { blocks, title, slug }, revalidate: 3600 };
+    return { props: { blocks, title, slug }, revalidate: 2700 };
   } catch (e) {
     if (e.code == "object_not_found") {
       return { notFound: true };

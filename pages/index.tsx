@@ -23,5 +23,5 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<any>> {
 
   const blocks = await getBlockChildren(page.id);
 
-  return { props: { page, blocks }, revalidate: 3600 };
+  return { props: { page, blocks }, revalidate: 2700 };
 }
