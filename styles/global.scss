@@ -60,15 +60,6 @@ html {
     @apply px-1.5 py-0.5 rounded border text-sm text-gray-900 border-gray-300 bg-gray-100 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-900;
   }
 
-  img {
-    /* Don't apply styles to next/image */
-    @apply m-0 rounded;
-  }
-
-  figure img {
-    @apply m-0 rounded-lg;
-  }
-
   a {
     @apply no-underline;
 

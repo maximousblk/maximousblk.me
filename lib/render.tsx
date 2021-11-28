@@ -167,7 +167,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents.text.length) return null;
       return (
         <aside className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-          <div className="h-6 w-6 flex-shrink-0 !rounded-sm select-none" aria-hidden="true">
+          <div className="h-6 w-6 flex-shrink-0 rounded overflow-hidden select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
@@ -193,12 +193,14 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <Image
-            height={contents.size.height}
-            width={contents.size.width}
-            src={contents[contents.type].url}
-            alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
-          />
+          <div className="flex rounded overflow-hidden border border-gray-200 dark:border-gray-700">
+            <Image
+              height={contents.size.height}
+              width={contents.size.width}
+              src={contents[contents.type].url}
+              alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
+            />
+          </div>
           {contents.caption.length > 0 && (
             <figcaption>
               <NotionText blocks={contents.caption} />
@@ -207,9 +209,10 @@ export function renderContent(block: NotionBlock) {
         </figure>
       );
     case "video":
+      if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <div className="!rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
+          <div className="rounded overflow-hidden border border-gray-200 dark:border-gray-700">
             <ReactPlayer light controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-auto aspect-video" />
           </div>
           {contents.caption.length > 0 && (
@@ -220,6 +223,7 @@ export function renderContent(block: NotionBlock) {
         </figure>
       );
     case "audio":
+      if (!contents[contents.type].url) return null;
       return (
         <figure>
           <audio controls src={contents[contents.type].url} preload="auto" className="max-w-full !w-full max-h-max !h-10" />
