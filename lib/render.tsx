@@ -7,7 +7,7 @@ import { File, FileText, Download, ExternalLink, Link2, AtSign } from "react-fea
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
-import { CustomLink } from "@/components/MDXComponents";
+import Link from "@/components/Link";
 import { Twemoji } from "@/components/Twemoji";
 import CodeBlock from "@/components/CodeBlock";
 import { TableOfContents, slugify } from "@/components/TableOfContents";
@@ -75,11 +75,7 @@ export function renderText(block) {
 
       const highlight = color.includes("background") ? " p-0.5 rounded-sm text-gray-900 dark:text-gray-50 !bg-opacity-40" : "";
 
-      let part: JSX.Element = contents.link ? (
-        <CustomLink href={contents.link.url}>{contents.content}</CustomLink>
-      ) : (
-        <>{contents.content}</>
-      );
+      let part: JSX.Element = contents.link ? <Link href={contents.link.url}>{contents.content}</Link> : <>{contents.content}</>;
 
       if (code) part = <code>{part}</code>;
       if (bold) part = <strong>{part}</strong>;
@@ -284,10 +280,10 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
   };
   const Icon = icons[type];
   return (
-    <CustomLink href={link} className="px-1.5 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+    <Link href={link} className="px-1.5 py-1 -mx-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
       <Icon size={16} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
       <span>{text}</span>
-    </CustomLink>
+    </Link>
   );
 }
 
@@ -325,13 +321,36 @@ function Heading({ type, id, contents }: { type: "heading_1" | "heading_2" | "he
   );
 }
 
-function LinkCard({ url, icon: CardIcon, text, mono }: { url: string; icon: Icon; text: string; mono?: boolean }) {
+function LinkCard({
+  url,
+  icon: CardIcon,
+  text,
+  caption,
+  download,
+  mono,
+}: {
+  url: string;
+  icon: Icon;
+  text: string;
+  caption?: any;
+  download?: boolean;
+  mono?: boolean;
+}) {
   return (
-    <CustomLink className="hover:no-underline" href={url}>
-      <p className="flex items-center space-x-2 py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400">
+    <figure className="my-6">
+      <Link
+        className="hover:no-underline flex items-center space-x-2 py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400"
+        href={url}
+        download={download}
+      >
         <CardIcon />
         <span className={mono ? "font-mono" : null}>{text}</span>
-      </p>
-    </CustomLink>
+      </Link>
+      {caption?.length > 0 && (
+        <figcaption>
+          <NotionText blocks={caption} />
+        </figcaption>
+      )}
+    </figure>
   );
 }

@@ -1,4 +1,4 @@
-import { CustomLink } from "@/components/MDXComponents";
+import Link from "@/components/Link";
 
 export interface TableOfContentsItem {
   title: string;
@@ -11,7 +11,7 @@ export default function TableOfContents({ items }: { items: TableOfContentsItem[
     <ul>
       {items.map((item) => (
         <li key={item.title}>
-          <CustomLink href={"#" + slugify([item.title])}>{item.title}</CustomLink>
+          <Link href={"#" + slugify([item.title])}>{item.title}</Link>
           {item.children && <TableOfContents items={item.children} />}
         </li>
       ))}
