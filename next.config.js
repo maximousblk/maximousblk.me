@@ -4,7 +4,15 @@ const withPWA = require("next-pwa");
 const config = {
   reactStrictMode: true,
   images: {
-    domains: ["cdn.maximousblk.me", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com", "images.unsplash.com", "github.githubassets.com"],
+    domains: [
+      "maximousblk.me",
+      "cdn.maximousblk.me",
+      "twemoji.maxcdn.com",
+      "s3.us-west-2.amazonaws.com",
+      "images.unsplash.com",
+      "github.githubassets.com",
+      "ogp.me",
+    ],
   },
   pwa: {
     disable: process.env.NODE_ENV === "development",

@@ -3,6 +3,7 @@ import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { TableOfContentsItem } from "@/components/TableOfContents";
 import readingTime, { ReadTimeResults } from "reading-time";
 import getImageSize from "probe-image-size/sync";
+import { unfurl } from "unfurl.js";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -151,6 +152,17 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           const page = await getPage(contents[contents.type]);
           // @ts-ignore
           block.link_to_page["title"] = page.properties.title.title.map(({ plain_text }) => plain_text).join("");
+          break;
+
+        case "bookmark":
+          const og_data = await unfurl(contents.url);
+
+          block.bookmark["meta"] = {
+            title: og_data?.title || og_data?.twitter_card?.title || og_data?.open_graph?.title,
+            description: og_data?.description || og_data?.open_graph?.description,
+            image: og_data?.open_graph?.images[0],
+            url: contents.url,
+          };
           break;
 
         case "synced_block":

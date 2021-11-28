@@ -1,16 +1,17 @@
 import { Fragment } from "react";
 import { format, parseISO } from "date-fns";
 import { basename as pathBasename } from "path";
-import type { Icon } from "react-feather";
 
-import { File, FileText, Download, ExternalLink, Link2, AtSign } from "react-feather";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import TeX from "@matejmazur/react-katex";
+import CodeBlock from "@/components/CodeBlock";
+import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
 import { Twemoji } from "@/components/Twemoji";
-import CodeBlock from "@/components/CodeBlock";
 import { TableOfContents, slugify } from "@/components/TableOfContents";
+import { FileText, Download, ExternalLink, Link2, AtSign } from "react-feather";
+import type { Icon } from "react-feather";
 import type { NotionBlock } from "@/lib/notion";
 
 export function renderText(block) {
@@ -110,17 +111,23 @@ export function renderContent(block: NotionBlock) {
         </>
       );
     case "paragraph":
+      if (!contents.text.length) return null;
       return (
         <>
           <p>
             <NotionText blocks={contents.text} />
           </p>
-          <div className="ml-5">{children && <NotionContent blocks={children} />}</div>
+          {children && (
+            <div className="ml-5">
+              <NotionContent blocks={children} />
+            </div>
+          )}
         </>
       );
     case "heading_1":
     case "heading_2":
     case "heading_3":
+      if (!contents.text.length) return null;
       return <Heading type={block.type} id={slugify(contents.text.map(({ plain_text }) => plain_text))} contents={contents.text} />;
     case "bulleted_list":
       return <ul>{children && <NotionContent blocks={children} />}</ul>;
@@ -128,6 +135,7 @@ export function renderContent(block: NotionBlock) {
       return <ol>{children && <NotionContent blocks={children} />}</ol>;
     case "bulleted_list_item":
     case "numbered_list_item":
+      if (!contents.text.length) return null;
       return (
         <li>
           <NotionText blocks={contents.text} />
@@ -135,6 +143,7 @@ export function renderContent(block: NotionBlock) {
         </li>
       );
     case "to_do":
+      if (!contents.text.length) return null;
       return (
         <label htmlFor={block.id}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled />
@@ -145,6 +154,7 @@ export function renderContent(block: NotionBlock) {
         </label>
       );
     case "toggle":
+      if (!contents.text.length) return null;
       return (
         <details>
           <summary className="p-2">
@@ -154,6 +164,7 @@ export function renderContent(block: NotionBlock) {
         </details>
       );
     case "callout":
+      if (!contents.text.length) return null;
       return (
         <aside className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
           <div className="h-6 w-6 flex-shrink-0 !rounded-sm select-none" aria-hidden="true">
@@ -171,6 +182,7 @@ export function renderContent(block: NotionBlock) {
         </aside>
       );
     case "code":
+      if (!contents.text.length) return null;
       // TODO: add captions/titles when they get added to the api
       return (
         <CodeBlock>
@@ -178,6 +190,7 @@ export function renderContent(block: NotionBlock) {
         </CodeBlock>
       );
     case "image":
+      if (!contents[contents.type].url) return null;
       return (
         <figure>
           <Image
@@ -186,7 +199,7 @@ export function renderContent(block: NotionBlock) {
             src={contents[contents.type].url}
             alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
           />
-          {contents.caption && (
+          {contents.caption.length > 0 && (
             <figcaption>
               <NotionText blocks={contents.caption} />
             </figcaption>
@@ -199,7 +212,7 @@ export function renderContent(block: NotionBlock) {
           <div className="!rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
             <ReactPlayer light controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-auto aspect-video" />
           </div>
-          {contents.caption && (
+          {contents.caption.length > 0 && (
             <figcaption>
               <NotionText blocks={contents.caption} />
             </figcaption>
@@ -210,22 +223,28 @@ export function renderContent(block: NotionBlock) {
       return (
         <figure>
           <audio controls src={contents[contents.type].url} preload="auto" className="max-w-full !w-full max-h-max !h-10" />
-          {contents.caption && (
+          {contents.caption.length > 0 && (
             <figcaption>
               <NotionText blocks={contents.caption} />
             </figcaption>
           )}
         </figure>
       );
+    case "bookmark":
+      return <Bookmark title={contents.meta.title} description={contents.meta.description} url={contents.meta.url} />;
     case "equation":
+      if (!contents.expression) return null;
       return <TeX math={contents.expression} block className="my-8" />;
     case "link_to_page":
+      if (!contents[contents.type]) return null;
       return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={Link2} />;
     case "child_page":
-      return <LinkCard url={"/p/" + block.id} text={contents.title} icon={block.has_children ? FileText : File} />;
+      if (!block.has_children) return null;
+      return <LinkCard url={"/p/" + block.id} text={contents.title} icon={FileText} />;
     case "divider":
       return <hr />;
     case "column_list":
+      if (!contents.children.length) return null;
       return (
         <div className="grid grid-flow-row md:grid-flow-col md:gap-8">
           {contents.children.map(({ column: { children: columnChildren }, id }) => (
@@ -236,17 +255,29 @@ export function renderContent(block: NotionBlock) {
         </div>
       );
     case "synced_block":
+      if (!children.length) return null;
       return <>{children && <NotionContent blocks={children} />}</>;
     case "quote":
+      if (!contents.text.length) return null;
       return (
         <blockquote>
           <NotionText blocks={contents.text} />
         </blockquote>
       );
     case "file":
+      if (!contents[contents.type].url) return null;
       const fileURL = new URL(contents[contents.type].url);
       const fileName = pathBasename(fileURL.pathname);
-      return <LinkCard mono url={fileURL.href} text={fileName} icon={contents.type == "file" ? Download : ExternalLink} />;
+      return (
+        <LinkCard
+          mono
+          download={contents.type == "file"}
+          url={fileURL.href}
+          text={fileName}
+          caption={contents.caption}
+          icon={contents.type == "file" ? Download : ExternalLink}
+        />
+      );
     default:
       if (block.type !== "unsupported") console.log("unsupported block:", block.type);
       return <Unsupported block={block} />;
@@ -254,6 +285,7 @@ export function renderContent(block: NotionBlock) {
 }
 
 export function NotionContent({ blocks }: { blocks: NotionBlock[] }) {
+  if (!blocks.length) return null;
   return (
     <>
       {blocks.map((block) => (
@@ -264,6 +296,7 @@ export function NotionContent({ blocks }: { blocks: NotionBlock[] }) {
 }
 
 export function NotionText({ blocks }) {
+  if (!blocks.length) return null;
   return (
     <>
       {blocks.map((block) => (
@@ -289,11 +322,11 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
 
 function Unsupported({ block }) {
   return (
-    <p className="p-2 flex flex-nowrap space-x-2 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
+    <figure className="my-6 p-2 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
       <span>Unsupported content</span>
       <span className="font-mono">[{block.type}]</span>
-    </p>
+    </figure>
   );
 }
 
