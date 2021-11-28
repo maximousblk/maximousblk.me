@@ -334,7 +334,7 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
 
 function Unsupported({ block }) {
   return (
-    <figure className="my-6 p-2 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
+    <figure className="my-4 p-2 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
       <span>Unsupported content</span>
       <span className="font-mono">[{block.type}]</span>
@@ -382,7 +382,7 @@ function LinkCard({
   mono?: boolean;
 }) {
   return (
-    <figure className="my-6">
+    <figure className="my-4">
       <Link
         className="hover:no-underline flex items-center space-x-2 py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400"
         href={url}

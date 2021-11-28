@@ -11,7 +11,7 @@ export interface BookmarkProps {
 
 export function Bookmark({ title, description, url, image, caption }: BookmarkProps) {
   return (
-    <figure>
+    <figure className="my-4">
       <Link
         href={url}
         className="rounded-md flex justify-between hover:no-underline overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800"
