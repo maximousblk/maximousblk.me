@@ -1,9 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
-import { promises as fs } from "fs";
-import path from "path";
 import { Feed } from "feed";
-import matter from "gray-matter";
 import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
 import { parseISO } from "date-fns";
