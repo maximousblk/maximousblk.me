@@ -21,7 +21,7 @@ export function Bookmark({ title, description, url, image, caption }: BookmarkPr
           <p className="m-0 text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{description}</p>
           <p className="m-0 font-mono text-xs text-gray-500 line-clamp-1">{url}</p>
         </div>
-        {(image?.url && image?.height && image?.width) && (
+        {image?.url && image?.height && image?.width && (
           <div className="hidden sm:flex w-64 max-h-28">
             <Image alt="" height={image.height} width={image.width} src={image.url} className="object-cover !rounded-none" />
           </div>
