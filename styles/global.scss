@@ -35,22 +35,6 @@ html {
 //   vertical-align: -0.1em;
 // }
 
-.sticky-nav {
-  --tw-bg-opacity: 0.6 !important;
-
-  backdrop-filter: blur(20px);
-  position: sticky;
-  top: 0;
-  transition: background-color 0.1 ease-in-out;
-  z-index: 10;
-
-  @supports not (backdrop-filter: none) {
-    --tw-bg-opacity: 1 !important;
-
-    backdrop-filter: none;
-  }
-}
-
 .prose {
   .katex {
     font-size: 1.5em;
