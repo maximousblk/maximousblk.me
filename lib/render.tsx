@@ -232,6 +232,21 @@ export function renderContent(block: NotionBlock) {
           )}
         </figure>
       );
+    case "pdf":
+    case "file":
+      if (!contents[contents.type].url) return null;
+      const fileURL = new URL(contents[contents.type].url);
+      const fileName = pathBasename(fileURL.pathname);
+      return (
+        <LinkCard
+          mono
+          download={contents.type == "file"}
+          url={fileURL.href}
+          text={fileName}
+          caption={contents.caption}
+          icon={contents.type == "file" ? Download : ExternalLink}
+        />
+      );
     case "bookmark":
       return (
         <Bookmark
@@ -273,20 +288,6 @@ export function renderContent(block: NotionBlock) {
         <blockquote>
           <NotionText blocks={contents.text} />
         </blockquote>
-      );
-    case "file":
-      if (!contents[contents.type].url) return null;
-      const fileURL = new URL(contents[contents.type].url);
-      const fileName = pathBasename(fileURL.pathname);
-      return (
-        <LinkCard
-          mono
-          download={contents.type == "file"}
-          url={fileURL.href}
-          text={fileName}
-          caption={contents.caption}
-          icon={contents.type == "file" ? Download : ExternalLink}
-        />
       );
     default:
       return <Unsupported type={block.type} />;
@@ -364,21 +365,16 @@ function Heading({ type, id, contents }: { type: "heading_1" | "heading_2" | "he
   );
 }
 
-function LinkCard({
-  url,
-  icon: CardIcon,
-  text,
-  caption,
-  download,
-  mono,
-}: {
+interface LinkCardProps {
   url: string;
   icon: Icon;
   text: string;
   caption?: any;
   download?: boolean;
   mono?: boolean;
-}) {
+}
+
+function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCardProps) {
   return (
     <figure className="my-4">
       <Link
