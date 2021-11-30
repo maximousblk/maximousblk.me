@@ -54,17 +54,17 @@ export function renderText(block) {
 
       const classes = {
         gray: "text-gray-500 dark:text-gray-400",
-        brown: "text-brown-500 dark:text-brown-400",
+        brown: "text-stone-500 dark:text-stone-400",
         orange: "text-orange-500 dark:text-orange-400",
-        yellow: "text-yellow-500 dark:text-yellow-400",
+        yellow: "text-amber-500 dark:text-yellow-400",
         green: "text-emerald-500 dark:text-emerald-400",
-        blue: "text-sky-500 dark:text-sky-400",
+        blue: "text-blue-500 dark:text-sky-400",
         purple: "text-indigo-500 dark:text-indigo-400",
         pink: "text-pink-500 dark:text-pink-400",
         red: "text-rose-500 dark:text-rose-400",
 
         gray_background: "bg-gray-400",
-        brown_background: "bg-brown-400",
+        brown_background: "bg-stone-400",
         orange_background: "bg-orange-400",
         yellow_background: "bg-yellow-400",
         green_background: "bg-emerald-400",
@@ -74,7 +74,7 @@ export function renderText(block) {
         red_background: "bg-rose-400",
       };
 
-      const highlight = color.includes("background") ? " p-0.5 rounded-sm text-gray-900 dark:text-gray-50 bg-opacity-40" : "";
+      const highlight = color.includes("background") ? " p-0.5 rounded-sm text-gray-900 dark:bg-opacity-90 bg-opacity-40" : "";
 
       let part: JSX.Element = contents.link ? <Link href={contents.link.url}>{contents.content}</Link> : <>{contents.content}</>;
 
@@ -85,7 +85,7 @@ export function renderText(block) {
       if (underline) part = <u>{part}</u>;
 
       return (
-        <span className={(classes[color] || "") + highlight} style={{ whiteSpace: "pre-wrap" }}>
+        <span className={classes[color] + highlight} style={{ whiteSpace: "pre-wrap" }}>
           {part}
         </span>
       );
