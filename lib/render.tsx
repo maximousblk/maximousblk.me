@@ -191,12 +191,13 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <div className="flex rounded overflow-hidden border border-gray-200 dark:border-gray-700">
+          <div className="flex mx-auto w-fit rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
             <Image
+              quality={90}
               height={contents.size.height}
               width={contents.size.width}
               src={contents[contents.type].url}
-              alt={contents?.caption.map(({ plain_text }) => plain_text).join("") ?? ""}
+              alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
             />
           </div>
           {contents.caption.length > 0 && (
@@ -210,7 +211,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <div className="rounded overflow-hidden border border-gray-200 dark:border-gray-700">
+          <div className="rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
             <ReactPlayer light controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-auto aspect-video" />
           </div>
           {contents.caption.length > 0 && (
