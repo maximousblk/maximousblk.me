@@ -40,8 +40,7 @@ export function renderText(block) {
           return <Mention type="page" link={"/p/" + contents.page.id} text={block.plain_text} />;
 
         default:
-          console.log("unsupported mention:", contents.type);
-          return <Unsupported block={contents} />;
+          return <Unsupported type={contents.type} />;
       }
 
     case "equation":
@@ -91,8 +90,7 @@ export function renderText(block) {
       );
 
     default:
-      console.log("unsupported text:", block.type);
-      return <Unsupported block={block} />;
+      return <Unsupported type={block.type} />;
   }
 }
 
@@ -291,8 +289,7 @@ export function renderContent(block: NotionBlock) {
         />
       );
     default:
-      if (block.type !== "unsupported") console.log("unsupported block:", block.type);
-      return <Unsupported block={block} />;
+      return <Unsupported type={block.type} />;
   }
 }
 
@@ -332,12 +329,13 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
   );
 }
 
-function Unsupported({ block }) {
+function Unsupported({ type }) {
+  console.warn("unsupported content:", type);
   return (
     <figure className="my-4 p-2 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
       <span>Unsupported content</span>
-      <span className="font-mono">[{block.type}]</span>
+      <span className="font-mono">[{type}]</span>
     </figure>
   );
 }
