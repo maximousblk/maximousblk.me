@@ -78,13 +78,13 @@ export function renderText(block) {
       let part: JSX.Element = contents.link ? <Link href={contents.link.url}>{contents.content}</Link> : <>{contents.content}</>;
 
       if (code) part = <code>{part}</code>;
-      if (bold) part = <strong>{part}</strong>;
+      if (bold) part = <strong className="font-medium">{part}</strong>;
       if (italic) part = <em>{part}</em>;
-      if (strikethrough) part = <del>{part}</del>;
+      if (strikethrough) part = <del className="text-gray-400 dark:text-gray-600">{part}</del>;
       if (underline) part = <u>{part}</u>;
 
       return (
-        <span className={classes[color] + highlight} style={{ whiteSpace: "pre-wrap" }}>
+        <span className={(classes[color] || "") + highlight} style={{ whiteSpace: "pre-wrap" }}>
           {part}
         </span>
       );
