@@ -248,6 +248,7 @@ export function renderContent(block: NotionBlock) {
           icon={contents.type == "file" ? Download : ExternalLink}
         />
       );
+    case "link_preview":
     case "bookmark":
       return (
         <Bookmark
@@ -255,7 +256,7 @@ export function renderContent(block: NotionBlock) {
           description={contents.meta.description}
           url={contents.meta.url}
           image={contents.meta.image}
-          caption={contents.caption.length > 0 && <NotionText blocks={contents.caption} />}
+          caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />}
         />
       );
     case "equation":

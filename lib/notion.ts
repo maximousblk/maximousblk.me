@@ -154,10 +154,11 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           block.link_to_page["title"] = page.properties.title.title.map(({ plain_text }) => plain_text).join("");
           break;
 
+        case "link_preview":
         case "bookmark":
           const og_data = await unfurl(contents.url);
 
-          block.bookmark["meta"] = {
+          block[block.type]["meta"] = {
             title: og_data?.title || og_data?.twitter_card?.title || og_data?.open_graph?.title,
             description: og_data?.description || og_data?.open_graph?.description,
             image: og_data?.open_graph?.images[0],

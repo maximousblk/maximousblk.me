@@ -11,6 +11,7 @@ const config = {
       "s3.us-west-2.amazonaws.com",
       "images.unsplash.com",
       "github.githubassets.com",
+      "opengraph.githubassets.com",
       "ogp.me",
     ],
   },
