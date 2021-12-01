@@ -166,7 +166,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
           if (image && image.height && image.width) {
             block[block.type]["meta"].image = image;
-          } else {
+          } else if (image && (image.secure_url || image.url)) {
             const { height, width } = await fetch(image.secure_url || image.url)
               .then((res) => res.arrayBuffer())
               .then((data) => getImageSize(Buffer.from(data)));
