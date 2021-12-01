@@ -158,9 +158,9 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           const og_data = await unfurl(contents.url);
 
           block[block.type]["meta"] = {
-            title: og_data?.title || og_data?.twitter_card?.title || og_data?.open_graph?.title,
-            description: og_data?.description || og_data?.open_graph?.description,
-            image: og_data?.open_graph?.images[0],
+            title: og_data.title || og_data.twitter_card?.title || og_data.open_graph?.title || null,
+            description: og_data.description || og_data.open_graph?.description || null,
+            image: og_data.open_graph?.images?.[0] || null,
             url: contents.url,
           };
           break;
