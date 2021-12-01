@@ -10,7 +10,7 @@ import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
 import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents, slugify } from "@/components/TableOfContents";
-import { FileText, Download, ExternalLink, Link2, AtSign } from "react-feather";
+import { FileText, Download, ExternalLink, Link2, AtSign, Play } from "react-feather";
 import type { Icon } from "react-feather";
 import type { NotionBlock } from "@/lib/notion";
 
@@ -212,7 +212,13 @@ export function renderContent(block: NotionBlock) {
       return (
         <figure>
           <div className="rounded-md overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
-            <ReactPlayer light controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-auto aspect-video" />
+            <ReactPlayer
+              light
+              controls
+              url={contents[contents.type].url}
+              playIcon={<Play size="64" />}
+              className="max-w-full !w-full max-h-max !h-auto aspect-video"
+            />
           </div>
           {contents.caption.length > 0 && (
             <figcaption>

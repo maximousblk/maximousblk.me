@@ -88,6 +88,10 @@ html {
     text-indent: -1rem;
   }
 
+  video {
+    @apply m-0;
+  }
+
   .footnote-backref {
     @apply ml-2;
   }
