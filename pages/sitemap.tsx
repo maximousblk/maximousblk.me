@@ -8,27 +8,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const index = await getIndex();
   const pages = await getDatabase(index.pages.id).then((pages) => {
     return pages.results
-      .filter((page) => {
-        // @ts-ignore
-        return page.properties.published.checkbox;
+      .filter(({ properties: { published } }) => {
+        return published[published.type];
       })
-      .map((page) => {
-        // @ts-ignore
-        const slug = page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__");
-        return `/${slug}`;
+      .map(({ properties: { slug } }) => {
+        return `/${slug[slug.type].map(({ plain_text }) => plain_text).join("__")}`;
       });
   });
 
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
-      .filter((post) => {
-        // @ts-ignore
-        return post.properties.published.checkbox;
+      .filter(({ properties: { published } }) => {
+        return published[published.type];
       })
-      .map((post) => {
-        // @ts-ignore
-        const slug = post.properties.slug.rich_text.map((slug) => slug.plain_text).join("__");
-        return `/posts/${slug}`;
+      .map(({ properties: { slug } }) => {
+        return `/posts/${slug[slug.type].map(({ plain_text }) => plain_text).join("__")}`;
       });
   });
 

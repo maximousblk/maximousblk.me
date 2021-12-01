@@ -64,20 +64,15 @@ export async function getStaticProps() {
   const index = await getIndex();
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
-      .filter((post) => {
-        // @ts-ignore
-        return post.properties.published.checkbox;
+      .filter(({ properties: { published } }) => {
+        return published[published.type];
       })
-      .map((post) => {
+      .map(({ properties: { title: postTitle, description: postDescription, slug: postSlug, date } }) => {
         return {
-          // @ts-ignore
-          title: post.properties.title.title.map((part) => part.plain_text).join(" "),
-          // @ts-ignore
-          description: post.properties.description.rich_text.map((part) => part.plain_text).join(" "),
-          // @ts-ignore
-          slug: post.properties.slug.rich_text.map((slug) => slug.plain_text).join("__"),
-          // @ts-ignore
-          publishedAt: parseISO(post.properties.date.date.start).getTime(),
+          title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
+          description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),
+          slug: postSlug[postSlug.type].map(({ plain_text }) => plain_text).join("__"),
+          publishedAt: parseISO(date[date.type].start).getTime(),
         };
       })
       .sort((a, b) => {

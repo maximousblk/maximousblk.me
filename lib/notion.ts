@@ -16,20 +16,18 @@ export async function getIndex(): Promise<{
 
   return (
     await Promise.all(
-      root.map(async ({ properties }) => {
-        // @ts-ignore
-        const name = properties.name.title.map(({ plain_text }) => plain_text).join("");
-        // @ts-ignore
-        const page = properties.page.rich_text.find(({ type }) => type === "mention").mention;
+      root.map(async ({ properties: { name, page: pageId } }) => {
+        const pageName = name[name.type].map(({ plain_text }) => plain_text).join("");
+        const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
 
         const children =
           page.type == "database"
-            ? (await getDatabase(page[page.type].id)).results.map(({ properties, id, object }) => {
+            ? (await getDatabase(page.database.id)).results.map(({ properties, id, object }) => {
                 return { id, type: object, slug: properties.slug[properties.slug.type].map(({ plain_text }) => plain_text).join("") };
               })
             : undefined;
 
-        return { name, id: page[page.type].id, type: page.type, children };
+        return { name: pageName, id: page[page.type].id, type: page.type, children };
       })
     )
   ).reduce((acc, { name, ...props }) => {
@@ -149,9 +147,10 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           break;
 
         case "link_to_page":
-          const page = await getPage(contents[contents.type]);
-          // @ts-ignore
-          block.link_to_page["title"] = page.properties.title.title.map(({ plain_text }) => plain_text).join("");
+          const {
+            properties: { title },
+          } = await getPage(contents[contents.type]);
+          block.link_to_page["title"] = title[title.type].map(({ plain_text }) => plain_text).join("");
           break;
 
         case "link_preview":
@@ -183,8 +182,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
     return blocks.reduce((acc: NotionBlock[], curr: NotionBlock) => {
       if (curr.type === "bulleted_list_item") {
         if (acc[acc.length - 1]?.type === "bulleted_list") {
-          // @ts-ignore
-          acc[acc.length - 1].bulleted_list.children?.push(curr);
+          acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
         } else {
           acc.push({
             id: getRandomInt(10 ** 99, 10 ** 100).toString(),
@@ -194,8 +192,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
         }
       } else if (curr.type === "numbered_list_item") {
         if (acc[acc.length - 1]?.type === "numbered_list") {
-          // @ts-ignore
-          acc[acc.length - 1].numbered_list.children?.push(curr);
+          acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
         } else {
           acc.push({
             id: getRandomInt(10 ** 99, 10 ** 100).toString(),
