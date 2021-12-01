@@ -82,6 +82,12 @@ html {
     }
   }
 
+  summary {
+    @apply my-2 pl-5;
+
+    text-indent: -1rem;
+  }
+
   .footnote-backref {
     @apply ml-2;
   }
