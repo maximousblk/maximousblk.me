@@ -384,8 +384,8 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
         href={url}
         download={download}
       >
-        <CardIcon />
-        <span className={mono ? "font-mono" : null}>{text}</span>
+        <CardIcon className="min-w-max" />
+        <span className={"line-clamp-1 break-all" + (mono ? " font-mono" : "")}>{text}</span>
       </Link>
       {caption?.length > 0 && (
         <figcaption>
