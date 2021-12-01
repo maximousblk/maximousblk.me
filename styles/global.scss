@@ -72,10 +72,10 @@ html {
   }
 
   label {
-    @apply my-2 pl-5;
+    @apply my-1.5 pl-5;
 
     display: block;
-    text-indent: -1.25rem;
+    text-indent: -1.3rem;
 
     input {
       @apply mr-2;
