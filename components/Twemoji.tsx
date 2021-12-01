@@ -9,7 +9,6 @@ export function Twemoji({ emoji, size = 16, ...props }: { emoji: string; size?: 
       width={size}
       aria-hidden="true"
       alt={emoji}
-      priority
       {...props}
     />
   );

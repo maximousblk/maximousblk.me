@@ -23,6 +23,7 @@ export default function Navbar() {
               <Link href={href}>
                 <a className="flex justify-between items-center px-2.5 py-1.5 rounded text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800">
                   <span className="flex justify-between items-center select-none text-sm pr-2" aria-hidden="true">
+                    <Twemoji priority emoji={nameToEmoji[emoji]} />
                   </span>
                   <span>{name}</span>
                 </a>
