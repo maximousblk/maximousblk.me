@@ -13,11 +13,6 @@ html {
   min-width: 360px;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
-
-  @media screen and (min-width: 960px) {
-    margin-left: calc(100vw - 100%);
-    margin-right: 0;
-  }
 }
 
 #__next {
