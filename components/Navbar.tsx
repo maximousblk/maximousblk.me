@@ -15,7 +15,7 @@ export default function Navbar() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <nav className="top-0 z-10 sticky flex flex-nowrap justify-center w-full p-2 mx-auto mb-16 backdrop-blur border-b border-gray-100 dark:border-gray-800 !bg-opacity-50 bg-white dark:bg-gray-900">
+    <nav className="top-0 z-10 sticky flex flex-nowrap justify-center w-full p-2 mx-auto mb-16 backdrop-blur !bg-opacity-50 bg-white dark:bg-gray-900">
       <div className="flex flex-nowrap justify-between items-center max-w-6xl w-full">
         <div className="flex flex-shrink-0">
           {config.nav.map(({ name, emoji, href }, i, a) => (
