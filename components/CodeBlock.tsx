@@ -29,7 +29,7 @@ export default function CodeBlock(props): JSX.Element {
         <button
           onClick={onCopy}
           aria-label="Copy code"
-          className="absolute top-4 right-4 items-center px-1 py-1.5 text-left rounded border border-gray-500 dark:border-gray-500 hover:border-gray-700 dark:hover:border-gray-400"
+          className="absolute top-4 right-4 items-center px-1 py-1.5 text-left rounded bg-opacity-40 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
         >
           {copied ? (
             <Check size={14} className="text-emerald-700 dark:text-emerald-400" />
