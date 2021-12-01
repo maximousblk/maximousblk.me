@@ -9,7 +9,7 @@ export default function Page({ page, blocks }) {
     return null;
   }
   return (
-    <IndexLayout title={page.properties.title.title[0].plain_text} description="">
+    <IndexLayout title={page.properties.title.title.map(({ plain_text }) => plain_text).join("")} description="">
       <NotionContent blocks={blocks} />
     </IndexLayout>
   );

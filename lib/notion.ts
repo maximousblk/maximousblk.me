@@ -20,7 +20,7 @@ export async function getIndex(): Promise<{
         // @ts-ignore
         const name = properties.name.title.map(({ plain_text }) => plain_text).join("");
         // @ts-ignore
-        const page = properties.page.rich_text.filter(({ type }) => type === "mention")[0].mention;
+        const page = properties.page.rich_text.find(({ type }) => type === "mention").mention;
 
         const children =
           page.type == "database"
@@ -112,7 +112,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
             .map((block) => {
               return {
-                title: block[block.type].text[0].plain_text,
+                title: block[block.type].text.map(({ plain_text }) => plain_text).join(""),
                 type: block.type,
                 children: [],
               };
