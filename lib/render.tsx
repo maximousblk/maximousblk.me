@@ -191,7 +191,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <div className="flex mx-auto w-fit rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
+          <div className="flex mx-auto w-fit rounded-md overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
             <Image
               quality={90}
               height={contents.size.height}
@@ -211,7 +211,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <div className="rounded-md overflow-hidden border border-gray-200 dark:border-gray-700">
+          <div className="rounded-md overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
             <ReactPlayer light controls url={contents[contents.type].url} className="max-w-full !w-full max-h-max !h-auto aspect-video" />
           </div>
           {contents.caption.length > 0 && (
