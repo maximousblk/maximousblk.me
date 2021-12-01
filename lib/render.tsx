@@ -163,13 +163,19 @@ export function renderContent(block: NotionBlock) {
       );
     case "callout":
       if (!contents.text.length) return null;
+      const icon = contents.icon;
       return (
         <aside className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
           <div className="h-6 w-6 flex-shrink-0 rounded overflow-hidden select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
-              <Image alt="callout icon" src={contents.icon[contents.icon.type].url} height={24} width={24} />
+              <Image
+                alt=""
+                src={icon.type == "file" ? icon.file.url : "https://images.weserv.nl/?url=" + icon[icon.type].url}
+                height={24}
+                width={24}
+              />
             )}
           </div>
 
@@ -196,7 +202,7 @@ export function renderContent(block: NotionBlock) {
               quality={90}
               height={contents.size.height}
               width={contents.size.width}
-              src={contents[contents.type].url}
+              src={contents.type == "file" ? contents.file.url : "https://images.weserv.nl/?url=" + contents[contents.type].url}
               alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
             />
           </div>

@@ -6,13 +6,9 @@ const config = {
   images: {
     domains: [
       "maximousblk.me",
-      "cdn.maximousblk.me",
+      "images.weserv.nl",
       "twemoji.maxcdn.com",
       "s3.us-west-2.amazonaws.com",
-      "images.unsplash.com",
-      "github.githubassets.com",
-      "opengraph.githubassets.com",
-      "ogp.me",
     ],
   },
   pwa: {
