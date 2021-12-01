@@ -22,7 +22,7 @@ export function Bookmark({ title, description, url, image, caption }: BookmarkPr
           <p className="m-0 font-mono text-xs text-gray-500 line-clamp-1">{url}</p>
         </div>
         {image?.url && image?.height && image?.width && (
-          <div className="hidden sm:flex w-60 max-h-[6.5rem] border-l border-gray-200 dark:border-gray-800">
+          <div className="hidden sm:flex w-60 max-h-[6.5rem]">
             <Image alt="" height={image.height} width={image.width} src={"https://images.weserv.nl/?url=" + image.url} className="object-cover !rounded-none" />
           </div>
         )}
