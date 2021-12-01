@@ -73,7 +73,7 @@ export function renderText(block) {
         red_background: "bg-rose-400",
       };
 
-      const highlight = color.includes("background") ? " p-0.5 rounded-sm text-gray-900 dark:bg-opacity-90 bg-opacity-40" : "";
+      const highlight = color.includes("background") ? " p-[0.1rem] rounded-sm text-gray-900 dark:bg-opacity-90 bg-opacity-40" : "";
 
       let part: JSX.Element = contents.link ? <Link href={contents.link.url}>{contents.content}</Link> : <>{contents.content}</>;
 
