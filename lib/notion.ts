@@ -156,13 +156,25 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
         case "link_preview":
         case "bookmark":
           const og_data = await unfurl(contents.url);
+          const image = og_data.open_graph?.images?.[0] || null;
 
           block[block.type]["meta"] = {
             title: og_data.title || og_data.twitter_card?.title || og_data.open_graph?.title || null,
             description: og_data.description || og_data.open_graph?.description || null,
-            image: og_data.open_graph?.images?.[0] || null,
             url: contents.url,
           };
+
+          if (image && (!image.height || !image.width)) {
+            const { height, width } = await fetch(image.secure_url || image.url)
+              .then((res) => res.arrayBuffer())
+              .then((data) => getImageSize(Buffer.from(data)));
+            block[block.type]["meta"].image = {
+              ...image,
+              url: image.secure_url || image.url,
+              height,
+              width,
+            };
+          }
           break;
 
         case "synced_block":
