@@ -105,7 +105,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
       const contents = block[block.type];
       switch (block.type) {
         case "table_of_contents":
-          // @ts-ignore
+          // @ts-ignore - `table_of_contents` is supposed to be a empty object
           block.table_of_contents["children"] = blocks
             .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
             .map((block) => {

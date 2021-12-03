@@ -18,17 +18,16 @@ export default function Page({ blocks, title, description, hide_descr, slug }) {
 export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   const index = await getIndex();
   const pages = await getDatabase(index.pages.id);
-  // @ts-ignore
-  const page = pages.results.find((page) => page.properties.slug.rich_text.map((slug) => slug.plain_text).join("__") === slug);
+
+  const page = pages.results.find(({ properties: { slug: sl } }) => sl[sl.type].map(({ plain_text }) => plain_text).join("__") === slug);
   if (!page) return { notFound: true };
 
+  const { title: pageTitle, description: pageDescription, hide_description } = page.properties;
+
   const blocks = await getBlockChildren(page.id);
-  // @ts-ignore
-  const title = page.properties.name.title.map((part) => part.plain_text).join(" ");
-  // @ts-ignore
-  const description = page.properties.description.rich_text.map((part) => part.plain_text).join(" ");
-  // @ts-ignore
-  const hide_descr = page.properties.hide_description.checkbox;
+  const title = pageTitle[pageTitle.type].map(({ plain_text }) => plain_text).join(" ");
+  const description = pageDescription[pageDescription.type].map(({ plain_text }) => plain_text).join(" ");
+  const hide_descr = hide_description[hide_description.type];
 
   return { props: { blocks, title, description, hide_descr, slug }, revalidate: 2700 };
 }

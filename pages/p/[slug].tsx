@@ -17,10 +17,12 @@ export default function Page({ blocks, title, slug }) {
 
 export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   try {
-    const page = await getPage(slug.toString());
+    const {
+      properties: { title: pageTitle },
+    } = await getPage(slug.toString());
     const blocks = await getBlockChildren(slug.toString());
-    // @ts-ignore
-    const title = page.properties.title.title.map((part) => part.plain_text).join(" ");
+
+    const title = pageTitle[pageTitle.type].map(({ plain_text }) => plain_text).join(" ");
 
     return { props: { blocks, title, slug }, revalidate: 2700 };
   } catch (e) {
