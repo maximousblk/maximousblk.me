@@ -29,10 +29,10 @@ export function renderText(block) {
           const withoutTime = (d: Date) => format(d, "PP");
 
           return (
-            <span>
+            <time dateTime={start.toISOString()}>
               {hasTime(start) ? withTime(start) : withoutTime(start)}
               {date.end ? ` - ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
-            </span>
+            </time>
           );
         case "user":
           return <Mention type="user" link={`mailto:${contents.user.person.email}`} text={contents.user.name} />;
@@ -165,7 +165,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents.text.length) return null;
       const icon = contents.icon;
       return (
-        <aside className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+        <div className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
           <div className="h-6 w-6 flex-shrink-0 rounded overflow-hidden select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
@@ -183,7 +183,7 @@ export function renderContent(block: NotionBlock) {
             <NotionText blocks={contents.text} />
             {children && <NotionContent blocks={children} />}
           </div>
-        </aside>
+        </div>
       );
     case "code":
       if (!contents.text.length) return null;

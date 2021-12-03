@@ -35,6 +35,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
 export function reportWebVitals(metric) {
   if (process.env.NODE_ENV === "development") {
-    console.log(metric);
+    console.debug(metric);
   }
 }
