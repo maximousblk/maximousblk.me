@@ -13,6 +13,11 @@ html {
   min-width: 360px;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+
+  @media screen and (min-width: 960px) {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+  }
 }
 
 #__next {
@@ -37,6 +42,14 @@ html {
 
   code {
     @apply px-1.5 py-0.5 rounded border text-sm text-gray-900 border-gray-200 bg-gray-100 dark:text-gray-200 dark:border-gray-800 dark:bg-gray-900;
+  }
+
+  .tooltip {
+    @apply invisible absolute;
+  }
+
+  .has-tooltip:hover .tooltip {
+    @apply visible z-50;
   }
 
   a {
