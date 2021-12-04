@@ -1,4 +1,5 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+// TODO: revert this when next.js is fixed
+import Document, { Html, Head, Main, NextScript } from "next/dist/pages/_document";
 
 import config from "@/config";
 
