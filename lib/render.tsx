@@ -341,7 +341,7 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
 function Unsupported({ type }) {
   console.warn("unsupported content:", type);
   return (
-    <figure className="my-4 p-2 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
+    <figure className="my-4 p-2 print:hidden flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
       <span>Unsupported content</span>
       <span className="font-mono">[{type}]</span>

@@ -75,7 +75,7 @@ export default function PostLayout({ children, title, slug, cover, publishedAt, 
           </div>
         )}
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
-        <div className="flex space-x-3 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 mt-8">
+        <div className="print:hidden flex space-x-3 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 mt-8">
           <a href={twitterURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
             {"Share on Twitter"}
             <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-gray-500" />

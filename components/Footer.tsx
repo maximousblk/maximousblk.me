@@ -19,7 +19,7 @@ const Social = ({ name, icon, href }) => {
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center mb-8">
+    <footer className="print:hidden flex flex-col items-center mb-8">
       <div className="flex space-x-2 mb-4">
         {config.footer.social.map(({ name, icon, href }) => (
           <Social name={name} icon={icon} href={href} key={name} />

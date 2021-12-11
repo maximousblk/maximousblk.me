@@ -8,7 +8,7 @@ export interface TableOfContentsItem {
 
 export default function TableOfContents({ items }: { items: TableOfContentsItem[] }) {
   return (
-    <nav aria-label="Table of contents">
+    <nav aria-label="Table of contents" className="print:hidden">
       <details id="_toc" className="px-3 py-2 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
         <summary className="!m-0 cursor-pointer font-medium">Table of contents</summary>
         <hr className="mt-2 mb-4" />
