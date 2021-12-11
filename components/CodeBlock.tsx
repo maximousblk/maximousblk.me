@@ -24,7 +24,7 @@ export default function CodeBlock(props): JSX.Element {
   };
 
   return (
-    <div ref={textInput} onMouseEnter={showCopy} onMouseLeave={hideCopy} className="relative">
+    <div ref={textInput} onMouseEnter={showCopy} onMouseLeave={hideCopy} className="relative w-full my-6">
       {hovered && (
         <button
           onClick={onCopy}
@@ -38,7 +38,7 @@ export default function CodeBlock(props): JSX.Element {
           )}
         </button>
       )}
-      <pre>{props.children}</pre>
+      <pre className="p-4 w-full overflow-auto border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-300 bg-gray-50 dark:bg-gray-900">{props.children}</pre>
     </div>
   );
 }
