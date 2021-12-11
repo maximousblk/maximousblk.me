@@ -101,14 +101,7 @@ export function renderContent(block: NotionBlock) {
 
   switch (block.type) {
     case "table_of_contents":
-      return (
-        <>
-          <p id="_toc" className="font-mono text-sm">
-            Table of Contents
-          </p>
-          <TableOfContents items={children} />
-        </>
-      );
+      return <TableOfContents items={children} />;
     case "paragraph":
       if (!contents.text.length) return null;
       return (
