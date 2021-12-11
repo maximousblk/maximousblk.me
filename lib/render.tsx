@@ -73,7 +73,7 @@ export function renderText(block) {
         red_background: "bg-rose-400",
       };
 
-      const highlight = color.includes("background") ? " p-[0.1rem] rounded-sm text-gray-900 dark:bg-opacity-90 bg-opacity-40" : "";
+      const highlight = color.includes("background") ? " p-[0.125rem] rounded-sm text-gray-900 dark:bg-opacity-90 bg-opacity-50" : "";
 
       let part: JSX.Element = contents.link ? <Link href={contents.link.url}>{contents.content}</Link> : <>{contents.content}</>;
 
@@ -82,6 +82,7 @@ export function renderText(block) {
       if (italic) part = <em>{part}</em>;
       if (strikethrough) part = <del className="text-gray-400 dark:text-gray-600">{part}</del>;
       if (underline) part = <u>{part}</u>;
+      if (color.includes("background")) part = <mark className="bg-transparent text-inherit">{part}</mark>;
 
       return (
         <span className={(classes[color] || "") + highlight} style={{ whiteSpace: "pre-wrap" }}>
@@ -396,7 +397,7 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
         href={url}
         download={download}
       >
-        <CardIcon className="min-w-max" />
+        <CardIcon className="min-w-max max-w-min" />
         <span className={"line-clamp-1 break-all" + (mono ? " font-mono" : "")}>{text}</span>
       </Link>
       {caption?.length > 0 && (
