@@ -101,11 +101,12 @@ export function renderContent(block: NotionBlock) {
 
   switch (block.type) {
     case "table_of_contents":
+      if (!children.length) return null;
       return <TableOfContents items={children} />;
     case "paragraph":
       if (!contents.text.length) return null;
       return (
-        <>
+        <Fragment>
           <p>
             <NotionText blocks={contents.text} />
           </p>
@@ -114,7 +115,7 @@ export function renderContent(block: NotionBlock) {
               <NotionContent blocks={children} />
             </div>
           )}
-        </>
+        </Fragment>
       );
     case "heading_1":
     case "heading_2":
@@ -137,8 +138,8 @@ export function renderContent(block: NotionBlock) {
     case "to_do":
       if (!contents.text.length) return null;
       return (
-        <label htmlFor={block.id}>
-          <input type="checkbox" id={block.id} checked={contents.checked} disabled />
+        <label htmlFor={block.id} className="my-2 pl-6 block -indent-5">
+          <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2" />
           <span className={contents.checked ? "line-through text-gray-400 dark:text-gray-600" : ""}>
             <NotionText blocks={contents.text} />
           </span>
@@ -159,8 +160,8 @@ export function renderContent(block: NotionBlock) {
       if (!contents.text.length) return null;
       const icon = contents.icon;
       return (
-        <div className="flex space-x-3 p-3 mb-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
-          <div className="h-6 w-6 flex-shrink-0 rounded overflow-hidden select-none" aria-hidden="true">
+        <div className="flex space-x-3 px-3 py-2 my-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+          <div className="h-6 w-6 mt-0.5 rounded overflow-hidden select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
@@ -303,7 +304,7 @@ export function renderContent(block: NotionBlock) {
 }
 
 export function NotionContent({ blocks }: { blocks: NotionBlock[] }) {
-  if (!blocks.length) return null;
+  if (!blocks?.length) return null;
   return (
     <>
       {blocks.map((block) => (
@@ -341,7 +342,7 @@ function Mention({ type, link, text }: { type: "user" | "page"; link: string; te
 function Unsupported({ type }) {
   console.warn("unsupported content:", type);
   return (
-    <figure className="my-4 p-2 print:hidden flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
+    <figure className="my-6 px-3 py-2 print:hidden flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
       <span>Unsupported content</span>
       <span className="font-mono">[{type}]</span>
@@ -384,9 +385,9 @@ interface LinkCardProps {
 
 function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCardProps) {
   return (
-    <figure className="my-4">
+    <figure className="my-6">
       <Link
-        className="hover:no-underline flex items-center space-x-2 py-2 px-3 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400"
+        className="hover:no-underline flex items-center space-x-3 px-3 py-2 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400"
         href={url}
         download={download}
       >

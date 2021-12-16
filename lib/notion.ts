@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
-import { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { TableOfContentsItem } from "@/components/TableOfContents";
-import readingTime, { ReadTimeResults } from "reading-time";
+import readingTime, { type ReadTimeResults } from "reading-time";
 import getImageSize from "probe-image-size/sync";
 import { unfurl } from "unfurl.js";
 

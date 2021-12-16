@@ -18,21 +18,6 @@ html {
   }
 }
 
-#__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-// /* twemoji */
-// img.emoji {
-//   display: inline-block;
-//   height: 1em;
-//   width: 1em;
-//   margin: 0 0.05em 0 0.1em;
-//   vertical-align: -0.1em;
-// }
-
 .prose {
   .katex {
     font-size: 1.5em;
@@ -70,45 +55,12 @@ html {
     }
   }
 
-  details > div {
-    margin-left: 1.25em;
-  }
-
-  label {
-    @apply my-1.5 pl-5;
-
-    display: block;
-    text-indent: -1.3rem;
-
-    input {
-      @apply mr-2;
-    }
-  }
-
-  summary {
-    @apply my-2 pl-5;
-
-    text-indent: -1rem;
+  details > *:last-child {
+    @apply mb-0;
   }
 
   video {
     @apply m-0;
-  }
-
-  .footnote-backref {
-    @apply ml-2;
-  }
-
-  .footnote-ref {
-    @apply ml-0.5;
-
-    &::before {
-      content: "[";
-    }
-
-    &::after {
-      content: "]";
-    }
   }
 }
 
