@@ -10,8 +10,7 @@ import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
 import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents, slugify } from "@/components/TableOfContents";
-import { FileText, Download, ExternalLink, Link2, AtSign, Play } from "react-feather";
-import type { Icon } from "react-feather";
+import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus } from "react-feather";
 import type { NotionBlock } from "@/lib/notion";
 
 export function renderText(block) {
@@ -148,14 +147,7 @@ export function renderContent(block: NotionBlock) {
       );
     case "toggle":
       if (!contents.text.length) return null;
-      return (
-        <details>
-          <summary className="p-2">
-            <NotionText blocks={contents.text} />
-          </summary>
-          <div>{children && <NotionContent blocks={children} />}</div>
-        </details>
-      );
+      return <Accordion summary={<NotionText blocks={contents.text} />} details={children ? <NotionContent blocks={children} /> : null} />;
     case "callout":
       if (!contents.text.length) return null;
       const icon = contents.icon;
@@ -400,5 +392,21 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
         </figcaption>
       )}
     </figure>
+  );
+}
+
+function Accordion({ summary, details }: { summary: React.ReactNode | string; details: React.ReactNode }) {
+  return (
+    <details className="group my-6 px-3 py-2 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+      <summary className="!m-0 flex space-x-2 cursor-pointer font-medium">
+        <span>
+          <Plus className="block group-open:hidden mt-0.5 h-6 w-6" />
+          <Minus className="hidden group-open:block mt-0.5 h-6 w-6" />
+        </span>
+        <p className="m-0 w-full line-clamp-1 group-open:line-clamp-none">{summary}</p>
+      </summary>
+      <hr className="mt-2 mb-4" />
+      {details || <p className="text-gray-400 dark:text-gray-600">This block is empty</p>}
+    </details>
   );
 }
