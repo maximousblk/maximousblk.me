@@ -1,5 +1,5 @@
 import PostLayout from "@/layouts/post";
-import { getBlockChildren, getDatabase, getIndex, getReadingTime } from "@/lib/notion";
+import { getBlockChildren, getIndex, getPage, getReadingTime } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { parseISO } from "date-fns";
 import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
@@ -22,10 +22,11 @@ export default function Blog({ blocks, slug, title, description, cover, publishe
 
 export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   const index = await getIndex();
-  const posts = await getDatabase(index.posts.id);
 
-  const post = posts.results.find(({ properties: { slug: sl } }) => sl[sl.type].map(({ plain_text }) => plain_text).join("__") === slug);
-  if (!post) return { notFound: true };
+  const pageID = index.posts.children.find(({ slug: sl }) => sl === slug)?.id;
+  if (!pageID) return { notFound: true };
+
+  const post = await getPage(pageID);
 
   const { title: postTitle, description: postDescription, date, cover: coverImage } = post.properties;
 

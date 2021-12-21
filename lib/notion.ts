@@ -4,6 +4,7 @@ import type { TableOfContentsItem } from "@/components/TableOfContents";
 import readingTime, { type ReadTimeResults } from "reading-time";
 import getImageSize from "probe-image-size/sync";
 import { unfurl } from "unfurl.js";
+import { slugify } from "@/lib/utils";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -23,7 +24,7 @@ export async function getIndex(): Promise<{
         const children =
           page.type == "database"
             ? (await getDatabase(page.database.id)).results.map(({ properties, id, object }) => {
-                return { id, type: object, slug: properties.slug[properties.slug.type].map(({ plain_text }) => plain_text).join("") };
+                return { id, type: object, slug: slugify(properties.title[properties.title.type].map(({ plain_text }) => plain_text)) };
               })
             : undefined;
 

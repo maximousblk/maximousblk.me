@@ -3,6 +3,7 @@ import { Feed } from "feed";
 import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
 import { parseISO } from "date-fns";
+import { slugify } from "@/lib/utils";
 
 const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const { f } = req.query;
@@ -42,11 +43,11 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
       .filter(({ properties: { published } }) => {
         return published[published.type];
       })
-      .map(({ properties: { title: postTitle, description: postDescription, slug: postSlug, date } }) => {
+      .map(({ properties: { title: postTitle, description: postDescription, date } }) => {
         return {
           title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
           description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),
-          slug: postSlug[postSlug.type].map((slug) => slug.plain_text).join("__"),
+          slug: slugify(postTitle[postTitle.type].map(({ plain_text }) => plain_text)),
           publishedAt: parseISO(date[date.type].start).getTime(),
         };
       })

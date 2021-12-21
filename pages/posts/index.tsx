@@ -8,6 +8,7 @@ import { parseISO } from "date-fns";
 
 import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
+import { slugify } from "@/lib/utils";
 
 const url = config.baseUrl + "/posts";
 const title = "Posts";
@@ -71,7 +72,7 @@ export async function getStaticProps() {
         return {
           title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
           description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),
-          slug: postSlug[postSlug.type].map(({ plain_text }) => plain_text).join("__"),
+          slug: slugify(postTitle[postTitle.type].map(({ plain_text }) => plain_text)),
           publishedAt: parseISO(date[date.type].start).getTime(),
         };
       })

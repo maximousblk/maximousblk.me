@@ -1,7 +1,7 @@
 import PageLayout from "@/layouts/page";
 
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
-import { getIndex, getBlockChildren, getDatabase } from "@/lib/notion";
+import { getIndex, getBlockChildren, getPage } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 
 export default function Page({ blocks, title, description, hide_descr, slug }) {
@@ -17,10 +17,10 @@ export default function Page({ blocks, title, description, hide_descr, slug }) {
 
 export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   const index = await getIndex();
-  const pages = await getDatabase(index.pages.id);
+  const pageID = index.pages.children.find(({ slug: sl }) => sl === slug)?.id;
+  if (!pageID) return { notFound: true };
 
-  const page = pages.results.find(({ properties: { slug: sl } }) => sl[sl.type].map(({ plain_text }) => plain_text).join("__") === slug);
-  if (!page) return { notFound: true };
+  const page = await getPage(pageID);
 
   const { title: pageTitle, description: pageDescription, hide_description } = page.properties;
 

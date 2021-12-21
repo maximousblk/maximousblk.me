@@ -25,7 +25,7 @@
     "feed": "^4.2.2",
     "gemoji": "^7.1.0",
     "katex": "^0.15.1",
-    "next": "^12.0.8-canary.10",
+    "next": "^12.0.8-canary.11",
     "next-pwa": "5.4.4",
     "next-seo": "^4.28.1",
     "next-sitemap": "^1.6.203",
@@ -38,6 +38,7 @@
     "react-player": "^2.9.0",
     "reading-time": "^1.5.0",
     "sharp": "^0.29.3",
+    "slugify": "^1.6.4",
     "tailwindcss": "^3.0.7",
     "twemoji": "^13.1.0",
     "unfurl.js": "^5.6.2"
@@ -47,9 +48,9 @@
     "@types/react": "^17.0.37",
     "@types/twemoji": "^12.1.2",
     "eslint": "^8.5.0",
-    "eslint-config-next": "^12.0.8-canary.10",
+    "eslint-config-next": "^12.0.8-canary.11",
     "prettier": "^2.5.1",
-    "sass": "^1.45.0",
+    "sass": "^1.45.1",
     "typescript": "^4.5.4"
   },
   "prettier": {

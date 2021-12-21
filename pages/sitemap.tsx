@@ -1,6 +1,7 @@
 import { getServerSideSitemap, ISitemapField } from "next-sitemap";
 import { GetServerSideProps } from "next";
 
+import { slugify } from "@/lib/utils";
 import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
 
@@ -11,8 +12,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       .filter(({ properties: { published } }) => {
         return published[published.type];
       })
-      .map(({ properties: { slug } }) => {
-        return `/${slug[slug.type].map(({ plain_text }) => plain_text).join("__")}`;
+      .map(({ properties: { title } }) => {
+        return `/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
       });
   });
 
@@ -21,8 +22,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       .filter(({ properties: { published } }) => {
         return published[published.type];
       })
-      .map(({ properties: { slug } }) => {
-        return `/posts/${slug[slug.type].map(({ plain_text }) => plain_text).join("__")}`;
+      .map(({ properties: { title } }) => {
+        return `/posts/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
       });
   });
 
