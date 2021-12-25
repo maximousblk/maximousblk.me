@@ -47,8 +47,10 @@
     "@types/probe-image-size": "^7.0.1",
     "@types/react": "^17.0.37",
     "@types/twemoji": "^12.1.2",
+    "browserify-fs": "^1.0.0",
     "eslint": "^8.5.0",
     "eslint-config-next": "^12.0.8-canary.12",
+    "preact": "^10.6.4",
     "prettier": "^2.5.1",
     "sass": "^1.45.1",
     "typescript": "^4.5.4"

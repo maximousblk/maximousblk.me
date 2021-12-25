@@ -12,6 +12,17 @@ const config = {
     disable: process.env.NODE_ENV === "development",
     dest: "public",
   },
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      Object.assign(config.resolve.alias, {
+        fs: "browserify-fs",
+        react: "preact/compat",
+        "react-dom/test-utils": "preact/test-utils",
+        "react-dom": "preact/compat",
+      });
+    }
+    return config;
+  },
   async rewrites() {
     return [
       {
