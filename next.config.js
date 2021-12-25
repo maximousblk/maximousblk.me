@@ -5,7 +5,6 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    formats: ["image/avif", "image/webp"],
     domains: ["maximousblk.me", "images.weserv.nl", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com"],
   },
   pwa: {
