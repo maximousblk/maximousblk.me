@@ -31,7 +31,6 @@
     "next-sitemap": "^1.6.203",
     "next-themes": "^0.0.15",
     "postcss": "^8.4.5",
-    "preact": "^10.6.4",
     "probe-image-size": "^7.2.2",
     "react": "^18.0.0-rc.0",
     "react-dom": "^18.0.0-rc.0",
