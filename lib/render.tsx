@@ -120,8 +120,17 @@ export function renderContent(block: NotionBlock) {
     case "heading_1":
     case "heading_2":
     case "heading_3":
-      if (!contents.text.length) return null;
-      return <Heading type={block.type} id={slugify(contents.text.map(({ plain_text }) => plain_text))} contents={contents.text} />;
+      if (!contents.text?.length) return null;
+      if (contents.children?.length) {
+        return (
+          <ToggleHeading type={block.type} id={slugify(contents.text.map(({ plain_text }) => plain_text))} contents={contents.text}>
+            <NotionContent blocks={contents.children} />
+          </ToggleHeading>
+        );
+      } else {
+        return <Heading type={block.type} id={slugify(contents.text.map(({ plain_text }) => plain_text))} contents={contents.text} />;
+      }
+
     case "bulleted_list":
       return <ul>{children && <NotionContent blocks={children} />}</ul>;
     case "numbered_list":
@@ -367,6 +376,27 @@ function Heading({ type, id, contents }: { type: "heading_1" | "heading_2" | "he
   );
 }
 
+function ToggleHeading({
+  type,
+  id,
+  contents,
+  children,
+}: {
+  type: "heading_1" | "heading_2" | "heading_3";
+  id: string;
+  contents: any;
+  children?: React.ReactChild;
+}) {
+  return (
+    <details>
+      <summary className="list-none">
+        <Heading type={type} id={id} contents={contents} />{" "}
+      </summary>
+      <div className="pl-4 border-l-2 border-gray-300 dark:border-gray-700">{children}</div>
+    </details>
+  );
+}
+
 interface LinkCardProps {
   url: string;
   icon: Icon;
@@ -399,7 +429,7 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
 function Accordion({ summary, details }: { summary: React.ReactNode | string; details: React.ReactNode }) {
   return (
     <details className="group my-6 px-3 py-2 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-      <summary className="!m-0 flex marker:hidden space-x-2 cursor-pointer font-medium">
+      <summary className="!m-0 flex list-none space-x-2 cursor-pointer font-medium">
         <span>
           <Plus className="block group-open:hidden mt-0.5 h-6 w-6" />
           <Minus className="hidden group-open:block mt-0.5 h-6 w-6" />

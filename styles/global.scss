@@ -19,6 +19,12 @@ html {
 }
 
 .prose {
+  > :first-child {
+    /* Override removing margin, to prevent layout shift */
+    margin-top: 1.25em !important;
+    margin-bottom: 1.25em !important;
+  }
+
   .katex {
     font-size: 1.5em;
   }
@@ -62,12 +68,6 @@ html {
   video {
     @apply m-0;
   }
-}
-
-.prose > :first-child {
-  /* Override removing margin, to prevent layout shift */
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
 }
 
 .quote::after {
