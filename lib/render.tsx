@@ -11,7 +11,7 @@ import Link from "@/components/Link";
 import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents } from "@/components/TableOfContents";
 import { slugify } from "@/lib/utils";
-import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus } from "react-feather";
+import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus, GitHub } from "react-feather";
 import type { NotionBlock } from "@/lib/notion";
 
 export function renderText(block) {
@@ -19,9 +19,10 @@ export function renderText(block) {
 
   switch (block.type) {
     case "mention":
+      const mention = contents[contents.type];
       switch (contents.type) {
         case "date":
-          const date = contents.date;
+          const date = mention;
           const start = parseISO(date.start);
           const end = parseISO(date.end);
           const hasTime = (d: Date) => d.getHours() !== 0;
@@ -35,9 +36,15 @@ export function renderText(block) {
             </time>
           );
         case "user":
-          return <Mention type="user" link={`mailto:${contents.user.person.email}`} text={contents.user.name} />;
+          return <Mention type="user" link={`mailto:${mention.person.email}`} text={mention.name} />;
         case "page":
-          return <Mention type="page" link={"/p/" + contents.page.id} text={block.plain_text} />;
+          return <Mention type="page" link={"/p/" + mention.id} text={block.plain_text} />;
+        case "link_preview":
+          const GHreg = /https?:\/\/github\.com\/(?<user>[^\/\s]+)\/(?<repo>[^\/\s]+)\/?((issues|pull)\/(?<num>\d+))?/;
+          const { user, repo, num } = GHreg.exec(mention.url).groups;
+          if (repo) {
+            return <Mention type="github" link={mention.url} text={`${user}/${repo}${num ? "#" + num : ""}`} />;
+          }
 
         default:
           return <Unsupported type={contents.type} />;
@@ -327,10 +334,11 @@ export function NotionText({ blocks }) {
   );
 }
 
-function Mention({ type, link, text }: { type: "user" | "page"; link: string; text: string }) {
+function Mention({ type, link, text }: { type: "user" | "page" | "github"; link: string; text: string }) {
   const icons = {
     user: AtSign,
     page: Link2,
+    github: GitHub,
   };
   const Icon = icons[type];
   return (
