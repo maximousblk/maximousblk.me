@@ -47,7 +47,7 @@ export function renderText(block) {
           }
 
         default:
-          return <Unsupported type={contents.type} />;
+          return <Unsupported object="mention" type={contents.type} />;
       }
 
     case "equation":
@@ -98,7 +98,7 @@ export function renderText(block) {
       );
 
     default:
-      return <Unsupported type={block.type} />;
+      return <Unsupported object="text" type={block.type} />;
   }
 }
 
@@ -308,7 +308,7 @@ export function renderContent(block: NotionBlock) {
         </blockquote>
       );
     default:
-      return <Unsupported type={block.type} />;
+      return <Unsupported object={block.object} type={block.type} />;
   }
 }
 
@@ -349,12 +349,12 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github"; link:
   );
 }
 
-function Unsupported({ type }) {
-  console.warn("unsupported content:", type);
+function Unsupported({ object, type }) {
+  console.warn(`unsupported ${object}: ${type}`);
   return (
     <figure className="my-6 px-3 py-2 print:hidden flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
       <span>❌</span>
-      <span>Unsupported content</span>
+      <span>Unsupported {object}</span>
       <span className="font-mono">[{type}]</span>
     </figure>
   );
