@@ -360,7 +360,17 @@ function Unsupported({ object, type }) {
   );
 }
 
-function Heading({ type, id, contents }: { type: "heading_1" | "heading_2" | "heading_3"; id: string; contents: any }) {
+function Heading({
+  type,
+  id,
+  contents,
+  ...props
+}: {
+  type: "heading_1" | "heading_2" | "heading_3";
+  id: string;
+  contents: any;
+  [key: string]: any;
+}) {
   const tags: { [key: string]: keyof JSX.IntrinsicElements } = {
     heading_1: "h2",
     heading_2: "h3",
@@ -379,7 +389,9 @@ function Heading({ type, id, contents }: { type: "heading_1" | "heading_2" | "he
       >
         <span className="icon icon-link"></span>
       </a>
-      <NotionText blocks={contents} />
+      <span {...props}>
+        <NotionText blocks={contents} />
+      </span>
     </HeadingX>
   );
 }
@@ -398,9 +410,9 @@ function ToggleHeading({
   return (
     <details>
       <summary className="list-none">
-        <Heading type={type} id={id} contents={contents} />{" "}
+        <Heading type={type} id={id} contents={contents} className="hover:cursor-pointer hover:underline" />
       </summary>
-      <div className="pl-4 border-l-2 border-gray-300 dark:border-gray-700">{children}</div>
+      <div className="pl-4 border-l-2 border-gray-200 dark:border-gray-800">{children}</div>
     </details>
   );
 }
