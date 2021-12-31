@@ -118,7 +118,7 @@ export function renderContent(block: NotionBlock) {
             <NotionText blocks={contents.text} />
           </p>
           {children && (
-            <div className="ml-5">
+            <div className="ml-1 pl-4 border-l-2 border-gray-200 dark:border-gray-800">
               <NotionContent blocks={children} />
             </div>
           )}
