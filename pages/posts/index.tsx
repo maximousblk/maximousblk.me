@@ -9,6 +9,7 @@ import { parseISO } from "date-fns";
 import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
 import { slugify } from "@/lib/utils";
+import { Page } from "@jitl/notion-api";
 
 const url = config.baseUrl + "/posts";
 const title = "Posts";
@@ -65,10 +66,10 @@ export async function getStaticProps() {
   const index = await getIndex();
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
-      .filter(({ properties: { published } }) => {
+      .filter(({ properties: { published } }: Page) => {
         return published[published.type];
       })
-      .map(({ properties: { title: postTitle, description: postDescription, slug: postSlug, date } }) => {
+      .map(({ properties: { title: postTitle, description: postDescription, slug: postSlug, date } }: Page) => {
         return {
           title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
           description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),

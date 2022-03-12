@@ -1,5 +1,6 @@
 import { Client } from "@notionhq/client";
-import type { GetBlockResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { TableOfContentsItem } from "@/components/TableOfContents";
 import readingTime, { type ReadTimeResults } from "reading-time";
 import getImageSize from "probe-image-size/sync";
@@ -17,13 +18,13 @@ export async function getIndex(): Promise<{
 
   return (
     await Promise.all(
-      root.map(async ({ properties: { name, page: pageId } }) => {
+      root.map(async ({ properties: { name, page: pageId } }: PageWithChildren) => {
         const pageName = name[name.type].map(({ plain_text }) => plain_text).join("");
         const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
 
         const children =
           page.type == "database"
-            ? (await getDatabase(page.database.id)).results.map(({ properties, id, object }) => {
+            ? (await getDatabase(page.database.id)).results.map(({ properties, id, object }: PageWithChildren) => {
                 return { id, type: object, slug: slugify(properties.title[properties.title.type].map(({ plain_text }) => plain_text)) };
               })
             : undefined;
@@ -37,14 +38,18 @@ export async function getIndex(): Promise<{
   }, {});
 }
 
+type NotionDB = QueryDatabaseResponse & {
+  results: PageWithChildren[];
+};
+
 export async function getDatabase(database_id: string) {
-  const db = await notion.databases.query({ database_id });
+  const db = (await notion.databases.query({ database_id })) as NotionDB;
 
   while (db.has_more) {
-    const { results, has_more, next_cursor } = await notion.databases.query({
+    const { results, has_more, next_cursor } = (await notion.databases.query({
       database_id,
       start_cursor: db.next_cursor,
-    });
+    })) as NotionDB;
     db.results = [...db.results, ...results];
     db.has_more = has_more;
     db.next_cursor = next_cursor;
@@ -54,7 +59,7 @@ export async function getDatabase(database_id: string) {
 }
 
 export async function getPage(page_id: string) {
-  return await notion.pages.retrieve({ page_id });
+  return (await notion.pages.retrieve({ page_id })) as PageWithChildren;
 }
 
 // extend GetBlockResponse type to include "list"
@@ -62,14 +67,14 @@ export type NotionBlock =
   | {
       id: string;
       type: "bulleted_list";
-      bulleted_list: { children: GetBlockResponse[] };
+      bulleted_list: { children: BlockWithChildren[] };
     }
   | {
       id: string;
       type: "numbered_list";
-      numbered_list: { children: GetBlockResponse[] };
+      numbered_list: { children: BlockWithChildren[] };
     }
-  | GetBlockResponse;
+  | BlockWithChildren;
 
 export async function getBlockChildren(block_id: string): Promise<NotionBlock[]> {
   const list = await notion.blocks.children.list({
@@ -88,13 +93,13 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
   const children = await Promise.all(
     list.results
-      .filter(({ has_children, type }) => !["unsupported", "child_page"].includes(type) && has_children)
+      .filter(({ has_children, type }: BlockWithChildren) => !["unsupported", "child_page"].includes(type) && has_children)
       .map(async ({ id }) => {
         return { id, children: await getBlockChildren(id) };
       })
   );
 
-  const blocks = list.results.map((block) => {
+  const blocks = list.results.map((block: BlockWithChildren) => {
     if (!["unsupported", "child_page"].includes(block.type) && block.has_children && !block[block.type].children) {
       block[block.type].children = children.find(({ id }) => id === block.id)?.children;
     }
@@ -106,10 +111,9 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
       const contents = block[block.type];
       switch (block.type) {
         case "table_of_contents":
-          // @ts-ignore - `table_of_contents` is supposed to be a empty object
           block.table_of_contents["children"] = blocks
             .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
-            .map((block) => {
+            .map((block: BlockWithChildren) => {
               return {
                 title: block[block.type].rich_text.map(({ plain_text }) => plain_text).join(""),
                 type: block.type,
@@ -193,7 +197,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
       return block;
     })
-  ).then((blocks) => {
+  ).then((blocks: BlockWithChildren[]) => {
     return blocks.reduce((acc: NotionBlock[], curr: NotionBlock) => {
       if (curr.type === "bulleted_list_item") {
         if (acc[acc.length - 1]?.type === "bulleted_list") {

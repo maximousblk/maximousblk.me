@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Feed } from "feed";
 import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
+import type { PageWithChildren } from "@jitl/notion-api";
 import { parseISO } from "date-fns";
 import { slugify } from "@/lib/utils";
 
@@ -40,10 +41,10 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const index = await getIndex();
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
-      .filter(({ properties: { published } }) => {
+      .filter(({ properties: { published } }: PageWithChildren) => {
         return published[published.type];
       })
-      .map(({ properties: { title: postTitle, description: postDescription, date } }) => {
+      .map(({ properties: { title: postTitle, description: postDescription, date } }: PageWithChildren) => {
         return {
           title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
           description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),

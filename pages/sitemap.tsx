@@ -4,25 +4,26 @@ import { GetServerSideProps } from "next";
 import { slugify } from "@/lib/utils";
 import config from "@/config";
 import { getDatabase, getIndex } from "@/lib/notion";
+import { Page } from "@jitl/notion-api";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const index = await getIndex();
   const pages = await getDatabase(index.pages.id).then((pages) => {
     return pages.results
-      .filter(({ properties: { published } }) => {
+      .filter(({ properties: { published } }: Page) => {
         return published[published.type];
       })
-      .map(({ properties: { title } }) => {
+      .map(({ properties: { title } }: Page) => {
         return `/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
       });
   });
 
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
-      .filter(({ properties: { published } }) => {
+      .filter(({ properties: { published } }: Page) => {
         return published[published.type];
       })
-      .map(({ properties: { title } }) => {
+      .map(({ properties: { title } }: Page) => {
         return `/posts/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
       });
   });
