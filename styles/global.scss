@@ -37,8 +37,8 @@ html {
     @apply no-underline;
 
     &[aria-hidden="true"][href^="#"] {
-      margin-left: -1.5ch;
-      margin-right: 0.5ch;
+      margin-left: -2.6ch;
+      margin-right: 0.8ch;
 
       @apply hover:bg-opacity-0;
       @apply font-normal;
@@ -47,15 +47,18 @@ html {
   }
 
   span.icon.icon-link {
-    font-size: 1em;
+    font-size: 0.8em;
     text-decoration: none;
 
-    @apply opacity-50;
-    @apply hover:opacity-100;
+    @apply select-none;
+    @apply opacity-20;
+    @apply dark:opacity-20;
+    @apply hover:opacity-80;
 
     &::before {
-      content: "#";
+      content: "⚓";
 
+      @apply font-mono;
       @apply text-gray-500;
       @apply dark:text-gray-400;
     }

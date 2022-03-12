@@ -14,6 +14,30 @@ import { slugify } from "@/lib/utils";
 import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus, GitHub, Calendar } from "react-feather";
 import type { NotionBlock } from "@/lib/notion";
 
+const notion_color = {
+  default: "",
+
+  gray: "!text-gray-500 !dark:text-gray-400",
+  brown: "!text-stone-500 !dark:text-stone-400",
+  orange: "!text-orange-500 !dark:text-orange-400",
+  yellow: "!text-amber-500 !dark:text-yellow-400",
+  green: "!text-emerald-500 !dark:text-emerald-400",
+  blue: "!text-blue-500 !dark:text-sky-400",
+  purple: "!text-indigo-500 !dark:text-indigo-400",
+  pink: "!text-pink-500 !dark:text-pink-400",
+  red: "!text-rose-500 !dark:text-rose-400",
+
+  gray_background: "!bg-opacity-20 !bg-gray-600 !border-gray-200 dark:!border-gray-900",
+  brown_background: "!bg-opacity-20 !bg-stone-600 !border-stone-200 dark:!border-stone-900",
+  orange_background: "!bg-opacity-20 !bg-orange-600 !border-orange-200 dark:!border-orange-900",
+  yellow_background: "!bg-opacity-20 !bg-yellow-600 !border-yellow-200 dark:!border-yellow-900",
+  green_background: "!bg-opacity-20 !bg-emerald-600 !border-emerald-200 dark:!border-emerald-900",
+  blue_background: "!bg-opacity-20 !bg-sky-600 !border-sky-200 dark:!border-sky-900",
+  purple_background: "!bg-opacity-20 !bg-indigo-600 !border-indigo-200 dark:!border-indigo-900",
+  pink_background: "!bg-opacity-20 !bg-pink-600 !border-pink-200 dark:!border-pink-900",
+  red_background: "!bg-opacity-20 !bg-rose-600 !border-rose-200 dark:!border-rose-900",
+};
+
 export function renderText(block) {
   const contents = block[block.type];
 
@@ -111,16 +135,16 @@ export function renderContent(block: NotionBlock) {
   switch (block.type) {
     case "table_of_contents":
       if (!children.length) return null;
-      return <TableOfContents items={children} />;
+      return <TableOfContents items={children} className={notion_color[contents.color || "default"]} />;
     case "paragraph":
       if (!contents.rich_text.length) return null;
       return (
         <Fragment>
-          <p>
+          <p className={"px-1 py-0.5 my-4 " + notion_color[contents.color || "default"]}>
             <NotionText blocks={contents.rich_text} />
           </p>
           {children && (
-            <div className="ml-1 pl-4 border-l-2 border-gray-200 dark:border-gray-800">
+            <div className={"ml-1 pl-4 border-l-2 border-gray-200 dark:border-gray-800 " + notion_color[contents.color || "default"]}>
               <NotionContent blocks={children} />
             </div>
           )}
@@ -136,25 +160,31 @@ export function renderContent(block: NotionBlock) {
             type={block.type}
             id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
             contents={contents.rich_text}
+            className={notion_color[contents.color || "default"]}
           >
             <NotionContent blocks={contents.children} />
           </ToggleHeading>
         );
       } else {
         return (
-          <Heading type={block.type} id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))} contents={contents.rich_text} />
+          <Heading
+            type={block.type}
+            id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
+            className={notion_color[contents.color || "default"]}
+            contents={contents.rich_text}
+          />
         );
       }
 
     case "bulleted_list":
-      return <ul>{children && <NotionContent blocks={children} />}</ul>;
+      return <ul className={notion_color[contents.color || "default"]}>{children && <NotionContent blocks={children} />}</ul>;
     case "numbered_list":
-      return <ol>{children && <NotionContent blocks={children} />}</ol>;
+      return <ol className={notion_color[contents.color || "default"]}>{children && <NotionContent blocks={children} />}</ol>;
     case "bulleted_list_item":
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
       return (
-        <li>
+        <li className={"px-2 py-1 my-2 " + notion_color[contents.color || "default"]}>
           <NotionText blocks={contents.rich_text} />
           {children && <NotionContent blocks={children} />}
         </li>
@@ -162,7 +192,7 @@ export function renderContent(block: NotionBlock) {
     case "to_do":
       if (!contents.rich_text.length) return null;
       return (
-        <label htmlFor={block.id} className="my-2 pl-6 block -indent-5">
+        <label htmlFor={block.id} className={"my-2 py-1 pl-6 block -indent-5 " + notion_color[contents.color || "default"]}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2" />
           <span className={contents.checked ? "line-through text-gray-400 dark:text-gray-600" : ""}>
             <NotionText blocks={contents.rich_text} />
@@ -174,13 +204,23 @@ export function renderContent(block: NotionBlock) {
     case "template":
       if (!contents.rich_text.length) return null;
       return (
-        <Accordion summary={<NotionText blocks={contents.rich_text} />} details={children ? <NotionContent blocks={children} /> : null} />
+        <Accordion
+          summary={<NotionText blocks={contents.rich_text} />}
+          details={children ? <NotionContent blocks={children} /> : null}
+          className={notion_color[contents.color || "default"]}
+        />
       );
     case "callout":
       if (!contents.rich_text.length) return null;
       const icon = contents.icon;
       return (
-        <div className="flex space-x-3 px-3 py-2 my-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+        <div
+          className={
+            "flex space-x-3 px-3 py-2 my-6 rounded border " +
+            "bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 " +
+            notion_color[contents.color || "default"]
+          }
+        >
           <div className="h-6 w-6 mt-0.5 rounded overflow-hidden select-none" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
@@ -313,7 +353,7 @@ export function renderContent(block: NotionBlock) {
     case "quote":
       if (!contents.rich_text.length) return null;
       return (
-        <blockquote>
+        <blockquote className={"py-1 font-serif " + notion_color[contents.color || "default"]}>
           <NotionText blocks={contents.rich_text} />
         </blockquote>
       );
@@ -376,6 +416,7 @@ function Heading({
   type,
   id,
   contents,
+  className = "",
   ...props
 }: {
   type: "heading_1" | "heading_2" | "heading_3";
@@ -392,7 +433,7 @@ function Heading({
   const HeadingX = tags[type];
 
   return (
-    <HeadingX id={id}>
+    <HeadingX id={id} className={"p-1 " + className}>
       <a
         href={"#" + id}
         className="px-1 py-0.5 rounded hidden sm:inline hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -412,17 +453,25 @@ function ToggleHeading({
   type,
   id,
   contents,
+  className,
   children,
 }: {
   type: "heading_1" | "heading_2" | "heading_3";
   id: string;
   contents: any;
+  className?: string;
   children?: React.ReactChild;
 }) {
   return (
-    <details>
-      <summary className="list-none">
-        <Heading type={type} id={id} contents={contents} className="hover:cursor-pointer hover:underline" />
+    <details className="group">
+      <summary className={"list-none cursor-pointer " + className}>
+        <div className="my-2 py-2 flex justify-between items-center">
+          <Heading type={type} id={id} contents={contents} className="m-0" />
+          <span className="p-1 m-1 w-min h-min rounded hover:bg-gray-800">
+            <Plus className="block group-open:hidden h-6 w-6" />
+            <Minus className="hidden group-open:block h-6 w-6" />
+          </span>
+        </div>
       </summary>
       <div className="pl-4 border-l-2 border-gray-200 dark:border-gray-800">{children}</div>
     </details>
@@ -458,9 +507,18 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
   );
 }
 
-function Accordion({ summary, details }: { summary: React.ReactNode | string; details: React.ReactNode }) {
+function Accordion({
+  summary,
+  details,
+  className = "",
+}: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
+  summary: React.ReactNode | string;
+  details: React.ReactNode;
+}) {
   return (
-    <details className="group my-6 px-3 py-2 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+    <details
+      className={"group my-6 px-3 py-2 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 " + className}
+    >
       <summary className="!m-0 flex list-none space-x-2 cursor-pointer font-medium">
         <span>
           <Plus className="block group-open:hidden mt-0.5 h-6 w-6" />
