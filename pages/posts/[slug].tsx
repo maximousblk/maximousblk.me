@@ -41,7 +41,7 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
         .then((data) => ({ url: coverURL, ...getImageSize(Buffer.from(data)) }))
     : null;
 
-  return { props: { blocks, slug, title, description, cover, publishedAt }, revalidate: 2700 };
+  return { props: { blocks, slug, title, description, cover, publishedAt }, revalidate: 1800 };
 }
 
 export async function getStaticPaths() {
