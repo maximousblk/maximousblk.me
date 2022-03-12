@@ -11,7 +11,7 @@ import Link from "@/components/Link";
 import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents } from "@/components/TableOfContents";
 import { slugify } from "@/lib/utils";
-import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus, GitHub } from "react-feather";
+import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus, GitHub, Calendar } from "react-feather";
 import type { NotionBlock } from "@/lib/notion";
 
 export function renderText(block) {
@@ -45,6 +45,8 @@ export function renderText(block) {
           if (repo) {
             return <Mention type="github" link={mention.url} text={`${user}/${repo}${num ? "#" + num : ""}`} />;
           }
+        case "template_mention":
+          return <Mention type={mention.type.replace("template_mention_", "")} link={null} text={mention[mention.type]} />;
 
         default:
           return <Unsupported object="mention" type={contents.type} />;
@@ -169,6 +171,7 @@ export function renderContent(block: NotionBlock) {
         </label>
       );
     case "toggle":
+    case "template":
       if (!contents.rich_text.length) return null;
       return (
         <Accordion summary={<NotionText blocks={contents.rich_text} />} details={children ? <NotionContent blocks={children} /> : null} />
@@ -342,11 +345,12 @@ export function NotionText({ blocks }) {
   );
 }
 
-function Mention({ type, link, text }: { type: "user" | "page" | "github"; link: string; text: string }) {
+function Mention({ type, link, text }: { type: "user" | "page" | "github" | "date"; link: string; text: string }) {
   const icons = {
     user: AtSign,
     page: Link2,
     github: GitHub,
+    date: Calendar,
   };
   const Icon = icons[type];
   return (
