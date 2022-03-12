@@ -111,11 +111,11 @@ export function renderContent(block: NotionBlock) {
       if (!children.length) return null;
       return <TableOfContents items={children} />;
     case "paragraph":
-      if (!contents.text.length) return null;
+      if (!contents.rich_text.length) return null;
       return (
         <Fragment>
           <p>
-            <NotionText blocks={contents.text} />
+            <NotionText blocks={contents.rich_text} />
           </p>
           {children && (
             <div className="ml-1 pl-4 border-l-2 border-gray-200 dark:border-gray-800">
@@ -127,15 +127,21 @@ export function renderContent(block: NotionBlock) {
     case "heading_1":
     case "heading_2":
     case "heading_3":
-      if (!contents.text?.length) return null;
+      if (!contents.rich_text.length) return null;
       if (contents.children?.length) {
         return (
-          <ToggleHeading type={block.type} id={slugify(contents.text.map(({ plain_text }) => plain_text))} contents={contents.text}>
+          <ToggleHeading
+            type={block.type}
+            id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
+            contents={contents.rich_text}
+          >
             <NotionContent blocks={contents.children} />
           </ToggleHeading>
         );
       } else {
-        return <Heading type={block.type} id={slugify(contents.text.map(({ plain_text }) => plain_text))} contents={contents.text} />;
+        return (
+          <Heading type={block.type} id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))} contents={contents.rich_text} />
+        );
       }
 
     case "bulleted_list":
@@ -144,29 +150,31 @@ export function renderContent(block: NotionBlock) {
       return <ol>{children && <NotionContent blocks={children} />}</ol>;
     case "bulleted_list_item":
     case "numbered_list_item":
-      if (!contents.text.length) return null;
+      if (!contents.rich_text.length) return null;
       return (
         <li>
-          <NotionText blocks={contents.text} />
+          <NotionText blocks={contents.rich_text} />
           {children && <NotionContent blocks={children} />}
         </li>
       );
     case "to_do":
-      if (!contents.text.length) return null;
+      if (!contents.rich_text.length) return null;
       return (
         <label htmlFor={block.id} className="my-2 pl-6 block -indent-5">
           <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2" />
           <span className={contents.checked ? "line-through text-gray-400 dark:text-gray-600" : ""}>
-            <NotionText blocks={contents.text} />
+            <NotionText blocks={contents.rich_text} />
           </span>
           {children && <NotionContent blocks={children} />}
         </label>
       );
     case "toggle":
-      if (!contents.text.length) return null;
-      return <Accordion summary={<NotionText blocks={contents.text} />} details={children ? <NotionContent blocks={children} /> : null} />;
+      if (!contents.rich_text.length) return null;
+      return (
+        <Accordion summary={<NotionText blocks={contents.rich_text} />} details={children ? <NotionContent blocks={children} /> : null} />
+      );
     case "callout":
-      if (!contents.text.length) return null;
+      if (!contents.rich_text.length) return null;
       const icon = contents.icon;
       return (
         <div className="flex space-x-3 px-3 py-2 my-6 rounded border bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800">
@@ -184,17 +192,15 @@ export function renderContent(block: NotionBlock) {
           </div>
 
           <div className="w-full space-y-4">
-            <NotionText blocks={contents.text} />
+            <NotionText blocks={contents.rich_text} />
             {children && <NotionContent blocks={children} />}
           </div>
         </div>
       );
     case "code":
-      if (!contents.text.length) return null;
-      // TODO: add captions/titles when they get added to the api
+      if (!contents.rich_text.length) return null;
       return (
-        <CodeBlock>
-          <NotionText blocks={contents.text} />
+          <NotionText blocks={contents.rich_text} />
         </CodeBlock>
       );
     case "image":
@@ -301,10 +307,10 @@ export function renderContent(block: NotionBlock) {
       if (!children.length) return null;
       return <>{children && <NotionContent blocks={children} />}</>;
     case "quote":
-      if (!contents.text.length) return null;
+      if (!contents.rich_text.length) return null;
       return (
         <blockquote>
-          <NotionText blocks={contents.text} />
+          <NotionText blocks={contents.rich_text} />
         </blockquote>
       );
     default:

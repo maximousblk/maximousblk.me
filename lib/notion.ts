@@ -111,7 +111,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
             .map((block) => {
               return {
-                title: block[block.type].text.map(({ plain_text }) => plain_text).join(""),
+                title: block[block.type].rich_text.map(({ plain_text }) => plain_text).join(""),
                 type: block.type,
                 children: [],
               };
