@@ -1,32 +1,44 @@
-import { MDXRemote } from "next-mdx-remote";
-
-import { getFiles, getFileBySlug } from "@/lib/mdx";
 import PageLayout from "@/layouts/page";
-import MDXComponents from "@/components/MDXComponents";
 
-export default function Page({ mdxSource, frontMatter }) {
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { getIndex, getBlockChildren, getPage } from "@/lib/notion";
+import { NotionContent } from "@/lib/render";
+
+export default function Page({ blocks, title, description, hide_descr, slug }) {
+  if (!blocks) {
+    return null;
+  }
   return (
-    <PageLayout frontMatter={frontMatter}>
-      <MDXRemote {...mdxSource} components={MDXComponents} />
+    <PageLayout title={title} slug={slug} description={description} hide_description={hide_descr}>
+      <NotionContent blocks={blocks} />
     </PageLayout>
   );
 }
 
-export async function getStaticPaths() {
-  const pages = await getFiles("pages");
+export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
+  const index = await getIndex();
+  const pageID = index.pages.children.find(({ slug: sl }) => sl === slug)?.id;
+  if (!pageID) return { notFound: true };
 
-  return {
-    paths: pages.map((s) => ({
-      params: {
-        slug: s.replace(/\.mdx/, "")
-      }
-    })),
-    fallback: false
-  };
+  const page = await getPage(pageID);
+
+  const { title: pageTitle, description: pageDescription, hide_description } = page.properties;
+
+  const blocks = await getBlockChildren(page.id);
+  const title = pageTitle[pageTitle.type].map(({ plain_text }) => plain_text).join(" ");
+  const description = pageDescription[pageDescription.type].map(({ plain_text }) => plain_text).join(" ");
+  const hide_descr = hide_description[hide_description.type];
+
+  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 2700 };
 }
 
-export async function getStaticProps({ params }) {
-  const pages = await getFileBySlug("pages", params.slug);
+export async function getStaticPaths() {
+  const index = await getIndex();
 
-  return { props: pages, revalidate: 3600 };
+  return {
+    paths: index.pages.children.map(({ slug }) => {
+      return { params: { slug } };
+    }),
+    fallback: "blocking",
+  };
 }

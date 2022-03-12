@@ -1,4 +1,4 @@
-import config from "@/data/config";
+import config from "@/config";
 
 const title = config.name;
 const description = config.description;
@@ -19,15 +19,15 @@ const SEO = {
         url: config.baseUrl + "/og.png",
         alt: title,
         width: 1280,
-        height: 720
-      }
-    ]
+        height: 720,
+      },
+    ],
   },
   twitter: {
     handle: "@" + config.username,
     site: "@" + config.username,
-    cardType: "summary_large_image"
-  }
+    cardType: "summary_large_image",
+  },
 };
 
 export default SEO;

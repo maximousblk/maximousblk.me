@@ -2,16 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./prism.scss";
-
 ::selection {
-  @apply text-gray-100 bg-gray-800 dark:text-coolGray-900 dark:bg-coolGray-100;
+  @apply text-gray-100 bg-gray-800 dark:text-gray-900 dark:bg-gray-100;
 }
 
 html {
+  tab-size: 2;
   min-width: 360px;
   scroll-behavior: smooth;
-  scroll-padding-top: 4rem;
+  scroll-padding-top: 6rem;
 
   @media screen and (min-width: 960px) {
     margin-left: calc(100vw - 100%);
@@ -19,53 +18,27 @@ html {
   }
 }
 
-#__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-// /* twemoji */
-// img.emoji {
-//   display: inline-block;
-//   height: 1em;
-//   width: 1em;
-//   margin: 0 0.05em 0 0.1em;
-//   vertical-align: -0.1em;
-// }
-
-.sticky-nav {
-  --tw-bg-opacity: 0.6 !important;
-
-  backdrop-filter: blur(20px);
-  position: sticky;
-  top: 0;
-  transition: background-color 0.1 ease-in-out;
-  z-index: 10;
-
-  @supports not (backdrop-filter: none) {
-    --tw-bg-opacity: 1 !important;
-
-    backdrop-filter: none;
-  }
-}
-
 .prose {
-  code {
-    @apply px-1.5 py-0.5 rounded border text-sm text-coolGray-200 border-coolGray-700 bg-coolGray-900;
+  > :first-child {
+    /* Override removing margin, to prevent layout shift */
+    margin-top: 1.25em !important;
+    margin-bottom: 1.25em !important;
   }
 
-  img {
-    /* Don't apply styles to next/image */
-    @apply m-0 rounded-md;
+  .katex {
+    font-size: 1.5em;
+  }
+
+  code {
+    @apply px-1 py-0.5 rounded border text-sm text-gray-900 border-gray-200 bg-gray-100 dark:text-gray-200 dark:border-gray-800 dark:bg-gray-900;
   }
 
   a {
     @apply no-underline;
 
     &[aria-hidden="true"][href^="#"] {
-      margin-left: -1.5ch;
-      margin-right: 0.5ch;
+      margin-left: -2.6ch;
+      margin-right: 0.8ch;
 
       @apply hover:bg-opacity-0;
       @apply font-normal;
@@ -74,64 +47,36 @@ html {
   }
 
   span.icon.icon-link {
-    font-size: 1em;
+    font-size: 0.9em;
     text-decoration: none;
 
-    @apply opacity-50;
-    @apply hover:opacity-100;
+    @apply select-none;
+    @apply opacity-20;
+    @apply dark:opacity-20;
+    @apply hover:opacity-80;
 
     &::before {
-      content: "#";
+      content: "⚓";
 
+      @apply font-mono;
       @apply text-gray-500;
-      @apply dark:text-coolGray-400;
+      @apply dark:text-gray-400;
     }
   }
 
-  .task-list-item {
-    @apply pl-0;
-
-    &::before {
-      display: none;
-    }
-
-    &:first-child,
-    :last-child {
-      @apply my-0;
-    }
-
-    input {
-      @apply mr-2;
-    }
+  details > *:last-child {
+    @apply mb-0;
   }
 
-  .footnote-backref {
-    @apply ml-2;
+  video {
+    @apply m-0;
   }
-
-  .footnote-ref {
-    @apply ml-0.5;
-
-    &::before {
-      content: "[";
-    }
-
-    &::after {
-      content: "]";
-    }
-  }
-}
-
-.prose > :first-child {
-  /* Override removing margin, to prevent layout shift */
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
 }
 
 .quote::after {
   content: "”";
 
-  @apply top-0 right-0 text-7xl font-serif text-gray-400 dark:text-coolGray-600 absolute;
+  @apply top-0 right-0 text-7xl font-serif text-gray-400 dark:text-gray-600 absolute;
 }
 
 pre {
@@ -140,6 +85,10 @@ pre {
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  span {
+    white-space: pre !important;
   }
 }
 

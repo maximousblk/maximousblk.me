@@ -2,6 +2,7 @@ import "@/styles/global.scss";
 import "@fontsource/inter";
 import "@fontsource/lora";
 import "@fontsource/jetbrains-mono";
+import "katex/dist/katex.min.css";
 
 import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";
@@ -25,6 +26,8 @@ export default function App({ Component, pageProps }: AppProps) {
         strategy="afterInteractive"
         src="https://analytics.maximousblk.me/umami.js"
         data-website-id="d565f770-836d-42fb-9fe3-0946633cdb49"
+        data-domains="maximousblk.me"
+        data-cache="true"
       />
     </ThemeProvider>
   );
@@ -32,6 +35,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
 export function reportWebVitals(metric) {
   if (process.env.NODE_ENV === "development") {
-    console.log(metric);
+    console.debug(metric);
   }
 }

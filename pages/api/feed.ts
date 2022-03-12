@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
-import { promises as fs } from "fs";
-import path from "path";
 import { Feed } from "feed";
-import matter from "gray-matter";
-import config from "@/data/config";
+import config from "@/config";
+import { getDatabase, getIndex } from "@/lib/notion";
+import type { PageWithChildren } from "@jitl/notion-api";
+import { parseISO } from "date-fns";
+import { slugify } from "@/lib/utils";
 
 const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const { f } = req.query;
@@ -29,35 +29,43 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
     feedLinks: {
       json: config.baseUrl + "/feed/json",
       rss: config.baseUrl + "/feed/rss",
-      atom: config.baseUrl + "/feed/atom"
+      atom: config.baseUrl + "/feed/atom",
     },
     author: {
       name: config.name,
       email: config.email,
-      link: config.baseUrl
-    }
+      link: config.baseUrl,
+    },
   });
 
-  const posts = await fs.readdir(path.join(process.cwd(), "data", "posts"));
+  const index = await getIndex();
+  const posts = await getDatabase(index.posts.id).then((posts) => {
+    return posts.results
+      .filter(({ properties: { published } }: PageWithChildren) => {
+        return published[published.type];
+      })
+      .map(({ properties: { title: postTitle, description: postDescription, date } }: PageWithChildren) => {
+        return {
+          title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
+          description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),
+          slug: slugify(postTitle[postTitle.type].map(({ plain_text }) => plain_text)),
+          publishedAt: parseISO(date[date.type].start).getTime(),
+        };
+      })
+      .sort((a, b) => {
+        return Number(b.publishedAt) - Number(a.publishedAt);
+      });
+  });
 
-  await Promise.all(
-    posts.map(async (name) => {
-      const content = await fs.readFile(path.join(process.cwd(), "data", "posts", name));
-      const frontmatter = matter(content);
-
-      if (frontmatter.data.published) {
-        rss.addItem({
-          title: frontmatter.data.title,
-          id: name.replace(/\.mdx?/, ""),
-          link: config.baseUrl + "/posts/" + name.replace(/\.mdx?/, ""),
-          description: frontmatter.data.description,
-          date: new Date(frontmatter.data.publishedAt),
-          image: config.baseUrl + frontmatter.data.image,
-          content: frontmatter.content
-        });
-      }
-    })
-  );
+  posts.map((post) => {
+    rss.addItem({
+      title: post.title,
+      id: post.slug,
+      link: config.baseUrl + "/posts/" + post.slug,
+      description: post.description,
+      date: new Date(post.publishedAt),
+    });
+  });
 
   rss.items.sort((a, b) => {
     return a.date > b.date ? -1 : 1;
@@ -66,7 +74,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const feeds = {
     atom: { body: rss.atom1(), type: "application/xml" },
     json: { body: rss.json1(), type: "application/json" },
-    rss: { body: rss.rss2(), type: "application/xml" }
+    rss: { body: rss.rss2(), type: "application/xml" },
   };
 
   const feed = feeds[format] || feeds.atom;

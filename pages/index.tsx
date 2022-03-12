@@ -1,19 +1,27 @@
-import { MDXRemote } from "next-mdx-remote";
+import { getIndex, getPage, getBlockChildren } from "@/lib/notion";
+import { NotionContent } from "@/lib/render";
+import { GetStaticPropsResult } from "next";
 
-import { getFileBySlug } from "@/lib/mdx";
 import IndexLayout from "@/layouts/index";
-import MDXComponents from "@/components/MDXComponents";
 
-export default function Uses({ mdxSource, frontMatter }) {
+export default function Page({ page, blocks }) {
+  if (!page || !blocks) {
+    return null;
+  }
   return (
-    <IndexLayout frontMatter={frontMatter}>
-      <MDXRemote {...mdxSource} components={MDXComponents} />
+    <IndexLayout title={page.properties.title.title.map(({ plain_text }) => plain_text).join("")} description="">
+      <NotionContent blocks={blocks} />
     </IndexLayout>
   );
 }
 
-export async function getStaticProps() {
-  const index = await getFileBySlug("pages", "home");
+export async function getStaticProps(): Promise<GetStaticPropsResult<any>> {
+  const index = await getIndex();
 
-  return { props: index, revalidate: 3600 };
+  const page = await getPage(index.home.id);
+  if (!page) return { notFound: true };
+
+  const blocks = await getBlockChildren(page.id);
+
+  return { props: { page, blocks }, revalidate: 2700 };
 }

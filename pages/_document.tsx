@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
-import config from "@/data/config";
+import config from "@/config";
 
 class MyDocument extends Document {
   render() {
@@ -29,7 +29,7 @@ class MyDocument extends Document {
           <meta content="M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI" name="google-site-verification" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         </Head>
-        <body className="bg-white dark:bg-coolGray-900 text-black dark:text-white">
+        <body className="bg-white dark:bg-gray-900 text-black dark:text-white">
           <Main />
           <NextScript />
         </body>

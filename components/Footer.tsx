@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 import Icon from "@/components/FeatherIcons";
-import config from "@/data/config";
+import config from "@/config";
 
 const Social = ({ name, icon, href }) => {
   return (
     <a
-      className="p-2 rounded text-sm text-gray-600 hover:text-gray-900 dark:text-coolGray-400 dark:hover:text-coolGray-200 transition hover:bg-gray-100 dark:hover:bg-coolGray-800"
+      className="p-2 rounded text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 transition hover:bg-gray-100 dark:hover:bg-gray-800"
       target="_blank"
       rel="noopener noreferrer"
       href={href}
@@ -19,16 +19,21 @@ const Social = ({ name, icon, href }) => {
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center mb-8">
+    <footer className="print:hidden flex flex-col items-center mb-8">
       <div className="flex space-x-2 mb-4">
         {config.footer.social.map(({ name, icon, href }) => (
           <Social name={name} icon={icon} href={href} key={name} />
         ))}
       </div>
-      <div className="space-x-3">
+      <div className="space-x-1">
         {config.footer.links.map(({ name, href }) => (
           <Link href={href} key={name}>
-            <a className="text-sm text-gray-600 hover:text-gray-900 dark:text-coolGray-400 dark:hover:text-coolGray-200">/{name}</a>
+            <a
+              className="px-1.5 py-1 rounded-sm text-sm font-mono text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+              aria-label={name}
+            >
+              /{name}
+            </a>
           </Link>
         ))}
       </div>
