@@ -140,7 +140,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents.rich_text.length) return null;
       return (
         <Fragment>
-          <p className={"px-1 py-0.5 my-4 " + notion_color[contents.color || "default"]}>
+          <p className={"px-1 py-0.5 my-4 rounded-sm " + notion_color[contents.color || "default"]}>
             <NotionText blocks={contents.rich_text} />
           </p>
           {children && (
@@ -177,14 +177,14 @@ export function renderContent(block: NotionBlock) {
       }
 
     case "bulleted_list":
-      return <ul className={notion_color[contents.color || "default"]}>{children && <NotionContent blocks={children} />}</ul>;
+      return <ul>{children && <NotionContent blocks={children} />}</ul>;
     case "numbered_list":
-      return <ol className={notion_color[contents.color || "default"]}>{children && <NotionContent blocks={children} />}</ol>;
+      return <ol>{children && <NotionContent blocks={children} />}</ol>;
     case "bulleted_list_item":
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
       return (
-        <li className={"px-2 py-1 my-2 " + notion_color[contents.color || "default"]}>
+        <li className={"px-2 py-1 my-2 rounded-sm " + notion_color[contents.color || "default"]}>
           <NotionText blocks={contents.rich_text} />
           {children && <NotionContent blocks={children} />}
         </li>
@@ -192,7 +192,7 @@ export function renderContent(block: NotionBlock) {
     case "to_do":
       if (!contents.rich_text.length) return null;
       return (
-        <label htmlFor={block.id} className={"my-2 py-1 pl-6 block -indent-5 " + notion_color[contents.color || "default"]}>
+        <label htmlFor={block.id} className={"my-2 py-1 pl-6 block -indent-5 rounded-sm " + notion_color[contents.color || "default"]}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2" />
           <span className={contents.checked ? "line-through text-gray-400 dark:text-gray-600" : ""}>
             <NotionText blocks={contents.rich_text} />
@@ -353,7 +353,7 @@ export function renderContent(block: NotionBlock) {
     case "quote":
       if (!contents.rich_text.length) return null;
       return (
-        <blockquote className={"py-1 font-serif " + notion_color[contents.color || "default"]}>
+        <blockquote className={"py-1 " + notion_color[contents.color || "default"]}>
           <NotionText blocks={contents.rich_text} />
         </blockquote>
       );
@@ -433,7 +433,7 @@ function Heading({
   const HeadingX = tags[type];
 
   return (
-    <HeadingX id={id} className={"p-1 " + className}>
+    <HeadingX id={id} className={"p-1 rounded-sm " + className}>
       <a
         href={"#" + id}
         className="px-1 py-0.5 rounded hidden sm:inline hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -464,10 +464,10 @@ function ToggleHeading({
 }) {
   return (
     <details className="group">
-      <summary className={"list-none cursor-pointer " + className}>
-        <div className="my-2 py-2 flex justify-between items-center">
+      <summary className={"list-none cursor-pointer rounded-sm " + className}>
+        <div className="my-2 py-1 flex justify-between items-center">
           <Heading type={type} id={id} contents={contents} className="m-0" />
-          <span className="p-1 m-1 w-min h-min rounded hover:bg-gray-800">
+          <span className="p-1 mx-2 w-min h-min rounded hover:bg-gray-800">
             <Plus className="block group-open:hidden h-6 w-6" />
             <Minus className="hidden group-open:block h-6 w-6" />
           </span>
