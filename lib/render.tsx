@@ -137,7 +137,7 @@ export function renderContent(block: NotionBlock) {
       if (!children.length) return null;
       return <TableOfContents items={children} className={notion_color[contents.color || "default"]} />;
     case "paragraph":
-      if (!contents.rich_text.length) return null;
+      if (!contents.rich_text.length) return <br />;
       return (
         <Fragment>
           <p className={"px-1 py-0.5 my-4 rounded-sm " + notion_color[contents.color || "default"]}>
