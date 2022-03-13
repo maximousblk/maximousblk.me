@@ -27,7 +27,7 @@ export default function CodeBlock(props): JSX.Element {
     <div ref={textInput} onMouseEnter={showCopy} onMouseLeave={hideCopy} className="relative w-full my-6">
       <div className="flex justify-between align-middle px-4 py-2 rounded-t-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-300 bg-gray-50 dark:bg-gray-900">
         <span className="flex font-mono">
-          <span className="uppercase font-medium text-gray-300 dark:text-gray-700 select-none">{props.lang}</span>
+          <span className="uppercase font-medium text-gray-400 dark:text-gray-600 select-none">{props.lang}</span>
           <span className="mx-4 line-clamp-1" title={props.title}>
             {props.title}
           </span>
