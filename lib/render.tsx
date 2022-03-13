@@ -520,7 +520,7 @@ function Accordion({
       className={"group my-6 px-3 py-2 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 " + className}
     >
       <summary className="!m-0 flex list-none space-x-2 cursor-pointer font-medium">
-        <span>
+        <span className={details ? "" : "text-gray-400 dark:text-gray-600"}>
           <Plus className="block group-open:hidden mt-0.5 h-6 w-6" />
           <Minus className="hidden group-open:block mt-0.5 h-6 w-6" />
         </span>
