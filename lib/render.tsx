@@ -192,8 +192,8 @@ export function renderContent(block: NotionBlock) {
     case "to_do":
       if (!contents.rich_text.length) return null;
       return (
-        <label htmlFor={block.id} className={"my-2 py-1 pl-6 block -indent-5 rounded-sm " + notion_color[contents.color || "default"]}>
-          <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2" />
+        <label htmlFor={block.id} className={"my-2 py-1 pl-9 block -indent-6 rounded-sm " + notion_color[contents.color || "default"]}>
+          <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2.5 scale-125 align-middle" />
           <span className={contents.checked ? "line-through text-gray-400 dark:text-gray-600" : ""}>
             <NotionText blocks={contents.rich_text} />
           </span>
