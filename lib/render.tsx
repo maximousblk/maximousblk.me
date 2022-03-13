@@ -27,15 +27,15 @@ const notion_color = {
   pink: "!text-pink-500 !dark:text-pink-400",
   red: "!text-rose-500 !dark:text-rose-400",
 
-  gray_background: "!bg-opacity-20 !bg-gray-600 !border-gray-200 dark:!border-gray-900",
-  brown_background: "!bg-opacity-20 !bg-stone-600 !border-stone-200 dark:!border-stone-900",
-  orange_background: "!bg-opacity-20 !bg-orange-600 !border-orange-200 dark:!border-orange-900",
-  yellow_background: "!bg-opacity-20 !bg-yellow-600 !border-yellow-200 dark:!border-yellow-900",
-  green_background: "!bg-opacity-20 !bg-emerald-600 !border-emerald-200 dark:!border-emerald-900",
-  blue_background: "!bg-opacity-20 !bg-sky-600 !border-sky-200 dark:!border-sky-900",
-  purple_background: "!bg-opacity-20 !bg-indigo-600 !border-indigo-200 dark:!border-indigo-900",
-  pink_background: "!bg-opacity-20 !bg-pink-600 !border-pink-200 dark:!border-pink-900",
-  red_background: "!bg-opacity-20 !bg-rose-600 !border-rose-200 dark:!border-rose-900",
+  gray_background: "!bg-opacity-10 !bg-gray-500 !border-gray-200 dark:!border-gray-900",
+  brown_background: "!bg-opacity-10 !bg-stone-500 !border-stone-200 dark:!border-stone-900",
+  orange_background: "!bg-opacity-10 !bg-orange-500 !border-orange-200 dark:!border-orange-900",
+  yellow_background: "!bg-opacity-10 !bg-yellow-500 !border-yellow-200 dark:!border-yellow-900",
+  green_background: "!bg-opacity-10 !bg-emerald-500 !border-emerald-200 dark:!border-emerald-900",
+  blue_background: "!bg-opacity-10 !bg-sky-500 !border-sky-200 dark:!border-sky-900",
+  purple_background: "!bg-opacity-10 !bg-indigo-500 !border-indigo-200 dark:!border-indigo-900",
+  pink_background: "!bg-opacity-10 !bg-pink-500 !border-pink-200 dark:!border-pink-900",
+  red_background: "!bg-opacity-10 !bg-rose-500 !border-rose-200 dark:!border-rose-900",
 };
 
 export function renderText(block) {
