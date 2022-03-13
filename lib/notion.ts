@@ -235,8 +235,8 @@ function getRandomInt(min: number, max: number) {
 
 export function getReadingTime(blocks: NotionBlock[]): ReadTimeResults {
   const words: string = blocks.reduce((acc, block) => {
-    if (block[block.type].text?.length) {
-      return acc + block[block.type].text.map(({ plain_text }) => plain_text).join(" ");
+    if (block[block.type].rich_text?.length) {
+      return acc + block[block.type].rich_text.map(({ plain_text }) => plain_text).join(" ");
     }
     return acc;
   }, "");
