@@ -5,9 +5,8 @@ import { getIndex, getBlockChildren, getPage } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 
 export default function Page({ blocks, title, description, hide_descr, slug }) {
-  if (!blocks) {
-    return null;
-  }
+  if (!blocks) return null;
+
   return (
     <PageLayout title={title} slug={slug} description={description} hide_description={hide_descr}>
       <NotionContent blocks={blocks} />

@@ -6,6 +6,8 @@ import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import getImageSize from "probe-image-size/sync";
 
 export default function Blog({ blocks, slug, title, description, cover, publishedAt }) {
+  if (!blocks) return null;
+
   return (
     <PostLayout
       title={title}

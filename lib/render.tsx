@@ -95,18 +95,18 @@ export function renderText(block) {
         pink: "text-pink-500 dark:text-pink-400",
         red: "text-rose-500 dark:text-rose-400",
 
-        gray_background: "bg-gray-400",
-        brown_background: "bg-stone-400",
-        orange_background: "bg-orange-400",
-        yellow_background: "bg-yellow-400",
-        green_background: "bg-emerald-400",
-        blue_background: "bg-sky-400",
-        purple_background: "bg-indigo-400",
-        pink_background: "bg-pink-400",
-        red_background: "bg-rose-400",
+        gray_background: "bg-gray-300 dark:bg-gray-400",
+        brown_background: "bg-stone-300 dark:bg-stone-400",
+        orange_background: "bg-orange-300 dark:bg-orange-400",
+        yellow_background: "bg-yellow-300 dark:bg-yellow-400",
+        green_background: "bg-emerald-300 dark:bg-emerald-400",
+        blue_background: "bg-sky-300 dark:bg-sky-400",
+        purple_background: "bg-indigo-300 dark:bg-indigo-400",
+        pink_background: "bg-pink-300 dark:bg-pink-400",
+        red_background: "bg-rose-300 dark:bg-rose-400",
       };
 
-      const highlight = color.includes("background") ? " p-[0.125rem] rounded-sm text-gray-900 dark:bg-opacity-90 bg-opacity-50" : "";
+      const highlight = color.includes("background") ? " p-[0.125rem] rounded-sm dark:bg-opacity-40 bg-opacity-50" : "";
 
       let part: JSX.Element = contents.link ? <Link href={contents.link.url}>{contents.content}</Link> : <>{contents.content}</>;
 

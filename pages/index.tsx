@@ -5,9 +5,8 @@ import { GetStaticPropsResult } from "next";
 import IndexLayout from "@/layouts/index";
 
 export default function Page({ page, blocks }) {
-  if (!page || !blocks) {
-    return null;
-  }
+  if (!page || !blocks) return null;
+
   return (
     <IndexLayout title={page.properties.title.title.map(({ plain_text }) => plain_text).join("")} description="">
       <NotionContent blocks={blocks} />
