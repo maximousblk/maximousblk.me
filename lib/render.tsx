@@ -467,7 +467,7 @@ function ToggleHeading({
       <summary className={"list-none cursor-pointer rounded-sm " + className}>
         <div className="my-2 py-1 flex justify-between items-center">
           <Heading type={type} id={id} contents={contents} className="m-0" />
-          <span className="p-1 mx-2 w-min h-min rounded hover:bg-gray-800">
+          <span className="p-1 mx-2 w-min h-min rounded hover:bg-gray-100 hover:dark:bg-gray-800">
             <Plus className="block group-open:hidden h-6 w-6" />
             <Minus className="hidden group-open:block h-6 w-6" />
           </span>
