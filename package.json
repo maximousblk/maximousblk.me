@@ -38,7 +38,7 @@
     "react-feather": "^2.0.9",
     "react-player": "^2.9.0",
     "reading-time": "^1.5.0",
-    "sharp": "^0.30.2",
+    "sharp": "^0.30.3",
     "slugify": "^1.6.5",
     "tailwindcss": "^3.0.23",
     "unfurl.js": "^5.6.4"
