@@ -1,19 +1,15 @@
 import { useRef, useState } from "react";
 import { Clipboard, Check } from "react-feather";
 
-export default function CodeBlock(props): JSX.Element {
+interface Props {
+  title?: string;
+  lang?: string;
+  children: React.ReactChild;
+}
+
+export default function CodeBlock({ title, lang, children }: Props): JSX.Element {
   const textInput = useRef(null);
-  const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
-
-  const showCopy = () => {
-    setHovered(true);
-  };
-
-  const hideCopy = () => {
-    setHovered(false);
-    setCopied(false);
-  };
 
   const onCopy = () => {
     navigator.clipboard.writeText(textInput.current.textContent);
@@ -24,12 +20,12 @@ export default function CodeBlock(props): JSX.Element {
   };
 
   return (
-    <div ref={textInput} onMouseEnter={showCopy} onMouseLeave={hideCopy} className="relative w-full my-6">
+    <div ref={textInput} className="relative w-full my-6">
       <div className="flex justify-between align-middle px-4 py-2 rounded-t-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-300 bg-gray-50 dark:bg-gray-900">
         <span className="flex font-mono">
-          <span className="uppercase font-medium text-gray-400 dark:text-gray-600 select-none">{props.lang}</span>
-          <span className="mx-4 line-clamp-1" title={props.title}>
-            {props.title}
+          <span className="uppercase font-medium text-gray-400 dark:text-gray-600 select-none">{lang}</span>
+          <span className="mx-4 line-clamp-1" title={title}>
+            {title}
           </span>
         </span>
         <button
@@ -47,7 +43,7 @@ export default function CodeBlock(props): JSX.Element {
       </div>
 
       <pre className="p-4 my-0 w-full overflow-auto rounded-t-none border border-t-0 border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-300 bg-gray-50 dark:bg-gray-900">
-        {props.children}
+        {children}
       </pre>
     </div>
   );
