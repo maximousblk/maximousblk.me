@@ -357,6 +357,36 @@ export function renderContent(block: NotionBlock) {
           <NotionText blocks={contents.rich_text} />
         </blockquote>
       );
+    case "table":
+      if (!contents.table_width && !contents.children.length) return null;
+
+      return (
+        <table className="table-auto w-full">
+          {contents.has_column_header && (
+            <thead>
+              <tr>
+                {children[0].table_row.cells.map((cell, i) => (
+                  <td key={i} className="px-4 py-2">
+                    <NotionText blocks={cell} />
+                  </td>
+                ))}
+              </tr>
+            </thead>
+          )}
+
+          <tbody>
+            {children.slice(contents.has_column_header ? 1 : 0).map(({ table_row }, i) => (
+              <tr key={i}>
+                {table_row.cells.map((cell, j) => (
+                  <td key={j} className="px-4 py-2">
+                    <NotionText blocks={cell} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
     default:
       // console.log(block.type, block[block.type]);
       return <Unsupported object={block.object} type={block.type} />;
