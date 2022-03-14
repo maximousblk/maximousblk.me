@@ -1,5 +1,6 @@
 public/sw*
 public/workbox*
+public/fallback*
 node_modules
 *.log
 .DS_Store
