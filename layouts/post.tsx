@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { ExternalLink } from "react-feather";
+import { Twitter, GitHub } from "react-feather";
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import Image from "next/image";
 
@@ -10,7 +10,7 @@ const discussURL = (title: string, slug: string) => {
   return `https://github.com/${config.repo.name}/discussions/new?category=post&title=${title}`;
 };
 const twitterURL = (title: string, slug: string) => {
-  const text = encodeURIComponent(title);
+  const text = encodeURIComponent(`${title} - ${config.name}`);
   const url = encodeURIComponent(`${config.baseUrl}/posts/${slug}`);
   return `http://twitter.com/share?text=${text}&url=${url}`;
 };
@@ -77,13 +77,13 @@ export default function PostLayout({ children, title, slug, cover, publishedAt, 
         <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
         <div className="print:hidden flex space-x-3 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 mt-8">
           <a href={twitterURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            <Twitter size={16} className="inline-block mr-1 text-gray-500 dark:text-gray-500" />
             {"Share on Twitter"}
-            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-gray-500" />
           </a>
           <p> • </p>
           <a href={discussURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            <GitHub size={16} className="inline-block mr-1 text-gray-500 dark:text-gray-500" />
             {"Discuss on GitHub"}
-            <ExternalLink size={16} className="inline-block ml-1 text-gray-500 dark:text-gray-500" />
           </a>
         </div>
       </article>
