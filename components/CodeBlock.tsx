@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import { Clipboard, Check } from "react-feather";
 
-interface Props {
+interface CodeBlockProps {
   title?: string;
   lang?: string;
   children: React.ReactChild;
 }
 
-export default function CodeBlock({ title, lang, children }: Props): JSX.Element {
+export default function CodeBlock({ title, lang, children }: CodeBlockProps): JSX.Element {
   const textInput = useRef(null);
   const [copied, setCopied] = useState(false);
 

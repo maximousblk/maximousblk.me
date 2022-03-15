@@ -1,8 +1,6 @@
 import { Client } from "@notionhq/client";
-import type { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
-import type { TableOfContentsItem } from "@/components/TableOfContents";
-import readingTime, { type ReadTimeResults } from "reading-time";
+import type { NotionDB, NotionBlock, TableOfContentsItem } from "@/lib/types";
 import getImageSize from "probe-image-size/sync";
 import { unfurl } from "unfurl.js";
 import { slugify } from "@/lib/utils";
@@ -38,10 +36,6 @@ export async function getIndex(): Promise<{
   }, {});
 }
 
-type NotionDB = QueryDatabaseResponse & {
-  results: PageWithChildren[];
-};
-
 export async function getDatabase(database_id: string) {
   const db = (await notion.databases.query({ database_id })) as NotionDB;
 
@@ -61,20 +55,6 @@ export async function getDatabase(database_id: string) {
 export async function getPage(page_id: string) {
   return (await notion.pages.retrieve({ page_id })) as PageWithChildren;
 }
-
-// extend GetBlockResponse type to include "list"
-export type NotionBlock =
-  | {
-      id: string;
-      type: "bulleted_list";
-      bulleted_list: { children: BlockWithChildren[] };
-    }
-  | {
-      id: string;
-      type: "numbered_list";
-      numbered_list: { children: BlockWithChildren[] };
-    }
-  | BlockWithChildren;
 
 export async function getBlockChildren(block_id: string): Promise<NotionBlock[]> {
   const list = await notion.blocks.children.list({
@@ -231,15 +211,4 @@ function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-export function getReadingTime(blocks: NotionBlock[]): ReadTimeResults {
-  const words: string = blocks.reduce((acc, block) => {
-    if (block[block.type].rich_text?.length) {
-      return acc + block[block.type].rich_text.map(({ plain_text }) => plain_text).join(" ");
-    }
-    return acc;
-  }, "");
-
-  return readingTime(words);
 }

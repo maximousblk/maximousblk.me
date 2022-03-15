@@ -12,7 +12,7 @@ import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents } from "@/components/TableOfContents";
 import { slugify } from "@/lib/utils";
 import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus, GitHub, Calendar } from "react-feather";
-import type { NotionBlock } from "@/lib/notion";
+import type { NotionBlock } from "@/lib/types";
 
 const notion_color = {
   default: "",

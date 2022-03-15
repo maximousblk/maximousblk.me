@@ -1,11 +1,6 @@
 import Link from "@/components/Link";
 import { slugify } from "@/lib/utils";
-
-export interface TableOfContentsItem {
-  title: string;
-  type?: string;
-  children?: TableOfContentsItem[];
-}
+import type { TableOfContentsItem } from "@/lib/types";
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   items: TableOfContentsItem[];

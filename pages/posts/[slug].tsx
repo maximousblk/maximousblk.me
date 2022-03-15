@@ -1,5 +1,6 @@
 import PostLayout from "@/layouts/post";
-import { getBlockChildren, getIndex, getPage, getReadingTime } from "@/lib/notion";
+import { getBlockChildren, getIndex, getPage } from "@/lib/notion";
+import { getReadingTime } from "@/lib/utils";
 import { NotionContent } from "@/lib/render";
 import { parseISO } from "date-fns";
 import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
