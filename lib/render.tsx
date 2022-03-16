@@ -424,7 +424,7 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
   };
   const Icon = icons[type];
   return (
-    <Link href={link} className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+    <Link href={link} className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded whitespace-nowrap">
       <Icon size={16} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
       <span>{text}</span>
     </Link>
