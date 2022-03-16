@@ -1508,14 +1508,14 @@ at-least-node@^1.0.0:
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
-autoprefixer@^10.4.2:
-  version "10.4.2"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.2.tgz#25e1df09a31a9fba5c40b578936b90d35c9d4d3b"
-  integrity sha512-9fOPpHKuDW1w/0EKfRmVnxTDt8166MAnLI3mgZ1JCnhNtYWxcJ6Ud5CO/AVOZi/AvFa8DY9RTy3h3+tFBlrrdQ==
+autoprefixer@^10.4.4:
+  version "10.4.4"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.4.tgz#3e85a245b32da876a893d3ac2ea19f01e7ea5a1e"
+  integrity sha512-Tm8JxsB286VweiZ5F0anmbyGiNI3v3wGv3mz9W+cxEDYB/6jbnj6GM9H9mK3wIL8ftgl+C07Lcwb8PG5PCCPzA==
   dependencies:
-    browserslist "^4.19.1"
-    caniuse-lite "^1.0.30001297"
-    fraction.js "^4.1.2"
+    browserslist "^4.20.2"
+    caniuse-lite "^1.0.30001317"
+    fraction.js "^4.2.0"
     normalize-range "^0.1.2"
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
@@ -1631,13 +1631,13 @@ browserify-fs@^1.0.0:
     level-js "^2.1.3"
     levelup "^0.18.2"
 
-browserslist@^4.17.5, browserslist@^4.19.1:
-  version "4.20.0"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.20.0.tgz#35951e3541078c125d36df76056e94738a52ebe9"
-  integrity sha512-bnpOoa+DownbciXj0jVGENf8VYQnE2LNWomhYuCsMmmx9Jd9lwq0WXODuwpSsp8AVdKM2/HorrzxAfbKvWTByQ==
+browserslist@^4.17.5, browserslist@^4.19.1, browserslist@^4.20.2:
+  version "4.20.2"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.20.2.tgz#567b41508757ecd904dab4d1c646c612cd3d4f88"
+  integrity sha512-CQOBCqp/9pDvDbx3xfMi+86pr4KXIf2FDkTTdeuYw8OxS9t898LA1Khq57gtufFILXpfgsSx5woNgsBgvGjpsA==
   dependencies:
-    caniuse-lite "^1.0.30001313"
-    electron-to-chromium "^1.4.76"
+    caniuse-lite "^1.0.30001317"
+    electron-to-chromium "^1.4.84"
     escalade "^3.1.1"
     node-releases "^2.0.2"
     picocolors "^1.0.0"
@@ -1678,10 +1678,10 @@ camelcase-css@^2.0.1:
   resolved "https://registry.yarnpkg.com/camelcase-css/-/camelcase-css-2.0.1.tgz#ee978f6947914cc30c6b44741b6ed1df7f043fd5"
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
 
-caniuse-lite@^1.0.30001283, caniuse-lite@^1.0.30001297, caniuse-lite@^1.0.30001313:
-  version "1.0.30001315"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001315.tgz#f1b1efd1171ee1170d52709a7252632dacbd7c77"
-  integrity sha512-5v7LFQU4Sb/qvkz7JcZkvtSH1Ko+1x2kgo3ocdBeMGZSOFpuE1kkm0kpTwLtWeFrw5qw08ulLxJjVIXIS8MkiQ==
+caniuse-lite@^1.0.30001283, caniuse-lite@^1.0.30001317:
+  version "1.0.30001317"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001317.tgz#0548fb28fd5bc259a70b8c1ffdbe598037666a1b"
+  integrity sha512-xIZLh8gBm4dqNX0gkzrBeyI86J2eCjWzYAs40q88smG844YIrN4tVQl/RhquHvKEKImWWFIVh1Lxe5n1G/N+GQ==
 
 chalk@^2.0.0, chalk@^2.4.2:
   version "2.4.2"
@@ -2064,10 +2064,10 @@ ejs@^3.1.6:
   dependencies:
     jake "^10.6.1"
 
-electron-to-chromium@^1.4.76:
-  version "1.4.82"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.82.tgz#51e123ca434b1eba8c434ece2b54f095b304a651"
-  integrity sha512-Ks+ANzLoIrFDUOJdjxYMH6CMKB8UQo5modAwvSZTxgF+vEs/U7G5IbWFUp6dS4klPkTDVdxbORuk8xAXXhMsWw==
+electron-to-chromium@^1.4.84:
+  version "1.4.85"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.85.tgz#a3666ba42147026b9f34d4d8d4caf0740e80f751"
+  integrity sha512-K9AsQ41WS2bjZUFpRWfvaS4RjEcRCamEkBJN1Z1TQILBfP1H8QnJ9ti0wiLiMv0sRjX3EHKzgs9jDnmGFx2jXg==
 
 emoji-datasource-apple@^7.0.2:
   version "7.0.2"
@@ -2505,7 +2505,7 @@ form-data@^3.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-fraction.js@^4.1.2:
+fraction.js@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.2.0.tgz#448e5109a313a3527f5a3ab2119ec4cf0e0e2950"
   integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
