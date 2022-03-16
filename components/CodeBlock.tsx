@@ -21,10 +21,10 @@ export default function CodeBlock({ title, lang, children }: CodeBlockProps): JS
 
   return (
     <div ref={textInput} className="relative w-full my-6">
-      <div className="flex justify-between align-middle px-4 py-2 rounded-t-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-300 bg-gray-50 dark:bg-gray-900">
-        <span className="flex font-mono">
-          <span className="uppercase font-medium text-gray-400 dark:text-gray-600 select-none">{lang}</span>
-          <span className="mx-4 line-clamp-1" title={title}>
+      <div className="flex justify-between align-middle rounded-t-md overflow-hidden border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-300 bg-gray-50 dark:bg-gray-900">
+        <span className="flex font-mono px-2 py-2 text-sm">
+          <span className="uppercase text-gray-400 dark:text-gray-600 select-none">{lang}</span>
+          <span className="mx-2 line-clamp-1" title={title}>
             {title}
           </span>
         </span>
@@ -32,7 +32,7 @@ export default function CodeBlock({ title, lang, children }: CodeBlockProps): JS
           onClick={onCopy}
           aria-label="Copy code"
           title="Copy code"
-          className="items-center px-1 py-1.5 text-left rounded bg-opacity-40 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
+          className="items-center p-2 text-left border-l border-gray-200 dark:border-gray-800 bg-opacity-40 bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800"
         >
           {copied ? (
             <Check size={14} className="text-emerald-700 dark:text-emerald-400" />
