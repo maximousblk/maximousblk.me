@@ -32,7 +32,7 @@ export default function CodeBlock({ title, lang, children }: CodeBlockProps): JS
           onClick={onCopy}
           aria-label="Copy code"
           title="Copy code"
-          className="items-center p-2 text-left border-l border-gray-200 dark:border-gray-800 bg-opacity-40 bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800"
+          className="items-center p-2 text-left border-l border-gray-200 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800"
         >
           {copied ? (
             <Check size={14} className="text-emerald-700 dark:text-emerald-400" />
