@@ -144,7 +144,13 @@ export function renderContent(block: NotionBlock) {
             <NotionText blocks={contents.rich_text} />
           </p>
           {children && (
-            <div className={"ml-1 pl-4 border-l-2 border-gray-200 dark:border-gray-800 " + notion_color[contents.color || "default"]}>
+            <div
+              className={
+                "ml-1 pl-4 last:!pb-0 last:!mb-0 " +
+                "border-l-2 border-gray-200 dark:border-gray-800 " +
+                notion_color[contents.color || "default"]
+              }
+            >
               <NotionContent blocks={children} />
             </div>
           )}
@@ -184,7 +190,7 @@ export function renderContent(block: NotionBlock) {
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
       return (
-        <li className={"px-2 py-1 my-2 rounded-sm " + notion_color[contents.color || "default"]}>
+        <li className={"px-2 py-1 my-2 last:!pb-0 last:!mb-0 rounded-sm " + notion_color[contents.color || "default"]}>
           <NotionText blocks={contents.rich_text} />
           {children && <NotionContent blocks={children} />}
         </li>
