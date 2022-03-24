@@ -13,7 +13,7 @@
     "prod": "yarn build && yarn start"
   },
   "dependencies": {
-    "@fontsource/inter": "^4.5.5",
+    "@fontsource/inter": "^4.5.7",
     "@fontsource/jetbrains-mono": "^4.5.3",
     "@fontsource/lora": "^4.5.4",
     "@jitl/notion-api": "^0.1.2",
