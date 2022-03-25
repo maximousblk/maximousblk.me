@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^4.5.7",
-    "@fontsource/jetbrains-mono": "^4.5.3",
+    "@fontsource/jetbrains-mono": "^4.5.5",
     "@fontsource/lora": "^4.5.6",
     "@jitl/notion-api": "^0.1.2",
     "@matejmazur/react-katex": "^3.1.3",
