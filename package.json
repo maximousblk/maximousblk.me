@@ -50,7 +50,7 @@
     "browserify-fs": "^1.0.0",
     "eslint": "^8.11.0",
     "eslint-config-next": "^12.1.0",
-    "prettier": "^2.6.0",
+    "prettier": "^2.6.1",
     "sass": "^1.49.9",
     "typescript": "^4.6.2"
   },
