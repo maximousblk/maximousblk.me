@@ -23,7 +23,7 @@ const preview = async (req: NextApiRequest, res: NextApiResponse) => {
       res.redirect(307, redirect as string);
     } else {
       res.status(202);
-      res.json({ success: true, message: "Preview mode disabled" });
+      res.json({ success: true, message: "Preview mode enabled" });
     }
   } else {
     res.status(401);
