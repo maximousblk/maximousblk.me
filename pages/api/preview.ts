@@ -15,7 +15,7 @@ const preview = async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
       res.json({ success: true, message: "Preview mode disabled" });
     }
-  } else if ((key as string) == (process.env.PREVIEW_KEY)) {
+  } else if ((key as string) == process.env.PREVIEW_KEY) {
     res.setPreviewData({}, { maxAge: 86400 });
 
     res.setHeader("Cache-Control", "private, no-cache, no-store, must-revalidate");
