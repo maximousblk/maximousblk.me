@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NextSeo } from "next-seo";
+import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
 import Container from "@/components/Container";
 import BlogPost from "@/components/BlogPost";
@@ -62,12 +63,12 @@ export default function Posts({ posts }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ preview }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   const index = await getIndex();
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
       .filter(({ properties: { published } }: Page) => {
-        return published[published.type];
+        return published[published.type] || preview || false;
       })
       .map(({ properties: { title: postTitle, description: postDescription, slug: postSlug, date } }: Page) => {
         return {

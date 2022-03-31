@@ -42,7 +42,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
       .filter(({ properties: { published } }: PageWithChildren) => {
-        return published[published.type];
+        return published[published.type] || req.preview || false;
       })
       .map(({ properties: { title: postTitle, description: postDescription, date } }: PageWithChildren) => {
         return {

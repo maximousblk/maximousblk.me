@@ -23,7 +23,7 @@ export default function Blog({ blocks, slug, title, description, cover, publishe
   );
 }
 
-export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
+export async function getStaticProps({ preview = false, params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   const index = await getIndex();
 
   const pageID = index.posts.children.find(({ slug: sl }) => sl === slug)?.id;
@@ -31,7 +31,9 @@ export async function getStaticProps({ params: { slug } }: GetStaticPropsContext
 
   const post = await getPage(pageID);
 
-  const { title: postTitle, description: postDescription, date, cover: coverImage } = post.properties;
+  const { published, title: postTitle, description: postDescription, date, cover: coverImage } = post.properties;
+
+  if (!published[published.type] && !preview) return { notFound: true };
 
   const blocks = await getBlockChildren(post.id);
   const title = postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" ");

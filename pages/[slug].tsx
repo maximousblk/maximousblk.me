@@ -14,14 +14,16 @@ export default function Page({ blocks, title, description, hide_descr, slug }) {
   );
 }
 
-export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
+export async function getStaticProps({ preview = false, params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   const index = await getIndex();
   const pageID = index.pages.children.find(({ slug: sl }) => sl === slug)?.id;
   if (!pageID) return { notFound: true };
 
   const page = await getPage(pageID);
 
-  const { title: pageTitle, description: pageDescription, hide_description } = page.properties;
+  const { published, title: pageTitle, description: pageDescription, hide_description } = page.properties;
+
+  if (!published[published.type] && !preview) return { notFound: true };
 
   const blocks = await getBlockChildren(page.id);
   const title = pageTitle[pageTitle.type].map(({ plain_text }) => plain_text).join(" ");

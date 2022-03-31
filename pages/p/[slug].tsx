@@ -14,13 +14,13 @@ export default function Page({ blocks, title, slug }) {
   );
 }
 
-export async function getStaticProps({ params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
+export async function getStaticProps({ preview = false, params: { slug } }: GetStaticPropsContext): Promise<GetStaticPropsResult<any>> {
   try {
-    const {
-      properties: { title: pageTitle },
-    } = await getPage(slug.toString());
-    const blocks = await getBlockChildren(slug.toString());
+    const { published, title: pageTitle } = await getPage(slug.toString()).then((page) => page.properties);
 
+    if (!published[published.type] && !preview) return { notFound: true };
+
+    const blocks = await getBlockChildren(slug.toString());
     const title = pageTitle[pageTitle.type].map(({ plain_text }) => plain_text).join(" ");
 
     return { props: { blocks, title, slug }, revalidate: 1800 };

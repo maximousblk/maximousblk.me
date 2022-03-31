@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const pages = await getDatabase(index.pages.id).then((pages) => {
     return pages.results
       .filter(({ properties: { published } }: Page) => {
-        return published[published.type];
+        return published[published.type] || ctx.preview || false;
       })
       .map(({ properties: { title } }: Page) => {
         return `/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
       .filter(({ properties: { published } }: Page) => {
-        return published[published.type];
+        return published[published.type] || ctx.preview || false;
       })
       .map(({ properties: { title } }: Page) => {
         return `/posts/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
