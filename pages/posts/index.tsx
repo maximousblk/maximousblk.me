@@ -4,7 +4,7 @@ import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
 import Container from "@/components/Container";
 import BlogPost from "@/components/BlogPost";
-import { Search as SearchIcon } from "react-feather";
+import { FiSearch } from "react-icons/fi";
 import { parseISO } from "date-fns";
 
 import config from "@/config";
@@ -50,7 +50,7 @@ export default function Posts({ posts }) {
             placeholder={`Search through ${filteredPosts.length} articles`}
             className="px-4 py-2 border border-gray-300 dark:border-gray-800 focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
           />
-          <SearchIcon className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300" />
+          <FiSearch className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300" />
         </div>
         {!filteredPosts.length && <p className="my-8 self-center text-gray-600 dark:text-gray-400 mb-4">No posts found ;-;</p>}
         <div className="divide-y divide-gray-200 dark:divide-gray-700">

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Clipboard, Check } from "react-feather";
+import { FiClipboard, FiCheck } from "react-icons/fi";
 
 interface CodeBlockProps {
   title?: string;
@@ -35,9 +35,9 @@ export default function CodeBlock({ title, lang, children }: CodeBlockProps): JS
           className="items-center p-2 text-left border-l border-gray-200 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800"
         >
           {copied ? (
-            <Check size={14} className="text-emerald-700 dark:text-emerald-400" />
+            <FiCheck size={14} className="text-emerald-700 dark:text-emerald-400" />
           ) : (
-            <Clipboard size={14} className="text-gray-700 dark:text-gray-400" />
+            <FiClipboard size={14} className="text-gray-700 dark:text-gray-400" />
           )}
         </button>
       </div>

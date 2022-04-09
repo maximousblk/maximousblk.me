@@ -11,7 +11,8 @@ import Link from "@/components/Link";
 import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents } from "@/components/TableOfContents";
 import { slugify } from "@/lib/utils";
-import { type Icon, FileText, Download, ExternalLink, Link2, AtSign, Play, Plus, Minus, GitHub, Calendar } from "react-feather";
+import type { IconType } from "react-icons";
+import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlay, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
 
 const notion_color = {
@@ -282,7 +283,7 @@ export function renderContent(block: NotionBlock) {
               light
               controls
               url={contents[contents.type].url}
-              playIcon={<Play size="64" />}
+              playIcon={<FiPlay size="64" />}
               className="max-w-full !w-full max-h-max !h-auto aspect-video"
             />
           </div>
@@ -317,7 +318,7 @@ export function renderContent(block: NotionBlock) {
           url={fileURL.href}
           text={fileName}
           caption={contents.caption}
-          icon={contents.type == "file" ? Download : ExternalLink}
+          icon={contents.type == "file" ? FiDownload : FiExternalLink}
         />
       );
     case "link_preview":
@@ -336,10 +337,10 @@ export function renderContent(block: NotionBlock) {
       return <TeX math={contents.expression} block className="my-8" />;
     case "link_to_page":
       if (!contents[contents.type]) return null;
-      return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={Link2} />;
+      return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={FiLink2} />;
     case "child_page":
       if (!block.has_children) return null;
-      return <LinkCard url={"/p/" + block.id} text={contents.title} icon={FileText} />;
+      return <LinkCard url={"/p/" + block.id} text={contents.title} icon={FiFileText} />;
     case "divider":
       return <hr />;
     case "column_list":
@@ -423,15 +424,15 @@ export function NotionText({ blocks }) {
 
 function Mention({ type, link, text }: { type: "user" | "page" | "github" | "date"; link: string; text: string }) {
   const icons = {
-    user: AtSign,
-    page: Link2,
-    github: GitHub,
-    date: Calendar,
+    user: FiAtSign,
+    page: FiLink2,
+    github: FiGithub,
+    date: FiCalendar,
   };
-  const Icon = icons[type];
+  const MentionIcon = icons[type];
   return (
     <Link href={link} className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded whitespace-nowrap">
-      <Icon size={16} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
+      <MentionIcon size={16} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
       <span>{text}</span>
     </Link>
   );
@@ -504,8 +505,8 @@ function ToggleHeading({
         <div className="my-2 py-1 flex justify-between items-center">
           <Heading type={type} id={id} contents={contents} className="m-0" />
           <span className="p-1 mx-2 w-min h-min rounded hover:bg-gray-100 hover:dark:bg-gray-800">
-            <Plus className="block group-open:hidden h-6 w-6" />
-            <Minus className="hidden group-open:block h-6 w-6" />
+            <FiPlus className="block group-open:hidden h-6 w-6" />
+            <FiMinus className="hidden group-open:block h-6 w-6" />
           </span>
         </div>
       </summary>
@@ -516,7 +517,7 @@ function ToggleHeading({
 
 interface LinkCardProps {
   url: string;
-  icon: Icon;
+  icon: IconType;
   text: string;
   caption?: any;
   download?: boolean;
@@ -557,8 +558,8 @@ function Accordion({
     >
       <summary className="!m-0 flex list-none space-x-2 cursor-pointer font-medium">
         <span className={details ? "" : "text-gray-400 dark:text-gray-600"}>
-          <Plus className="block group-open:hidden mt-0.5 h-6 w-6" />
-          <Minus className="hidden group-open:block mt-0.5 h-6 w-6" />
+          <FiPlus className="block group-open:hidden mt-0.5 h-6 w-6" />
+          <FiMinus className="hidden group-open:block mt-0.5 h-6 w-6" />
         </span>
         <p className="m-0 w-full line-clamp-1 group-open:line-clamp-none">{summary}</p>
       </summary>

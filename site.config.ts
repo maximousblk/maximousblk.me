@@ -22,27 +22,27 @@ export const config = {
     social: [
       {
         name: "GitHub",
-        icon: "GitHub",
+        icon: "FiGithub",
         href: "https://github.com/maximousblk",
       },
       {
         name: "Figma",
-        icon: "Figma",
+        icon: "FiFigma",
         href: "https://figma.com/@maximousblk",
       },
       {
         name: "Twitter",
-        icon: "Twitter",
+        icon: "FiTwitter",
         href: "https://twitter.com/maximousblk",
       },
       {
         name: "Telegram",
-        icon: "Send",
+        icon: "FiSend",
         href: "https://t.me/maximousblk",
       },
       {
         name: "GMail",
-        icon: "Mail",
+        icon: "FiMail",
         href: "mailto:maximousblk@gmail.com",
       },
     ],
