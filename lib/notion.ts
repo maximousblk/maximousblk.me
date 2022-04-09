@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionDB, NotionBlock, TableOfContentsItem } from "@/lib/types";
-import getImageSize from "probe-image-size/sync";
+import getImageSize from "probe-image-size";
 import { unfurl } from "unfurl.js";
 import { slugify } from "@/lib/utils";
 
@@ -57,15 +57,10 @@ export async function getPage(page_id: string) {
 }
 
 export async function getBlockChildren(block_id: string): Promise<NotionBlock[]> {
-  const list = await notion.blocks.children.list({
-    block_id,
-  });
+  const list = await notion.blocks.children.list({ block_id });
 
   while (list.has_more) {
-    const { results, has_more, next_cursor } = await notion.blocks.children.list({
-      block_id,
-      start_cursor: list.next_cursor,
-    });
+    const { results, has_more, next_cursor } = await notion.blocks.children.list({ block_id, start_cursor: list.next_cursor });
     list.results = list.results.concat(results);
     list.has_more = has_more;
     list.next_cursor = next_cursor;
@@ -126,9 +121,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           break;
 
         case "image":
-          block.image["size"] = await fetch(contents[contents.type].url)
-            .then((res) => res.arrayBuffer())
-            .then((data) => getImageSize(Buffer.from(data)));
+          block.image["size"] = await getImageSize(contents[contents.type].url);
           break;
 
         case "link_to_page":
@@ -152,9 +145,8 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           if (image && image.height && image.width) {
             block[block.type]["meta"].image = image;
           } else if (image && (image.secure_url || image.url)) {
-            const { height, width } = await fetch(image.secure_url || image.url)
-              .then((res) => res.arrayBuffer())
-              .then((data) => getImageSize(Buffer.from(data)));
+            const { height, width } = await getImageSize(image.secure_url || image.url);
+
             block[block.type]["meta"].image = {
               ...image,
               url: image.secure_url || image.url,
