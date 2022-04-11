@@ -953,22 +953,21 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jitl/notion-api@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@jitl/notion-api/-/notion-api-0.1.2.tgz#8c8d715b68a4f0404f3354241fdb7faaff995ce6"
-  integrity sha512-hhnV8Mt5lbpJX7yiEgS1XB3dvsCzTQLD8LFRO0hLPfxyBr3AuiG18WX3yv+2YSVC348fXvlhQPb16dpxaIUX1A==
+"@jitl/notion-api@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@jitl/notion-api/-/notion-api-0.2.1.tgz#f00de2c238dddfab63e81ada71625d671f490d23"
+  integrity sha512-R0H5hz/dCistR7vWOXmoddU1UiFRCErp5Wf7C/E+zlO01PJyJ+NMQuQyoEkpiE7oX6qOalKgnKf8+IGR82VLZA==
   dependencies:
-    "@jitl/util" "*"
+    "@jitl/util" "0.0.3"
     "@types/debug" "^4.1.7"
     "@types/mime-types" "^2.1.1"
     debug "^4.3.3"
-    emoji-datasource-apple "^7.0.2"
     emoji-unicode "^2.0.1"
     fast-safe-stringify "^2.1.1"
     mime-types "^2.1.34"
     node-emoji "^1.11.0"
 
-"@jitl/util@*":
+"@jitl/util@0.0.3":
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@jitl/util/-/util-0.0.3.tgz#ef43903768c16200fcf4c0c9d4a79e5b9cb264f3"
   integrity sha512-C7WAt4ROaPS9wL8Sxlen0KP9i/Z917rpModwkQBfNZUp61Be88CZx7T1hz7oG7nev9f2J+Ze2wDdQyS5uk+d8w==
@@ -2065,11 +2064,6 @@ electron-to-chromium@^1.4.84:
   version "1.4.106"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.106.tgz#e7a3bfa9d745dd9b9e597616cb17283cc349781a"
   integrity sha512-ZYfpVLULm67K7CaaGP7DmjyeMY4naxsbTy+syVVxT6QHI1Ww8XbJjmr9fDckrhq44WzCrcC5kH3zGpdusxwwqg==
-
-emoji-datasource-apple@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/emoji-datasource-apple/-/emoji-datasource-apple-7.0.2.tgz#20ba1788fbfa335147e1fd27bd54e11419964aa6"
-  integrity sha512-m127Ybt10utN5WF+0mehR2siDTh4CcS6N1Xq+0VE387XIZB+DYczrvc7amgAgEtema0lX1GpVzO2wEXKEChfqQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
