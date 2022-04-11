@@ -41,7 +41,7 @@ export default function Navbar() {
             className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded p-3 h-10 w-10"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
           >
-            {mounted && <Icon name={resolvedTheme === "dark" ? "Sun" : "Moon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />}
+            {mounted && <Icon name={resolvedTheme === "dark" ? "FiSun" : "FiMoon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />}
           </button>
         </div>
       </div>
