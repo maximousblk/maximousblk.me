@@ -26,7 +26,7 @@
     "feed": "^4.2.2",
     "gemoji": "^7.1.0",
     "katex": "^0.15.3",
-    "next": "^12.1.4",
+    "next": "^12.1.5",
     "next-pwa": "^5.4.7",
     "next-seo": "^5.4.0",
     "next-sitemap": "^2.5.20",
@@ -40,7 +40,7 @@
     "reading-time": "^1.5.0",
     "sharp": "^0.30.3",
     "slugify": "^1.6.5",
-    "tailwindcss": "^3.0.23",
+    "tailwindcss": "^3.0.24",
     "unfurl.js": "^5.6.4"
   },
   "devDependencies": {
@@ -49,7 +49,7 @@
     "@types/react-dom": "^18.0.0",
     "browserify-fs": "^1.0.0",
     "eslint": "^8.12.0",
-    "eslint-config-next": "^12.1.2",
+    "eslint-config-next": "^12.1.5",
     "prettier": "^2.6.2",
     "sass": "^1.50.0",
     "typescript": "^4.6.3"
