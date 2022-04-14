@@ -141,13 +141,13 @@ export function renderContent(block: NotionBlock) {
       if (!contents.rich_text.length) return <br />;
       return (
         <Fragment>
-          <p className={"px-1 py-0.5 my-4 rounded-sm " + notion_color[contents.color || "default"]}>
+          <p className={"my-4 rounded-sm px-1 py-0.5 " + notion_color[contents.color || "default"]}>
             <NotionText blocks={contents.rich_text} />
           </p>
           {children && (
             <div
               className={
-                "ml-1 pl-4 last:!pb-0 last:!mb-0 " +
+                "ml-1 pl-4 last:!mb-0 last:!pb-0 " +
                 "border-l-2 border-gray-200 dark:border-gray-800 " +
                 notion_color[contents.color || "default"]
               }
@@ -191,7 +191,7 @@ export function renderContent(block: NotionBlock) {
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
       return (
-        <li className={"px-2 py-1 my-2 last:!pb-0 last:!mb-0 rounded-sm " + notion_color[contents.color || "default"]}>
+        <li className={"my-2 rounded-sm px-2 py-1 last:!mb-0 last:!pb-0 " + notion_color[contents.color || "default"]}>
           <NotionText blocks={contents.rich_text} />
           {children && <NotionContent blocks={children} />}
         </li>
@@ -199,9 +199,9 @@ export function renderContent(block: NotionBlock) {
     case "to_do":
       if (!contents.rich_text.length) return null;
       return (
-        <label htmlFor={block.id} className={"my-2 py-1 pl-9 block -indent-6 rounded-sm " + notion_color[contents.color || "default"]}>
+        <label htmlFor={block.id} className={"my-2 block rounded-sm py-1 pl-9 -indent-6 " + notion_color[contents.color || "default"]}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2.5 scale-125 align-middle" />
-          <span className={contents.checked ? "line-through text-gray-400 dark:text-gray-600" : ""}>
+          <span className={contents.checked ? "text-gray-400 line-through dark:text-gray-600" : ""}>
             <NotionText blocks={contents.rich_text} />
           </span>
           {children && <NotionContent blocks={children} />}
@@ -223,12 +223,12 @@ export function renderContent(block: NotionBlock) {
       return (
         <div
           className={
-            "flex space-x-3 px-3 py-2 my-6 rounded border " +
-            "bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 " +
+            "my-6 flex space-x-3 rounded border px-3 py-2 " +
+            "border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900 " +
             notion_color[contents.color || "default"]
           }
         >
-          <div className="h-6 w-6 mt-0.5 rounded overflow-hidden select-none" aria-hidden="true">
+          <div className="mt-0.5 h-6 w-6 select-none overflow-hidden rounded" aria-hidden="true">
             {contents.icon.type == "emoji" ? (
               <Twemoji emoji={contents.icon.emoji} size={24} />
             ) : (
@@ -258,7 +258,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <div className="flex mx-auto w-fit rounded-md overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
+          <div className="mx-auto flex w-fit overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-800">
             <Image
               quality={90}
               height={contents.size.height}
@@ -278,13 +278,13 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <div className="rounded-md overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
+          <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-800">
             <ReactPlayer
               light
               controls
               url={contents[contents.type].url}
               playIcon={<FiPlay size="64" />}
-              className="max-w-full !w-full max-h-max !h-auto aspect-video"
+              className="aspect-video !h-auto max-h-max !w-full max-w-full"
             />
           </div>
           {contents.caption.length > 0 && (
@@ -298,7 +298,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents[contents.type].url) return null;
       return (
         <figure>
-          <audio controls src={contents[contents.type].url} preload="auto" className="max-w-full !w-full max-h-max !h-10" />
+          <audio controls src={contents[contents.type].url} preload="auto" className="!h-10 max-h-max !w-full max-w-full" />
           {contents.caption.length > 0 && (
             <figcaption>
               <NotionText blocks={contents.caption} />
@@ -368,7 +368,7 @@ export function renderContent(block: NotionBlock) {
       if (!contents.table_width && !contents.children.length) return null;
 
       return (
-        <table className="table-auto w-full">
+        <table className="w-full table-auto">
           {contents.has_column_header && (
             <thead>
               <tr>
@@ -431,8 +431,8 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
   };
   const MentionIcon = icons[type];
   return (
-    <Link href={link} className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded whitespace-nowrap">
-      <MentionIcon size={16} className="inline-block mr-1 mb-0.5 text-gray-500 dark:text-gray-500" />
+    <Link href={link} className="whitespace-nowrap rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-800">
+      <MentionIcon size={16} className="mr-1 mb-0.5 inline-block text-gray-500 dark:text-gray-500" />
       <span>{text}</span>
     </Link>
   );
@@ -441,7 +441,7 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
 function Unsupported({ object, type }) {
   if (!process.env.NODE_ENV.toUpperCase().startsWith("PROD")) console.warn(`unsupported ${object}: ${type}`);
   return (
-    <figure className="my-6 px-3 py-2 print:hidden flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border bg-opacity-5 bg-rose-600 border-rose-200 dark:border-rose-900">
+    <figure className="my-6 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border border-rose-200 bg-rose-600 bg-opacity-5 px-3 py-2 dark:border-rose-900 print:hidden">
       <span>❌</span>
       <span>Unsupported {object}</span>
       <span className="font-mono">[{type}]</span>
@@ -470,10 +470,10 @@ function Heading({
   const HeadingX = tags[type];
 
   return (
-    <HeadingX id={id} className={"p-1 rounded-sm " + className}>
+    <HeadingX id={id} className={"rounded-sm p-1 " + className}>
       <a
         href={"#" + id}
-        className="px-1 py-0.5 rounded hidden sm:inline hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="hidden rounded px-1 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 sm:inline"
         aria-hidden="true"
         tabIndex={-1}
       >
@@ -501,16 +501,16 @@ function ToggleHeading({
 }) {
   return (
     <details className="group">
-      <summary className={"list-none cursor-pointer rounded-sm " + className}>
-        <div className="my-2 py-1 flex justify-between items-center">
+      <summary className={"cursor-pointer list-none rounded-sm " + className}>
+        <div className="my-2 flex items-center justify-between py-1">
           <Heading type={type} id={id} contents={contents} className="m-0" />
-          <span className="p-1 mx-2 w-min h-min rounded hover:bg-gray-100 hover:dark:bg-gray-800">
-            <FiPlus className="block group-open:hidden h-6 w-6" />
-            <FiMinus className="hidden group-open:block h-6 w-6" />
+          <span className="mx-2 h-min w-min rounded p-1 hover:bg-gray-100 hover:dark:bg-gray-800">
+            <FiPlus className="block h-6 w-6 group-open:hidden" />
+            <FiMinus className="hidden h-6 w-6 group-open:block" />
           </span>
         </div>
       </summary>
-      <div className="pl-4 border-l-2 border-gray-200 dark:border-gray-800">{children}</div>
+      <div className="border-l-2 border-gray-200 pl-4 dark:border-gray-800">{children}</div>
     </details>
   );
 }
@@ -528,12 +528,12 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
   return (
     <figure className="my-6">
       <Link
-        className="hover:no-underline flex items-center space-x-3 px-3 py-2 rounded border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-900 dark:border-gray-800 dark:hover:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400"
+        className="flex items-center space-x-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 hover:bg-gray-100 hover:no-underline dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800"
         href={url}
         download={download}
       >
         <CardIcon className="h-6 w-6" />
-        <span className={"w-full line-clamp-1 break-all" + (mono ? " font-mono" : "")}>{text}</span>
+        <span className={"w-full break-all line-clamp-1" + (mono ? " font-mono" : "")}>{text}</span>
       </Link>
       {caption?.length > 0 && (
         <figcaption>
@@ -554,12 +554,12 @@ function Accordion({
 }) {
   return (
     <details
-      className={"group my-6 px-3 py-2 rounded border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 " + className}
+      className={"group my-6 rounded border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-800 dark:bg-gray-900 " + className}
     >
-      <summary className="!m-0 flex list-none space-x-2 cursor-pointer font-medium">
+      <summary className="!m-0 flex cursor-pointer list-none space-x-2 font-medium">
         <span className={details ? "" : "text-gray-400 dark:text-gray-600"}>
-          <FiPlus className="block group-open:hidden mt-0.5 h-6 w-6" />
-          <FiMinus className="hidden group-open:block mt-0.5 h-6 w-6" />
+          <FiPlus className="mt-0.5 block h-6 w-6 group-open:hidden" />
+          <FiMinus className="mt-0.5 hidden h-6 w-6 group-open:block" />
         </span>
         <p className="m-0 w-full line-clamp-1 group-open:line-clamp-none">{summary}</p>
       </summary>

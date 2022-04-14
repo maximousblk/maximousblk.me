@@ -61,28 +61,28 @@ export default function PostLayout({ children, title, slug, cover, publishedAt, 
   return (
     <Container>
       <BlogSeo url={`${config.baseUrl}/posts/${slug}`} title={title} description={description} image={cover} publishedAt={publishedAt} />
-      <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">{title}</h1>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
+      <article className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">{title}</h1>
+        <div className="mt-2 mb-8 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
           <div className="flex items-center">
-            <p className="text-sm font-mono text-gray-600 dark:text-gray-400">{format(publishedAt, "PPPP")}</p>
+            <p className="font-mono text-sm text-gray-600 dark:text-gray-400">{format(publishedAt, "PPPP")}</p>
           </div>
-          <p className="text-sm font-mono text-gray-600 dark:text-gray-400 min-w-32 mt-2 md:mt-0">{readingTime}</p>
+          <p className="min-w-32 mt-2 font-mono text-sm text-gray-600 dark:text-gray-400 md:mt-0">{readingTime}</p>
         </div>
         {cover && (
-          <div className="flex mb-8 w-full h-72 rounded overflow-hidden">
+          <div className="mb-8 flex h-72 w-full overflow-hidden rounded">
             <Image src={cover.url} alt="" width={cover.width} height={cover.height} className="object-cover" />
           </div>
         )}
-        <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
-        <div className="print:hidden flex space-x-3 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 mt-8">
+        <div className="prose w-full max-w-none dark:prose-dark">{children}</div>
+        <div className="mt-8 flex space-x-3 text-sm text-gray-700 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-200 print:hidden">
           <a href={twitterURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
-            <FiTwitter size={16} className="inline-block mr-1 text-gray-500 dark:text-gray-500" />
+            <FiTwitter size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-500" />
             {"Share on Twitter"}
           </a>
           <p> • </p>
           <a href={discussURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
-            <FiGithub size={16} className="inline-block mr-1 text-gray-500 dark:text-gray-500" />
+            <FiGithub size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-500" />
             {"Discuss on GitHub"}
           </a>
         </div>

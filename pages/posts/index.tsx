@@ -40,19 +40,19 @@ export default function Posts({ posts }) {
           description,
         }}
       />
-      <div className="flex flex-col justify-center items-start w-full max-w-4xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-8 text-black dark:text-white">Posts</h1>
-        <div className="relative w-full mb-4">
+      <div className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">
+        <h1 className="mb-8 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">Posts</h1>
+        <div className="relative mb-4 w-full">
           <input
             aria-label={`Search through ${filteredPosts.length} articles`}
             type="text"
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder={`Search through ${filteredPosts.length} articles`}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-800 focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-100"
           />
           <FiSearch className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300" />
         </div>
-        {!filteredPosts.length && <p className="my-8 self-center text-gray-600 dark:text-gray-400 mb-4">No posts found ;-;</p>}
+        {!filteredPosts.length && <p className="my-8 mb-4 self-center text-gray-600 dark:text-gray-400">No posts found ;-;</p>}
         <div className="divide-y divide-gray-200 dark:divide-gray-700">
           {filteredPosts.map((post) => (
             <BlogPost key={post.title} {...post} />

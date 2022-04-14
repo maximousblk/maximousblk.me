@@ -17,15 +17,15 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Navigation Menu"
-      className="top-0 z-10 sticky print:hidden flex flex-nowrap justify-center w-full p-2 mx-auto mb-16 backdrop-blur !bg-opacity-50 bg-white dark:bg-gray-900"
+      className="sticky top-0 z-10 mx-auto mb-16 flex w-full flex-nowrap justify-center bg-white !bg-opacity-50 p-2 backdrop-blur dark:bg-gray-900 print:hidden"
     >
-      <div className="flex flex-nowrap justify-between items-center max-w-6xl w-full">
+      <div className="flex w-full max-w-6xl flex-nowrap items-center justify-between">
         <div className="flex flex-shrink-0">
           {config.nav.map(({ name, emoji, href }, i, a) => (
-            <div key={name} className="inline-block my-3">
+            <div key={name} className="my-3 inline-block">
               <Link href={href}>
-                <a className="flex justify-between items-center px-2.5 py-1.5 rounded text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800">
-                  <span className="flex justify-between items-center select-none text-sm pr-2" aria-hidden="true">
+                <a className="flex items-center justify-between rounded px-2.5 py-1.5 text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-800">
+                  <span className="flex select-none items-center justify-between pr-2 text-sm" aria-hidden="true">
                     <Twemoji priority emoji={nameToEmoji[emoji]} />
                   </span>
                   <span>{name}</span>
@@ -38,7 +38,7 @@ export default function Navbar() {
           <button
             aria-label="Toggle Dark Mode"
             type="button"
-            className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded p-3 h-10 w-10"
+            className="h-10 w-10 rounded p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
           >
             {mounted && <Icon name={resolvedTheme === "dark" ? "FiSun" : "FiMoon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />}

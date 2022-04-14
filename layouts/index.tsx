@@ -9,9 +9,9 @@ export default function IndexLayout({ children, title, description }) {
   return (
     <Container>
       <NextSeo title={title} titleTemplate={"%s"} description={description} canonical={url} openGraph={{ url, title, description }} />
-      <article className="flex flex-col justify-center items-start max-w-4xl mx-auto mb-16 w-full">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">{title}</h1>
-        <div className="prose dark:prose-dark max-w-none w-full">{children}</div>
+      <article className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">
+        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">{title}</h1>
+        <div className="prose w-full max-w-none dark:prose-dark">{children}</div>
       </article>
     </Container>
   );
