@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@types/probe-image-size": "^7.0.1",
-    "@types/react": "^18.0.5",
+    "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.1",
     "browserify-fs": "^1.0.0",
     "eslint": "^8.12.0",
