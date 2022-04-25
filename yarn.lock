@@ -953,10 +953,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jitl/notion-api@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@jitl/notion-api/-/notion-api-0.2.1.tgz#f00de2c238dddfab63e81ada71625d671f490d23"
-  integrity sha512-R0H5hz/dCistR7vWOXmoddU1UiFRCErp5Wf7C/E+zlO01PJyJ+NMQuQyoEkpiE7oX6qOalKgnKf8+IGR82VLZA==
+"@jitl/notion-api@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@jitl/notion-api/-/notion-api-0.2.2.tgz#ba98781db2bdb8b63a1cfeacee2ec90499528e0e"
+  integrity sha512-PBoIUttvk7IHmm8iP8+XM0TIYvijHRchR//WIm3qayC+g9vaAMQPl4WmmXJDTiF+fkN76txRrO2i82dYRUzFCA==
   dependencies:
     "@jitl/util" "0.0.3"
     "@types/debug" "^4.1.7"
