@@ -31,7 +31,7 @@
     "next-seo": "^5.4.0",
     "next-sitemap": "^2.5.20",
     "next-themes": "^0.1.1",
-    "postcss": "^8.4.12",
+    "postcss": "^8.4.13",
     "probe-image-size": "^7.2.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
