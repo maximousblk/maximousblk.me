@@ -5,7 +5,7 @@ export interface BookmarkProps {
   title: string;
   description: string;
   url: string;
-  image?: { url: string; width: number; height: number };
+  image?: { url: string; width: number; height: number; placeholder: string };
   caption?: React.ReactNode;
 }
 
@@ -27,6 +27,8 @@ export function Bookmark({ title, description, url, image, caption }: BookmarkPr
               alt=""
               height={image.height}
               width={image.width}
+              placeholder="blur"
+              blurDataURL={image.placeholder}
               src={"https://images.weserv.nl/?h=200&url=" + image.url}
               className="!rounded-none object-cover"
             />

@@ -263,6 +263,8 @@ export function renderContent(block: NotionBlock) {
               quality={90}
               height={contents.size.height}
               width={contents.size.width}
+              placeholder="blur"
+              blurDataURL={contents.placeholder}
               src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(contents[contents.type].url).toString("base64")}
               alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
             />

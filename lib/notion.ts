@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionDB, NotionBlock, TableOfContentsItem } from "@/lib/types";
-import getImageSize from "probe-image-size";
+import { getPlaiceholder } from "plaiceholder";
 import { unfurl } from "unfurl.js";
 import { slugify } from "@/lib/utils";
 
@@ -121,7 +121,12 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           break;
 
         case "image":
-          block.image["size"] = await getImageSize(contents[contents.type].url);
+          const {
+            base64,
+            img: { height, width },
+          } = await getPlaiceholder(contents[contents.type].url, { size: 64 });
+          block.image["size"] = { height, width };
+          block.image["placeholder"] = base64;
           break;
 
         case "link_to_page":
@@ -142,16 +147,18 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             url: contents.url,
           };
 
-          if (image && image.height && image.width) {
-            block[block.type]["meta"].image = image;
-          } else if (image && (image.secure_url || image.url)) {
-            const { height, width } = await getImageSize(image.secure_url || image.url);
+          if (image && (image.secure_url || image.url)) {
+            const {
+              base64,
+              img: { height, width },
+            } = await getPlaiceholder(image.secure_url || image.url, { size: 64 });
 
             block[block.type]["meta"].image = {
               ...image,
               url: image.secure_url || image.url,
               height,
               width,
+              placeholder: base64,
             };
           }
           break;

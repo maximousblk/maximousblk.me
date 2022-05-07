@@ -4,7 +4,7 @@ import { getReadingTime } from "@/lib/utils";
 import { NotionContent } from "@/lib/render";
 import { parseISO } from "date-fns";
 import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
-import getImageSize from "probe-image-size";
+import { getPlaiceholder } from "plaiceholder";
 
 export default function Blog({ blocks, slug, title, description, cover, publishedAt }) {
   if (!blocks) return null;
@@ -40,7 +40,14 @@ export async function getStaticProps({ preview = false, params: { slug } }: GetS
   const description = postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" ");
   const publishedAt = parseISO(date[date.type].start).getTime();
   const coverURL = coverImage[coverImage.type][0]?.file.url;
-  const cover = coverURL ? { url: coverURL, ...(await getImageSize(coverURL)) } : null;
+  const cover = coverURL
+    ? {
+        url: coverURL,
+        ...(await getPlaiceholder(coverURL, { size: 64 }).then(({ img, base64 }) => {
+          return { width: img.width, height: img.height, placeholder: base64 };
+        })),
+      }
+    : null;
 
   return { props: { blocks, slug, title, description, cover, publishedAt }, revalidate: 1800 };
 }

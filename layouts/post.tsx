@@ -70,12 +70,14 @@ export default function PostLayout({ children, title, slug, cover, publishedAt, 
           <p className="min-w-32 mt-2 font-mono text-sm text-gray-600 dark:text-gray-400 md:mt-0">{readingTime}</p>
         </div>
         {cover && (
-          <div className="mb-8 flex h-72 w-full overflow-hidden rounded">
+          <div className="mb-8 flex h-72 w-full items-center overflow-hidden rounded align-middle">
             <Image
               src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(cover.url).toString("base64")}
               alt=""
               width={cover.width}
               height={cover.height}
+              placeholder="blur"
+              blurDataURL={cover.placeholder}
               className="object-cover"
             />
           </div>
