@@ -27,7 +27,7 @@ export function Bookmark({ title, description, url, image, caption }: BookmarkPr
               alt=""
               height={image.height}
               width={image.width}
-              src={"https://images.weserv.nl/?url=" + image.url}
+              src={"https://images.weserv.nl/?h=200&url=" + image.url}
               className="!rounded-none object-cover"
             />
           </div>

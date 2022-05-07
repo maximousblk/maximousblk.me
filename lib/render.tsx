@@ -234,7 +234,7 @@ export function renderContent(block: NotionBlock) {
             ) : (
               <Image
                 alt=""
-                src={icon.type == "file" ? icon.file.url : "https://images.weserv.nl/?url=" + icon[icon.type].url}
+                src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(icon[icon.type].url).toString("base64")}
                 height={24}
                 width={24}
               />
@@ -263,7 +263,7 @@ export function renderContent(block: NotionBlock) {
               quality={90}
               height={contents.size.height}
               width={contents.size.width}
-              src={contents.type == "file" ? contents.file.url : "https://images.weserv.nl/?url=" + contents[contents.type].url}
+              src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(contents[contents.type].url).toString("base64")}
               alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
             />
           </div>
