@@ -49,7 +49,7 @@ export async function getStaticProps({ preview = false, params: { slug } }: GetS
       }
     : null;
 
-  return { props: { blocks, slug, title, description, cover, publishedAt }, revalidate: 1800 };
+  return { props: { blocks, slug, title, description, cover, publishedAt }, revalidate: 300 };
 }
 
 export async function getStaticPaths() {

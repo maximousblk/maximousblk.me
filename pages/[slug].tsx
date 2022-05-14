@@ -30,7 +30,7 @@ export async function getStaticProps({ preview = false, params: { slug } }: GetS
   const description = pageDescription[pageDescription.type].map(({ plain_text }) => plain_text).join(" ");
   const hide_descr = hide_description[hide_description.type];
 
-  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 1800 };
+  return { props: { blocks, title, description, hide_descr, slug }, revalidate: 300 };
 }
 
 export async function getStaticPaths() {

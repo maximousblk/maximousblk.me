@@ -83,5 +83,5 @@ export async function getStaticProps({ preview }: GetStaticPropsContext): Promis
       });
   });
 
-  return { props: { posts }, revalidate: 1800 };
+  return { props: { posts }, revalidate: 300 };
 }
