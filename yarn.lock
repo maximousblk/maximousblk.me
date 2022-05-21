@@ -4728,10 +4728,10 @@ unbox-primitive@^1.0.2:
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
 
-unfurl.js@^5.6.4:
-  version "5.6.4"
-  resolved "https://registry.yarnpkg.com/unfurl.js/-/unfurl.js-5.6.4.tgz#ac5cc64ce1ecf0164549d617143c7d131965bd23"
-  integrity sha512-kuPgWu8e9HqYr+hkPrEqWFdJIYxZ6nowC+H4XomN48dhyvMUDibBJkIn9IxcEAUb777L3VudifyhFOxTmMQaFg==
+unfurl.js@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/unfurl.js/-/unfurl.js-5.7.0.tgz#b6328b01e6dfd5afc9598ba9d44da8a2c56ff55c"
+  integrity sha512-r6jvA/I6bDFMaSCGLVv3KznzbsNr+pQGcanH8ezYH1bjEJEDVdZr2jcPrgdrnTlFRCDGy+sns2jG/kVwm/kMzg==
   dependencies:
     debug "^3.1.0"
     he "^1.2.0"
