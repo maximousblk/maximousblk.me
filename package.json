@@ -49,7 +49,7 @@
     "browserify-fs": "^1.0.0",
     "eslint": "^8.17.0",
     "eslint-config-next": "^12.1.6",
-    "prettier": "^2.6.2",
+    "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
     "sass": "^1.52.2",
     "typescript": "^4.7.3"
