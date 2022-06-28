@@ -47,6 +47,11 @@ const config = {
         destination: "https://keybase.io/maximousblk/pgp_keys.asc",
         permanent: false,
       },
+      {
+        source: "/sponsor",
+        destination: "https://github.com/sponsors/maximousblk",
+        permanent: true,
+      },
     ];
   },
 };
