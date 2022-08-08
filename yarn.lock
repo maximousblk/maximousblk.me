@@ -935,10 +935,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/jetbrains-mono/-/jetbrains-mono-4.5.9.tgz#792bcd574f42a0602cc04bfef39e11058d0ca217"
   integrity sha512-qgzRg1dYIPyAOTp1XR6RkDOlNt4o6LVAe9PXR68hQzbwd1xf0S86TWEzNFSL82do8weF/G2ubo4TGxrNKo9D1A==
 
-"@fontsource/lora@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/lora/-/lora-4.5.10.tgz#9b876c9c5acbe0fa9c3447cae7f6178787e1ba6c"
-  integrity sha512-STHlJKDMu6ma0kov3NRU7Z7VpqFl/87jZPooK7NyxqN0BOFnMkUQ7GS7qOJowFMdHRm69dkUvckaIoOWlSbe5Q==
+"@fontsource/lora@^4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/lora/-/lora-4.5.11.tgz#c8316d4d813e06b090b7284223f69a4fd92b55e5"
+  integrity sha512-Ah4hfKAmB0hlOKe1w+x0GIrFSJ1Ea84lBfzEkMS7G2uk8+iv+yqYmvylDDU5gbGkZB89Zo2XUURN/PdTX79EoA==
 
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
