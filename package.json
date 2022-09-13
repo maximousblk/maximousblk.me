@@ -21,7 +21,7 @@
     "@notionhq/client": "^1.0.4",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.7",
-    "autoprefixer": "^10.4.9",
+    "autoprefixer": "^10.4.10",
     "date-fns": "^2.29.2",
     "feed": "^4.2.2",
     "gemoji": "^7.1.0",
