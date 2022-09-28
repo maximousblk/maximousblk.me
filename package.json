@@ -52,7 +52,7 @@
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "sass": "^1.55.0",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   },
   "prettier": {
     "printWidth": 140
