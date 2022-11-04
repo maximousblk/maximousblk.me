@@ -38,7 +38,7 @@
     "react-icons": "^4.4.0",
     "react-player": "^2.11.0",
     "reading-time": "^1.5.0",
-    "sharp": "^0.31.0",
+    "sharp": "^0.31.2",
     "slugify": "^1.6.5",
     "tailwindcss": "^3.1.8",
     "unfurl.js": "^5.7.0"
