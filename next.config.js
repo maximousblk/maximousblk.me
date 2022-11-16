@@ -7,10 +7,10 @@ const config = {
   images: {
     domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com"],
   },
-  pwa: {
-    disable: process.env.NODE_ENV === "development",
-    dest: "public",
-  },
+  // pwa: {
+  //   disable: process.env.NODE_ENV === "development",
+  //   dest: "public",
+  // },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       Object.assign(config.resolve.alias, {
@@ -56,4 +56,4 @@ const config = {
   },
 };
 
-module.exports = withPWA(config);
+module.exports = config;
