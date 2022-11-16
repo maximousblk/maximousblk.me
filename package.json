@@ -13,48 +13,51 @@
     "prod": "yarn build && yarn start"
   },
   "dependencies": {
-    "@fontsource/inter": "^4.5.12",
+    "@fontsource/inter": "^4.5.14",
     "@fontsource/jetbrains-mono": "^4.5.11",
-    "@fontsource/lora": "^4.5.11",
+    "@fontsource/lora": "^4.5.12",
     "@jitl/notion-api": "^0.2.2",
     "@matejmazur/react-katex": "^3.1.3",
-    "@notionhq/client": "^1.0.4",
+    "@notionhq/client": "^2.2.2",
     "@tailwindcss/line-clamp": "^0.4.2",
-    "@tailwindcss/typography": "^0.5.7",
-    "autoprefixer": "^10.4.12",
+    "@tailwindcss/typography": "^0.5.8",
+    "autoprefixer": "^10.4.13",
     "date-fns": "^2.29.3",
     "feed": "^4.2.2",
-    "gemoji": "^7.1.0",
-    "katex": "^0.16.2",
-    "next": "^12.3.1",
-    "next-pwa": "^5.5.5",
-    "next-seo": "^5.5.0",
-    "next-sitemap": "^2.5.28",
+    "gemoji": "^8.0.0",
+    "katex": "^0.16.3",
+    "next": "^13.0.3",
+    "next-pwa": "^5.6.0",
+    "next-seo": "^5.14.1",
+    "next-sitemap": "^3.1.32",
     "next-themes": "^0.2.1",
     "plaiceholder": "^2.5.0",
-    "postcss": "^8.4.18",
+    "postcss": "^8.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0",
+    "react-icons": "^4.6.0",
     "react-player": "^2.11.0",
     "reading-time": "^1.5.0",
     "sharp": "^0.31.2",
     "slugify": "^1.6.5",
-    "tailwindcss": "^3.1.8",
-    "unfurl.js": "^5.7.0"
+    "tailwindcss": "^3.2.4",
+    "unfurl.js": "^6.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
     "browserify-fs": "^1.0.0",
-    "eslint": "^8.24.0",
-    "eslint-config-next": "^12.3.1",
+    "eslint": "^8.27.0",
+    "eslint-config-next": "^13.0.3",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
-    "sass": "^1.55.0",
-    "typescript": "^4.8.3"
+    "sass": "^1.56.1",
+    "typescript": "^4.9.3"
   },
   "prettier": {
     "printWidth": 140
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
