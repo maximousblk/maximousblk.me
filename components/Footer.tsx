@@ -27,13 +27,13 @@ export default function Footer() {
       </div>
       <div className="space-x-1">
         {config.footer.links.map(({ name, href }) => (
-          <Link href={href} key={name}>
-            <a
-              className="rounded-sm px-1.5 py-1 font-mono text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-              aria-label={name}
-            >
-              /{name}
-            </a>
+          <Link
+            href={href}
+            key={name}
+            className="rounded-sm px-1.5 py-1 font-mono text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+            aria-label={name}
+          >
+            /{name}
           </Link>
         ))}
       </div>

@@ -8,10 +8,8 @@ export function Link({ href, ...props }) {
 
   if (isInternalLink) {
     return (
-      <NextLink href={href}>
-        <a className={baseStyle} {...props}>
-          {props.children}
-        </a>
+      <NextLink href={href} className={baseStyle} {...props}>
+        {props.children}
       </NextLink>
     );
   } else if (isAnchorLink) {

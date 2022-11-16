@@ -23,10 +23,11 @@ function NotFound() {
             <code>HTTP ERROR 404</code>
           </blockquote>
         </p>
-        <Link href="/">
-          <a className="mx-auto w-48 rounded-md bg-gray-100 p-3 text-center text-black hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 print:hidden">
-            Go to Home
-          </a>
+        <Link
+          href="/"
+          className="mx-auto w-48 rounded-md bg-gray-100 p-3 text-center text-black hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 print:hidden"
+        >
+          Go to Home
         </Link>
       </div>
     </Container>
