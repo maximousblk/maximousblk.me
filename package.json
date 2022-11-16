@@ -44,6 +44,7 @@
     "unfurl.js": "^6.0.0"
   },
   "devDependencies": {
+    "@next/codemod": "^13.0.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "browserify-fs": "^1.0.0",
