@@ -1,5 +1,3 @@
-"use client";
-
 import "@/styles/global.scss";
 import "@fontsource/inter";
 import "@fontsource/lora";
@@ -9,6 +7,7 @@ import "katex/dist/katex.min.css";
 import { ThemeProvider } from "next-themes";
 
 import Container from "@/components/Container";
+import ThemeContext from "./theme";
 
 export const revalidate = 3600;
 
@@ -17,11 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head />
       <body>
-        <ThemeProvider attribute="class">
+        <ThemeContext>
           <Container>
             <main className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">{children}</main>
           </Container>
-        </ThemeProvider>
+        </ThemeContext>
       </body>
     </html>
   );
