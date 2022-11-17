@@ -12,7 +12,7 @@ import Container from "@/components/Container";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en">
       <head />
       <body>
         <ThemeProvider attribute="class">
