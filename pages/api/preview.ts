@@ -3,8 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const preview = async (req: NextApiRequest, res: NextApiResponse) => {
   const { key, reset, redirect } = req.query;
 
-  console.log(6969, { key, reset, redirect });
-
   if (reset != undefined) {
     res.clearPreviewData();
 

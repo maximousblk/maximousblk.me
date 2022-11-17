@@ -3,7 +3,7 @@ import SEO from "./seo";
 
 import config from "@/config";
 
-export const revalidate = 4000;
+export const revalidate = 3600;
 
 async function getData() {
   const index = await getIndex();

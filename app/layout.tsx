@@ -10,6 +10,8 @@ import { ThemeProvider } from "next-themes";
 
 import Container from "@/components/Container";
 
+export const revalidate = 3600;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

@@ -184,7 +184,6 @@ export function renderContent(block: NotionBlock) {
           />
         );
       }
-
     case "bulleted_list":
       return <ul>{children && <NotionContent blocks={children} />}</ul>;
     case "numbered_list":

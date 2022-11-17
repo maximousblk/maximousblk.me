@@ -2,7 +2,7 @@ import { getIndex, getPage, getBlockChildren } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { notFound } from "next/navigation";
 
-export const revalidate = 200;
+export const revalidate = 3600;
 
 async function getData() {
   const index = await getIndex();
