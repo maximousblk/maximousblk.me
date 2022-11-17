@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState } from "react";
 import { FiClipboard, FiCheck } from "react-icons/fi";
 

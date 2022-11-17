@@ -4,6 +4,7 @@ const withPWA = require("next-pwa");
 const config = {
   reactStrictMode: true,
   // swcMinify: true,
+  experimental: { appDir: true },
   images: {
     domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com"],
   },

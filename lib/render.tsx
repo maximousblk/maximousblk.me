@@ -1,3 +1,5 @@
+"use client";
+
 import { Fragment } from "react";
 import { format, parseISO } from "date-fns";
 import { basename as pathBasename } from "path";
