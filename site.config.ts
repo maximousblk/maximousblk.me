@@ -3,7 +3,7 @@ export const config = {
   description: "I'm a Web Developer who likes building beautiful web interfaces & experiences.",
   email: "maximousblk@gmail.com",
   username: "maximousblk",
-  baseUrl: "https://maximousblk.me",
+  baseUrl: "https://next.maximousblk.me",
   repo: {
     name: "maximousblk/maximousblk.me",
     branch: "main",
