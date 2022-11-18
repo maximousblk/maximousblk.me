@@ -1,11 +1,8 @@
 import Image from "next/image";
-import { getPlaiceholder } from "plaiceholder";
+import { getImageInfo } from "@/lib/utils";
 
 export default async function NotionImage({ src, alt, caption }) {
-  const {
-    base64,
-    img: { height, width },
-  } = await getPlaiceholder(src, { size: 64 });
+  const { blurDataURL, height, width } = await getImageInfo(src);
 
   return (
     <figure>
@@ -15,7 +12,7 @@ export default async function NotionImage({ src, alt, caption }) {
           height={height}
           width={width}
           placeholder="blur"
-          blurDataURL={base64}
+          blurDataURL={blurDataURL}
           src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(src).toString("base64")}
           alt={alt}
         />
