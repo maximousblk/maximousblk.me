@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
-import type { NotionDB, NotionBlock, TableOfContentsItem } from "@/lib/types";
+import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
 import { getPlaiceholder } from "plaiceholder";
 import { unfurl } from "unfurl.js";
 import { slugify } from "@/lib/utils";
@@ -10,7 +10,7 @@ export const notion = new Client({
 });
 
 export async function getIndex(): Promise<{
-  [key: string]: { id: string; type: string; children?: { id: string; type: string; slug: string }[] };
+  [key: string]: { id: string; type: string; children?: { id: string; type: string; published: boolean; slug: string }[] };
 }> {
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
@@ -22,8 +22,13 @@ export async function getIndex(): Promise<{
 
         const children =
           page.type == "database"
-            ? (await getDatabase(page.database.id)).results.map(({ properties, id, object }: PageWithChildren) => {
-                return { id, type: object, slug: slugify(properties.title[properties.title.type].map(({ plain_text }) => plain_text)) };
+            ? (await getDatabase(page.database.id)).results.map(({ properties: { published, title }, id, object }: PageWithChildren) => {
+                return {
+                  id,
+                  type: object,
+                  published: published[published.type],
+                  slug: slugify(title[title.type].map(({ plain_text }) => plain_text)),
+                };
               })
             : undefined;
 
@@ -37,13 +42,13 @@ export async function getIndex(): Promise<{
 }
 
 export async function getDatabase(database_id: string) {
-  const db = (await notion.databases.query({ database_id })) as NotionDB;
+  const db = await notion.databases.query({ database_id });
 
   while (db.has_more) {
-    const { results, has_more, next_cursor } = (await notion.databases.query({
+    const { results, has_more, next_cursor } = await notion.databases.query({
       database_id,
       start_cursor: db.next_cursor,
-    })) as NotionDB;
+    });
     db.results = [...db.results, ...results];
     db.has_more = has_more;
     db.next_cursor = next_cursor;

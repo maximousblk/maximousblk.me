@@ -1,8 +1,15 @@
-import type { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
-import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
+import type { QueryDatabaseResponse, BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { PageWithChildren } from "@jitl/notion-api";
 
 export type NotionDB = QueryDatabaseResponse & {
   results: PageWithChildren[];
+};
+
+type BlockWithChildren = Omit<
+  BlockObjectResponse,
+  "archived" | "created_by" | "created_time" | "last_edited_by" | "last_edited_time" | "parent"
+> & {
+  children: BlockWithChildren[];
 };
 
 export type NotionBlock =

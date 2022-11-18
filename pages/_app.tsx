@@ -32,9 +32,3 @@ export default function App({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   );
 }
-
-export function reportWebVitals(metric) {
-  if (process.env.NODE_ENV === "development") {
-    console.debug(metric);
-  }
-}
