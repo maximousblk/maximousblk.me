@@ -10,7 +10,7 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "prod": "pnpm build && pnpm start"
+    "prod": "next build && next start"
   },
   "dependencies": {
     "@fontsource/inter": "^4.5.14",
