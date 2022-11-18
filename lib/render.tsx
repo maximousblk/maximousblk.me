@@ -252,7 +252,11 @@ export function renderContent(block: NotionBlock) {
     case "code":
       if (!contents.rich_text.length) return null;
       return (
-        <CodeBlock lang={contents.language} title={contents.caption.map(({ plain_text }) => plain_text).join("")}>
+        <CodeBlock
+          lang={contents.language}
+          title={contents.caption.map(({ plain_text }) => plain_text).join("")}
+          plain_text={contents.rich_text.map(({ plain_text }) => plain_text).join("")}
+        >
           <NotionText blocks={contents.rich_text} />
         </CodeBlock>
       );
