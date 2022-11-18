@@ -17,7 +17,7 @@ export default function CodeBlock({ title, lang, children, plain_text }: CodeBlo
             {title}
           </span>
         </span>
-        {/* <CodeCopy plain_text={plain_text} /> */}
+        <CodeCopy plain_text={plain_text} />
       </div>
 
       <pre className="my-0 w-full overflow-auto rounded-t-none border border-t-0 border-gray-200 bg-gray-50 p-4 text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
