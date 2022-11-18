@@ -6,7 +6,7 @@ import { basename as pathBasename } from "path";
 
 import Image from "next/image";
 import NotionEquation from "@/components/NotionEquation";
-import TeX from "@matejmazur/react-katex";
+import FormattedDate from "@/components/FormattedDate";
 import CodeBlock from "@/components/CodeBlock";
 import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
@@ -50,19 +50,7 @@ export function renderText(block) {
       const mention = contents[contents.type];
       switch (contents.type) {
         case "date":
-          const date = mention;
-          const start = parseISO(date.start);
-          const end = parseISO(date.end);
-          const hasTime = (d: Date) => d.getHours() !== 0;
-          const withTime = (d: Date) => format(d, "PPpp");
-          const withoutTime = (d: Date) => format(d, "PP");
-
-          return (
-            <time dateTime={start.toISOString()}>
-              {hasTime(start) ? withTime(start) : withoutTime(start)}
-              {date.end ? ` - ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
-            </time>
-          );
+          return <FormattedDate start={mention.start} end={mention.end} />;
         case "user":
           return <Mention type="user" link={`mailto:${mention.person.email}`} text={mention.name} />;
         case "page":
