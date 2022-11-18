@@ -16,6 +16,7 @@ import { slugify } from "@/lib/utils";
 import type { IconType } from "react-icons";
 import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlay, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
+import NotionImage from "@/components/NotionImage";
 
 const notion_color = {
   default: "",
@@ -258,24 +259,12 @@ export function renderContent(block: NotionBlock) {
     case "image":
       if (!contents[contents.type].url) return null;
       return (
-        <figure>
-          <div className="mx-auto flex w-fit overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-800">
-            <Image
-              quality={90}
-              height={contents.size.height}
-              width={contents.size.width}
-              placeholder="blur"
-              blurDataURL={contents.placeholder}
-              src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(contents[contents.type].url).toString("base64")}
-              alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
-            />
-          </div>
-          {contents.caption.length > 0 && (
-            <figcaption>
-              <NotionText blocks={contents.caption} />
-            </figcaption>
-          )}
-        </figure>
+        // @ts-ignore
+        <NotionImage
+          src={contents[contents.type].url}
+          alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
+          caption={contents.caption.length > 0 ? <NotionText blocks={contents.caption} /> : null}
+        />
       );
     case "video":
       if (!contents[contents.type].url) return null;

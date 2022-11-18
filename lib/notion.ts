@@ -120,15 +120,6 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             }, []);
           break;
 
-        case "image":
-          const {
-            base64,
-            img: { height, width },
-          } = await getPlaiceholder(contents[contents.type].url, { size: 64 });
-          block.image["size"] = { height, width };
-          block.image["placeholder"] = base64;
-          break;
-
         case "link_to_page":
           const {
             properties: { title },
