@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { basename as pathBasename } from "path";
 
 import Image from "next/image";
-import NotionEquation from "@/components/NotionEquation";
+import { InlineMath, BlockMath } from "react-katex";
 import FormattedDate from "@/components/FormattedDate";
 import CodeBlock from "@/components/CodeBlock";
 import Bookmark from "@/components/Bookmark";
@@ -67,7 +67,7 @@ export function renderText(block) {
       }
 
     case "equation":
-      return <NotionEquation math={contents.expression} />;
+      return <InlineMath math={contents.expression} />;
 
     case "text":
       const {
@@ -304,7 +304,11 @@ export function renderContent(block: NotionBlock) {
       );
     case "equation":
       if (!contents.expression) return null;
-      return <NotionEquation math={contents.expression} block className="my-8" />;
+      return (
+        <div className="my-8">
+          <BlockMath math={contents.expression} />
+        </div>
+      );
     case "link_to_page":
       if (!contents[contents.type]) return null;
       return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={FiLink2} />;
