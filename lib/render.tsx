@@ -1,7 +1,4 @@
-"use client";
-
 import { Fragment } from "react";
-import { format, parseISO } from "date-fns";
 import { basename as pathBasename } from "path";
 
 import Image from "next/image";
@@ -16,6 +13,7 @@ import { slugify } from "@/lib/utils";
 import type { IconType } from "react-icons";
 import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlay, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
+import NotionVideo from "@/components/NotionVideo";
 import NotionImage from "@/components/NotionImage";
 
 const notion_color = {
@@ -261,22 +259,10 @@ export function renderContent(block: NotionBlock) {
     case "video":
       if (!contents[contents.type].url) return null;
       return (
-        <figure>
-          <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-800">
-            <ReactPlayer
-              light
-              controls
-              url={contents[contents.type].url}
-              playIcon={<FiPlay size="64" />}
-              className="aspect-video !h-auto max-h-max !w-full max-w-full"
-            />
-          </div>
-          {contents.caption.length > 0 && (
-            <figcaption>
-              <NotionText blocks={contents.caption} />
-            </figcaption>
-          )}
-        </figure>
+        <NotionVideo
+          url={contents[contents.type].url}
+          caption={contents.caption.length > 0 ? <NotionText blocks={contents.caption} /> : null}
+        />
       );
     case "audio":
       if (!contents[contents.type].url) return null;
