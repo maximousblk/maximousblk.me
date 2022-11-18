@@ -1,5 +1,3 @@
-"use client";
-
 import { format, parseISO } from "date-fns";
 
 export function FormattedDate({ start, end }) {
