@@ -141,22 +141,8 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             title: og_data.title || og_data.twitter_card?.title || og_data.open_graph?.title || null,
             description: og_data.description || og_data.open_graph?.description || null,
             url: contents.url,
+            image,
           };
-
-          if (image && (image.secure_url || image.url)) {
-            const {
-              base64,
-              img: { height, width },
-            } = await getPlaiceholder(image.secure_url || image.url, { size: 64 });
-
-            block[block.type]["meta"].image = {
-              ...image,
-              url: image.secure_url || image.url,
-              height,
-              width,
-              placeholder: base64,
-            };
-          }
           break;
 
         case "synced_block":

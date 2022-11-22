@@ -18,7 +18,7 @@ const twitterURL = (title: string, slug: string) => {
 const BlogSeo = ({ title, description, publishedAt, url, image }) => {
   const date = new Date(publishedAt).toISOString();
   const featuredImage = {
-    url: image?.url ? "https://proxy.maximousblk.me/?rewrite=" + Buffer.from(image.url).toString("base64") : config.baseUrl + "/og.png",
+    url: image?.url ? "https://proxy.maximousblk.me/rewrite?url=" + Buffer.from(image.url).toString("base64") : config.baseUrl + "/og.png",
     alt: title,
     width: image?.width,
     height: image?.height,
@@ -72,7 +72,7 @@ export default function PostLayout({ children, title, slug, cover, publishedAt, 
         {cover && (
           <div className="mb-8 flex h-72 w-full items-center overflow-hidden rounded align-middle">
             <Image
-              src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(cover.url).toString("base64")}
+              src={"https://proxy.maximousblk.me/rewrite?url=" + Buffer.from(cover.url).toString("base64")}
               alt=""
               width={cover.width}
               height={cover.height}

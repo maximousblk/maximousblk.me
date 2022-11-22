@@ -1,5 +1,5 @@
 import Link from "@/components/Link";
-import Image from "next/image";
+import ProxyImage from "@/components/ProxyImage";
 
 export interface BookmarkProps {
   title: string;
@@ -21,17 +21,10 @@ export function Bookmark({ title, description, url, image, caption }: BookmarkPr
           <p className="m-0 text-sm text-gray-600 line-clamp-1 dark:text-gray-400">{description}</p>
           <p className="m-0 font-mono text-xs text-gray-500 line-clamp-1">{url}</p>
         </div>
-        {image?.url && image?.height && image?.width && (
+        {image?.url && (
           <div className="hidden max-h-[6.5rem] w-60 sm:flex">
-            <Image
-              alt=""
-              height={image.height}
-              width={image.width}
-              placeholder="blur"
-              blurDataURL={image.placeholder}
-              src={"https://images.weserv.nl/?h=200&url=" + image.url}
-              className="!rounded-none object-cover"
-            />
+            {/* @ts-ignore */}
+            <ProxyImage alt={title} src={image.url} width={image.width} height={image.height} className="!rounded-none object-cover" />
           </div>
         )}
       </Link>

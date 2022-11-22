@@ -29,6 +29,10 @@ html {
     font-size: 1.5em;
   }
 
+  img {
+    @apply my-0;
+  }
+
   code {
     @apply rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-sm text-gray-900 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
   }

@@ -21,6 +21,7 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.8",
     "autoprefixer": "^10.4.13",
+    "base64url": "^3.0.1",
     "date-fns": "^2.29.3",
     "feed": "^4.2.2",
     "gemoji": "^8.0.0",

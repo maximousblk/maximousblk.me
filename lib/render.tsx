@@ -1,20 +1,19 @@
 import { Fragment } from "react";
 import { basename as pathBasename } from "path";
 
-import Image from "next/image";
 import { InlineMath, BlockMath } from "react-katex";
 import FormattedDate from "@/components/FormattedDate";
 import CodeBlock from "@/components/CodeBlock";
 import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
-import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents } from "@/components/TableOfContents";
 import { slugify } from "@/lib/utils";
 import type { IconType } from "react-icons";
-import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlay, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
+import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
 import NotionVideo from "@/components/NotionVideo";
 import NotionImage from "@/components/NotionImage";
+import NotionCallout from "@/components/NotionCallout";
 
 const notion_color = {
   default: "",
@@ -207,34 +206,12 @@ export function renderContent(block: NotionBlock) {
       );
     case "callout":
       if (!contents.rich_text.length) return null;
-      const icon = contents.icon;
       return (
-        <div
-          className={
-            "my-6 flex space-x-3 rounded border px-3 py-2 " +
-            "border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900 " +
-            notion_color[contents.color || "default"]
-          }
-        >
-          <div className="mt-0.5 h-6 w-6 select-none overflow-hidden rounded" aria-hidden="true">
-            {contents.icon.type == "emoji" ? (
-              <Twemoji emoji={contents.icon.emoji} size={24} />
-            ) : (
-              <Image
-                alt=""
-                src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(icon[icon.type].url).toString("base64")}
-                height={24}
-                width={24}
-              />
-            )}
-          </div>
-
-          <div className="w-full space-y-4">
-            <NotionText blocks={contents.rich_text} />
-            {children && <NotionContent blocks={children} />}
-          </div>
-        </div>
+        <NotionCallout icon={contents.icon} color={contents.color} contents={<NotionText blocks={contents.rich_text} />}>
+          {children && <NotionContent blocks={children} />}
+        </NotionCallout>
       );
+
     case "code":
       if (!contents.rich_text.length) return null;
       return (
