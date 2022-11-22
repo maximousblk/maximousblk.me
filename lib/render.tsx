@@ -7,37 +7,13 @@ import CodeBlock from "@/components/CodeBlock";
 import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
 import { TableOfContents } from "@/components/TableOfContents";
-import { slugify } from "@/lib/utils";
+import { getNotionColorClass, slugify } from "@/lib/utils";
 import type { IconType } from "react-icons";
 import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
 import NotionVideo from "@/components/NotionVideo";
 import NotionImage from "@/components/NotionImage";
 import NotionCallout from "@/components/NotionCallout";
-
-const notion_color = {
-  default: "",
-
-  gray: "!text-gray-500 !dark:text-gray-400",
-  brown: "!text-stone-500 !dark:text-stone-400",
-  orange: "!text-orange-500 !dark:text-orange-400",
-  yellow: "!text-amber-500 !dark:text-yellow-400",
-  green: "!text-emerald-500 !dark:text-emerald-400",
-  blue: "!text-blue-500 !dark:text-sky-400",
-  purple: "!text-indigo-500 !dark:text-indigo-400",
-  pink: "!text-pink-500 !dark:text-pink-400",
-  red: "!text-rose-500 !dark:text-rose-400",
-
-  gray_background: "!bg-opacity-10 !bg-gray-500 !border-gray-200 dark:!border-gray-900",
-  brown_background: "!bg-opacity-10 !bg-stone-500 !border-stone-200 dark:!border-stone-900",
-  orange_background: "!bg-opacity-10 !bg-orange-500 !border-orange-200 dark:!border-orange-900",
-  yellow_background: "!bg-opacity-10 !bg-yellow-500 !border-yellow-200 dark:!border-yellow-900",
-  green_background: "!bg-opacity-10 !bg-emerald-500 !border-emerald-200 dark:!border-emerald-900",
-  blue_background: "!bg-opacity-10 !bg-sky-500 !border-sky-200 dark:!border-sky-900",
-  purple_background: "!bg-opacity-10 !bg-indigo-500 !border-indigo-200 dark:!border-indigo-900",
-  pink_background: "!bg-opacity-10 !bg-pink-500 !border-pink-200 dark:!border-pink-900",
-  red_background: "!bg-opacity-10 !bg-rose-500 !border-rose-200 dark:!border-rose-900",
-};
 
 export function renderText(block) {
   const contents = block[block.type];
@@ -124,12 +100,12 @@ export function renderContent(block: NotionBlock) {
   switch (block.type) {
     case "table_of_contents":
       if (!children.length) return null;
-      return <TableOfContents items={children} className={notion_color[contents.color || "default"]} />;
+      return <TableOfContents items={children} className={getNotionColorClass(contents.color)} />;
     case "paragraph":
       if (!contents.rich_text.length) return <br />;
       return (
         <Fragment>
-          <p className={"my-4 rounded-sm px-1 py-0.5 " + notion_color[contents.color || "default"]}>
+          <p className={"my-4 rounded-sm px-1 py-0.5 " + getNotionColorClass(contents.color)}>
             <NotionText blocks={contents.rich_text} />
           </p>
           {children && (
@@ -137,7 +113,7 @@ export function renderContent(block: NotionBlock) {
               className={
                 "ml-1 pl-4 last:!mb-0 last:!pb-0 " +
                 "border-l-2 border-gray-200 dark:border-gray-800 " +
-                notion_color[contents.color || "default"]
+                getNotionColorClass(contents.color)
               }
             >
               <NotionContent blocks={children} />
@@ -155,7 +131,7 @@ export function renderContent(block: NotionBlock) {
             type={block.type}
             id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
             contents={contents.rich_text}
-            className={notion_color[contents.color || "default"]}
+            className={getNotionColorClass(contents.color)}
           >
             <NotionContent blocks={contents.children} />
           </ToggleHeading>
@@ -165,7 +141,7 @@ export function renderContent(block: NotionBlock) {
           <Heading
             type={block.type}
             id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
-            className={notion_color[contents.color || "default"]}
+            className={getNotionColorClass(contents.color)}
             contents={contents.rich_text}
           />
         );
@@ -178,7 +154,7 @@ export function renderContent(block: NotionBlock) {
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
       return (
-        <li className={"my-2 rounded-sm px-2 py-1 last:!mb-0 last:!pb-0 " + notion_color[contents.color || "default"]}>
+        <li className={"my-2 rounded-sm px-2 py-1 last:!mb-0 last:!pb-0 " + getNotionColorClass(contents.color)}>
           <NotionText blocks={contents.rich_text} />
           {children && <NotionContent blocks={children} />}
         </li>
@@ -186,7 +162,7 @@ export function renderContent(block: NotionBlock) {
     case "to_do":
       if (!contents.rich_text.length) return null;
       return (
-        <label htmlFor={block.id} className={"my-2 block rounded-sm py-1 pl-9 -indent-6 " + notion_color[contents.color || "default"]}>
+        <label htmlFor={block.id} className={"my-2 block rounded-sm py-1 pl-9 -indent-6 " + getNotionColorClass(contents.color)}>
           <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2.5 scale-125 align-middle" />
           <span className={contents.checked ? "text-gray-400 line-through dark:text-gray-600" : ""}>
             <NotionText blocks={contents.rich_text} />
@@ -201,7 +177,7 @@ export function renderContent(block: NotionBlock) {
         <Accordion
           summary={<NotionText blocks={contents.rich_text} />}
           details={children ? <NotionContent blocks={children} /> : null}
-          className={notion_color[contents.color || "default"]}
+          className={getNotionColorClass(contents.color)}
         />
       );
     case "callout":
@@ -215,11 +191,7 @@ export function renderContent(block: NotionBlock) {
     case "code":
       if (!contents.rich_text.length) return null;
       return (
-        <CodeBlock
-          lang={contents.language}
-          title={contents.caption.map(({ plain_text }) => plain_text).join("")}
-          plain_text={contents.rich_text.map(({ plain_text }) => plain_text).join("")}
-        >
+        <CodeBlock lang={contents.language} title={getPlainText(contents.caption)} plain_text={getPlainText(contents.rich_text)}>
           <NotionText blocks={contents.rich_text} />
         </CodeBlock>
       );
@@ -229,7 +201,7 @@ export function renderContent(block: NotionBlock) {
         // @ts-ignore
         <NotionImage
           src={contents[contents.type].url}
-          alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
+          alt={getPlainText(contents?.caption)}
           caption={contents.caption.length > 0 ? <NotionText blocks={contents.caption} /> : null}
         />
       );
@@ -311,7 +283,7 @@ export function renderContent(block: NotionBlock) {
     case "quote":
       if (!contents.rich_text.length) return null;
       return (
-        <blockquote className={"py-1 " + notion_color[contents.color || "default"]}>
+        <blockquote className={"py-1 " + getNotionColorClass(contents.color)}>
           <NotionText blocks={contents.rich_text} />
         </blockquote>
       );
@@ -518,4 +490,8 @@ function Accordion({
       {details || <p className="text-gray-400 dark:text-gray-600">This block is empty</p>}
     </details>
   );
+}
+
+function getPlainText(blocks): string {
+  return blocks?.map(({ plain_text }) => plain_text).join("") || "";
 }
