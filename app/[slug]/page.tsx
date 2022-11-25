@@ -1,27 +1,29 @@
-import { getIndex, getPage, getBlockChildren } from "@/lib/notion";
+import { getSiteMap, getBlockChildren } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
+import { previewData } from "next/headers";
 import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 
-async function getData(slug) {
-  const index = await getIndex();
+async function getData(slug: string) {
+  const preview = !!previewData();
 
-  const pageID = index.pages.children.find(({ slug: sl }) => sl === slug)?.id;
-  if (!pageID) return null;
+  const index = await getSiteMap();
 
-  const page = await getPage(pageID);
+  const {
+    id: page_id,
+    published,
+    title,
+    description,
+    properties: { hide_description },
+  } = index.pages.children.find(({ slug: sl }) => sl === slug);
 
-  const { published, title: pageTitle, description: pageDescription, hide_description } = page.properties;
+  if (!page_id) return null;
+  if (!published && !preview) return null;
 
-  if (!published[published.type]) return null;
+  const blocks = await getBlockChildren(page_id);
 
-  const blocks = await getBlockChildren(page.id);
-  const title = pageTitle[pageTitle.type].map(({ plain_text }) => plain_text).join(" ");
-  const description = pageDescription[pageDescription.type].map(({ plain_text }) => plain_text).join(" ");
-  const hide_descr = hide_description[hide_description.type];
-
-  return { blocks, title, description, hide_descr };
+  return { blocks, title, description, hide_descr: hide_description[hide_description.type] };
 }
 
 export default async function Page({ params: { slug } }) {

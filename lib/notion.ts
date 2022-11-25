@@ -15,35 +15,56 @@ export const notion = new Client({
 });
 
 export async function getSiteMap(): Promise<{
-  [key: string]: { id: string; type: string; children?: { id: string; type: string; published: boolean; slug: string }[] };
+  [key: string]: {
+    id: string;
+    type: string;
+    children?: {
+      id: string;
+      type: string;
+      cover?: string;
+      last_edited_time: string;
+      title: string;
+      description: string;
+      published: boolean;
+      slug: string;
+      properties: any;
+    }[];
+  };
 }> {
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
-  return (
-    await Promise.all(
-      root.map(async ({ properties: { name, page: pageId } }: PageWithChildren) => {
-        const pageName = name[name.type].map(({ plain_text }) => plain_text).join("");
-        const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
+  return await Promise.all(
+    root.map(async ({ properties: { name, page: pageId } }: PageWithChildren) => {
+      const pageName = getPlainText(name[name.type]);
+      const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
 
-        const children =
-          page.type == "database"
-            ? (await getDatabase(page.database.id)).results.map(({ properties: { published, title }, id, object }: PageWithChildren) => {
+      const children =
+        page.type == "database"
+          ? (await getDatabase(page.database.id)).results.map(
+              ({ properties: { published, title, description, ...properties }, last_edited_time, cover, id, object }: PageWithChildren) => {
                 return {
                   id,
                   type: object,
+                  cover: cover ? cover[cover.type].url : null,
+                  last_edited_time,
+                  title: getPlainText(title[title.type]),
+                  description: getPlainText(description[description.type]),
                   published: published[published.type],
-                  slug: slugify(title[title.type].map(({ plain_text }) => plain_text)),
+                  slug: slugify(getPlainText(title[title.type])),
+                  properties,
                 };
-              })
-            : undefined;
+              }
+            )
+          : null;
 
-        return { name: pageName, id: page[page.type].id, type: page.type, children };
-      })
-    )
-  ).reduce((acc, { name, ...props }) => {
-    acc[name] = { ...props };
-    return acc;
-  }, {});
+      return { name: pageName, id: page[page.type].id, type: page.type, title: page[page.type].title, children };
+    })
+  ).then((pages) =>
+    pages.reduce((acc, { name, ...props }) => {
+      acc[name] = { ...props };
+      return acc;
+    }, {})
+  );
 }
 
 export async function getDatabase(database_id: string) {
