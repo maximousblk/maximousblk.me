@@ -255,10 +255,10 @@ export function renderContent(block: NotionBlock) {
       );
     case "link_to_page":
       if (!contents[contents.type]) return null;
-      return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={FiLink2} />;
+      return <LinkCard url={"/" + contents[contents.type]} text={contents.title} icon={FiLink2} />;
     case "child_page":
       if (!block.has_children) return null;
-      return <LinkCard url={"/p/" + block.id} text={contents.title} icon={FiFileText} />;
+      return <LinkCard url={"/" + block.id} text={contents.title} icon={FiFileText} />;
     case "divider":
       return <hr />;
     case "column_list":
