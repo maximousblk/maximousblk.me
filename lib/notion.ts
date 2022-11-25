@@ -162,7 +162,15 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
         case "link_preview":
         case "bookmark":
-          const og_data = await unfurl(contents.url);
+          const og_data = await unfurl(contents.url, {
+            fetch: (input) => {
+              console.debug("[unfurl] fetch", input);
+
+              return fetch(input, {
+                next: { revalidate: 3600 },
+              });
+            },
+          });
           const image = og_data.open_graph?.images?.[0] || null;
 
           block[block.type]["meta"] = {

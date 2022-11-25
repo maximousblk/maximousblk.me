@@ -1,17 +1,10 @@
-const withPWA = require("next-pwa");
-
 /** @type {import('next').NextConfig} */
-const config = {
+module.exports = {
   reactStrictMode: true,
-  // swcMinify: true,
   experimental: { appDir: true },
   images: {
     domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com"],
   },
-  // pwa: {
-  //   disable: process.env.NODE_ENV === "development",
-  //   dest: "public",
-  // },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       Object.assign(config.resolve.alias, {
@@ -56,5 +49,3 @@ const config = {
     ];
   },
 };
-
-module.exports = config;
