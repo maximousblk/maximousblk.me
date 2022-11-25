@@ -13,17 +13,12 @@ async function getData(slug: string) {
 
     if (!page?.id) return { not_found: true };
 
-    console.log("page exists");
-
     const {
       parent,
       properties: { published, title, description, hide_description },
     } = page;
 
     if (parent.type == "database_id" && !published[published.type]) return { not_found: true };
-    console.log("page is public");
-
-    console.log(published, title, description, hide_description);
 
     const blocks = await getBlockChildren(page.id);
 
