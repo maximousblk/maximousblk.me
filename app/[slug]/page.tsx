@@ -42,9 +42,11 @@ export default async function Page({ params: { slug } }) {
   );
 }
 export async function generateStaticParams() {
-  const index = await getIndex();
+  const {
+    pages: { children: pages },
+  } = await getSiteMap();
 
-  return index.pages.children
+  return pages
     .filter(({ published }) => published)
     .map(({ slug }) => {
       return { slug };

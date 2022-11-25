@@ -1,11 +1,12 @@
-import { getIndex, getPage, getBlockChildren } from "@/lib/notion";
+import { getSiteMap, getPage, getBlockChildren } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
+import { getPlainText } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 
 async function getData() {
-  const index = await getIndex();
+  const index = await getSiteMap();
 
   const page = await getPage(index.home.id);
 
@@ -21,7 +22,7 @@ export default async function Page() {
 
   if (!data) notFound();
 
-  const title = data.page.properties.title["title"].map(({ plain_text }) => plain_text).join("");
+  const title = getPlainText(data.page.properties.title["title"]);
 
   return (
     <main className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">

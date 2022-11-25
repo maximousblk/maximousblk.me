@@ -23,7 +23,7 @@ function Contents({ items }: { items: TableOfContentsItem[] }) {
     <ul>
       {items.map((item) => (
         <li key={item.title}>
-          <Link href={"#" + slugify([item.title])}>{item.title}</Link>
+          <Link href={"#" + slugify(item.title)}>{item.title}</Link>
           {item.children && <Contents items={item.children} />}
         </li>
       ))}

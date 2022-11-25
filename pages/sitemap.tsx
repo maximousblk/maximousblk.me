@@ -1,20 +1,20 @@
 import { getServerSideSitemap, ISitemapField } from "next-sitemap";
 import { GetServerSideProps } from "next";
 
-import { slugify } from "@/lib/utils";
+import { getPlainText, slugify } from "@/lib/utils";
 import config from "@/config";
-import { getDatabase, getIndex } from "@/lib/notion";
+import { getDatabase, getSiteMap } from "@/lib/notion";
 import { Page } from "@jitl/notion-api";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const index = await getIndex();
+  const index = await getSiteMap();
   const pages = await getDatabase(index.pages.id).then((pages) => {
     return pages.results
       .filter(({ properties: { published } }: Page) => {
         return published[published.type] || ctx.preview || false;
       })
       .map(({ properties: { title } }: Page) => {
-        return `/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
+        return `/${slugify(getPlainText(title[title.type]))}`;
       });
   });
 
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         return published[published.type] || ctx.preview || false;
       })
       .map(({ properties: { title } }: Page) => {
-        return `/posts/${slugify(title[title.type].map(({ plain_text }) => plain_text))}`;
+        return `/posts/${slugify(getPlainText(title[title.type]))}`;
       });
   });
 

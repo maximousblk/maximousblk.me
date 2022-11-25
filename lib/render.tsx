@@ -7,7 +7,7 @@ import CodeBlock from "@/components/CodeBlock";
 import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
 import { TableOfContents } from "@/components/TableOfContents";
-import { getNotionColorClass, slugify } from "@/lib/utils";
+import { getNotionColorClass, slugify, getPlainText } from "@/lib/utils";
 import type { IconType } from "react-icons";
 import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
@@ -129,7 +129,7 @@ export function renderContent(block: NotionBlock) {
         return (
           <ToggleHeading
             type={block.type}
-            id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
+            id={slugify(getPlainText(contents.rich_text))}
             contents={contents.rich_text}
             className={getNotionColorClass(contents.color)}
           >
@@ -140,7 +140,7 @@ export function renderContent(block: NotionBlock) {
         return (
           <Heading
             type={block.type}
-            id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
+            id={slugify(getPlainText(contents.rich_text))}
             className={getNotionColorClass(contents.color)}
             contents={contents.rich_text}
           />
@@ -490,8 +490,4 @@ function Accordion({
       {details || <p className="text-gray-400 dark:text-gray-600">This block is empty</p>}
     </details>
   );
-}
-
-function getPlainText(blocks): string {
-  return blocks?.map(({ plain_text }) => plain_text).join("") || "";
 }

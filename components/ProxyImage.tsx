@@ -25,7 +25,7 @@ export default async function ProxyImage({
   }
 
   if (!src.startsWith("https://proxy.maximousblk.me/rewrite?url=")) {
-    src = "https://proxy.maximousblk.me/rewrite?url=" + base64url(src)
+    src = "https://proxy.maximousblk.me/rewrite?url=" + base64url(src);
   }
 
   return (

@@ -4,14 +4,14 @@ import type { NotionBlock } from "@/lib/types";
 import { cache } from "react";
 import { getPlaiceholder } from "plaiceholder";
 
-export function slugify(text: string[]) {
-  return slugy(text.join(""), { lower: true });
+export function slugify(text: string) {
+  return slugy(text, { lower: true });
 }
 
 export function getReadingTime(blocks: NotionBlock[]): ReadTimeResults {
   const words: string = blocks.reduce((acc, block) => {
     if (block[block.type].rich_text?.length) {
-      return acc + block[block.type].rich_text.map(({ plain_text }) => plain_text).join(" ");
+      return acc + getPlainText(block[block.type].rich_text);
     }
     return acc;
   }, "");
@@ -60,4 +60,8 @@ const notion_color = {
 
 export function getNotionColorClass(anotation: string) {
   return notion_color[anotation] || "";
+}
+
+export function getPlainText(blocks: { plain_text: string }[]): string {
+  return blocks?.map(({ plain_text }) => plain_text).join("");
 }

@@ -5,10 +5,10 @@ interface Attributes {
   title: string;
   description: string;
   slug: string;
-  publishedAt: Date;
+  publishedAt: Date | number;
 }
 
-const BlogPost = ({ title, description, slug, publishedAt }: Attributes) => {
+export default function BlogPost({ title, description, slug, publishedAt }: Attributes) {
   return (
     <div>
       <Link href={`/posts/${slug}`} className="w-full">
@@ -24,6 +24,4 @@ const BlogPost = ({ title, description, slug, publishedAt }: Attributes) => {
       </Link>
     </div>
   );
-};
-
-export default BlogPost;
+}

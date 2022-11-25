@@ -1,15 +1,14 @@
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
-import { getPlaiceholder } from "plaiceholder";
 import { unfurl } from "unfurl.js";
-import { slugify } from "@/lib/utils";
+import { getPlainText, slugify } from "@/lib/utils";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-export async function getIndex(): Promise<{
+export async function getSiteMap(): Promise<{
   [key: string]: { id: string; type: string; children?: { id: string; type: string; published: boolean; slug: string }[] };
 }> {
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
@@ -95,7 +94,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
             .map((block: BlockWithChildren) => {
               return {
-                title: block[block.type].rich_text.map(({ plain_text }) => plain_text).join(""),
+                title: getPlainText(block[block.type].rich_text),
                 type: block.type,
                 children: [],
               };
@@ -129,7 +128,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           const {
             properties: { title },
           } = await getPage(contents[contents.type]);
-          block.link_to_page["title"] = title[title.type].map(({ plain_text }) => plain_text).join("");
+          block.link_to_page["title"] = getPlainText(title[title.type]);
           break;
 
         case "link_preview":

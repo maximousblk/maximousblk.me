@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Feed } from "feed";
 import config from "@/config";
-import { getDatabase, getIndex } from "@/lib/notion";
+import { getDatabase, getSiteMap } from "@/lib/notion";
 import type { PageWithChildren } from "@jitl/notion-api";
 import { parseISO } from "date-fns";
-import { slugify } from "@/lib/utils";
+import { getPlainText, slugify } from "@/lib/utils";
 
 const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const { f } = req.query;
@@ -38,7 +38,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  const index = await getIndex();
+  const index = await getSiteMap();
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
       .filter(({ properties: { published } }: PageWithChildren) => {
@@ -46,9 +46,9 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
       })
       .map(({ properties: { title: postTitle, description: postDescription, date } }: PageWithChildren) => {
         return {
-          title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
-          description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),
-          slug: slugify(postTitle[postTitle.type].map(({ plain_text }) => plain_text)),
+          title: getPlainText(postTitle[postTitle.type]),
+          description: getPlainText(postDescription[postDescription.type]),
+          slug: slugify(getPlainText(postTitle[postTitle.type])),
           publishedAt: parseISO(date[date.type].start).getTime(),
         };
       })

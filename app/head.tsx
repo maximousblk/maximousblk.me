@@ -1,18 +1,19 @@
-import { getIndex, getPage } from "@/lib/notion";
+import { getSiteMap, getPage } from "@/lib/notion";
 import SEO from "./seo";
 
 import config from "@/config";
+import { getPlainText } from "@/lib/utils";
 
 export const revalidate = 3600;
 
 async function getData() {
-  const index = await getIndex();
+  const index = await getSiteMap();
 
   const page = await getPage(index.home.id);
 
   if (!page) return null;
 
-  const title = page.properties.title["title"].map(({ plain_text }) => plain_text).join("");
+  const title = getPlainText(page.properties.title["title"]);
 
   return { title };
 }
