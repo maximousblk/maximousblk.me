@@ -4,7 +4,6 @@ import { NotionContent } from "@/lib/render";
 import { getReadingTime } from "@/lib/utils";
 import { format, parseISO } from "date-fns";
 import config from "@/config";
-import { previewData } from "next/headers";
 import { notFound } from "next/navigation";
 import { FiGithub, FiTwitter } from "react-icons/fi";
 
@@ -59,8 +58,6 @@ export default async function Page({ params: { slug } }) {
 }
 
 async function getData(slug: string) {
-  const preview = !!previewData();
-
   try {
     const {
       posts: { children: posts },
@@ -75,7 +72,7 @@ async function getData(slug: string) {
     } = posts.find(({ slug: sl }) => sl === slug) || {};
 
     if (!page_id) return { not_found: true };
-    if (!published && !preview) return { not_found: true };
+    if (!published) return { not_found: true };
 
     const publishedAt = parseISO(date[date.type]?.start).getTime();
 

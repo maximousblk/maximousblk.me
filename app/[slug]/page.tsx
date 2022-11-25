@@ -1,13 +1,10 @@
 import { getSiteMap, getBlockChildren } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
-import { previewData } from "next/headers";
 import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 
 async function getData(slug: string) {
-  const preview = !!previewData();
-
   const index = await getSiteMap();
 
   const {
@@ -19,7 +16,7 @@ async function getData(slug: string) {
   } = index.pages.children.find(({ slug: sl }) => sl === slug);
 
   if (!page_id) return null;
-  if (!published && !preview) return null;
+  if (!published) return null;
 
   const blocks = await getBlockChildren(page_id);
 
