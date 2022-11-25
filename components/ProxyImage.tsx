@@ -1,4 +1,5 @@
-import Image, { ImageProps } from "next/image";
+import { ImageProps } from "next/image";
+import Image from "@/components/ClientImage";
 import { getImageInfo } from "@/lib/utils";
 import base64url from "base64url";
 
