@@ -1,7 +1,6 @@
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
-import { unfurl } from "unfurl.js";
 import { getPlainText, slugify } from "@/lib/utils";
 
 export const notion = new Client({
@@ -158,27 +157,6 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             properties: { title },
           } = await getPage(contents[contents.type]);
           block.link_to_page["title"] = getPlainText(title[title.type]);
-          break;
-
-        case "link_preview":
-        case "bookmark":
-          const og_data = await unfurl(contents.url, {
-            fetch: (input) => {
-              console.debug("[unfurl] fetch", input);
-
-              return fetch(input, {
-                next: { revalidate: 3600 },
-              });
-            },
-          });
-          const image = og_data.open_graph?.images?.[0] || null;
-
-          block[block.type]["meta"] = {
-            title: og_data.title || og_data.twitter_card?.title || og_data.open_graph?.title || null,
-            description: og_data.description || og_data.open_graph?.description || null,
-            url: contents.url,
-            image,
-          };
           break;
 
         case "synced_block":

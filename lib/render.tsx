@@ -243,13 +243,8 @@ export function renderContent(block: NotionBlock) {
     case "link_preview":
     case "bookmark":
       return (
-        <Bookmark
-          title={contents.meta.title}
-          description={contents.meta.description}
-          url={contents.meta.url}
-          image={contents.meta.image}
-          caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />}
-        />
+        // @ts-ignore
+        <Bookmark url={contents.url} caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />} />
       );
     case "equation":
       if (!contents.expression) return null;

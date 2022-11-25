@@ -1,15 +1,27 @@
 import Link from "@/components/Link";
 import ProxyImage from "@/components/ProxyImage";
+import { unfurl } from "unfurl.js";
 
-export interface BookmarkProps {
-  title: string;
-  description: string;
-  url: string;
-  image?: { url: string; width: number; height: number; placeholder: string };
-  caption?: React.ReactNode;
+async function getData(url: string) {
+  const og_data = await unfurl(url, {
+    fetch: (input) => {
+      console.debug("[unfurl] fetch", input);
+
+      return fetch(input, {
+        next: { revalidate: 3600 },
+      });
+    },
+  });
+
+  return {
+    title: og_data.twitter_card?.title || og_data.open_graph?.title || og_data.title || null,
+    description: og_data.open_graph?.description || og_data.description || null,
+    image: og_data.open_graph?.images?.[0] || null,
+  };
 }
 
-export function Bookmark({ title, description, url, image, caption }: BookmarkProps) {
+export async function Bookmark({ url, caption }: { url: string; caption?: JSX.Element }) {
+  const { title, description, image } = await getData(url);
   return (
     <figure className="my-6">
       <Link
