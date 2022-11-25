@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
@@ -15,7 +16,8 @@ export const notion = new Client({
   },
 });
 
-export async function getSiteMap(): Promise<{
+export const getSiteMap = cache(_getSiteMap);
+async function _getSiteMap(): Promise<{
   [key: string]: {
     id: string;
     type: string;
@@ -68,7 +70,8 @@ export async function getSiteMap(): Promise<{
   );
 }
 
-export async function getDatabase(database_id: string) {
+export const getDatabase = cache(_getDatabase);
+async function _getDatabase(database_id: string) {
   const db = await notion.databases.query({ database_id });
 
   while (db.has_more) {
@@ -84,11 +87,13 @@ export async function getDatabase(database_id: string) {
   return db;
 }
 
-export async function getPage(page_id: string) {
+export const getPage = cache(_getPage);
+async function _getPage(page_id: string) {
   return (await notion.pages.retrieve({ page_id })) as PageWithChildren;
 }
 
-export async function getBlockChildren(block_id: string): Promise<NotionBlock[]> {
+export const getBlockChildren = cache(_getBlockChildren);
+async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
   const list = await notion.blocks.children.list({ block_id });
 
   while (list.has_more) {
