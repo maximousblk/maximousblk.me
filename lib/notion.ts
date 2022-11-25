@@ -6,6 +6,12 @@ import { getPlainText, slugify } from "@/lib/utils";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
+  fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+    return fetch(input, {
+      next: { revalidate: 3600 },
+      ...init,
+    });
+  },
 });
 
 export async function getSiteMap(): Promise<{
