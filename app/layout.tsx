@@ -5,6 +5,8 @@ import "@fontsource/jetbrains-mono";
 import "katex/dist/katex.min.css";
 
 import Container from "@/components/Container";
+import Analytics from "@/components/Analytics";
+
 import ThemeContext from "./theme";
 
 export const revalidate = 3600;
@@ -17,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeContext>
           <Container>{children}</Container>
         </ThemeContext>
+        <Analytics />
       </body>
     </html>
   );
