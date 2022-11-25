@@ -3,14 +3,12 @@ import Link from "next/link";
 
 import Twemoji from "@/components/Twemoji";
 import ThemeSwitch from "@/components/ThemeSwitch";
+import NavWrapper from "@/components/NavWrapper";
 import config from "@/config";
 
 export default function Navbar() {
   return (
-    <nav
-      aria-label="Navigation Menu"
-      className="sticky top-0 z-10 mx-auto mb-16 flex w-full flex-nowrap justify-center bg-white !bg-opacity-50 p-2 backdrop-blur dark:bg-gray-900 print:hidden"
-    >
+    <NavWrapper>
       <div className="flex w-full max-w-6xl flex-nowrap items-center justify-between">
         <div className="flex flex-shrink-0">
           {config.nav.map(({ name, emoji, href }, i, a) => (
@@ -29,6 +27,6 @@ export default function Navbar() {
         </div>
         <ThemeSwitch />
       </div>
-    </nav>
+    </NavWrapper>
   );
 }
