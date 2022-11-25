@@ -318,7 +318,7 @@ export function renderContent(block: NotionBlock) {
         </table>
       );
     default:
-      // console.log(block.type, block[block.type]);
+      // console.debug(block.type, block[block.type]);
       return <Unsupported object={block.object} type={block.type} />;
   }
 }

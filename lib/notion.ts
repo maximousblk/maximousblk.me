@@ -7,6 +7,8 @@ import { getPlainText, slugify } from "@/lib/utils";
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
   fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+    console.debug("[notion] fetch", input);
+
     return fetch(input, {
       next: { revalidate: 3600 },
       ...init,
