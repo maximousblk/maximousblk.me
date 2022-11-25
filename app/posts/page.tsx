@@ -1,5 +1,3 @@
-import { previewData } from "next/headers";
-
 import PostsList from "@/components/PostsList";
 import { parseISO } from "date-fns";
 
@@ -8,14 +6,13 @@ import { getSiteMap } from "@/lib/notion";
 export const revalidate = 3600;
 
 async function getData() {
-  const preview = !!previewData();
   const {
     posts: { children: posts },
   } = await getSiteMap();
 
   return posts
     .filter(({ published }) => {
-      return published || preview;
+      return published;
     })
     .map(({ title, description, slug, properties: { date } }) => {
       return {
