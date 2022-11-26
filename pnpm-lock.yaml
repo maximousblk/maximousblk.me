@@ -1,11 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@fontsource/inter': ^4.5.14
-  '@fontsource/jetbrains-mono': ^4.5.11
-  '@fontsource/lora': ^4.5.12
   '@jitl/notion-api': ^0.2.2
   '@next/codemod': ^13.0.5
+  '@next/font': ^13.0.5
   '@notionhq/client': ^2.2.2
   '@tailwindcss/line-clamp': ^0.4.2
   '@tailwindcss/typography': ^0.5.8
@@ -45,10 +43,8 @@ specifiers:
   unfurl.js: ^6.0.0
 
 dependencies:
-  '@fontsource/inter': 4.5.14
-  '@fontsource/jetbrains-mono': 4.5.11
-  '@fontsource/lora': 4.5.12
   '@jitl/notion-api': 0.2.2_@notionhq+client@2.2.2
+  '@next/font': 13.0.5
   '@notionhq/client': 2.2.2
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.4
   '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
@@ -1261,18 +1257,6 @@ packages:
       - supports-color
     dev: true
 
-  /@fontsource/inter/4.5.14:
-    resolution: {integrity: sha512-JDC9AocdPLuGsASkvWw9hS5gtHE7K9dOwL98XLrk5yjYqxy4uVnScG58NUvFMJDVJRl/7c8Wnap6PEs+7Zvj1Q==}
-    dev: false
-
-  /@fontsource/jetbrains-mono/4.5.11:
-    resolution: {integrity: sha512-IW1qgWGkjlN1O6Jf+6LWF9DpcdXhyQEXhTlzfVKrWHX+ProuOT5FcrEAj34AR+19CgAb9Sheda2slORnybBsdw==}
-    dev: false
-
-  /@fontsource/lora/4.5.12:
-    resolution: {integrity: sha512-fOJN5nqvMbxu5P5AZnemQB8bSXUITRNuVN0u9x+19FG+GVarQrGeW1DtXEaX+hXCJjbYjOiQ3psYoa1nVJJk6A==}
-    dev: false
-
   /@humanwhocodes/config-array/0.11.7:
     resolution: {integrity: sha512-kBbPWzN8oVMLb0hOUYXhmxggL/1cJE6ydvjDIGi9EnAGUyA7cLVKQg+d/Dsm+KZwx2czGHrCmMVLiyg8s5JPKw==}
     engines: {node: '>=10.10.0'}
@@ -1384,6 +1368,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.0.5:
+    resolution: {integrity: sha512-NrP4B8pxwerrkkuG/m7MQv0ks89Kk4Lc0kzbiRaYX+Xb0coDaw+I9T+g42aOHf8j8ta1vtKqb5XE1+troZ4CoQ==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.0.5:
     resolution: {integrity: sha512-YO691dxHlviy6H0eghgwqn+5kU9J3iQnKERHTDSppqjjGDBl6ab4wz9XfI5AhljjkaTg3TknHoIEWFDoZ4Ve8g==}
