@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "babel-loader": "^9.1.0",
     "browserify-fs": "^1.0.0",
     "eslint": "^8.24.0",
     "eslint-config-next": "^12.3.1",
