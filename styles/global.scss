@@ -60,9 +60,9 @@ html {
     @apply hover:opacity-80;
 
     &::before {
-      content: "#";
+      content: "⚓";
 
-      @apply font-mono2;
+      @apply font-mono;
       @apply text-gray-500;
       @apply dark:text-gray-400;
     }

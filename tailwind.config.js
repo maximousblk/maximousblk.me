@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--next-font-sans)", ...fontFamily.sans],
-        mono: ["var(--next-font-mono)", ...fontFamily.mono],
-        mono2: ["var(--next-font-mono2)", ...fontFamily.mono],
+        sans: ["Inter", ...fontFamily.sans],
+        serif: ["Lora", ...fontFamily.serif],
+        mono: ["JetBrains Mono", ...fontFamily.mono],
       },
       typography: (theme) => ({
         DEFAULT: {

@@ -27,10 +27,10 @@ export function renderText(block) {
         case "user":
           return <Mention type="user" link={`mailto:${mention.person.email}`} text={mention.name} />;
         case "page":
-          return <Mention type="page" link={"/" + mention.id} text={block.plain_text} />;
+          return <Mention type="page" link={"/p/" + mention.id} text={block.plain_text} />;
         case "link_preview":
-          const gh_pattern = /https?:\/\/github\.com\/(?<user>[^\/\s]+)\/(?<repo>[^\/\s]+)\/?((issues|pull)\/(?<num>\d+))?/;
-          const { user, repo, num } = gh_pattern.exec(mention.url).groups;
+          const GHreg = /https?:\/\/github\.com\/(?<user>[^\/\s]+)\/(?<repo>[^\/\s]+)\/?((issues|pull)\/(?<num>\d+))?/;
+          const { user, repo, num } = GHreg.exec(mention.url).groups;
           if (repo) {
             return <Mention type="github" link={mention.url} text={`${user}/${repo}${num ? "#" + num : ""}`} />;
           }
