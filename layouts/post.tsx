@@ -18,7 +18,7 @@ const twitterURL = (title: string, slug: string) => {
 const BlogSeo = ({ title, description, publishedAt, url, image }) => {
   const date = new Date(publishedAt).toISOString();
   const featuredImage = {
-    url: image?.url ? "https://proxy.maximousblk.me/?rewrite=" + Buffer.from(image.url).toString("base64") : config.baseUrl + "/og.png",
+    url: image?.url ? "https://proxy.maximousblk.me/rewrite?url=" + Buffer.from(image.url).toString("base64") : config.baseUrl + "/og.png",
     alt: title,
     width: image?.width,
     height: image?.height,

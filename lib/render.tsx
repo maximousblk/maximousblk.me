@@ -234,7 +234,7 @@ export function renderContent(block: NotionBlock) {
             ) : (
               <Image
                 alt=""
-                src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(icon[icon.type].url).toString("base64")}
+                src={"https://proxy.maximousblk.me/rewrite?url=" + Buffer.from(icon[icon.type].url).toString("base64")}
                 height={24}
                 width={24}
               />
@@ -265,7 +265,7 @@ export function renderContent(block: NotionBlock) {
               width={contents.size.width}
               placeholder="blur"
               blurDataURL={contents.placeholder}
-              src={"https://proxy.maximousblk.me/?rewrite=" + Buffer.from(contents[contents.type].url).toString("base64")}
+              src={"https://proxy.maximousblk.me/rewrite?url=" + Buffer.from(contents[contents.type].url).toString("base64")}
               alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
             />
           </div>
