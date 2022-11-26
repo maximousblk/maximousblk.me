@@ -1,43 +1,57 @@
 import { getServerSideSitemap, ISitemapField } from "next-sitemap";
 import { GetServerSideProps } from "next";
 
-import { getPlainText, slugify } from "@/lib/utils";
 import config from "@/config";
-import { getDatabase, getSiteMap } from "@/lib/notion";
-import { Page } from "@jitl/notion-api";
+import { getSiteMap } from "@/lib/notion";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const index = await getSiteMap();
-  const pages = await getDatabase(index.pages.id).then((pages) => {
-    return pages.results
-      .filter(({ properties: { published } }: Page) => {
-        return published[published.type] || ctx.preview || false;
-      })
-      .map(({ properties: { title } }: Page) => {
-        return `/${slugify(getPlainText(title[title.type]))}`;
-      });
-  });
+  const {
+    posts: { children: posts },
+    pages: { children: pages },
+  } = await getSiteMap();
 
-  const posts = await getDatabase(index.posts.id).then((posts) => {
-    return posts.results
-      .filter(({ properties: { published } }: Page) => {
-        return published[published.type] || ctx.preview || false;
-      })
-      .map(({ properties: { title } }: Page) => {
-        return `/posts/${slugify(getPlainText(title[title.type]))}`;
-      });
-  });
+  const x_pages = pages
+    .filter(({ published }) => {
+      return published || false;
+    })
+    .map(({ slug, last_edited_time }) => {
+      return {
+        loc: config.baseUrl + "/" + slug,
+        lastmod: new Date(last_edited_time).toISOString(),
+        priority: 0.7,
+      };
+    });
 
-  const entries: ISitemapField[] = ["", ...pages, "/posts", ...posts].map((route) => {
-    return {
-      loc: config.baseUrl + route,
+  const x_posts = posts
+    .filter(({ properties: { published } }) => {
+      return published || false;
+    })
+    .map(({ slug, last_edited_time }) => {
+      return {
+        loc: config.baseUrl + "/posts/" + slug,
+        lastmod: new Date(last_edited_time).toISOString(),
+        priority: 0.7,
+      };
+    });
+
+  const entries: ISitemapField[] = [
+    {
+      loc: config.baseUrl,
       lastmod: new Date().toISOString(),
       priority: 0.7,
-    };
-  });
+    },
+    ...x_pages,
+    {
+      loc: config.baseUrl + "/posts",
+      lastmod: new Date().toISOString(),
+      priority: 0.7,
+    },
+    ...x_posts,
+  ];
+
+  ctx.res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600");
 
   return getServerSideSitemap(ctx, entries);
 };
 
-function SiteMap() {}
-export default SiteMap;
+export default function SiteMap() {}
