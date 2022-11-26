@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     });
 
   const x_posts = posts
-    .filter(({ properties: { published } }) => {
+    .filter(({ published }) => {
       return published || false;
     })
     .map(({ slug, last_edited_time }) => {
