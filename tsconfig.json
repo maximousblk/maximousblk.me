@@ -16,11 +16,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
       "@/config": ["site.config.ts"],
-      "@/layouts/*": ["layouts/*"],
-      "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"],
       "@/*": ["./*"]
     },
     "plugins": [{ "name": "next" }]
