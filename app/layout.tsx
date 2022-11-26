@@ -1,7 +1,10 @@
 import "@/styles/global.scss";
+
 import "@fontsource/inter";
 import "@fontsource/lora";
 import "@fontsource/jetbrains-mono";
+import "@fontsource/ibm-plex-mono"
+
 import "katex/dist/katex.min.css";
 
 import Container from "@/components/Container";

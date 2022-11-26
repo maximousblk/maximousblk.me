@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@fontsource/ibm-plex-mono': ^4.5.12
   '@fontsource/inter': ^4.5.14
   '@fontsource/jetbrains-mono': ^4.5.11
   '@fontsource/lora': ^4.5.12
@@ -45,6 +46,7 @@ specifiers:
   unfurl.js: ^6.0.0
 
 dependencies:
+  '@fontsource/ibm-plex-mono': 4.5.12
   '@fontsource/inter': 4.5.14
   '@fontsource/jetbrains-mono': 4.5.11
   '@fontsource/lora': 4.5.12
@@ -1260,6 +1262,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@fontsource/ibm-plex-mono/4.5.12:
+    resolution: {integrity: sha512-ysF4GfudxLgDnpycjzrHFKqsEMOYHt0IUJN6dRECg6YLvVggLMj/SPh+w0QWjdgXkIbjqIbcho0O5mNcLCJMiQ==}
+    dev: false
 
   /@fontsource/inter/4.5.14:
     resolution: {integrity: sha512-JDC9AocdPLuGsASkvWw9hS5gtHE7K9dOwL98XLrk5yjYqxy4uVnScG58NUvFMJDVJRl/7c8Wnap6PEs+7Zvj1Q==}

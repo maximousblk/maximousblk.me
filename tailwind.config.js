@@ -9,6 +9,7 @@ module.exports = {
         sans: ["Inter", ...fontFamily.sans],
         serif: ["Lora", ...fontFamily.serif],
         mono: ["JetBrains Mono", ...fontFamily.mono],
+        mono2: ["IBM Plex Mono", ...fontFamily.mono],
       },
       typography: (theme) => ({
         DEFAULT: {
