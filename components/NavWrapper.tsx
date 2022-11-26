@@ -25,7 +25,7 @@ export default function NavWrapper({ children }) {
       className={
         "sticky top-0 z-10 mx-auto mb-16 flex w-full flex-nowrap justify-center " +
         "bg-white !bg-opacity-40 p-2 backdrop-blur-md dark:bg-gray-900 print:hidden " +
-        (scrollY > 50 ? "border-b border-gray-100 dark:border-gray-800" : "")
+        (scrollY > 50 ? "border-b border-gray-100/50 dark:border-gray-800/50" : "")
       }
     >
       {children}
