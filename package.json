@@ -41,7 +41,7 @@
     "sharp": "^0.31.0",
     "slugify": "^1.6.5",
     "tailwindcss": "^3.1.8",
-    "unfurl.js": "^5.7.0"
+    "unfurl.js": "^6.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.21",
