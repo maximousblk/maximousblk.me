@@ -4,7 +4,7 @@ import { getImageInfo } from "@/lib/utils";
 import base64url from "base64url";
 import errorImage from "@/public/image_error.png";
 
-export default async function ProxyImage({
+export default async function ServerImage({
   src,
   alt,
   height,

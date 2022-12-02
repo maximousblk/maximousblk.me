@@ -1,4 +1,4 @@
-import ProxyImage from "@/components/ProxyImage";
+import ServerImage from "@/components/ServerImage";
 import { getBlockChildren, getSiteMap } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { getReadingTime } from "@/lib/utils";
@@ -36,7 +36,7 @@ export default async function Page({ params: { slug } }) {
       {cover && (
         <div className="mb-8 flex h-72 w-full items-center overflow-hidden rounded align-middle">
           {/* @ts-ignore */}
-          <ProxyImage src={cover} alt={title} className="object-cover" />
+          <ServerImage src={cover} alt={title} className="object-cover" />
         </div>
       )}
       <div className="prose w-full max-w-none dark:prose-dark">
