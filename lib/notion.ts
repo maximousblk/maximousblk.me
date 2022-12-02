@@ -2,7 +2,7 @@ import { cache } from "react";
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
-import { getPlainText, slugify } from "@/lib/utils";
+import { getPlainText, slugify, blockID } from "@/lib/utils";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -184,7 +184,7 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
           acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
         } else {
           acc.push({
-            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            id: blockID.next().value || "",
             type: "bulleted_list",
             bulleted_list: { children: [curr] },
           });
@@ -194,7 +194,7 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
           acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
         } else {
           acc.push({
-            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            id: blockID.next().value || "",
             type: "numbered_list",
             numbered_list: { children: [curr] },
           });
@@ -205,10 +205,4 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
       return acc;
     }, []);
   });
-}
-
-function getRandomInt(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

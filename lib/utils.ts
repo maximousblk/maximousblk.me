@@ -65,3 +65,12 @@ export function getNotionColorClass(anotation: string) {
 export function getPlainText(blocks: { plain_text: string }[]): string {
   return blocks?.map(({ plain_text }) => plain_text).join("");
 }
+
+function* generateBlockID() {
+  let i = 1;
+  while (true) {
+    yield `notion_block_${i++}`;
+  }
+}
+
+export const blockID = generateBlockID();

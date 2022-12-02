@@ -7,7 +7,7 @@ import CodeBlock from "@/components/CodeBlock";
 import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
 import { TableOfContents } from "@/components/TableOfContents";
-import { getNotionColorClass, slugify, getPlainText } from "@/lib/utils";
+import { getNotionColorClass, slugify, getPlainText, blockID } from "@/lib/utils";
 import type { IconType } from "react-icons";
 import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
@@ -334,7 +334,7 @@ export function NotionText({ blocks }) {
   return (
     <>
       {blocks.map((block) => (
-        <Fragment key={Math.random()}>{renderText(block)}</Fragment>
+        <Fragment key={blockID.next().value || ""}>{renderText(block)}</Fragment>
       ))}
     </>
   );
