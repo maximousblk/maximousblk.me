@@ -1,5 +1,5 @@
 import ClientImage from "@/components/ClientImage";
-import Twemoji from "@/components/Twemoji";
+import Emoji from "@/components/Emoji";
 import { getNotionColorClass } from "@/lib/utils";
 
 export default function NotionCallout({ contents, children, color, icon, ...props }) {
@@ -13,7 +13,7 @@ export default function NotionCallout({ contents, children, color, icon, ...prop
     >
       <div className="mt-0.5 h-6 w-6 select-none overflow-hidden rounded" aria-hidden="true">
         {icon.type == "emoji" ? (
-          <Twemoji emoji={icon.emoji} size={24} />
+          <Emoji emoji={icon.emoji} size={24} />
         ) : (
           <ClientImage alt="icon" src={icon[icon.type].url} height={24} width={24} />
         )}

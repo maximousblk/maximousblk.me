@@ -3,7 +3,7 @@ module.exports = {
   reactStrictMode: true,
   experimental: { appDir: true },
   images: {
-    domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "twemoji.maxcdn.com", "s3.us-west-2.amazonaws.com"],
+    domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "cdn.jsdelivr.net", "s3.us-west-2.amazonaws.com"],
   },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {

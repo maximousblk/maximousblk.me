@@ -1,7 +1,7 @@
 import { nameToEmoji } from "gemoji";
 import Link from "next/link";
 
-import Twemoji from "@/components/Twemoji";
+import Emoji from "@/components/Emoji";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import NavWrapper from "@/components/NavWrapper";
 import config from "@/config";
@@ -18,7 +18,7 @@ export default function Navbar() {
                 className="flex items-center justify-between rounded px-2.5 py-1.5 text-gray-900 hover:bg-gray-100/20 dark:text-gray-100 dark:hover:bg-gray-800/20"
               >
                 <span className="flex select-none items-center justify-between pr-2 text-sm" aria-hidden="true">
-                  <Twemoji priority emoji={nameToEmoji[emoji]} />
+                  <Emoji priority emoji={nameToEmoji[emoji]} />
                 </span>
                 <span>{name}</span>
               </Link>
