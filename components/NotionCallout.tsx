@@ -1,4 +1,4 @@
-import ProxyImage from "@/components/ProxyImage";
+import ClientImage from "@/components/ClientImage";
 import Twemoji from "@/components/Twemoji";
 import { getNotionColorClass } from "@/lib/utils";
 
@@ -15,8 +15,7 @@ export default function NotionCallout({ contents, children, color, icon, ...prop
         {icon.type == "emoji" ? (
           <Twemoji emoji={icon.emoji} size={24} />
         ) : (
-          // @ts-ignore
-          <ProxyImage alt="icon" src={icon[icon.type].url} height={24} width={24} />
+          <ClientImage alt="icon" src={icon[icon.type].url} height={24} width={24} />
         )}
       </div>
 

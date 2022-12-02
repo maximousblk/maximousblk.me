@@ -2,10 +2,15 @@
 
 import Image, { ImageProps } from "next/image";
 import { useState } from "react";
+import base64url from "base64url";
 
 import errorImage from "@/public/image_error.png";
 
 export default function ClientImage({ src, alt, ...props }: ImageProps) {
+  if (typeof src == "string" && !src.startsWith("https://proxy.maximousblk.me/rewrite?url=")) {
+    src = "https://proxy.maximousblk.me/rewrite?url=" + base64url(src);
+  }
+
   const [imgSrc, setSrc] = useState(src);
   const [err, setErr] = useState(false);
 

@@ -1,5 +1,5 @@
 import Link from "@/components/Link";
-import ProxyImage from "@/components/ProxyImage";
+import ClientImage from "@/components/ClientImage";
 import { unfurl } from "unfurl.js";
 
 async function getData(url: string) {
@@ -39,8 +39,7 @@ export async function Bookmark({ url, caption }: { url: string; caption?: JSX.El
         </div>
         {image?.url && (
           <div className="hidden max-h-[6.5rem] w-60 sm:flex">
-            {/* @ts-ignore */}
-            <ProxyImage alt={title} src={image.url} width={image.width} height={image.height} className="!rounded-none object-cover" />
+            <ClientImage alt={title} src={image.url} className="!rounded-none object-cover" />
           </div>
         )}
       </Link>
