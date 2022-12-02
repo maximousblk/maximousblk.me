@@ -20,16 +20,20 @@ export function getReadingTime(blocks: NotionBlock[]): ReadTimeResults {
 }
 
 async function getPlaiceholderInfo(src: string) {
-  const {
-    base64,
-    img: { height, width },
-  } = await getPlaiceholder(src, { size: 64 });
+  try {
+    const {
+      base64,
+      img: { height, width },
+    } = await getPlaiceholder(src, { size: 64 });
 
-  return {
-    height,
-    width,
-    blurDataURL: base64,
-  };
+    return {
+      height,
+      width,
+      blurDataURL: base64,
+    };
+  } catch (error) {
+    return null;
+  }
 }
 
 export const getImageInfo = cache(getPlaiceholderInfo);

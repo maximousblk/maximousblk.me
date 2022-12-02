@@ -1,7 +1,8 @@
-import { ImageProps } from "next/image";
+import NextImage, { ImageProps } from "next/image";
 import Image from "@/components/ClientImage";
 import { getImageInfo } from "@/lib/utils";
 import base64url from "base64url";
+import errorImage from "@/public/image_error.png";
 
 export default async function ProxyImage({
   src,
@@ -22,7 +23,13 @@ export default async function ProxyImage({
   } = { height: 0, width: 0, blurDataURL: "" };
 
   if (!height || !width) {
-    image = await getImageInfo(src);
+    let imageinfo = await getImageInfo(src);
+
+    if (imageinfo) {
+      image = imageinfo;
+    } else {
+      return <NextImage src={errorImage} alt={alt} aria-label="Unexpected error occured while loading image" />;
+    }
   }
 
   if (!src.startsWith("https://proxy.maximousblk.me/rewrite?url=")) {
