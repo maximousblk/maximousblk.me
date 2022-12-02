@@ -5,7 +5,7 @@ import { unfurl } from "unfurl.js";
 async function getData(url: string) {
   const og_data = await unfurl(url, {
     fetch: (input) => {
-      console.debug("[unfurl] fetch", input);
+      // console.debug("[unfurl] fetch", input);
 
       return fetch(input, {
         next: { revalidate: 3600 },
