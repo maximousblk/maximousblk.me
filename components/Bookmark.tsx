@@ -3,6 +3,8 @@ import ProxyImage from "@/components/ProxyImage";
 import { unfurl } from "unfurl.js";
 
 async function getData(url: string) {
+  console.time("[unfurl] getData " + url);
+
   const og_data = await unfurl(url, {
     fetch: (input) => {
       // console.debug("[unfurl] fetch", input);
@@ -12,6 +14,8 @@ async function getData(url: string) {
       });
     },
   });
+
+  console.timeEnd("[unfurl] getData " + url);
 
   return {
     title: og_data.twitter_card?.title || og_data.open_graph?.title || og_data.title || null,
