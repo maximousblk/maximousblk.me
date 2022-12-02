@@ -34,9 +34,10 @@ async function _getSiteMap(): Promise<{
     }[];
   };
 }> {
+  console.time("[notion] getSiteMap");
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
-  return await Promise.all(
+  const sitemap = await Promise.all(
     root.map(async ({ properties: { name, page: pageId } }: PageWithChildren) => {
       const pageName = getPlainText(name[name.type]);
       const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
@@ -68,10 +69,16 @@ async function _getSiteMap(): Promise<{
       return acc;
     }, {})
   );
+
+  console.timeEnd("[notion] getSiteMap");
+
+  return sitemap;
 }
 
 export const getDatabase = cache(_getDatabase);
 async function _getDatabase(database_id: string) {
+  console.time("[notion] getDatabase " + database_id);
+
   const db = await notion.databases.query({ database_id });
 
   while (db.has_more) {
@@ -84,16 +91,26 @@ async function _getDatabase(database_id: string) {
     db.next_cursor = next_cursor;
   }
 
+  console.timeEnd("[notion] getDatabase " + database_id);
+
   return db;
 }
 
 export const getPage = cache(_getPage);
 async function _getPage(page_id: string) {
-  return (await notion.pages.retrieve({ page_id })) as PageWithChildren;
+  console.time("[notion] getPage " + page_id);
+
+  const page = (await notion.pages.retrieve({ page_id })) as PageWithChildren;
+
+  console.timeEnd("[notion] getPage " + page_id);
+
+  return page;
 }
 
 export const getBlockChildren = cache(_getBlockChildren);
 async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
+  console.time("[notion] getBlockChildren " + block_id);
+
   const list = await notion.blocks.children.list({ block_id });
 
   while (list.has_more) {
@@ -118,7 +135,7 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
     return block;
   });
 
-  return await Promise.all(
+  const blockChildren = await Promise.all(
     blocks.map(async (block) => {
       const contents = block[block.type];
       switch (block.type) {
@@ -205,4 +222,8 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
       return acc;
     }, []);
   });
+
+  console.timeEnd("[notion] getBlockChildren " + block_id);
+
+  return blockChildren;
 }

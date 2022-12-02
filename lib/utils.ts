@@ -19,12 +19,21 @@ export function getReadingTime(blocks: NotionBlock[]): ReadTimeResults {
   return readingTime(words);
 }
 
-async function getPlaiceholderInfo(src: string) {
+export const getImageInfo = cache(_getImageInfo);
+async function _getImageInfo(src: string) {
   try {
+    const timerName = src
+      .replace("s3.us-west-2.amazonaws.com/secure.notion-static.com", "notion.aws")
+      .replace("proxy.maximousblk.me/rewrite?url=", "rewrite.proxy")
+      .substring(0, Math.min(80, src.length));
+    console.time("[notion] getImageInfo " + timerName);
+
     const {
       base64,
       img: { height, width },
     } = await getPlaiceholder(src, { size: 64 });
+
+    console.timeEnd("[notion] getImageInfo " + timerName);
 
     return {
       height,
@@ -35,8 +44,6 @@ async function getPlaiceholderInfo(src: string) {
     return null;
   }
 }
-
-export const getImageInfo = cache(getPlaiceholderInfo);
 
 const notion_color = {
   default: "",
