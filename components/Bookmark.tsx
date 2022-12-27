@@ -3,7 +3,8 @@ import ClientImage from "@/components/ClientImage";
 import { unfurl } from "unfurl.js";
 
 async function getData(url: string) {
-  console.time("[unfurl] getData " + url);
+  const epoch = Math.floor(Date.now() / 1000);
+  console.time(`[unfurl] getData ${url} ${epoch}`);
 
   const og_data = await unfurl(url, {
     fetch: (input) => {
@@ -15,7 +16,7 @@ async function getData(url: string) {
     },
   });
 
-  console.timeEnd("[unfurl] getData " + url);
+  console.timeEnd(`[unfurl] getData ${url} ${epoch}`);
 
   return {
     title: og_data.twitter_card?.title || og_data.open_graph?.title || og_data.title || null,

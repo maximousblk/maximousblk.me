@@ -26,14 +26,16 @@ async function _getImageInfo(src: string) {
       .replace("s3.us-west-2.amazonaws.com/secure.notion-static.com", "notion.aws")
       .replace("proxy.maximousblk.me/rewrite?url=", "rewrite.proxy")
       .substring(0, Math.min(80, src.length));
-    console.time("[notion] getImageInfo " + timerName);
+
+    const epoch = Math.floor(Date.now() / 1000);
+    console.time(`[notion] getImageInfo ${timerName} ${epoch}`);
 
     const {
       base64,
       img: { height, width },
     } = await getPlaiceholder(src, { size: 64 });
 
-    console.timeEnd("[notion] getImageInfo " + timerName);
+    console.timeEnd(`[notion] getImageInfo ${timerName} ${epoch}`);
 
     return {
       height,

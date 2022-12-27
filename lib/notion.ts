@@ -34,7 +34,9 @@ async function _getSiteMap(): Promise<{
     }[];
   };
 }> {
-  console.time("[notion] getSiteMap");
+  const epoch = Math.floor(Date.now() / 1000);
+  console.time(`[notion] getSiteMap ${epoch}`);
+
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
   const sitemap = await Promise.all(
@@ -70,14 +72,15 @@ async function _getSiteMap(): Promise<{
     }, {})
   );
 
-  console.timeEnd("[notion] getSiteMap");
+  console.timeEnd(`[notion] getSiteMap ${epoch}`);
 
   return sitemap;
 }
 
 export const getDatabase = cache(_getDatabase);
 async function _getDatabase(database_id: string) {
-  console.time("[notion] getDatabase " + database_id);
+  const epoch = Math.floor(Date.now() / 1000);
+  console.time(`[notion] getDatabase ${database_id} ${epoch}`);
 
   const db = await notion.databases.query({ database_id });
 
@@ -91,25 +94,27 @@ async function _getDatabase(database_id: string) {
     db.next_cursor = next_cursor;
   }
 
-  console.timeEnd("[notion] getDatabase " + database_id);
+  console.timeEnd(`[notion] getDatabase ${database_id} ${epoch}`);
 
   return db;
 }
 
 export const getPage = cache(_getPage);
 async function _getPage(page_id: string) {
-  console.time("[notion] getPage " + page_id);
+  const epoch = Math.floor(Date.now() / 1000);
+  console.time(`[notion] getPage ${page_id} ${epoch}`);
 
   const page = (await notion.pages.retrieve({ page_id })) as PageWithChildren;
 
-  console.timeEnd("[notion] getPage " + page_id);
+  console.timeEnd(`[notion] getPage ${page_id} ${epoch}`);
 
   return page;
 }
 
 export const getBlockChildren = cache(_getBlockChildren);
 async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
-  console.time("[notion] getBlockChildren " + block_id);
+  const epoch = Math.floor(Date.now() / 1000);
+  console.time(`[notion] getBlockChildren ${block_id} ${epoch}`);
 
   const list = await notion.blocks.children.list({ block_id });
 
@@ -223,7 +228,7 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
     }, []);
   });
 
-  console.timeEnd("[notion] getBlockChildren " + block_id);
+  console.timeEnd(`[notion] getBlockChildren ${block_id} ${epoch}`);
 
   return blockChildren;
 }
