@@ -17,9 +17,7 @@ const roles = [
   "Tinkerer",
   "Hacker",
   "Maker",
-  "Bot",
   "Gamer",
-  "Human",
   "Nerd",
 ];
 
@@ -27,15 +25,17 @@ function* randomRole(): Generator<string> {
   // shuffle array
   const shuffled = roles.sort(() => 0.5 - Math.random());
 
+  let i = 0;
+
   while (true) {
-    // select random element from shuffled
-    yield shuffled[Math.round(Math.random() * (shuffled.length - 1))];
+    yield shuffled[i];
+    i = (i + 1) % shuffled.length;
   }
 }
 
 export default function RoleScramble() {
   const [role, setRole] = useState<string>(randomRole().next().value);
-  const { ref, replay } = useScramble({
+  const { ref } = useScramble({
     text: role,
     overdrive: false,
     // unicode: 33, 35, 36, 37, 38, 42, 43, 45, 48-57, 61, 63, 64, 65-90, 97-122, 126

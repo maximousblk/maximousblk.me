@@ -28,7 +28,7 @@ export default async function Page() {
       <div className="mb-4 flex flex-col gap-4">
         <div className="inline-flex flex-wrap items-end gap-4 md:gap-8">
           <h1 className="inline text-3xl font-bold leading-none tracking-tight text-black dark:text-white md:text-5xl">Maximous Black</h1>
-          <span className="font-mono text-sm leading-6 text-gray-600 md:text-lg">
+          <span className="select-none font-mono text-sm leading-6 text-gray-600 md:text-lg">
             | &apos;<b>mak</b>.si.mus blak |
           </span>
         </div>
