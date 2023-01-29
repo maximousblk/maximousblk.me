@@ -4,20 +4,26 @@ import { useScramble } from "use-scramble";
 import { useEffect, useState } from "react";
 
 const roles = [
-  "UI/UX Designer",
-  "Web Developer",
   "Software Engineer",
+  "Web Developer",
+  "UI/UX Designer",
+  "IoT/Embedded Developer",
   "Open Source Contributor",
+  "AI/ML Enthusiast",
   "Tech Enthusiast",
+  "Crypto Bro",
   "Student",
   "Learner",
   "Tinkerer",
   "Hacker",
   "Maker",
   "Bot",
+  "Gamer",
   "Human",
   "Nerd",
 ];
+
+
 
 function* randomRole(): Generator<string> {
   // shuffle array
