@@ -23,8 +23,6 @@ const roles = [
   "Nerd",
 ];
 
-
-
 function* randomRole(): Generator<string> {
   // shuffle array
   const shuffled = roles.sort(() => 0.5 - Math.random());

@@ -62,7 +62,10 @@
   },
   "prettier": {
     "printWidth": 140,
-    "endOfLine": "crlf"
+    "endOfLine": "crlf",
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ]
   },
   "engines": {
     "node": ">=18"
