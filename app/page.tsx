@@ -2,6 +2,7 @@ import { getSiteMap, getPage, getBlockChildren } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { getPlainText } from "@/lib/utils";
 import { notFound } from "next/navigation";
+import RoleScramble from "./roles";
 
 export const revalidate = 3600;
 
@@ -22,11 +23,17 @@ export default async function Page() {
 
   if (!data) notFound();
 
-  const title = getPlainText(data.page.properties.title["title"]);
-
   return (
     <main className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">{title}</h1>
+      <div className="mb-4 flex flex-col gap-4">
+        <div className="inline-flex items-end">
+          <h1 className="inline text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl leading-none">Maximous Black</h1>
+          <span className="text-gray-600 text-lg ml-10 mb-2 font-mono leading-none">
+            | &apos;<b>mak</b>.si.mus blak |
+          </span>
+        </div>
+        <RoleScramble />
+      </div>
       <div className="prose w-full max-w-none dark:prose-dark">
         <NotionContent blocks={data.blocks} />
       </div>

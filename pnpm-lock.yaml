@@ -44,6 +44,7 @@ specifiers:
   tailwindcss: ^3.2.4
   typescript: ^4.9.4
   unfurl.js: ^6.1.0
+  use-scramble: ^2.2.11
 
 dependencies:
   '@fontsource/ibm-plex-mono': 4.5.13
@@ -78,6 +79,7 @@ dependencies:
   slugify: 1.6.5
   tailwindcss: 3.2.4_postcss@8.4.21
   unfurl.js: 6.1.0
+  use-scramble: 2.2.11_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@next/codemod': 13.1.6_@babel+preset-env@7.20.2
@@ -6897,6 +6899,17 @@ packages:
     resolution: {integrity: sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==}
     deprecated: Please see https://github.com/lydell/urix#deprecated
     dev: true
+
+  /use-scramble/2.2.11_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-HdWeYLMp+OSoS+15xyoQuNM+mxZL7gJCv1wk+WjYIE5n4wZHviBIj3AFhgpHiuonIlZiUStMPivLhjDCwqx8Sg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /use/3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
