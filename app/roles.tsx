@@ -55,5 +55,9 @@ export default function RoleScramble() {
     return () => clearInterval(interval);
   }, []);
 
-  return <span ref={ref} className="font-mono italic text-gray-400" />;
+  return (
+    <span ref={ref} className="font-mono italic text-gray-400">
+      Web Developer
+    </span>
+  );
 }
