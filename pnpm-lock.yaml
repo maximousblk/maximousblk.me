@@ -26,7 +26,7 @@ specifiers:
   next: ^13.1.6
   next-pwa: ^5.6.0
   next-seo: ^5.15.0
-  next-sitemap: ^3.1.47
+  next-sitemap: ^3.1.48
   next-themes: ^0.2.1
   plaiceholder: ^2.5.0
   postcss: ^8.4.21
@@ -44,7 +44,7 @@ specifiers:
   tailwindcss: ^3.2.4
   typescript: ^4.9.4
   unfurl.js: ^6.1.0
-  use-scramble: ^2.2.11
+  use-scramble: ^2.2.12
 
 dependencies:
   '@fontsource/ibm-plex-mono': 4.5.13
@@ -65,7 +65,7 @@ dependencies:
   next: 13.1.6_23e7ztf2chqi3ri6onem3l5mii
   next-pwa: 5.6.0_k2seot55bsmlm52vxz6m7rtrky
   next-seo: 5.15.0_3vryta7zmbcsw4rrqf4axjqggm
-  next-sitemap: 3.1.47_dlcnecpznf2wc36zwuq5m2ie5q
+  next-sitemap: 3.1.48_dlcnecpznf2wc36zwuq5m2ie5q
   next-themes: 0.2.1_3vryta7zmbcsw4rrqf4axjqggm
   plaiceholder: 2.5.0_sharp@0.31.3
   postcss: 8.4.21
@@ -79,7 +79,7 @@ dependencies:
   slugify: 1.6.5
   tailwindcss: 3.2.4_postcss@8.4.21
   unfurl.js: 6.1.0
-  use-scramble: 2.2.11_biqbaboplfbrettd7655fr4n2y
+  use-scramble: 2.2.12_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@next/codemod': 13.1.6_@babel+preset-env@7.20.2
@@ -3142,7 +3142,7 @@ packages:
       eslint-import-resolver-typescript: 3.5.3_ohdts44xlqyeyrlje4qnefqeay
       eslint-plugin-import: 2.27.5_eslint@8.33.0
       eslint-plugin-jsx-a11y: 6.7.1_eslint@8.33.0
-      eslint-plugin-react: 7.32.1_eslint@8.33.0
+      eslint-plugin-react: 7.32.2_eslint@8.33.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.33.0
       typescript: 4.9.4
     transitivePeerDependencies:
@@ -3274,8 +3274,8 @@ packages:
       eslint: 8.33.0
     dev: true
 
-  /eslint-plugin-react/7.32.1_eslint@8.33.0:
-    resolution: {integrity: sha512-vOjdgyd0ZHBXNsmvU+785xY8Bfe57EFbTYYk8XrROzWpr9QBvpjITvAXt9xqcE6+8cjR/g1+mfumPToxsl1www==}
+  /eslint-plugin-react/7.32.2_eslint@8.33.0:
+    resolution: {integrity: sha512-t2fBMa+XzonrrNkyVirzKlvn5RXzzPwRHtMvLAtVZrt8oxgnTQaYbU6SXTOO1mwQgp1y5+toMSKInnzGr0Knqg==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -5053,8 +5053,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /next-sitemap/3.1.47_dlcnecpznf2wc36zwuq5m2ie5q:
-    resolution: {integrity: sha512-LZxCWZ6lhQBfv1cuGob3tnsaHWffQM7VDmkXXp8u3n4LD7EJAR/SamlMj3mpHa8bFeuR6TjjRqrq/7e4WSOcLQ==}
+  /next-sitemap/3.1.48_dlcnecpznf2wc36zwuq5m2ie5q:
+    resolution: {integrity: sha512-cUyjkoac+HeYrn8m3Pwq7DbcSK9+wW+AgPI7Q0Ipv85p4qDKTznS95ihahJXVKLZNRMTV6V45cxStiXW8+I2dA==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
@@ -6900,8 +6900,8 @@ packages:
     deprecated: Please see https://github.com/lydell/urix#deprecated
     dev: true
 
-  /use-scramble/2.2.11_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-HdWeYLMp+OSoS+15xyoQuNM+mxZL7gJCv1wk+WjYIE5n4wZHviBIj3AFhgpHiuonIlZiUStMPivLhjDCwqx8Sg==}
+  /use-scramble/2.2.12_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-/LDu+MJAvfqRd82VJnIBj6xKnGlsJkVVdnJmdXvGtAOxGpMXi6UhfKtve7qbgnIRQELtOp4nPe8vCX7SxYv9KQ==}
     engines: {node: '>=10'}
     peerDependencies:
       react: '>=16'
