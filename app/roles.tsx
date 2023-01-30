@@ -56,7 +56,7 @@ export default function RoleScramble() {
   }, []);
 
   return (
-    <span ref={ref} className="font-mono italic text-gray-400">
+    <span ref={ref} className="font-mono italic text-gray-500 dark:text-gray-400">
       Web Developer
     </span>
   );
