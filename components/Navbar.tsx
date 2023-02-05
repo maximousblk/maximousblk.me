@@ -15,7 +15,7 @@ export default function Navbar() {
             <div key={name} className="my-1 inline-block">
               <Link
                 href={href}
-                className="flex items-center justify-between rounded px-2.5 py-1.5 text-gray-900 hover:bg-gray-100/20 dark:text-gray-100 dark:hover:bg-gray-800/20"
+                className="flex items-center justify-between rounded border border-transparent px-2.5 py-1.5 text-gray-900 hover:border-gray-500/10 hover:bg-gray-200/30 dark:text-gray-100 dark:hover:bg-gray-700/30"
               >
                 <span className="flex select-none items-center justify-between pr-2 text-sm" aria-hidden="true">
                   <Emoji priority emoji={nameToEmoji[emoji]} />
