@@ -18,7 +18,13 @@ export default function NavLink({ href, emoji, name }: { href: string; emoji: st
         <span className="flex select-none items-center justify-between pr-2 text-sm" aria-hidden="true">
           <Emoji priority emoji={nameToEmoji[emoji]} />
         </span>
-        <span className={pathname == href ? "text-black underline underline-offset-2 dark:text-white" : ""}>{name}</span>
+        <span
+          className={
+            pathname == href ? "text-black underline decoration-gray-300 underline-offset-2 dark:text-white dark:decoration-gray-700" : ""
+          }
+        >
+          {name}
+        </span>
       </Link>
     </div>
   );
