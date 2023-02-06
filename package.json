@@ -13,11 +13,8 @@
     "prod": "next build && next start"
   },
   "dependencies": {
-    "@fontsource/ibm-plex-mono": "^4.5.13",
-    "@fontsource/inter": "^4.5.15",
-    "@fontsource/jetbrains-mono": "^4.5.12",
-    "@fontsource/lora": "^4.5.13",
     "@jitl/notion-api": "^0.2.2",
+    "@next/font": "^13.1.6",
     "@notionhq/client": "^2.2.3",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",

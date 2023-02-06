@@ -6,10 +6,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...fontFamily.sans],
-        serif: ["Lora", ...fontFamily.serif],
-        mono: ["JetBrains Mono", ...fontFamily.mono],
-        mono2: ["IBM Plex Mono", ...fontFamily.mono],
+        sans: ["var(--font-sans)", "Inter", ...fontFamily.sans],
+        serif: ["var(--font-serif)", "Lora", ...fontFamily.serif],
+        mono: ["var(--font-mono)", "JetBrains Mono", ...fontFamily.mono],
+        mono2: ["var(--font-mono2)", "IBM Plex Mono", ...fontFamily.mono],
       },
       typography: (theme) => ({
         DEFAULT: {

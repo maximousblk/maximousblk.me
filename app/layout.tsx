@@ -1,9 +1,11 @@
 import "@/styles/global.scss";
 
-import "@fontsource/inter";
-import "@fontsource/lora";
-import "@fontsource/jetbrains-mono";
-import "@fontsource/ibm-plex-mono";
+import { Inter, Lora, JetBrains_Mono, IBM_Plex_Mono } from "@next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const ibmPlexMono = IBM_Plex_Mono({ weight: "400", subsets: ["latin"], variable: "--font-mono2" });
 
 import "katex/dist/katex.min.css";
 
@@ -18,7 +20,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head />
-      <body className="bg-white text-black dark:bg-gray-900 dark:text-white">
+      <body
+        className={
+          "bg-white font-sans text-black dark:bg-gray-900 dark:text-white " +
+          [inter.variable, lora.variable, jetbrainsMono.variable, ibmPlexMono.variable].join(" ")
+        }
+      >
         <ThemeContext>
           <div className="flex min-h-screen flex-col bg-white dark:bg-gray-900">
             <Navbar />
