@@ -16,6 +16,10 @@ module.exports = {
   async rewrites() {
     return [
       {
+        source: "/feed",
+        destination: "/api/feed",
+      },
+      {
         source: "/feed/:format*",
         destination: "/api/feed?f=:format*",
       },
