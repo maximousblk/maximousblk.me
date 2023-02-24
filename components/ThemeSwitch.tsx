@@ -13,18 +13,21 @@ export default function ThemeSwitch() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="flex flex-shrink-0 space-x-2">
-      <button
-        aria-label="Toggle Dark Mode"
-        disabled={!mounted}
-        type="button"
-        className="h-10 w-10 rounded border border-transparent p-3 text-gray-900 hover:border-gray-500/10 hover:bg-gray-200/30 dark:text-gray-100 dark:hover:bg-gray-700/30"
-        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      >
-        {(mounted && (
-          <Icon name={resolvedTheme === "dark" ? "FiSun" : "FiMoon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />
-        )) || <Icon name="FiLoader" className="h-4 w-4 animate-spin text-gray-800 dark:text-gray-200" />}
-      </button>
-    </div>
+    <button
+      aria-label="Toggle Dark Mode"
+      disabled={!mounted}
+      type="button"
+      className={
+        "h-10 w-10 rounded border border-transparent p-3 text-gray-900 hover:border-gray-500/10 hover:bg-gray-200/30 dark:text-gray-100 dark:hover:bg-gray-700/30 " +
+        mounted
+          ? "cursor-not-allowed"
+          : "cursor-pointer"
+      }
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+    >
+      {(mounted && <Icon name={resolvedTheme === "dark" ? "FiSun" : "FiMoon"} className="h-4 w-4 text-gray-800 dark:text-gray-200" />) || (
+        <Icon name="FiLoader" className="h-4 w-4 animate-spin text-gray-800 dark:text-gray-200" />
+      )}
+    </button>
   );
 }
