@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
 import { FiCheck, FiClipboard } from "react-icons/fi";
+import useMounted from "@/lib/useMounted";
 
 export function CodeCopy({ plain_text }): JSX.Element {
+  const mounted = useMounted();
   const [copied, setCopied] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   const onCopy = () => {
     navigator.clipboard.writeText(plain_text);
@@ -14,8 +16,6 @@ export function CodeCopy({ plain_text }): JSX.Element {
       setCopied(false);
     }, 1000);
   };
-
-  useEffect(() => setMounted(true), []);
 
   return (
     <>

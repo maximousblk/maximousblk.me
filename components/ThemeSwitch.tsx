@@ -1,16 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
 import Icon from "@/components/FeatherIcons";
+import useMounted from "@/lib/useMounted";
 
 export default function ThemeSwitch() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const { resolvedTheme, setTheme } = useTheme();
-
-  // After mounting, we have access to the theme
-  useEffect(() => setMounted(true), []);
 
   return (
     <button
