@@ -11,7 +11,7 @@ async function getData() {
 
   const page = await getPage(index.home.id);
 
-  if (!page) return null;
+  if (!page) return { title: config.name };
 
   const title = getPlainText(page.properties.title["title"]);
 
