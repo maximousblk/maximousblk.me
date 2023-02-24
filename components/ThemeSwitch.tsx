@@ -19,9 +19,7 @@ export default function ThemeSwitch() {
       type="button"
       className={
         "h-10 w-10 rounded border border-transparent p-3 text-gray-900 hover:border-gray-500/10 hover:bg-gray-200/30 dark:text-gray-100 dark:hover:bg-gray-700/30 " +
-        mounted
-          ? "cursor-not-allowed"
-          : "cursor-pointer"
+        (mounted ? "cursor-pointer" : "cursor-not-allowed")
       }
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
