@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  experimental: { appDir: true },
+  experimental: {
+    appDir: true,
+    // typedRoutes: true,
+  },
   images: {
     domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "cdn.jsdelivr.net", "s3.us-west-2.amazonaws.com"],
   },

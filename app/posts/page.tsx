@@ -27,6 +27,11 @@ async function getData() {
     });
 }
 
+export const metadata = {
+  title: "Posts",
+  description: "My blog posts",
+};
+
 export default async function Posts() {
   const posts = await getData();
 
