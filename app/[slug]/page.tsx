@@ -2,6 +2,7 @@ import { getSiteMap, getPage, getBlockChildren } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { getPlainText } from "@/lib/utils";
 import { notFound } from "next/navigation";
+import { Metadata } from "next/types";
 
 export const revalidate = 3600;
 
@@ -47,6 +48,16 @@ async function getData(slug: string) {
 
     return { blocks, title, description, hide_descr: !!hide_description[hide_description.type] };
   }
+}
+
+export async function generateMetadata({ params, searchParams }): Promise<Metadata> {
+  console.debug("generateMetadata /[slug]", { params, searchParams });
+
+  const { title, description, not_found } = await getData(params.slug);
+
+  if (not_found) return notFound();
+
+  return { title, description };
 }
 
 export default async function Page({ params: { slug } }) {
