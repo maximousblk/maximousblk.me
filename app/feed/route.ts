@@ -1,13 +1,14 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { type NextRequest } from "next/server";
 import { Feed } from "feed";
+import { parseISO } from "date-fns";
+
 import config from "@/config";
 import { getDatabase, getSiteMap } from "@/lib/notion";
 import type { PageWithChildren } from "@jitl/notion-api";
-import { parseISO } from "date-fns";
 import { getPlainText, slugify } from "@/lib/utils";
 
-const rss = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { f } = req.query;
+export async function GET(req: NextRequest, { params }) {
+  const { f } = params;
 
   const format = (f as string) || "atom";
 
@@ -42,7 +43,7 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
       .filter(({ properties: { published } }: PageWithChildren) => {
-        return published[published.type] || req.preview || false;
+        return published[published.type] || false;
       })
       .map(({ properties: { title: postTitle, description: postDescription, date } }: PageWithChildren) => {
         return {
@@ -79,10 +80,11 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const feed = feeds[format] || feeds.atom;
 
-  res.status(200);
-  res.setHeader("Content-Type", feed.type);
-  res.setHeader("Cache-Control", "s-maxage=86400, maxage=86400, stale-while-revalidate");
-  res.end(feed.body);
-};
-
-export default rss;
+  return new Response(feed.body, {
+    status: 200,
+    headers: {
+      "Content-Type": feed.type,
+      "Cache-Control": "s-maxage=86400, maxage=86400, stale-while-revalidate",
+    },
+  });
+}

@@ -1,10 +1,9 @@
-import { getServerSideSitemap, ISitemapField } from "next-sitemap";
-import { GetServerSideProps } from "next";
+import { ISitemapField, SitemapBuilder } from "next-sitemap";
 
 import config from "@/config";
 import { getSiteMap } from "@/lib/notion";
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export async function GET() {
   const {
     posts: { children: posts },
     pages: { children: pages },
@@ -49,9 +48,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     ...x_posts,
   ];
 
-  ctx.res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600");
-
-  return getServerSideSitemap(ctx, entries);
-};
-
-export default function SiteMap() {}
+  return new Response(new SitemapBuilder().buildSitemapXml(entries), {
+    headers: {
+      "Content-Type": "text/xml",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600",
+    },
+  });
+}
