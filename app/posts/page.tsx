@@ -1,7 +1,8 @@
-import PostsList from "@/components/PostsList";
 import { parseISO } from "date-fns";
 
+import PostsList from "@/components/PostsList";
 import { getSiteMap } from "@/lib/notion";
+import config from "@/config";
 
 export const revalidate = 3600;
 
@@ -30,6 +31,35 @@ async function getData() {
 export const metadata = {
   title: "Posts",
   description: "My blog posts",
+  openGraph: {
+    type: "article",
+    title: "Posts",
+    description: "My blog posts",
+    url: config.baseUrl + "/posts",
+    images: [
+      {
+        url: config.baseUrl + "/api/og?title=Posts&description=My blog posts",
+        alt: "Posts",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
+  twitter: {
+    title: "Posts",
+    description: "My blog posts",
+    images: [
+      {
+        url: config.baseUrl + "/api/og?title=Posts&description=My blog posts",
+        alt: "Posts",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
+  other: {
+    "og:image": config.baseUrl + "/api/og?title=Posts&description=My blog posts",
+  },
 };
 
 export default async function Posts() {

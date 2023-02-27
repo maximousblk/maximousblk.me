@@ -22,13 +22,36 @@ export const revalidate = 3600;
 export const fetchCache = "force-cache";
 
 export async function generateMetadata({ params, searchParams }): Promise<Metadata> {
-  console.debug("generateMetadata (root)", { params, searchParams });
-
   return {
     title: {
       default: seo.title,
       template: seo.titleTemplate,
     },
+    description: seo.description,
+    creator: config.name,
+    applicationName: config.name,
+    authors: {
+      name: config.name,
+      url: config.baseUrl,
+    },
+    openGraph: {
+      type: "website",
+      title: seo.title,
+      description: seo.description,
+      url: config.baseUrl,
+      siteName: config.name,
+      images: seo.openGraph.images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+      images: seo.openGraph.images,
+      creator: "@" + config.username,
+      site: "@" + config.username,
+    },
+    manifest: config.baseUrl + "/webmanifest.json",
+    themeColor: config.themeColor,
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",
@@ -49,30 +72,12 @@ export async function generateMetadata({ params, searchParams }): Promise<Metada
         },
       ],
     },
-    description: seo.description,
-    openGraph: seo.openGraph,
-    twitter: {
-      card: "summary_large_image",
-      title: seo.title,
-      description: seo.description,
-      images: seo.openGraph.images,
-      creator: "@" + config.username,
-      site: "@" + config.username,
-    },
-    themeColor: config.themeColor,
-    creator: config.name,
     appleWebApp: {
       capable: true,
       startupImage: "/favicons/apple-touch-icon.png",
       statusBarStyle: "black-translucent",
       title: config.name,
     },
-    applicationName: config.name,
-    authors: {
-      name: config.name,
-      url: config.baseUrl,
-    },
-    manifest: config.baseUrl + "/webmanifest.json",
     formatDetection: {
       telephone: false,
     },
@@ -85,6 +90,7 @@ export async function generateMetadata({ params, searchParams }): Promise<Metada
       "msapplication-TileColor": config.themeColor,
       "google-site-verification": "M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI",
       "X-UA-Compatible": "IE=edge",
+      "og:image": seo.openGraph.images[0].url,
     },
   };
 }

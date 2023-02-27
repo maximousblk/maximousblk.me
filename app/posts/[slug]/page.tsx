@@ -1,11 +1,12 @@
 import ServerImage from "@/components/ServerImage";
 import { getBlockChildren, getSiteMap } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
-import { getReadingTime } from "@/lib/utils";
+import { getReadingTime, getPlainText } from "@/lib/utils";
 import { format, parseISO } from "date-fns";
 import config from "@/config";
 import { notFound } from "next/navigation";
 import { FiGithub, FiTwitter } from "react-icons/fi";
+import { Metadata } from "next/types";
 
 export const revalidate = 3600;
 
@@ -18,6 +19,49 @@ const twitterURL = (title: string, slug: string) => {
   const url = encodeURIComponent(`${config.baseUrl}/posts/${slug}`);
   return `http://twitter.com/share?text=${text}&url=${url}`;
 };
+
+export async function generateMetadata({ params, searchParams }): Promise<Metadata> {
+  const { title, blocks, not_found } = await getData(params.slug);
+
+  if (not_found) return notFound();
+  const _block = blocks.find((b) => !!b[b.type].rich_text);
+  const description = getPlainText(_block[_block.type].rich_text);
+  const og_image = config.baseUrl + "/api/og?title=" + encodeURIComponent(title) + "&description=" + encodeURIComponent(description);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url: config.baseUrl + "/posts/" + params.slug,
+      images: [
+        {
+          url: og_image,
+          alt: title,
+          width: 1280,
+          height: 720,
+        },
+      ],
+    },
+    twitter: {
+      title,
+      description,
+      images: [
+        {
+          url: og_image,
+          alt: title,
+          width: 1280,
+          height: 720,
+        },
+      ],
+    },
+    other: {
+      "og:image": og_image,
+    },
+  };
+}
 
 export default async function Page({ params: { slug } }) {
   const { blocks, title, cover, publishedAt, not_found } = await getData(slug);

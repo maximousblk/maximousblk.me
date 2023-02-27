@@ -1,8 +1,10 @@
+import { notFound } from "next/navigation";
+import { Metadata } from "next/types";
+
+import config from "@/config";
 import { getSiteMap, getPage, getBlockChildren } from "@/lib/notion";
 import { NotionContent } from "@/lib/render";
 import { getPlainText } from "@/lib/utils";
-import { notFound } from "next/navigation";
-import { Metadata } from "next/types";
 
 export const revalidate = 3600;
 
@@ -51,13 +53,45 @@ async function getData(slug: string) {
 }
 
 export async function generateMetadata({ params, searchParams }): Promise<Metadata> {
-  console.debug("generateMetadata /[slug]", { params, searchParams });
-
   const { title, description, not_found } = await getData(params.slug);
 
   if (not_found) return notFound();
 
-  return { title, description };
+  const og_image = config.baseUrl + "/api/og?title=" + title + "&description=" + description;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: config.baseUrl + "/" + params.slug,
+      images: [
+        {
+          url: og_image,
+          alt: title,
+          width: 1280,
+          height: 720,
+        },
+      ],
+    },
+    twitter: {
+      title,
+      description,
+      images: [
+        {
+          url: og_image,
+          alt: title,
+          width: 1280,
+          height: 720,
+        },
+      ],
+    },
+    other: {
+      "og:image": og_image,
+    },
+  };
 }
 
 export default async function Page({ params: { slug } }) {

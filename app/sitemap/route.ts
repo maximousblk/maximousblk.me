@@ -3,6 +3,8 @@ import { ISitemapField, SitemapBuilder } from "next-sitemap";
 import config from "@/config";
 import { getSiteMap } from "@/lib/notion";
 
+export const revalidate = 3600;
+
 export async function GET() {
   const {
     posts: { children: posts },

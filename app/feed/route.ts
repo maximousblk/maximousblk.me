@@ -7,6 +7,8 @@ import { getDatabase, getSiteMap } from "@/lib/notion";
 import type { PageWithChildren } from "@jitl/notion-api";
 import { getPlainText, slugify } from "@/lib/utils";
 
+export const revalidate = 3600;
+
 export async function GET(req: NextRequest, { params }) {
   const { f } = params;
 
