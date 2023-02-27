@@ -21,5 +21,6 @@
   "dir": "ltr",
   "lang": "en-IE",
   "orientation": "portrait-primary",
-  "start_url": "/"
+  "start_url": "/",
+  "id": "/"
 }

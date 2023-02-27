@@ -41,7 +41,7 @@ html {
     @apply no-underline;
 
     &[aria-hidden="true"][href^="#"] {
-      margin-left: -2.6ch;
+      margin-left: -1.8ch;
       margin-right: 0.8ch;
 
       @apply hover:bg-opacity-0;
