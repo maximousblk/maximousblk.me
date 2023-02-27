@@ -6,7 +6,7 @@ import base64url from "base64url";
 
 import errorImage from "@/public/image_error.png";
 
-export default function ClientImage({ src, alt, errSrc, ...props }: ImageProps & { errSrc?: string }) {
+export default function ClientImage({ src, alt, ...props }: ImageProps) {
   if (typeof src == "string" && !src.startsWith("https://proxy.maximousblk.me/rewrite?url=")) {
     src = "https://proxy.maximousblk.me/rewrite?url=" + base64url(src);
   }
@@ -21,7 +21,7 @@ export default function ClientImage({ src, alt, errSrc, ...props }: ImageProps &
       {...props}
       aria-label={err ? "Unexpected error occured while loading image" : props["aria-label"]}
       onError={() => {
-        setSrc(errSrc || errorImage.src);
+        setSrc(errorImage.src);
         setErr(true);
       }}
     />

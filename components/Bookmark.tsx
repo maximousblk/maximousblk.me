@@ -22,11 +22,7 @@ async function getData(url: string) {
   return {
     title: og_data.twitter_card?.title || og_data.open_graph?.title || og_data.title || null,
     description: og_data.open_graph?.description || og_data.description || null,
-    image: og_data.open_graph?.images?.[0] || {
-      url: config.baseUrl + "/api/screenshot?url=" + encodeURIComponent(url),
-      height: 900,
-      width: 1600,
-    },
+    image: og_data.open_graph?.images?.[0] || null,
   };
 }
 
@@ -45,12 +41,7 @@ export async function Bookmark({ url, caption }: { url: string; caption?: JSX.El
         </div>
         {image?.url && (
           <div className="hidden max-h-[6.5rem] w-60 sm:flex">
-            <ClientImage
-              alt={title}
-              src={image.url}
-              errSrc={"/api/screenshot?url=" + encodeURIComponent(url)}
-              className="!rounded-none object-cover"
-            />
+            <ClientImage alt={title} src={image.url} className="!rounded-none object-cover" />
           </div>
         )}
       </Link>
