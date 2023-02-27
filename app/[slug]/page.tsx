@@ -57,7 +57,7 @@ export async function generateMetadata({ params, searchParams }): Promise<Metada
 
   if (not_found) return notFound();
 
-  const og_image = config.baseUrl + "/api/og?title=" + title + "&description=" + description;
+  const og_image = `${config.baseUrl}/api/og?title=${title}&description=${description}`;
 
   return {
     title,
@@ -79,6 +79,7 @@ export async function generateMetadata({ params, searchParams }): Promise<Metada
     twitter: {
       title,
       description,
+      card: "summary_large_image",
       images: [
         {
           url: og_image,

@@ -38,7 +38,7 @@ export const metadata = {
     url: config.baseUrl + "/posts",
     images: [
       {
-        url: config.baseUrl + "/api/og?title=Posts&description=My blog posts",
+        url: config.baseUrl + "/api/og?title=Posts\u0026description=My blog posts",
         alt: "Posts",
         width: 1280,
         height: 720,
@@ -48,9 +48,10 @@ export const metadata = {
   twitter: {
     title: "Posts",
     description: "My blog posts",
+    card: "summary_large_image",
     images: [
       {
-        url: config.baseUrl + "/api/og?title=Posts&description=My blog posts",
+        url: config.baseUrl + "/api/og?title=Posts\u0026description=My blog posts",
         alt: "Posts",
         width: 1280,
         height: 720,
@@ -58,7 +59,7 @@ export const metadata = {
     ],
   },
   other: {
-    "og:image": config.baseUrl + "/api/og?title=Posts&description=My blog posts",
+    "og:image": config.baseUrl + "/api/og?title=Posts\u0026description=My blog posts",
   },
 };
 

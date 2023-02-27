@@ -29,8 +29,12 @@ function Og({ title, description }) {
 }
 
 export default async function OgImage(req: NextApiRequest, res: NextApiResponse) {
-  const title = new URL(req.url).searchParams.get("title");
-  const description = new URL(req.url).searchParams.get("description");
+  const url = new URL(req.url.replaceAll("&amp%3B", "&"));
+
+  console.log({ i_url: url.href, u_url: req.url });
+
+  const title = url.searchParams.get("title");
+  const description = url.searchParams.get("description");
 
   return new ImageResponse(<Og title={title || "Hello World"} description={description} />, {
     // debug: true,
