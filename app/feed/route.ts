@@ -10,9 +10,7 @@ import { getPlainText, slugify } from "@/lib/utils";
 export const revalidate = 3600;
 
 export async function GET(req: NextRequest, { params }) {
-  const { f } = params;
-
-  const format = (f as string) || "atom";
+  const format: string = params.f || "atom";
 
   const rss = new Feed({
     title: config.name,
