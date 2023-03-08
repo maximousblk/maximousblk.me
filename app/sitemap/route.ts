@@ -1,4 +1,4 @@
-import { ISitemapField, SitemapBuilder } from "next-sitemap";
+import { getServerSideSitemap, ISitemapField } from "next-sitemap";
 
 import config from "@/config";
 import { getSiteMap } from "@/lib/notion";
@@ -50,10 +50,5 @@ export async function GET() {
     ...x_posts,
   ];
 
-  return new Response(new SitemapBuilder().buildSitemapXml(entries), {
-    headers: {
-      "Content-Type": "text/xml",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600",
-    },
-  });
+  return getServerSideSitemap(entries);
 }
