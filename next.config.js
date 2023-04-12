@@ -7,6 +7,7 @@ module.exports = {
   },
   images: {
     domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "cdn.jsdelivr.net", "s3.us-west-2.amazonaws.com"],
+    minimumCacheTTL: 3600,
   },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
