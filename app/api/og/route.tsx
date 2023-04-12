@@ -11,14 +11,14 @@ function Og({ title, description }) {
       <div tw="border-4 border-gray-400 bg-gray-900 rounded flex justify-center m-8 w-[88%] h-[80%]">
         <div tw="flex flex-col justify-between m-6 w-[90%] h-[90%]">
           <div tw="flex flex-col">
-            <p tw="text-7xl font-bold text-purple-300">{title}</p>
+            <p tw="text-7xl font-medium text-purple-300">{title}</p>
             <p tw="text-2xl font-medium text-gray-400 leading-normal">{description}</p>
           </div>
-          <div tw="flex justify-between w-full mb-2 text-2xl font-mono">
+          <div tw="flex justify-between w-full mb-2 text-2xl">
             <span>
               <span tw="text-gray-200">by</span>
               <span tw="text-transparent">&quot;</span>
-              <span tw="overflow-hidden font-bold">{SITE.name}</span>
+              <span tw="overflow-hidden font-medium">{SITE.name}</span>
             </span>
           </div>
         </div>
@@ -56,12 +56,12 @@ export async function GET(req: Request) {
         weight: 500,
         style: "normal",
       },
-      {
-        name: "Inter",
-        data: await fetch(new URL("../../../public/fonts/FiraCode-Bold.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
-        weight: 700,
-        style: "normal",
-      },
+      // {
+      //   name: "Inter",
+      //   data: await fetch(new URL("../../../public/fonts/FiraCode-Bold.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
+      //   weight: 700,
+      //   style: "normal",
+      // },
     ],
   });
 }
