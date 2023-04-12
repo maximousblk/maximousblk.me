@@ -1,5 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next/types";
-import { ImageResponse } from "@vercel/og";
+import { ImageResponse } from "next/server";
 
 import SITE from "@/config";
 
@@ -28,7 +27,7 @@ function Og({ title, description }) {
   );
 }
 
-export default async function OgImage(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: Request) {
   const url = new URL(req.url);
 
   const title = url.searchParams.get("title");
@@ -47,20 +46,20 @@ export default async function OgImage(req: NextApiRequest, res: NextApiResponse)
     fonts: [
       {
         name: "Inter",
-        data: await fetch(new URL("../../public/fonts/FiraCode-Retina.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
+        data: await fetch(new URL("../../../public/fonts/FiraCode-Retina.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
         weight: 400,
         style: "normal",
       },
       {
         name: "Inter",
-        data: await fetch(new URL("../../public/fonts/FiraCode-Medium.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
+        data: await fetch(new URL("../../../public/fonts/FiraCode-Medium.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
         weight: 500,
         style: "normal",
       },
       {
         name: "Inter",
-        data: await fetch(new URL("../../public/fonts/FiraCode-Bold.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
-        weight: 600,
+        data: await fetch(new URL("../../../public/fonts/FiraCode-Bold.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
+        weight: 700,
         style: "normal",
       },
     ],
