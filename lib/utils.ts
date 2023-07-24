@@ -3,6 +3,7 @@ import readingTime, { type ReadTimeResults } from "reading-time";
 import type { NotionBlock } from "@/lib/types";
 import { cache } from "react";
 import { getPlaiceholder } from "plaiceholder";
+import base64url from "base64url";
 
 export function slugify(text: string) {
   return slugy(text, { lower: true });
@@ -33,7 +34,7 @@ async function _getImageInfo(src: string) {
     const {
       base64,
       img: { height, width },
-    } = await getPlaiceholder(src, { size: 64 });
+    } = await getPlaiceholder("https://proxy.maximousblk.me/rewrite?url=" + base64url(src), { size: 64 });
 
     console.timeEnd(`[notion] getImageInfo ${timerName} ${epoch}`);
 
@@ -43,6 +44,7 @@ async function _getImageInfo(src: string) {
       blurDataURL: base64,
     };
   } catch (error) {
+    console.error(error);
     return null;
   }
 }
