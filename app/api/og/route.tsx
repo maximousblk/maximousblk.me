@@ -2,7 +2,7 @@ import { ImageResponse } from "next/server";
 
 import SITE from "@/config";
 
-export const config = { runtime: "edge" };
+export const runtime = "edge";
 
 function Og({ title, description }) {
   return (
