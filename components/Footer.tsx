@@ -30,7 +30,7 @@ export default function Footer() {
           <Link
             href={href}
             key={name}
-            className="rounded-sm px-1.5 py-1 font-mono text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+            className="rounded-sm border border-transparent px-1.5 py-1 font-mono text-sm text-gray-600 hover:border-gray-200 hover:bg-gray-100 dark:text-gray-400 dark:hover:border-gray-800 dark:hover:bg-gray-900"
             aria-label={name}
           >
             /{name}

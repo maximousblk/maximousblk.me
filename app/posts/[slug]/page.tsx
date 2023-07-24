@@ -72,7 +72,7 @@ export default async function Page({ params: { slug } }) {
   return (
     <article className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">
       <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">{title}</h1>
-      <div className="mt-2 mb-8 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
+      <div className="mb-8 mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
         <div className="flex items-center">
           <p className="font-mono text-sm text-gray-600 dark:text-gray-400">{format(publishedAt, "PPPP")}</p>
         </div>
@@ -80,7 +80,7 @@ export default async function Page({ params: { slug } }) {
       </div>
       {cover && (
         <div className="mb-8 flex h-72 w-full items-center overflow-hidden rounded align-middle">
-          {/* @ts-ignore */}
+          {/* @ts-expect-error[2786] */}
           <ServerImage src={cover} alt={title} className="object-cover" />
         </div>
       )}

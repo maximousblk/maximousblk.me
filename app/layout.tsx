@@ -23,6 +23,7 @@ export const fetchCache = "force-cache";
 
 export async function generateMetadata({ params, searchParams }): Promise<Metadata> {
   return {
+    metadataBase: new URL(config.baseUrl),
     title: {
       default: seo.title,
       template: seo.titleTemplate,
@@ -101,14 +102,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head />
       <body
         className={
-          "bg-white font-sans text-black dark:bg-gray-900 dark:text-white " +
+          "bg-white font-sans text-black dark:bg-gray-950 dark:text-white " +
           [inter.variable, lora.variable, jetbrainsMono.variable, ibmPlexMono.variable].join(" ")
         }
       >
         <ThemeContext>
-          <div className="flex min-h-screen flex-col bg-white dark:bg-gray-900">
+          <div className="flex min-h-screen flex-col">
             <Navbar />
-            <div className="flex flex-1 flex-col justify-center bg-white px-4 dark:bg-gray-900 sm:px-8">{children}</div>
+            <div className="flex flex-1 flex-col justify-center px-4 sm:px-8">{children}</div>
             <Footer />
           </div>
         </ThemeContext>

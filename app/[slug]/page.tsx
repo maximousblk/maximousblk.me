@@ -103,7 +103,7 @@ export default async function Page({ params: { slug } }) {
   return (
     <main className="mx-auto mb-16 flex w-full max-w-4xl flex-col items-start justify-center">
       <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">{title}</h1>
-      {!hide_descr && <p className="mt-2 mb-8 text-gray-700 dark:text-gray-300">{description}</p>}
+      {!hide_descr && <p className="mb-8 mt-2 text-gray-700 dark:text-gray-300">{description}</p>}
       <div className="prose w-full max-w-none dark:prose-dark">
         <NotionContent blocks={blocks ?? []} />
       </div>

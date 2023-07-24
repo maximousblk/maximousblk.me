@@ -22,8 +22,11 @@ export default async function ServerImage({
     blurDataURL: string;
   } = { height: 0, width: 0, blurDataURL: "" };
 
+  // console.debug({ src, alt, height, width, ...props })
+
   if (!height || !width) {
     let imageinfo = await getImageInfo(src);
+    // console.debug({ imageinfo });
 
     if (imageinfo) {
       image = imageinfo;

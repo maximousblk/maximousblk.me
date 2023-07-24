@@ -6,7 +6,7 @@ import ReactPlayer from "react-player";
 export function NotionVideo({ url, caption }) {
   return (
     <figure>
-      <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-800">
+      <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-900 dark:bg-gray-800">
         <ReactPlayer
           light
           controls

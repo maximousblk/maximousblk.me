@@ -198,7 +198,6 @@ export function renderContent(block: NotionBlock) {
     case "image":
       if (!contents[contents.type].url) return null;
       return (
-        // @ts-ignore
         <NotionImage
           src={contents[contents.type].url}
           alt={getPlainText(contents?.caption)}
@@ -243,7 +242,7 @@ export function renderContent(block: NotionBlock) {
     case "link_preview":
     case "bookmark":
       return (
-        // @ts-ignore
+        // @ts-expect-error[2786]
         <Bookmark url={contents.url} caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />} />
       );
     case "equation":
@@ -349,8 +348,8 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
   };
   const MentionIcon = icons[type];
   return (
-    <Link href={link} className="whitespace-nowrap rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-800">
-      <MentionIcon size={16} className="mr-1 mb-0.5 inline-block text-gray-500 dark:text-gray-500" />
+    <Link href={link} className="whitespace-nowrap rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-900">
+      <MentionIcon size={16} className="mb-0.5 mr-1 inline-block text-gray-500 dark:text-gray-500" />
       <span>{text}</span>
     </Link>
   );
@@ -359,7 +358,7 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
 function Unsupported({ object, type }) {
   if (!process.env.NODE_ENV.toUpperCase().startsWith("PROD")) console.warn(`unsupported ${object}: ${type}`);
   return (
-    <figure className="my-6 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border border-rose-200 bg-rose-600 bg-opacity-5 px-3 py-2 dark:border-rose-900 print:hidden">
+    <figure className="my-6 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border border-rose-200 bg-rose-600 bg-opacity-5 px-3 py-2 dark:border-rose-950 print:hidden">
       <span>❌</span>
       <span>Unsupported {object}</span>
       <span className="font-mono">[{type}]</span>
@@ -446,12 +445,12 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
   return (
     <figure className="my-6">
       <Link
-        className="flex items-center space-x-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 hover:bg-gray-100 hover:no-underline dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800"
+        className="flex items-center space-x-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 hover:bg-gray-100 hover:no-underline dark:border-gray-900 dark:bg-gray-950 dark:text-gray-400 dark:hover:border-gray-800 dark:hover:bg-gray-900"
         href={url}
         download={download}
       >
         <CardIcon className="h-6 w-6" />
-        <span className={"w-full break-all line-clamp-1" + (mono ? " font-mono" : "")}>{text}</span>
+        <span className={"line-clamp-1 w-full break-all" + (mono ? " font-mono" : "")}>{text}</span>
       </Link>
       {caption?.length > 0 && (
         <figcaption>
@@ -472,16 +471,16 @@ function Accordion({
 }) {
   return (
     <details
-      className={"group my-6 rounded border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-800 dark:bg-gray-900 " + className}
+      className={"group my-6 rounded border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-900 dark:bg-gray-950 " + className}
     >
       <summary className="!m-0 flex cursor-pointer list-none space-x-2 font-medium">
         <span className={details ? "" : "text-gray-400 dark:text-gray-600"}>
           <FiPlus className="mt-0.5 block h-6 w-6 group-open:hidden" />
           <FiMinus className="mt-0.5 hidden h-6 w-6 group-open:block" />
         </span>
-        <p className="m-0 w-full line-clamp-1 group-open:line-clamp-none">{summary}</p>
+        <p className="m-0 line-clamp-1 w-full group-open:line-clamp-none">{summary}</p>
       </summary>
-      <hr className="mt-2 mb-4" />
+      <hr className="mb-4 mt-2" />
       {details || <p className="text-gray-400 dark:text-gray-600">This block is empty</p>}
     </details>
   );

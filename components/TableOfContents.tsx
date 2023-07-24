@@ -9,9 +9,9 @@ type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLD
 export default function TableOfContents({ items, className = "" }: Props) {
   return (
     <nav id="_toc" aria-label="Table of contents">
-      <details className={"rounded border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-800 dark:bg-gray-900 " + className}>
+      <details className={"rounded border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-900 dark:bg-gray-950 " + className}>
         <summary className="!m-0 cursor-pointer font-medium">Table of contents</summary>
-        <hr className="mt-2 mb-4" />
+        <hr className="mb-4 mt-2" />
         {items && <Contents items={items} />}
       </details>
     </nav>

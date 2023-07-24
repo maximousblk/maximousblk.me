@@ -24,8 +24,8 @@ export default function NavWrapper({ children }) {
       aria-label="Navigation Menu"
       className={
         "sticky top-0 z-10 mx-auto mb-16 flex w-full flex-nowrap justify-center " +
-        "bg-white !bg-opacity-40 p-2 backdrop-blur-md dark:bg-gray-900 print:hidden " +
-        (scrollY > 50 ? "border-b border-gray-100/50 dark:border-gray-800/50" : "")
+        "bg-white !bg-opacity-40 p-2 backdrop-blur-md dark:bg-gray-950 print:hidden " +
+        (scrollY > 50 ? "border-b border-gray-200/40 dark:border-gray-900/50" : "")
       }
     >
       {children}
