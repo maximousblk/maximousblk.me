@@ -19,11 +19,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/_umami_cloud/:path*",
-      "destination": "https://analytics.umami.is/:path*"
-    }
   ]
 }

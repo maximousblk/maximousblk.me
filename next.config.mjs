@@ -37,6 +37,14 @@ export const config = {
         source: "/robots.txt",
         destination: "/.well-known/robots.txt",
       },
+      {
+        "source": "/_umami/:path*",
+        "destination": "https://analytics.maximousblk.me/:path*"
+      },
+      {
+        "source": "/_umami_cloud/:path*",
+        "destination": "https://analytics.umami.is/:path*"
+      },
     ];
   },
   async redirects() {
