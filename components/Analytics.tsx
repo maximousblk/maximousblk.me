@@ -10,10 +10,17 @@ export default function Analytics() {
       <Script
         async
         defer
-        strategy="afterInteractive"
-        src="https://analytics.maximousblk.me/umami.js"
-        data-website-id="d565f770-836d-42fb-9fe3-0946633cdb49"
-        data-domains="maximousblk.me"
+        strategy="lazyOnload"
+        src="/_umami/script.js"
+        data-website-id="08fa52f2-a0b2-4351-82eb-5dad04d73afe"
+        data-cache="true"
+      />
+      <Script
+        async
+        defer
+        strategy="lazyOnload"
+        src="/_umami_cloud/script.js"
+        data-website-id="03fe92d0-876b-4862-b050-a35a8e6daff1"
         data-cache="true"
       />
     </>

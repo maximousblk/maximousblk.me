@@ -1,5 +1,7 @@
+// @ts-check
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+export const config = {
   reactStrictMode: true,
   experimental: {
     appDir: true,
@@ -57,3 +59,5 @@ module.exports = {
     ];
   },
 };
+
+export default config;

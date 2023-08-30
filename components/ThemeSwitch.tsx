@@ -14,6 +14,8 @@ export default function ThemeSwitch() {
       aria-label="Toggle Dark Mode"
       disabled={!mounted}
       type="button"
+      data-umami-event="Theme Change"
+      data-umami-event-theme={resolvedTheme}
       className={
         "h-10 w-10 rounded border border-transparent p-3 text-gray-900 hover:border-gray-500/10 hover:bg-gray-200/30 dark:text-gray-100 dark:hover:bg-gray-800/30 " +
         (mounted ? "cursor-pointer" : "cursor-not-allowed")
