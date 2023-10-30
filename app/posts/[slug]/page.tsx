@@ -26,7 +26,7 @@ export async function generateMetadata({ params, searchParams }): Promise<Metada
   if (not_found) return notFound();
   const _block = blocks.find((b) => !!b[b.type].rich_text);
   const description = getPlainText(_block[_block.type].rich_text);
-  const og_image = config.baseUrl + "/api/og?title=" + encodeURIComponent(title) + "\u0026description=" + encodeURIComponent(description);
+  const og_image = config.baseUrl + "/api/og?title=" + encodeURIComponent(title) + "&description=" + encodeURIComponent(description);
 
   return {
     title,
