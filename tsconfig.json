@@ -17,7 +17,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/config": ["site.config.ts"],
+      "@/config": ["./site.config.ts"],
       "@/*": ["./*"]
     },
     "plugins": [{ "name": "next" }]
