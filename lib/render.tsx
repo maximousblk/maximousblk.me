@@ -147,9 +147,9 @@ export function renderContent(block: NotionBlock) {
         );
       }
     case "bulleted_list":
-      return <ul>{children && <NotionContent blocks={children} />}</ul>;
+      return <ul className={getNotionColorClass(contents.color)}>{children && <NotionContent blocks={children} />}</ul>;
     case "numbered_list":
-      return <ol>{children && <NotionContent blocks={children} />}</ol>;
+      return <ol className={getNotionColorClass(contents.color)}>{children && <NotionContent blocks={children} />}</ol>;
     case "bulleted_list_item":
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
