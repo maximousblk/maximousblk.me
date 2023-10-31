@@ -17,7 +17,7 @@ export const config = {
       {
         hostname: "s3.us-west-2.amazonaws.com",
         protocol: "https",
-        port: '',
+        port: "",
         pathname: "/secure.notion-static.com/**",
       },
       {

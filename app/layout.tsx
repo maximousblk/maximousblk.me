@@ -106,6 +106,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body
         className={
           "bg-white font-sans text-black dark:bg-gray-950 dark:text-white " +
+          "selection:bg-gray-800 selection:text-accent-warm-100 selection:dark:bg-gray-100 selection:dark:text-accent-cool-900 " +
           [inter.variable, lora.variable, jetbrainsMono.variable, ibmPlexMono.variable].join(" ")
         }
       >

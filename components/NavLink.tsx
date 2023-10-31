@@ -20,7 +20,9 @@ export default function NavLink({ href, emoji, name }: { href: string; emoji: st
         </span>
         <span
           className={
-            pathname == href ? "text-black underline decoration-gray-300 underline-offset-2 dark:text-white dark:decoration-gray-700" : ""
+            pathname == href
+              ? "text-black underline decoration-accent-warm-500/80 underline-offset-4 dark:text-white dark:decoration-accent-cool-500/80"
+              : ""
           }
         >
           {name}

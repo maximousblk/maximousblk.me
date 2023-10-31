@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-::selection {
-  @apply bg-gray-800 text-gray-100 dark:bg-gray-100 dark:text-gray-900;
-}
-
 html {
   tab-size: 2;
   min-width: 360px;

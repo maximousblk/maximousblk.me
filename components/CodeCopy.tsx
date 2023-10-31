@@ -24,12 +24,15 @@ export function CodeCopy({ plain_text }): JSX.Element {
           onClick={onCopy}
           aria-label="Copy code"
           title="Copy code"
-          className="items-center border-l border-gray-200 p-2 text-left hover:bg-gray-200 dark:border-gray-900 dark:hover:bg-gray-900"
+          className="group items-center border-l border-gray-200 p-2 text-left hover:bg-gray-200 dark:border-gray-900 dark:hover:bg-gray-900"
         >
           {copied ? (
             <FiCheck size={14} className="text-emerald-700 dark:text-emerald-400" />
           ) : (
-            <FiClipboard size={14} className="text-gray-700 dark:text-gray-400" />
+            <FiClipboard
+              size={14}
+              className="text-gray-700 group-hover:text-accent-warm-600 dark:text-gray-400 group-hover:dark:text-accent-cool-400"
+            />
           )}
         </button>
       )}

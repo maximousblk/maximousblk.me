@@ -77,9 +77,10 @@ export function renderText(block) {
 
       if (code) part = <code>{part}</code>;
       if (bold) part = <strong className="font-medium">{part}</strong>;
-      if (italic) part = <em>{part}</em>;
+      if (italic) part = <em className="italic">{part}</em>;
       if (strikethrough) part = <del className="text-gray-400 dark:text-gray-600">{part}</del>;
-      if (underline) part = <u>{part}</u>;
+      if (underline)
+        part = <u className="underline decoration-accent-warm-500 underline-offset-2 dark:decoration-accent-cool-500">{part}</u>;
       if (color.includes("background")) part = <mark className="bg-transparent text-inherit">{part}</mark>;
 
       return (
@@ -147,9 +148,22 @@ export function renderContent(block: NotionBlock) {
         );
       }
     case "bulleted_list":
-      return <ul className={getNotionColorClass(contents.color)}>{children && <NotionContent blocks={children} />}</ul>;
+      return (
+        <ul className={"marker:text-accent-warm-600/40 marker:dark:text-accent-cool-400/60 " + getNotionColorClass(contents.color)}>
+          {children && <NotionContent blocks={children} />}
+        </ul>
+      );
     case "numbered_list":
-      return <ol className={getNotionColorClass(contents.color)}>{children && <NotionContent blocks={children} />}</ol>;
+      return (
+        <ol
+          className={
+            "marker:font-mono marker:font-medium marker:text-accent-warm-600/50 marker:dark:text-accent-cool-400/80 " +
+            getNotionColorClass(contents.color)
+          }
+        >
+          {children && <NotionContent blocks={children} />}
+        </ol>
+      );
     case "bulleted_list_item":
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
@@ -163,7 +177,13 @@ export function renderContent(block: NotionBlock) {
       if (!contents.rich_text.length) return null;
       return (
         <label htmlFor={block.id} className={"my-2 block rounded-sm py-1 pl-9 -indent-6 " + getNotionColorClass(contents.color)}>
-          <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2.5 scale-125 align-middle" />
+          <input
+            type="checkbox"
+            id={block.id}
+            checked={contents.checked}
+            disabled
+            className="mr-2.5 rounded border-gray-300 bg-gray-100 align-middle checked:border-0 checked:bg-accent-warm-400 dark:border-gray-800 dark:bg-gray-900 dark:checked:bg-accent-cool-400"
+          />
           <span className={contents.checked ? "text-gray-400 line-through dark:text-gray-600" : ""}>
             <NotionText blocks={contents.rich_text} />
           </span>
@@ -274,7 +294,7 @@ export function renderContent(block: NotionBlock) {
     case "quote":
       if (!contents.rich_text.length) return null;
       return (
-        <blockquote className={"py-1 " + getNotionColorClass(contents.color)}>
+        <blockquote className={"border-accent-warm-500/20 py-1 dark:border-accent-cool-400/30 " + getNotionColorClass(contents.color)}>
           <NotionText blocks={contents.rich_text} />
         </blockquote>
       );
@@ -345,7 +365,7 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
   };
   const MentionIcon = icons[type];
   return (
-    <Link href={link} className="whitespace-nowrap rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-900">
+    <Link href={link} className="whitespace-nowrap rounded p-1 hover:bg-accent-warm-100 dark:hover:bg-gray-900">
       <MentionIcon size={16} className="mb-0.5 mr-1 inline-block text-gray-500 dark:text-gray-500" />
       <span>{text}</span>
     </Link>
@@ -442,12 +462,12 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
   return (
     <figure className="my-6">
       <Link
-        className="flex items-center space-x-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 hover:bg-gray-100 hover:no-underline dark:border-gray-900 dark:bg-gray-950 dark:text-gray-400 dark:hover:border-gray-800 dark:hover:bg-gray-900"
+        className="flex items-center space-x-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 hover:bg-accent-warm-50 hover:no-underline dark:border-gray-900 dark:bg-gray-950 dark:text-gray-400 dark:hover:border-gray-800 dark:hover:bg-accent-cool-950"
         href={url}
         download={download}
       >
         <CardIcon className="h-6 w-6" />
-        <span className={"line-clamp-1 w-full break-all" + (mono ? " font-mono" : "")}>{text}</span>
+        <span className={"line-clamp-1 w-full break-all font-normal" + (mono ? " font-mono" : "")}>{text}</span>
       </Link>
       {caption?.length > 0 && (
         <figcaption>

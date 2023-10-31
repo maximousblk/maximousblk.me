@@ -2,6 +2,7 @@ import Link from "@/components/Link";
 import ClientImage from "@/components/ClientImage";
 import { unfurl } from "unfurl.js";
 import config from "@/config";
+import { FiExternalLink } from "react-icons/fi";
 
 async function getData(url: string) {
   const epoch = Math.floor(Date.now() / 1000);
@@ -32,12 +33,17 @@ export async function Bookmark({ url, caption }: { url: string; caption?: JSX.El
     <figure className="my-6">
       <Link
         href={url}
-        className="flex justify-between overflow-hidden rounded-md border border-gray-200 bg-gray-50 hover:bg-gray-100 hover:no-underline dark:border-gray-900 dark:bg-gray-950 dark:hover:bg-gray-900"
+        className="group flex justify-between overflow-hidden rounded-md border border-gray-200 bg-gray-50 hover:bg-gray-100 hover:no-underline dark:border-gray-900 dark:bg-gray-950 dark:hover:bg-gray-900"
       >
         <div className="flex w-full flex-col space-y-2 p-3">
           <p className="m-0 line-clamp-1 font-medium text-gray-900 dark:text-gray-100">{title}</p>
           <p className="m-0 line-clamp-1 text-sm text-gray-600 dark:text-gray-400">{description}</p>
-          <p className="m-0 line-clamp-1 font-mono text-xs text-gray-500">{url}</p>
+          <p className="m-0 line-clamp-1 font-mono text-xs text-gray-500 group-hover:text-accent-warm-500 group-hover:dark:text-accent-cool-400">
+            {url}{" "}
+            <span>
+              <FiExternalLink className="inline" />
+            </span>
+          </p>
         </div>
         {image?.url && (
           <div className="hidden max-h-[6.5rem] w-60 sm:flex">
