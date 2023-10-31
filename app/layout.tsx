@@ -1,7 +1,7 @@
 import "@/styles/global.scss";
 
 import { Inter, Lora, JetBrains_Mono, IBM_Plex_Mono } from "next/font/google";
-import type { Metadata } from "next/types";
+import type { Metadata, Viewport } from "next/types";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
@@ -21,80 +21,83 @@ export const revalidate = 3600;
 
 export const fetchCache = "force-cache";
 
-export async function generateMetadata({ params, searchParams }): Promise<Metadata> {
-  return {
-    metadataBase: new URL(config.baseUrl),
-    title: {
-      default: seo.title,
-      template: seo.titleTemplate,
-    },
+export const metadata: Metadata = {
+  metadataBase: new URL(config.baseUrl),
+  title: {
+    default: seo.title,
+    template: seo.titleTemplate,
+  },
+  description: seo.description,
+  creator: config.name,
+  applicationName: config.name,
+  authors: {
+    name: config.name,
+    url: config.baseUrl,
+  },
+  openGraph: {
+    type: "website",
+    title: seo.title,
     description: seo.description,
-    creator: config.name,
-    applicationName: config.name,
-    authors: {
-      name: config.name,
-      url: config.baseUrl,
-    },
-    openGraph: {
-      type: "website",
-      title: seo.title,
-      description: seo.description,
-      url: config.baseUrl,
-      siteName: config.name,
-      images: seo.openGraph.images,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: seo.title,
-      description: seo.description,
-      images: seo.openGraph.images,
-      creator: "@" + config.username,
-      site: "@" + config.username,
-    },
-    manifest: config.baseUrl + "/webmanifest.json",
-    themeColor: config.themeColor,
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
-      apple: "/favicons/apple-touch-icon.png",
-      other: [
-        {
-          url: "/favicons/favicon-32x32.png",
-          sizes: "32x32",
-        },
-        {
-          url: "/favicons/favicon-16x16.png",
-          sizes: "16x16",
-        },
-        {
-          url: "/favicons/safari-pinned-tab.svg",
-          sizes: "180x180",
-          rel: "mask-icon",
-        },
-      ],
-    },
-    appleWebApp: {
-      capable: true,
-      startupImage: "/favicons/apple-touch-icon.png",
-      statusBarStyle: "black-translucent",
-      title: config.name,
-    },
-    formatDetection: {
-      telephone: false,
-    },
-    viewport: {
-      width: "device-width",
-      initialScale: 1,
-    },
-    generator: "Next.js",
-    other: {
-      "msapplication-TileColor": config.themeColor,
-      "google-site-verification": "M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI",
-      "X-UA-Compatible": "IE=edge",
-      "og:image": seo.openGraph.images[0].url,
-    },
-  };
-}
+    url: config.baseUrl,
+    siteName: config.name,
+    images: seo.openGraph.images,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seo.title,
+    description: seo.description,
+    images: seo.openGraph.images,
+    creator: "@" + config.username,
+    site: "@" + config.username,
+  },
+  manifest: config.baseUrl + "/webmanifest.json",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicons/apple-touch-icon.png",
+    other: [
+      {
+        url: "/favicons/favicon-32x32.png",
+        sizes: "32x32",
+      },
+      {
+        url: "/favicons/favicon-16x16.png",
+        sizes: "16x16",
+      },
+      {
+        url: "/favicons/safari-pinned-tab.svg",
+        sizes: "180x180",
+        rel: "mask-icon",
+      },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    startupImage: "/favicons/apple-touch-icon.png",
+    statusBarStyle: "black-translucent",
+    title: config.name,
+  },
+  formatDetection: {
+    telephone: false,
+  },
+
+  generator: "Next.js",
+  other: {
+    "msapplication-TileColor": config.themeColor,
+    "google-site-verification": "M4wcsX_DZ9CkpAzZ5rNmUbk1JWl3aLqgxIfB4YG-ozI",
+    "X-UA-Compatible": "IE=edge",
+    "og:image": seo.openGraph.images[0].url,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: config.themeColor },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (

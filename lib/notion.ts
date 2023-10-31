@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { Client } from "@notionhq/client";
 import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
@@ -16,7 +16,7 @@ export const notion = new Client({
   },
 });
 
-export const getSiteMap = cache(_getSiteMap);
+export const getSiteMap = unstable_cache(_getSiteMap, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getSiteMap(): Promise<{
   [key: string]: {
     id: string;
@@ -64,12 +64,12 @@ async function _getSiteMap(): Promise<{
           : null;
 
       return { name: pageName, id: page[page.type].id, type: page.type, title: page[page.type].title, children };
-    })
+    }),
   ).then((pages) =>
     pages.reduce((acc, { name, ...props }) => {
       acc[name] = { ...props };
       return acc;
-    }, {})
+    }, {}),
   );
 
   console.timeEnd(`[notion] getSiteMap ${epoch}`);
@@ -77,7 +77,7 @@ async function _getSiteMap(): Promise<{
   return sitemap;
 }
 
-export const getDatabase = cache(_getDatabase);
+export const getDatabase = unstable_cache(_getDatabase, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getDatabase(database_id: string) {
   const epoch = Math.floor(Date.now() / 1000);
   console.time(`[notion] getDatabase ${database_id} ${epoch}`);
@@ -99,7 +99,7 @@ async function _getDatabase(database_id: string) {
   return db;
 }
 
-export const getPage = cache(_getPage);
+export const getPage = unstable_cache(_getPage, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getPage(page_id: string) {
   const epoch = Math.floor(Date.now() / 1000);
   console.time(`[notion] getPage ${page_id} ${epoch}`);
@@ -111,7 +111,7 @@ async function _getPage(page_id: string) {
   return page;
 }
 
-export const getBlockChildren = cache(_getBlockChildren);
+export const getBlockChildren = unstable_cache(_getBlockChildren, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
   const epoch = Math.floor(Date.now() / 1000);
   console.time(`[notion] getBlockChildren ${block_id} ${epoch}`);

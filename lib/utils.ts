@@ -1,7 +1,7 @@
 import slugy from "slugify";
 import readingTime, { type ReadTimeResults } from "reading-time";
 import type { NotionBlock } from "@/lib/types";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { getPlaiceholder } from "plaiceholder";
 import base64url from "base64url";
 
@@ -20,7 +20,7 @@ export function getReadingTime(blocks: NotionBlock[]): ReadTimeResults {
   return readingTime(words);
 }
 
-export const getImageInfo = cache(_getImageInfo);
+export const getImageInfo = unstable_cache(_getImageInfo, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getImageInfo(src: string) {
   try {
     const timerName = src

@@ -8,7 +8,26 @@ export const config = {
     // typedRoutes: true,
   },
   images: {
-    domains: ["maximousblk.me", "proxy.maximousblk.me", "images.weserv.nl", "cdn.jsdelivr.net", "s3.us-west-2.amazonaws.com"],
+    remotePatterns: [
+      {
+        hostname: "**.maximousblk.me",
+        protocol: "https",
+      },
+      {
+        hostname: "s3.us-west-2.amazonaws.com",
+        protocol: "https",
+        port: '',
+        pathname: "/secure.notion-static.com/**",
+      },
+      {
+        hostname: "images.weserv.nl",
+        protocol: "https",
+      },
+      {
+        hostname: "cdn.jsdelivr.net",
+        protocol: "https",
+      },
+    ],
     minimumCacheTTL: 3600,
   },
   webpack: (config, { dev, isServer }) => {
@@ -38,12 +57,12 @@ export const config = {
         destination: "/.well-known/robots.txt",
       },
       {
-        "source": "/_umami/:path*",
-        "destination": "https://analytics.maximousblk.me/:path*"
+        source: "/_umami/:path*",
+        destination: "https://analytics.maximousblk.me/:path*",
       },
       {
-        "source": "/_umami_cloud/:path*",
-        "destination": "https://analytics.umami.is/:path*"
+        source: "/_umami_cloud/:path*",
+        destination: "https://analytics.umami.is/:path*",
       },
     ];
   },
