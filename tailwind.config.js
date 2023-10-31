@@ -39,6 +39,16 @@ module.exports = {
           950: "hsl(248, 35%, 20%)",
         },
       },
+      animation: {
+        "spin-slow": "spin 5s linear infinite",
+        wiggle: "wiggle .8s ease-in-out infinite",
+      },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-5deg)" },
+          "50%": { transform: "rotate(5deg)" },
+        },
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
