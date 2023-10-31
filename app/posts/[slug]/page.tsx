@@ -91,9 +91,12 @@ export default async function Page({ params: { slug } }) {
           href={twitterURL(title, slug)}
           target="_blank"
           rel="noopener noreferrer"
-          className="group underline-offset-2 hover:underline hover:text-accent-warm-500 hover:dark:text-accent-cool-400"
+          className="group underline-offset-2 hover:text-accent-warm-500 hover:underline hover:dark:text-accent-cool-400"
         >
-          <FiTwitter size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-300 group-hover:text-accent-warm-500 group-hover:dark:text-accent-cool-400" />
+          <FiTwitter
+            size={16}
+            className="mr-1 inline-block text-gray-500 group-hover:text-accent-warm-500 dark:text-gray-300 group-hover:dark:text-accent-cool-400"
+          />
           {"Share on Twitter"}
         </a>
         <p> • </p>
@@ -101,9 +104,12 @@ export default async function Page({ params: { slug } }) {
           href={discussURL(title)}
           target="_blank"
           rel="noopener noreferrer"
-          className="group underline-offset-2 hover:underline hover:text-accent-warm-500 hover:dark:text-accent-cool-400"
+          className="group underline-offset-2 hover:text-accent-warm-500 hover:underline hover:dark:text-accent-cool-400"
         >
-          <FiGithub size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-300 group-hover:text-accent-warm-500 group-hover:dark:text-accent-cool-400" />
+          <FiGithub
+            size={16}
+            className="mr-1 inline-block text-gray-500 group-hover:text-accent-warm-500 dark:text-gray-300 group-hover:dark:text-accent-cool-400"
+          />
           {"Discuss on GitHub"}
         </a>
       </div>
