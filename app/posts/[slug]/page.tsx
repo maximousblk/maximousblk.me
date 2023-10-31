@@ -87,13 +87,23 @@ export default async function Page({ params: { slug } }) {
         <NotionContent blocks={blocks} />
       </div>
       <div className="mt-8 flex space-x-3 text-sm text-gray-700 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-200 print:hidden">
-        <a href={twitterURL(title, slug)} target="_blank" rel="noopener noreferrer" className="hover:underline">
-          <FiTwitter size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-500" />
+        <a
+          href={twitterURL(title, slug)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group underline-offset-2 hover:underline hover:text-accent-warm-500 hover:dark:text-accent-cool-400"
+        >
+          <FiTwitter size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-300 group-hover:text-accent-warm-500 group-hover:dark:text-accent-cool-400" />
           {"Share on Twitter"}
         </a>
         <p> • </p>
-        <a href={discussURL(title)} target="_blank" rel="noopener noreferrer" className="hover:underline">
-          <FiGithub size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-500" />
+        <a
+          href={discussURL(title)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group underline-offset-2 hover:underline hover:text-accent-warm-500 hover:dark:text-accent-cool-400"
+        >
+          <FiGithub size={16} className="mr-1 inline-block text-gray-500 dark:text-gray-300 group-hover:text-accent-warm-500 group-hover:dark:text-accent-cool-400" />
           {"Discuss on GitHub"}
         </a>
       </div>
