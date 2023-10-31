@@ -4,8 +4,8 @@ import { parseISO } from "date-fns";
 
 import config from "@/config";
 import { getDatabase, getSiteMap } from "@/lib/notion";
-import type { PageWithChildren } from "@jitl/notion-api";
 import { getPlainText, slugify } from "@/lib/utils";
+import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export const revalidate = 3600;
 
@@ -42,10 +42,10 @@ export async function GET(req: NextRequest, { params }) {
   const index = await getSiteMap();
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
-      .filter(({ properties: { published } }: PageWithChildren) => {
+      .filter(({ properties: { published } }: PageObjectResponse) => {
         return published[published.type] || false;
       })
-      .map(({ properties: { title: postTitle, description: postDescription, date } }: PageWithChildren) => {
+      .map(({ properties: { title: postTitle, description: postDescription, date } }: PageObjectResponse) => {
         return {
           title: getPlainText(postTitle[postTitle.type]),
           description: getPlainText(postDescription[postDescription.type]),

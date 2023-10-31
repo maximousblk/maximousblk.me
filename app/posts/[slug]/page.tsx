@@ -80,7 +80,6 @@ export default async function Page({ params: { slug } }) {
       </div>
       {cover && (
         <div className="mb-8 flex h-72 w-full items-center overflow-hidden rounded align-middle">
-          {/* @ts-expect-error[2786] */}
           <ServerImage src={cover} alt={title} className="object-cover" />
         </div>
       )}

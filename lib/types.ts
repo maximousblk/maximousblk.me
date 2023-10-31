@@ -1,8 +1,7 @@
-import type { QueryDatabaseResponse, BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import type { PageWithChildren } from "@jitl/notion-api";
+import type { QueryDatabaseResponse, BlockObjectResponse, PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export type NotionDB = QueryDatabaseResponse & {
-  results: PageWithChildren[];
+  results: PageObjectResponse[];
 };
 
 type BlockWithChildren = Omit<
@@ -16,14 +15,14 @@ export type NotionBlock =
   | {
       id: string;
       type: "bulleted_list";
-      bulleted_list: { children: BlockWithChildren[] };
+      bulleted_list: { children: BlockObjectResponse[] };
     }
   | {
       id: string;
       type: "numbered_list";
-      numbered_list: { children: BlockWithChildren[] };
+      numbered_list: { children: BlockObjectResponse[] };
     }
-  | BlockWithChildren;
+  | BlockObjectResponse;
 
 export interface TableOfContentsItem {
   title: string;

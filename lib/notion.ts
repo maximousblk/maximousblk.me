@@ -1,8 +1,8 @@
 import { unstable_cache } from "next/cache";
 import { Client } from "@notionhq/client";
-import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
 import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
 import { getPlainText, slugify, blockID } from "@/lib/utils";
+import { BlockObjectResponse, PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -40,14 +40,20 @@ async function _getSiteMap(): Promise<{
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
   const sitemap = await Promise.all(
-    root.map(async ({ properties: { name, page: pageId } }: PageWithChildren) => {
+    root.map(async ({ properties: { name, page: pageId } }: PageObjectResponse) => {
       const pageName = getPlainText(name[name.type]);
       const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
 
       const children =
         page.type == "database"
           ? (await getDatabase(page.database.id)).results.map(
-              ({ properties: { published, title, description, ...properties }, last_edited_time, cover, id, object }: PageWithChildren) => {
+              ({
+                properties: { published, title, description, ...properties },
+                last_edited_time,
+                cover,
+                id,
+                object,
+              }: PageObjectResponse) => {
                 return {
                   id,
                   type: object,
@@ -104,7 +110,7 @@ async function _getPage(page_id: string) {
   const epoch = Math.floor(Date.now() / 1000);
   // console.time(`[notion] getPage ${page_id} ${epoch}`);
 
-  const page = (await notion.pages.retrieve({ page_id })) as PageWithChildren;
+  const page = (await notion.pages.retrieve({ page_id })) as PageObjectResponse;
 
   // console.timeEnd(`[notion] getPage ${page_id} ${epoch}`);
 
@@ -127,13 +133,13 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
 
   const children = await Promise.all(
     list.results
-      .filter(({ has_children, type }: BlockWithChildren) => !["unsupported", "child_page"].includes(type) && has_children)
+      .filter(({ has_children, type }: BlockObjectResponse) => !["unsupported", "child_page"].includes(type) && has_children)
       .map(async ({ id }) => {
         return { id, children: await getBlockChildren(id) };
       }),
   );
 
-  const blocks = list.results.map((block: BlockWithChildren) => {
+  const blocks = list.results.map((block: BlockObjectResponse) => {
     if (!["unsupported", "child_page"].includes(block.type) && block.has_children && !block[block.type].children) {
       block[block.type].children = children.find(({ id }) => id === block.id)?.children;
     }
@@ -147,7 +153,7 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
         case "table_of_contents":
           block.table_of_contents["children"] = blocks
             .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
-            .map((block: BlockWithChildren) => {
+            .map((block: BlockObjectResponse) => {
               return {
                 title: getPlainText(block[block.type].rich_text),
                 type: block.type,
@@ -198,8 +204,8 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
       }
 
       return block;
-    })
-  ).then((blocks: BlockWithChildren[]) => {
+    }),
+  ).then((blocks: BlockObjectResponse[]) => {
     return blocks.reduce((acc: NotionBlock[], curr: NotionBlock) => {
       if (curr.type === "bulleted_list_item") {
         if (acc[acc.length - 1]?.type === "bulleted_list") {

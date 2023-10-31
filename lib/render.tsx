@@ -241,10 +241,7 @@ export function renderContent(block: NotionBlock) {
       );
     case "link_preview":
     case "bookmark":
-      return (
-        // @ts-expect-error[2786]
-        <Bookmark url={contents.url} caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />} />
-      );
+      return <Bookmark url={contents.url} caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />} />;
     case "equation":
       if (!contents.expression) return null;
       return (
