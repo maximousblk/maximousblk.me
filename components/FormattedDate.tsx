@@ -13,7 +13,7 @@ export function FormattedDate({ start, end }) {
   return (
     <time dateTime={start.toISOString()}>
       {hasTime(start) ? withTime(start) : withoutTime(start)}
-      {end ? ` - ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
+      {end ? ` -> ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
     </time>
   );
 }
