@@ -11,3 +11,5 @@ LICENSE
 .env.local
 .next
 .vercel
+.idea
+pnpm-lock.yaml

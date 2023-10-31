@@ -1,43 +1,19 @@
 import { Fragment } from "react";
-import { format, parseISO } from "date-fns";
 import { basename as pathBasename } from "path";
 
-import Image from "next/image";
-import ReactPlayer from "react-player";
-import TeX from "@matejmazur/react-katex";
+import { InlineMath, BlockMath } from "react-katex";
+import FormattedDate from "@/components/FormattedDate";
 import CodeBlock from "@/components/CodeBlock";
 import Bookmark from "@/components/Bookmark";
 import Link from "@/components/Link";
-import { Twemoji } from "@/components/Twemoji";
 import { TableOfContents } from "@/components/TableOfContents";
-import { slugify } from "@/lib/utils";
+import { getNotionColorClass, slugify, getPlainText, blockID } from "@/lib/utils";
 import type { IconType } from "react-icons";
-import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlay, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
+import { FiFileText, FiDownload, FiExternalLink, FiLink2, FiAtSign, FiPlus, FiMinus, FiGithub, FiCalendar } from "react-icons/fi";
 import type { NotionBlock } from "@/lib/types";
-
-const notion_color = {
-  default: "",
-
-  gray: "!text-gray-500 !dark:text-gray-400",
-  brown: "!text-stone-500 !dark:text-stone-400",
-  orange: "!text-orange-500 !dark:text-orange-400",
-  yellow: "!text-amber-500 !dark:text-yellow-400",
-  green: "!text-emerald-500 !dark:text-emerald-400",
-  blue: "!text-blue-500 !dark:text-sky-400",
-  purple: "!text-indigo-500 !dark:text-indigo-400",
-  pink: "!text-pink-500 !dark:text-pink-400",
-  red: "!text-rose-500 !dark:text-rose-400",
-
-  gray_background: "!bg-opacity-10 !bg-gray-500 !border-gray-200 dark:!border-gray-900",
-  brown_background: "!bg-opacity-10 !bg-stone-500 !border-stone-200 dark:!border-stone-900",
-  orange_background: "!bg-opacity-10 !bg-orange-500 !border-orange-200 dark:!border-orange-900",
-  yellow_background: "!bg-opacity-10 !bg-yellow-500 !border-yellow-200 dark:!border-yellow-900",
-  green_background: "!bg-opacity-10 !bg-emerald-500 !border-emerald-200 dark:!border-emerald-900",
-  blue_background: "!bg-opacity-10 !bg-sky-500 !border-sky-200 dark:!border-sky-900",
-  purple_background: "!bg-opacity-10 !bg-indigo-500 !border-indigo-200 dark:!border-indigo-900",
-  pink_background: "!bg-opacity-10 !bg-pink-500 !border-pink-200 dark:!border-pink-900",
-  red_background: "!bg-opacity-10 !bg-rose-500 !border-rose-200 dark:!border-rose-900",
-};
+import NotionVideo from "@/components/NotionVideo";
+import NotionImage from "@/components/NotionImage";
+import NotionCallout from "@/components/NotionCallout";
 
 export function renderText(block) {
   const contents = block[block.type];
@@ -47,26 +23,14 @@ export function renderText(block) {
       const mention = contents[contents.type];
       switch (contents.type) {
         case "date":
-          const date = mention;
-          const start = parseISO(date.start);
-          const end = parseISO(date.end);
-          const hasTime = (d: Date) => d.getHours() !== 0;
-          const withTime = (d: Date) => format(d, "PPpp");
-          const withoutTime = (d: Date) => format(d, "PP");
-
-          return (
-            <time dateTime={start.toISOString()}>
-              {hasTime(start) ? withTime(start) : withoutTime(start)}
-              {date.end ? ` - ${hasTime(end) ? withTime(end) : withoutTime(end)}` : ""}
-            </time>
-          );
+          return <FormattedDate start={mention.start} end={mention.end} />;
         case "user":
           return <Mention type="user" link={`mailto:${mention.person.email}`} text={mention.name} />;
         case "page":
-          return <Mention type="page" link={"/p/" + mention.id} text={block.plain_text} />;
+          return <Mention type="page" link={"/" + mention.id} text={block.plain_text} />;
         case "link_preview":
-          const GHreg = /https?:\/\/github\.com\/(?<user>[^\/\s]+)\/(?<repo>[^\/\s]+)\/?((issues|pull)\/(?<num>\d+))?/;
-          const { user, repo, num } = GHreg.exec(mention.url).groups;
+          const gh_pattern = /https?:\/\/github\.com\/(?<user>[^\/\s]+)\/(?<repo>[^\/\s]+)\/?((issues|pull)\/(?<num>\d+))?/;
+          const { user, repo, num } = gh_pattern.exec(mention.url).groups;
           if (repo) {
             return <Mention type="github" link={mention.url} text={`${user}/${repo}${num ? "#" + num : ""}`} />;
           }
@@ -78,7 +42,7 @@ export function renderText(block) {
       }
 
     case "equation":
-      return <TeX math={contents.expression} />;
+      return <InlineMath math={contents.expression} />;
 
     case "text":
       const {
@@ -113,9 +77,10 @@ export function renderText(block) {
 
       if (code) part = <code>{part}</code>;
       if (bold) part = <strong className="font-medium">{part}</strong>;
-      if (italic) part = <em>{part}</em>;
+      if (italic) part = <em className="italic">{part}</em>;
       if (strikethrough) part = <del className="text-gray-400 dark:text-gray-600">{part}</del>;
-      if (underline) part = <u>{part}</u>;
+      if (underline)
+        part = <u className="underline decoration-accent-warm-500 underline-offset-2 dark:decoration-accent-cool-500">{part}</u>;
       if (color.includes("background")) part = <mark className="bg-transparent text-inherit">{part}</mark>;
 
       return (
@@ -136,12 +101,12 @@ export function renderContent(block: NotionBlock) {
   switch (block.type) {
     case "table_of_contents":
       if (!children.length) return null;
-      return <TableOfContents items={children} className={notion_color[contents.color || "default"]} />;
+      return <TableOfContents items={children} className={getNotionColorClass(contents.color)} />;
     case "paragraph":
       if (!contents.rich_text.length) return <br />;
       return (
         <Fragment>
-          <p className={"my-4 rounded-sm px-1 py-0.5 " + notion_color[contents.color || "default"]}>
+          <p className={"my-4 rounded-sm px-1 py-0.5 " + getNotionColorClass(contents.color)}>
             <NotionText blocks={contents.rich_text} />
           </p>
           {children && (
@@ -149,7 +114,7 @@ export function renderContent(block: NotionBlock) {
               className={
                 "ml-1 pl-4 last:!mb-0 last:!pb-0 " +
                 "border-l-2 border-gray-200 dark:border-gray-800 " +
-                notion_color[contents.color || "default"]
+                getNotionColorClass(contents.color)
               }
             >
               <NotionContent blocks={children} />
@@ -165,9 +130,9 @@ export function renderContent(block: NotionBlock) {
         return (
           <ToggleHeading
             type={block.type}
-            id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
+            id={slugify(getPlainText(contents.rich_text))}
             contents={contents.rich_text}
-            className={notion_color[contents.color || "default"]}
+            className={getNotionColorClass(contents.color)}
           >
             <NotionContent blocks={contents.children} />
           </ToggleHeading>
@@ -176,22 +141,34 @@ export function renderContent(block: NotionBlock) {
         return (
           <Heading
             type={block.type}
-            id={slugify(contents.rich_text.map(({ plain_text }) => plain_text))}
-            className={notion_color[contents.color || "default"]}
+            id={slugify(getPlainText(contents.rich_text))}
+            className={getNotionColorClass(contents.color)}
             contents={contents.rich_text}
           />
         );
       }
-
     case "bulleted_list":
-      return <ul>{children && <NotionContent blocks={children} />}</ul>;
+      return (
+        <ul className={"marker:text-accent-warm-600/40 marker:dark:text-accent-cool-400/60 " + getNotionColorClass(contents.color)}>
+          {children && <NotionContent blocks={children} />}
+        </ul>
+      );
     case "numbered_list":
-      return <ol>{children && <NotionContent blocks={children} />}</ol>;
+      return (
+        <ol
+          className={
+            "marker:font-mono marker:font-medium marker:text-accent-warm-600/50 marker:dark:text-accent-cool-400/80 " +
+            getNotionColorClass(contents.color)
+          }
+        >
+          {children && <NotionContent blocks={children} />}
+        </ol>
+      );
     case "bulleted_list_item":
     case "numbered_list_item":
       if (!contents.rich_text.length) return null;
       return (
-        <li className={"my-2 rounded-sm px-2 py-1 last:!mb-0 last:!pb-0 " + notion_color[contents.color || "default"]}>
+        <li className={"my-2 rounded-sm px-2 py-1 last:!mb-0 last:!pb-0 " + getNotionColorClass(contents.color)}>
           <NotionText blocks={contents.rich_text} />
           {children && <NotionContent blocks={children} />}
         </li>
@@ -199,8 +176,14 @@ export function renderContent(block: NotionBlock) {
     case "to_do":
       if (!contents.rich_text.length) return null;
       return (
-        <label htmlFor={block.id} className={"my-2 block rounded-sm py-1 pl-9 -indent-6 " + notion_color[contents.color || "default"]}>
-          <input type="checkbox" id={block.id} checked={contents.checked} disabled className="mr-2.5 scale-125 align-middle" />
+        <label htmlFor={block.id} className={"my-2 block rounded-sm py-1 pl-9 -indent-6 " + getNotionColorClass(contents.color)}>
+          <input
+            type="checkbox"
+            id={block.id}
+            checked={contents.checked}
+            disabled
+            className="mr-2.5 rounded border-gray-300 bg-gray-100 align-middle checked:border-0 checked:bg-accent-warm-400 dark:border-gray-800 dark:bg-gray-900 dark:checked:bg-accent-cool-400"
+          />
           <span className={contents.checked ? "text-gray-400 line-through dark:text-gray-600" : ""}>
             <NotionText blocks={contents.rich_text} />
           </span>
@@ -214,87 +197,40 @@ export function renderContent(block: NotionBlock) {
         <Accordion
           summary={<NotionText blocks={contents.rich_text} />}
           details={children ? <NotionContent blocks={children} /> : null}
-          className={notion_color[contents.color || "default"]}
+          className={getNotionColorClass(contents.color)}
         />
       );
     case "callout":
       if (!contents.rich_text.length) return null;
-      const icon = contents.icon;
       return (
-        <div
-          className={
-            "my-6 flex space-x-3 rounded border px-3 py-2 " +
-            "border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900 " +
-            notion_color[contents.color || "default"]
-          }
-        >
-          <div className="mt-0.5 h-6 w-6 select-none overflow-hidden rounded" aria-hidden="true">
-            {contents.icon.type == "emoji" ? (
-              <Twemoji emoji={contents.icon.emoji} size={24} />
-            ) : (
-              <Image
-                alt=""
-                src={"https://proxy.maximousblk.me/rewrite?url=" + Buffer.from(icon[icon.type].url).toString("base64")}
-                height={24}
-                width={24}
-              />
-            )}
-          </div>
-
-          <div className="w-full space-y-4">
-            <NotionText blocks={contents.rich_text} />
-            {children && <NotionContent blocks={children} />}
-          </div>
-        </div>
+        <NotionCallout icon={contents.icon} color={contents.color} contents={<NotionText blocks={contents.rich_text} />}>
+          {children && <NotionContent blocks={children} />}
+        </NotionCallout>
       );
+
     case "code":
       if (!contents.rich_text.length) return null;
       return (
-        <CodeBlock lang={contents.language} title={contents.caption.map(({ plain_text }) => plain_text).join("")}>
+        <CodeBlock lang={contents.language} title={getPlainText(contents.caption)} plain_text={getPlainText(contents.rich_text)}>
           <NotionText blocks={contents.rich_text} />
         </CodeBlock>
       );
     case "image":
       if (!contents[contents.type].url) return null;
       return (
-        <figure>
-          <div className="mx-auto flex w-fit overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-800">
-            <Image
-              quality={90}
-              height={contents.size.height}
-              width={contents.size.width}
-              placeholder="blur"
-              blurDataURL={contents.placeholder}
-              src={"https://proxy.maximousblk.me/rewrite?url=" + Buffer.from(contents[contents.type].url).toString("base64")}
-              alt={contents?.caption.map(({ plain_text }) => plain_text).join("")}
-            />
-          </div>
-          {contents.caption.length > 0 && (
-            <figcaption>
-              <NotionText blocks={contents.caption} />
-            </figcaption>
-          )}
-        </figure>
+        <NotionImage
+          src={contents[contents.type].url}
+          alt={getPlainText(contents?.caption)}
+          caption={contents.caption.length > 0 ? <NotionText blocks={contents.caption} /> : null}
+        />
       );
     case "video":
       if (!contents[contents.type].url) return null;
       return (
-        <figure>
-          <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-gray-800">
-            <ReactPlayer
-              light
-              controls
-              url={contents[contents.type].url}
-              playIcon={<FiPlay size="64" />}
-              className="aspect-video !h-auto max-h-max !w-full max-w-full"
-            />
-          </div>
-          {contents.caption.length > 0 && (
-            <figcaption>
-              <NotionText blocks={contents.caption} />
-            </figcaption>
-          )}
-        </figure>
+        <NotionVideo
+          url={contents[contents.type].url}
+          caption={contents.caption.length > 0 ? <NotionText blocks={contents.caption} /> : null}
+        />
       );
     case "audio":
       if (!contents[contents.type].url) return null;
@@ -325,24 +261,20 @@ export function renderContent(block: NotionBlock) {
       );
     case "link_preview":
     case "bookmark":
-      return (
-        <Bookmark
-          title={contents.meta.title}
-          description={contents.meta.description}
-          url={contents.meta.url}
-          image={contents.meta.image}
-          caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />}
-        />
-      );
+      return <Bookmark url={contents.url} caption={contents.caption?.length > 0 && <NotionText blocks={contents.caption} />} />;
     case "equation":
       if (!contents.expression) return null;
-      return <TeX math={contents.expression} block className="my-8" />;
+      return (
+        <div className="my-8">
+          <BlockMath math={contents.expression} />
+        </div>
+      );
     case "link_to_page":
       if (!contents[contents.type]) return null;
-      return <LinkCard url={"/p/" + contents[contents.type]} text={contents.title} icon={FiLink2} />;
+      return <LinkCard url={"/" + contents[contents.type]} text={contents.title} icon={FiLink2} />;
     case "child_page":
       if (!block.has_children) return null;
-      return <LinkCard url={"/p/" + block.id} text={contents.title} icon={FiFileText} />;
+      return <LinkCard url={"/" + block.id} text={contents.title} icon={FiFileText} />;
     case "divider":
       return <hr />;
     case "column_list":
@@ -362,7 +294,7 @@ export function renderContent(block: NotionBlock) {
     case "quote":
       if (!contents.rich_text.length) return null;
       return (
-        <blockquote className={"py-1 " + notion_color[contents.color || "default"]}>
+        <blockquote className={"border-accent-warm-500/20 py-1 dark:border-accent-cool-400/30 " + getNotionColorClass(contents.color)}>
           <NotionText blocks={contents.rich_text} />
         </blockquote>
       );
@@ -397,7 +329,7 @@ export function renderContent(block: NotionBlock) {
         </table>
       );
     default:
-      // console.log(block.type, block[block.type]);
+      // console.debug(block.type, block[block.type]);
       return <Unsupported object={block.object} type={block.type} />;
   }
 }
@@ -418,7 +350,7 @@ export function NotionText({ blocks }) {
   return (
     <>
       {blocks.map((block) => (
-        <Fragment key={Math.random()}>{renderText(block)}</Fragment>
+        <Fragment key={blockID.next().value || ""}>{renderText(block)}</Fragment>
       ))}
     </>
   );
@@ -433,8 +365,8 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
   };
   const MentionIcon = icons[type];
   return (
-    <Link href={link} className="whitespace-nowrap rounded p-1 hover:bg-gray-100 dark:hover:bg-gray-800">
-      <MentionIcon size={16} className="mr-1 mb-0.5 inline-block text-gray-500 dark:text-gray-500" />
+    <Link href={link} className="whitespace-nowrap rounded p-1 hover:bg-accent-warm-100 dark:hover:bg-gray-900">
+      <MentionIcon size={16} className="mb-0.5 mr-1 inline-block text-gray-500 dark:text-gray-500" />
       <span>{text}</span>
     </Link>
   );
@@ -443,7 +375,7 @@ function Mention({ type, link, text }: { type: "user" | "page" | "github" | "dat
 function Unsupported({ object, type }) {
   if (!process.env.NODE_ENV.toUpperCase().startsWith("PROD")) console.warn(`unsupported ${object}: ${type}`);
   return (
-    <figure className="my-6 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border border-rose-200 bg-rose-600 bg-opacity-5 px-3 py-2 dark:border-rose-900 print:hidden">
+    <figure className="my-6 flex flex-nowrap space-x-2.5 overflow-auto whitespace-nowrap rounded border border-rose-200 bg-rose-600 bg-opacity-5 px-3 py-2 dark:border-rose-950 print:hidden">
       <span>❌</span>
       <span>Unsupported {object}</span>
       <span className="font-mono">[{type}]</span>
@@ -530,12 +462,12 @@ function LinkCard({ url, icon: CardIcon, text, caption, download, mono }: LinkCa
   return (
     <figure className="my-6">
       <Link
-        className="flex items-center space-x-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 hover:bg-gray-100 hover:no-underline dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800"
+        className="flex items-center space-x-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 hover:bg-accent-warm-50 hover:no-underline dark:border-gray-900 dark:bg-gray-950 dark:text-gray-400 dark:hover:border-gray-800 dark:hover:bg-accent-cool-950"
         href={url}
         download={download}
       >
         <CardIcon className="h-6 w-6" />
-        <span className={"w-full break-all line-clamp-1" + (mono ? " font-mono" : "")}>{text}</span>
+        <span className={"line-clamp-1 w-full break-all font-normal" + (mono ? " font-mono" : "")}>{text}</span>
       </Link>
       {caption?.length > 0 && (
         <figcaption>
@@ -556,16 +488,16 @@ function Accordion({
 }) {
   return (
     <details
-      className={"group my-6 rounded border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-800 dark:bg-gray-900 " + className}
+      className={"group my-6 rounded border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-900 dark:bg-gray-950 " + className}
     >
       <summary className="!m-0 flex cursor-pointer list-none space-x-2 font-medium">
         <span className={details ? "" : "text-gray-400 dark:text-gray-600"}>
           <FiPlus className="mt-0.5 block h-6 w-6 group-open:hidden" />
           <FiMinus className="mt-0.5 hidden h-6 w-6 group-open:block" />
         </span>
-        <p className="m-0 w-full line-clamp-1 group-open:line-clamp-none">{summary}</p>
+        <p className="m-0 line-clamp-1 w-full group-open:line-clamp-none">{summary}</p>
       </summary>
-      <hr className="mt-2 mb-4" />
+      <hr className="mb-4 mt-2" />
       {details || <p className="text-gray-400 dark:text-gray-600">This block is empty</p>}
     </details>
   );

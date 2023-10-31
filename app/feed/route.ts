@@ -1,15 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { type NextRequest } from "next/server";
 import { Feed } from "feed";
-import config from "@/config";
-import { getDatabase, getIndex } from "@/lib/notion";
-import type { PageWithChildren } from "@jitl/notion-api";
 import { parseISO } from "date-fns";
-import { slugify } from "@/lib/utils";
 
-const rss = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { f } = req.query;
+import config from "@/config";
+import { getDatabase, getSiteMap } from "@/lib/notion";
+import { getPlainText, slugify } from "@/lib/utils";
+import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
-  const format = (f as string) || "atom";
+export const revalidate = 3600;
+
+export async function GET(req: NextRequest, { params }) {
+  const format: string = params?.f || "atom";
 
   const rss = new Feed({
     title: config.name,
@@ -38,17 +39,17 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  const index = await getIndex();
+  const index = await getSiteMap();
   const posts = await getDatabase(index.posts.id).then((posts) => {
     return posts.results
-      .filter(({ properties: { published } }: PageWithChildren) => {
-        return published[published.type] || req.preview || false;
+      .filter(({ properties: { published } }: PageObjectResponse) => {
+        return published[published.type] || false;
       })
-      .map(({ properties: { title: postTitle, description: postDescription, date } }: PageWithChildren) => {
+      .map(({ properties: { title: postTitle, description: postDescription, date } }: PageObjectResponse) => {
         return {
-          title: postTitle[postTitle.type].map(({ plain_text }) => plain_text).join(" "),
-          description: postDescription[postDescription.type].map(({ plain_text }) => plain_text).join(" "),
-          slug: slugify(postTitle[postTitle.type].map(({ plain_text }) => plain_text)),
+          title: getPlainText(postTitle[postTitle.type]),
+          description: getPlainText(postDescription[postDescription.type]),
+          slug: slugify(getPlainText(postTitle[postTitle.type])),
           publishedAt: parseISO(date[date.type].start).getTime(),
         };
       })
@@ -79,10 +80,11 @@ const rss = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const feed = feeds[format] || feeds.atom;
 
-  res.status(200);
-  res.setHeader("Content-Type", feed.type);
-  res.setHeader("Cache-Control", "s-maxage=86400, maxage=86400, stale-while-revalidate");
-  res.end(feed.body);
-};
-
-export default rss;
+  return new Response(feed.body, {
+    status: 200,
+    headers: {
+      "Content-Type": feed.type,
+      "Cache-Control": "s-maxage=86400, maxage=86400, stale-while-revalidate",
+    },
+  });
+}

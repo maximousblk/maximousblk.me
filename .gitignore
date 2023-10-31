@@ -8,3 +8,6 @@ node_modules
 .next
 .vercel
 .idea
+.vscode
+yarn.lock
+package-lock.json

@@ -4,6 +4,7 @@ export const config = {
   email: "maximousblk@gmail.com",
   username: "maximousblk",
   baseUrl: "https://maximousblk.me",
+  themeColor: "#111827",
   repo: {
     name: "maximousblk/maximousblk.me",
     branch: "main",

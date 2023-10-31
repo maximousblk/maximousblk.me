@@ -2,17 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-::selection {
-  @apply bg-gray-800 text-gray-100 dark:bg-gray-100 dark:text-gray-900;
-}
-
 html {
   tab-size: 2;
   min-width: 360px;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     margin-left: calc(100vw - 100%);
     margin-right: 0;
   }
@@ -29,6 +25,10 @@ html {
     font-size: 1.5em;
   }
 
+  img {
+    @apply my-0;
+  }
+
   code {
     @apply rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-sm text-gray-900 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200;
   }
@@ -37,7 +37,7 @@ html {
     @apply no-underline;
 
     &[aria-hidden="true"][href^="#"] {
-      margin-left: -2.6ch;
+      margin-left: -1.8ch;
       margin-right: 0.8ch;
 
       @apply hover:bg-opacity-0;
@@ -56,9 +56,9 @@ html {
     @apply hover:opacity-80;
 
     &::before {
-      content: "⚓";
+      content: "#";
 
-      @apply font-mono;
+      @apply font-mono2;
       @apply text-gray-500;
       @apply dark:text-gray-400;
     }
@@ -76,7 +76,7 @@ html {
 .quote::after {
   content: "”";
 
-  @apply absolute top-0 right-0 font-serif text-7xl text-gray-400 dark:text-gray-600;
+  @apply absolute right-0 top-0 font-serif text-7xl text-gray-400 dark:text-gray-600;
 }
 
 pre {

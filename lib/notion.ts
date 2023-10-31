@@ -1,62 +1,127 @@
+import { unstable_cache } from "next/cache";
 import { Client } from "@notionhq/client";
-import type { BlockWithChildren, PageWithChildren } from "@jitl/notion-api";
-import type { NotionDB, NotionBlock, TableOfContentsItem } from "@/lib/types";
-import { getPlaiceholder } from "plaiceholder";
-import { unfurl } from "unfurl.js";
-import { slugify } from "@/lib/utils";
+import type { NotionBlock, TableOfContentsItem } from "@/lib/types";
+import { getPlainText, slugify, blockID } from "@/lib/utils";
+import { BlockObjectResponse, PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
+  fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+    // console.debug("[notion] fetch", input);
+
+    return fetch(input, {
+      next: { revalidate: 3600 },
+      ...init,
+    });
+  },
 });
 
-export async function getIndex(): Promise<{
-  [key: string]: { id: string; type: string; children?: { id: string; type: string; slug: string }[] };
+export const getSiteMap = unstable_cache(_getSiteMap, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
+async function _getSiteMap(): Promise<{
+  [key: string]: {
+    id: string;
+    type: string;
+    children?: {
+      id: string;
+      type: string;
+      cover?: string;
+      last_edited_time: string;
+      title: string;
+      description: string;
+      published: boolean;
+      slug: string;
+      properties: any;
+    }[];
+  };
 }> {
+  const epoch = Math.floor(Date.now() / 1000);
+  // console.time(`[notion] getSiteMap ${epoch}`);
+
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
-  return (
-    await Promise.all(
-      root.map(async ({ properties: { name, page: pageId } }: PageWithChildren) => {
-        const pageName = name[name.type].map(({ plain_text }) => plain_text).join("");
-        const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
+  const sitemap = await Promise.all(
+    root.map(async ({ properties: { name, page: pageId } }: PageObjectResponse) => {
+      const pageName = getPlainText(name[name.type]);
+      const page = pageId[pageId.type].find(({ type }) => type === "mention").mention;
 
-        const children =
-          page.type == "database"
-            ? (await getDatabase(page.database.id)).results.map(({ properties, id, object }: PageWithChildren) => {
-                return { id, type: object, slug: slugify(properties.title[properties.title.type].map(({ plain_text }) => plain_text)) };
-              })
-            : undefined;
+      const children =
+        page.type == "database"
+          ? (await getDatabase(page.database.id)).results.map(
+              ({
+                properties: { published, title, description, ...properties },
+                last_edited_time,
+                cover,
+                id,
+                object,
+              }: PageObjectResponse) => {
+                return {
+                  id,
+                  type: object,
+                  cover: cover ? cover[cover.type].url : null,
+                  last_edited_time,
+                  title: getPlainText(title[title.type]),
+                  description: getPlainText(description[description.type]),
+                  published: published[published.type],
+                  slug: slugify(getPlainText(title[title.type])),
+                  properties,
+                };
+              },
+            )
+          : null;
 
-        return { name: pageName, id: page[page.type].id, type: page.type, children };
-      })
-    )
-  ).reduce((acc, { name, ...props }) => {
-    acc[name] = { ...props };
-    return acc;
-  }, {});
+      return { name: pageName, id: page[page.type].id, type: page.type, title: page[page.type].title, children };
+    }),
+  ).then((pages) =>
+    pages.reduce((acc, { name, ...props }) => {
+      acc[name] = { ...props };
+      return acc;
+    }, {}),
+  );
+
+  // console.timeEnd(`[notion] getSiteMap ${epoch}`);
+
+  return sitemap;
 }
 
-export async function getDatabase(database_id: string) {
-  const db = (await notion.databases.query({ database_id })) as NotionDB;
+export const getDatabase = unstable_cache(_getDatabase, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
+async function _getDatabase(database_id: string) {
+  const epoch = Math.floor(Date.now() / 1000);
+  // console.time(`[notion] getDatabase ${database_id} ${epoch}`);
+
+  const db = await notion.databases.query({ database_id });
 
   while (db.has_more) {
-    const { results, has_more, next_cursor } = (await notion.databases.query({
+    const { results, has_more, next_cursor } = await notion.databases.query({
       database_id,
       start_cursor: db.next_cursor,
-    })) as NotionDB;
+    });
     db.results = [...db.results, ...results];
     db.has_more = has_more;
     db.next_cursor = next_cursor;
   }
 
+  // console.timeEnd(`[notion] getDatabase ${database_id} ${epoch}`);
+
   return db;
 }
 
-export async function getPage(page_id: string) {
-  return (await notion.pages.retrieve({ page_id })) as PageWithChildren;
+export const getPage = unstable_cache(_getPage, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
+async function _getPage(page_id: string) {
+  const epoch = Math.floor(Date.now() / 1000);
+  // console.time(`[notion] getPage ${page_id} ${epoch}`);
+
+  const page = (await notion.pages.retrieve({ page_id })) as PageObjectResponse;
+
+  // console.timeEnd(`[notion] getPage ${page_id} ${epoch}`);
+
+  return page;
 }
 
-export async function getBlockChildren(block_id: string): Promise<NotionBlock[]> {
+export const getBlockChildren = unstable_cache(_getBlockChildren, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
+async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
+  const epoch = Math.floor(Date.now() / 1000);
+  // console.time(`[notion] getBlockChildren ${block_id} ${epoch}`);
+
   const list = await notion.blocks.children.list({ block_id });
 
   while (list.has_more) {
@@ -68,29 +133,29 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
 
   const children = await Promise.all(
     list.results
-      .filter(({ has_children, type }: BlockWithChildren) => !["unsupported", "child_page"].includes(type) && has_children)
+      .filter(({ has_children, type }: BlockObjectResponse) => !["unsupported", "child_page"].includes(type) && has_children)
       .map(async ({ id }) => {
         return { id, children: await getBlockChildren(id) };
-      })
+      }),
   );
 
-  const blocks = list.results.map((block: BlockWithChildren) => {
+  const blocks = list.results.map((block: BlockObjectResponse) => {
     if (!["unsupported", "child_page"].includes(block.type) && block.has_children && !block[block.type].children) {
       block[block.type].children = children.find(({ id }) => id === block.id)?.children;
     }
     return block;
   });
 
-  return await Promise.all(
+  const blockChildren = await Promise.all(
     blocks.map(async (block) => {
       const contents = block[block.type];
       switch (block.type) {
         case "table_of_contents":
           block.table_of_contents["children"] = blocks
             .filter(({ type }) => ["heading_1", "heading_2", "heading_3"].includes(type))
-            .map((block: BlockWithChildren) => {
+            .map((block: BlockObjectResponse) => {
               return {
-                title: block[block.type].rich_text.map(({ plain_text }) => plain_text).join(""),
+                title: getPlainText(block[block.type].rich_text),
                 type: block.type,
                 children: [],
               };
@@ -120,47 +185,11 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
             }, []);
           break;
 
-        case "image":
-          const {
-            base64,
-            img: { height, width },
-          } = await getPlaiceholder(contents[contents.type].url, { size: 64 });
-          block.image["size"] = { height, width };
-          block.image["placeholder"] = base64;
-          break;
-
         case "link_to_page":
           const {
             properties: { title },
           } = await getPage(contents[contents.type]);
-          block.link_to_page["title"] = title[title.type].map(({ plain_text }) => plain_text).join("");
-          break;
-
-        case "link_preview":
-        case "bookmark":
-          const og_data = await unfurl(contents.url);
-          const image = og_data.open_graph?.images?.[0] || null;
-
-          block[block.type]["meta"] = {
-            title: og_data.title || og_data.twitter_card?.title || og_data.open_graph?.title || null,
-            description: og_data.description || og_data.open_graph?.description || null,
-            url: contents.url,
-          };
-
-          if (image && (image.secure_url || image.url)) {
-            const {
-              base64,
-              img: { height, width },
-            } = await getPlaiceholder(image.secure_url || image.url, { size: 64 });
-
-            block[block.type]["meta"].image = {
-              ...image,
-              url: image.secure_url || image.url,
-              height,
-              width,
-              placeholder: base64,
-            };
-          }
+          block.link_to_page["title"] = getPlainText(title[title.type]);
           break;
 
         case "synced_block":
@@ -175,15 +204,15 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
       }
 
       return block;
-    })
-  ).then((blocks: BlockWithChildren[]) => {
+    }),
+  ).then((blocks: BlockObjectResponse[]) => {
     return blocks.reduce((acc: NotionBlock[], curr: NotionBlock) => {
       if (curr.type === "bulleted_list_item") {
         if (acc[acc.length - 1]?.type === "bulleted_list") {
           acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
         } else {
           acc.push({
-            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            id: blockID.next().value || "",
             type: "bulleted_list",
             bulleted_list: { children: [curr] },
           });
@@ -193,7 +222,7 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
           acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
         } else {
           acc.push({
-            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
+            id: blockID.next().value || "",
             type: "numbered_list",
             numbered_list: { children: [curr] },
           });
@@ -204,10 +233,8 @@ export async function getBlockChildren(block_id: string): Promise<NotionBlock[]>
       return acc;
     }, []);
   });
-}
 
-function getRandomInt(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  // console.timeEnd(`[notion] getBlockChildren ${block_id} ${epoch}`);
+
+  return blockChildren;
 }
