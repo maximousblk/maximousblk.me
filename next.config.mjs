@@ -1,11 +1,12 @@
 // @ts-check
 
+import withPlaiceholder from "@plaiceholder/next";
+
 /** @type {import('next').NextConfig} */
 export const config = {
   reactStrictMode: true,
   experimental: {
-    appDir: true,
-    // typedRoutes: true,
+    webpackBuildWorker: true,
   },
   images: {
     remotePatterns: [
@@ -29,14 +30,6 @@ export const config = {
       },
     ],
     minimumCacheTTL: 3600,
-  },
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      Object.assign(config.resolve.alias, {
-        fs: "browserify-fs",
-      });
-    }
-    return config;
   },
   async rewrites() {
     return [
@@ -87,4 +80,4 @@ export const config = {
   },
 };
 
-export default config;
+export default withPlaiceholder(config);

@@ -35,7 +35,7 @@ async function _getSiteMap(): Promise<{
   };
 }> {
   const epoch = Math.floor(Date.now() / 1000);
-  console.time(`[notion] getSiteMap ${epoch}`);
+  // console.time(`[notion] getSiteMap ${epoch}`);
 
   const { results: root } = await getDatabase(process.env.NOTION_INDEX);
 
@@ -59,7 +59,7 @@ async function _getSiteMap(): Promise<{
                   slug: slugify(getPlainText(title[title.type])),
                   properties,
                 };
-              }
+              },
             )
           : null;
 
@@ -72,7 +72,7 @@ async function _getSiteMap(): Promise<{
     }, {}),
   );
 
-  console.timeEnd(`[notion] getSiteMap ${epoch}`);
+  // console.timeEnd(`[notion] getSiteMap ${epoch}`);
 
   return sitemap;
 }
@@ -80,7 +80,7 @@ async function _getSiteMap(): Promise<{
 export const getDatabase = unstable_cache(_getDatabase, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getDatabase(database_id: string) {
   const epoch = Math.floor(Date.now() / 1000);
-  console.time(`[notion] getDatabase ${database_id} ${epoch}`);
+  // console.time(`[notion] getDatabase ${database_id} ${epoch}`);
 
   const db = await notion.databases.query({ database_id });
 
@@ -94,7 +94,7 @@ async function _getDatabase(database_id: string) {
     db.next_cursor = next_cursor;
   }
 
-  console.timeEnd(`[notion] getDatabase ${database_id} ${epoch}`);
+  // console.timeEnd(`[notion] getDatabase ${database_id} ${epoch}`);
 
   return db;
 }
@@ -102,11 +102,11 @@ async function _getDatabase(database_id: string) {
 export const getPage = unstable_cache(_getPage, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getPage(page_id: string) {
   const epoch = Math.floor(Date.now() / 1000);
-  console.time(`[notion] getPage ${page_id} ${epoch}`);
+  // console.time(`[notion] getPage ${page_id} ${epoch}`);
 
   const page = (await notion.pages.retrieve({ page_id })) as PageWithChildren;
 
-  console.timeEnd(`[notion] getPage ${page_id} ${epoch}`);
+  // console.timeEnd(`[notion] getPage ${page_id} ${epoch}`);
 
   return page;
 }
@@ -114,7 +114,7 @@ async function _getPage(page_id: string) {
 export const getBlockChildren = unstable_cache(_getBlockChildren, undefined, { revalidate: Number(process.env.NOTION_PAGE_REVALIDATE) });
 async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
   const epoch = Math.floor(Date.now() / 1000);
-  console.time(`[notion] getBlockChildren ${block_id} ${epoch}`);
+  // console.time(`[notion] getBlockChildren ${block_id} ${epoch}`);
 
   const list = await notion.blocks.children.list({ block_id });
 
@@ -130,7 +130,7 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
       .filter(({ has_children, type }: BlockWithChildren) => !["unsupported", "child_page"].includes(type) && has_children)
       .map(async ({ id }) => {
         return { id, children: await getBlockChildren(id) };
-      })
+      }),
   );
 
   const blocks = list.results.map((block: BlockWithChildren) => {
@@ -228,7 +228,7 @@ async function _getBlockChildren(block_id: string): Promise<NotionBlock[]> {
     }, []);
   });
 
-  console.timeEnd(`[notion] getBlockChildren ${block_id} ${epoch}`);
+  // console.timeEnd(`[notion] getBlockChildren ${block_id} ${epoch}`);
 
   return blockChildren;
 }

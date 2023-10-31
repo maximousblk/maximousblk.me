@@ -29,14 +29,20 @@ async function _getImageInfo(src: string) {
       .substring(0, Math.min(80, src.length));
 
     const epoch = Math.floor(Date.now() / 1000);
-    console.time(`[notion] getImageInfo ${timerName} ${epoch}`);
+    // console.time(`[notion] getImageInfo ${timerName} ${epoch}`);
+
+    // "https://proxy.maximousblk.me/rewrite?url=" + base64url(src)
+    const buffer = await fetch(src, { next: { revalidate: Number(process.env.CACHE_TIMEOUT) } }).then(async (res) =>
+      Buffer.from(await res.arrayBuffer()),
+    );
 
     const {
       base64,
-      img: { height, width },
-    } = await getPlaiceholder("https://proxy.maximousblk.me/rewrite?url=" + base64url(src), { size: 64 });
+      // img: { height, width },
+      metadata: { height, width },
+    } = await getPlaiceholder(buffer, { size: 64 });
 
-    console.timeEnd(`[notion] getImageInfo ${timerName} ${epoch}`);
+    // console.timeEnd(`[notion] getImageInfo ${timerName} ${epoch}`);
 
     return {
       height,

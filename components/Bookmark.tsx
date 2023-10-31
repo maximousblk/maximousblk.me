@@ -5,7 +5,7 @@ import config from "@/config";
 
 async function getData(url: string) {
   const epoch = Math.floor(Date.now() / 1000);
-  console.time(`[unfurl] getData ${url} ${epoch}`);
+  // console.time(`[unfurl] getData ${url} ${epoch}`);
 
   const og_data = await unfurl(url, {
     fetch: (input) => {
@@ -17,7 +17,7 @@ async function getData(url: string) {
     },
   });
 
-  console.timeEnd(`[unfurl] getData ${url} ${epoch}`);
+  // console.timeEnd(`[unfurl] getData ${url} ${epoch}`);
 
   return {
     title: og_data.twitter_card?.title || og_data.open_graph?.title || og_data.title || null,
