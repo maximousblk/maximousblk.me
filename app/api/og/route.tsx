@@ -46,13 +46,13 @@ export async function GET(req: Request) {
     fonts: [
       {
         name: "Inter",
-        data: await fetch(new URL("../../../public/fonts/FiraCode-Retina.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
+        data: await fetch(new URL("../../../public/fonts/JetBrainsMono-Regular.woff2", import.meta.url)).then((res) => res.arrayBuffer()),
         weight: 400,
         style: "normal",
       },
       {
         name: "Inter",
-        data: await fetch(new URL("../../../public/fonts/FiraCode-Medium.ttf", import.meta.url)).then((res) => res.arrayBuffer()),
+        data: await fetch(new URL("../../../public/fonts/JetBrainsMono-Medium.woff2", import.meta.url)).then((res) => res.arrayBuffer()),
         weight: 500,
         style: "normal",
       },
