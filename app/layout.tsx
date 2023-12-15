@@ -13,6 +13,7 @@ import "katex/dist/katex.min.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import ThemeContext from "@/components/ThemeContext";
 import config from "@/config";
 import seo from "@/next-seo.config";
@@ -118,6 +119,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </div>
         </ThemeContext>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
